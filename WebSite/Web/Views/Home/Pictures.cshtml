@@ -1,0 +1,35 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<Web.ViewModels.PictureViewModel> list = Model as List<Web.ViewModels.PictureViewModel>;
+}
+<style>
+    .head {
+        height: 50px;
+        text-align: right;
+        margin-bottom: 20px;
+        border-bottom: 2px solid #bebdbd;
+    }
+
+    .pic {
+        width: 25%;
+        float: left;
+        cursor: pointer;
+    }
+</style>
+
+<div id="imghead" class="head"></div>
+
+<div style="width:100%;overflow:hidden;">
+    @{
+        foreach (var item in list)
+        {
+            foreach (var img in item.Conten)
+            {
+                var str = list.IndexOf(item) + "_" + item.Conten.IndexOf(img);
+                <div class="pic" onclick="window.open('/Home/PictureInfo?inPicID=@item.PictureID')">
+                    <img id="img_@str" alt="@img.Desc" src="@img.Src" />
+                </div>
+            }
+        }
+    }
+</div>

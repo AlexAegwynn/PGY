@@ -1,0 +1,225 @@
+﻿@{
+    Layout = null;
+    var mPic = Model as Web.ViewModels.PictureViewModel;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@mPic.Title</title>
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/Js/zepto.js"></script>
+    <script src="~/Scripts/Js/zepto.min.js"></script>
+    <style>
+        body {
+            cursor: default;
+        }
+
+        img {
+            width: auto;
+            height: auto;
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        .view {
+            position: relative;
+            margin-top: 50px;
+            width: 648px;
+            height: 550px;
+            overflow: hidden;
+            border: 1px solid #e4e4e4;
+            padding-top: 24px;
+        }
+
+        .piclist {
+            width: 130px;
+            height: 130px;
+            float: left;
+            margin: 0px 10px 0px 10px;
+            cursor: pointer;
+        }
+
+        .pic {
+            width: 600px;
+            height: 150px;
+            overflow: hidden;
+            float: left;
+            position: relative;
+        }
+
+        .leftright {
+            width: 24px;
+            height: 77.5px;
+            float: left;
+            padding-top: 52.5px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+            .leftright:hover {
+                background-color: #efefef;
+            }
+    </style>
+    <script>
+        var index = 1;
+        var mindex = 1;
+        var count = @mPic.Conten.Count;
+        var time = null;
+        var v = 0;
+        
+        $(function () {
+            var w = 0;
+            $("div[name='viewitem']").each(function () {
+                w += $(this).width();
+            })
+            $('#picview').css('width', w);
+
+            var mw = 0;
+            $("div[name='piclist']").each(function () {
+                mw += $(this).width() + parseInt(20);
+            });
+            $('#picbox').css('width', mw);
+        });
+        
+        function ImgClick(i) {
+            var picture = $('#picview');
+            index = i;
+            $('#piccode').html(index);
+            var value = (i-1) * (-648);
+            picture.animate({ left: value });
+        }
+
+        function MouseDown(state) {
+            clearInterval(time);
+            var re = $('#time').val();
+            if (re == 40) {
+                var pic = document.getElementById('picview');
+                var picture = $('#picview');
+
+                if (state == 'next') {
+                    $('#prev').css('display', 'block');
+                    if (index < count) {
+                        var pleft = pic.offsetLeft - 648 + "px";
+                        picture.animate({ left: pleft });
+                        index++;
+                        if (index == count) {
+                            $('#next').css('display', 'none');
+                        }
+                    }
+                } else {
+                    $('#next').css('display', 'block');
+                    if (index > 1) {
+                        var pleft = pic.offsetLeft + 648 + "px";
+                        picture.animate({ left: pleft });
+                        index--;
+                        if (index == 1) {
+                            $('#prev').css('display', 'none');
+                        }
+                    }
+                }
+                $('#piccode').html(index);
+            }
+        }
+
+        function MMouseDown(state) {
+            clearInterval(time);
+            var re = $('#time').val();
+            if (re == 40) {
+                var pic = document.getElementById('picbox');
+                var picbox = $('#picbox');
+
+                if (state == 'next') {
+                    if (mindex < (count - 3)) {
+                        var pleft = pic.offsetLeft - 150 + "px";
+                        picbox.animate({ left: pleft });
+
+                        mindex++;
+                    }
+                } else {
+                    if (mindex > 1) {
+                        var pleft = pic.offsetLeft + 150 + "px";
+                        picbox.animate({ left: pleft });
+
+                        mindex--;
+                    }
+                }
+            }
+        }
+
+        function SetValue() {
+            $('#time').val(v);
+            if (v >= 40) {
+                clearInterval(time);
+                v = 0;
+            }
+        }
+
+        function MouseUp() {
+            time = setInterval(function () {
+                v++;
+                SetValue();
+            }, 10);
+        }
+    </script>
+</head>
+<body>
+    <input hidden="hidden" type="text" id="time" value="40" />
+    <div id="page" style="max-width:650px;min-width:650px;margin:0px auto;">
+        <div id="pictitle" style="width:100%;height:auto;">
+            <h2>@mPic.Title</h2>
+        </div>
+        <div id="info">
+            <span>类别： @mPic.DomainName</span>
+            <span>作者： @mPic.RAdminName</span>
+            <span>发布时间： @mPic.ReleaseTime</span>
+        </div>
+        <div class="view">
+            <div id="next" onmousedown="MouseDown('next')" onmouseup="MouseUp()" style="position:absolute;top:45%;right:0px;cursor:pointer;z-index:2;">
+                <img src="~/Content/Images/next.png" />
+            </div>
+            <div id="prev" onmousedown="MouseDown('prev')" onmouseup="MouseUp()" style="display:none;position:absolute;top:45%;left:0px;cursor:pointer;z-index:2;">
+                <img src="~/Content/Images/prev.png" />
+            </div>
+            <div id="picview" style="height:550px;overflow:hidden;position:absolute;z-index:1;">
+                @foreach (var item in mPic.Conten)
+                {
+                    <div name="viewitem" style="width:648px;height:550px;float:left;">
+                        <div style="width:450px;height:450px;margin:auto;">
+                            <img src="@item.Src" />
+                        </div>
+                        <div style="height:100px;text-align:center;">
+                            <span id="picinfo" style="cursor:pointer;font-size:15px;" onclick="">@item.Desc</span>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        <div id="count" style="height:30px;margin-top:20px;text-align:center;">
+            <span id="piccode">1</span><span>/ @mPic.Conten.Count</span>
+        </div>
+        <div id="mpicview" style="width:648px;height:130px;margin:30px 0px 80px 0px;">
+            <div onmousedown="MMouseDown('prev')" onmouseup="MouseUp()" class="leftright">
+                <img src="~/Content/Images/left.png" />
+            </div>
+            <div class="pic">
+                <div id="picbox" style="height:130px;float:left;position:absolute;">
+                    @foreach (var item in mPic.Conten)
+                    {
+                        var index = mPic.Conten.IndexOf(item) + 1;
+                        <div id="item_@index" name="piclist" class="piclist" onclick="ImgClick('@index')">
+                            <img style="display:block;margin:auto;" src="@item.Src" />
+                        </div>
+                    }
+                </div>
+            </div>
+            <div onmousedown="MMouseDown('next')" onmouseup="MouseUp()" class="leftright">
+                <img src="~/Content/Images/right.png" />
+            </div>
+        </div>
+    </div>
+</body>
+</html>

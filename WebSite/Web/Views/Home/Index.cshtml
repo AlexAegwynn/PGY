@@ -1,0 +1,281 @@
+﻿@model Web.ViewModels.HomeViewModel
+@{
+    var index = 0;
+    var website = ViewData["WebSite"] as Model.WebSiteInfo;
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="@website.Keywords">
+    <meta name="description" content="@website.Description">
+    <meta content="telephone=no" name="format-detection">
+    <meta name="robots" content="index,follow">
+    <title>@website.WebSiteName</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/FrontEnd/css/global.css" rel="stylesheet" />
+    <link href="~/Content/css/FrontEnd/Index.css" rel="stylesheet" />
+</head>
+<body class="">
+    <div class="page-wrap  subpage">
+        <!-- header -->
+        <header class="header">
+            <div class="header-top">
+                <div class="container">
+                    <div class="logo">
+                        @*<a href="" title="home">
+                            <!-- <img src="logo1.png" alt="logo" style="width: 80px;"></a> -->*@
+                        <img alt="Logo" src="@website.LogoImgUrl" />
+                    </div>
+                    <div class="claim">
+                        @website.WebSiteName
+                    </div>
+                </div>
+            </div>
+            <div class="main-nav">
+                <div class="container">
+                    <div class="nav">
+                        <ul>
+                            <li class="current active"><a href="" title="">首页</a></li>
+                            <li class=""><a href="" title="">商品</a></li>
+                            <li class=""><a href="" title="">文章</a></li>
+                            <li class=""><a href="" title="">图集</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <section class="main" data-showsapoverlay="">
+            <div class="container">
+                <div class="page-title headline-full-width" style="margin-top: 50px;">
+                    <h1>手机数据线丨原装手机数据线包邮</h1>
+                </div>
+
+                <div class="slider-left-item">
+                    <div class="module-slider" data-auto="true">
+                        <div class="bx-wrapper" style="max-width: 100%;">
+                            <div class="bx-viewport" style="width: 100%; overflow: hidden; position: relative; height: 430px;">
+                                <ul class="image-slider" style="width: 515%; position: relative; transition-duration: 0s; transform: translate3d(-610px, 0px, 0px);">
+                                    <li style="float: left; list-style: none; position: relative; width: 610px;" class="bx-clone">
+                                        <img src="~/Content/FrontEnd/css/Headquater.jpg" alt="" title="">
+                                        <div class="caption ">
+                                            <a href="" target="_blank" id="imageslider_teaser_8814812955708">
+                                                <h4>手机数据线丨原装手机数据线包邮</h4>
+                                                手机数据线丨原装手机数据线包邮
+                                                <span>查看更多</span>
+                                            </a>
+                                        </div>
+                                    </li>
+                                    <li style="float: left; list-style: none; position: relative; width: 610px;">
+                                        <img src="~/Content/FrontEnd/css/02PI-AP-PH-bui-osb4top-load-bearing-capacity-610x430px.jpg" alt="" title="">
+                                        <div class="caption ">
+                                            <a href="" target="_self" id="imageslider_teaser_8814812890172">
+                                                <h4>手机数据线丨原装手机数据线包邮</h4>
+                                                手机数据线丨原装手机数据线包邮
+                                                <span>查看更多</span>
+                                            </a>
+                                        </div>
+                                    </li>
+                                    <li style="float: left; list-style: none; position: relative; width: 610px;">
+                                        <img src="~/Content/FrontEnd/css/02PI-PR-PRO-bui-dhf-installation-04i-610x430px.jpg" alt="" title="">
+                                        <div class="caption ">
+                                            <a href="" title="" target="_self" id="imageslider_teaser_8814812922940">
+                                                <h4>手机数据线丨原装手机数据线包邮</h4>
+                                                手机数据线丨原装手机数据线包邮
+                                                <span>查看更多</span>
+                                            </a>
+                                        </div>
+                                    </li>
+                                    <li style="float: left; list-style: none; position: relative; width: 610px;">
+                                        <img src="~/Content/FrontEnd/css/Headquater.jpg" alt="" title="">
+                                        <div class="caption ">
+                                            <a href="" target="_blank" id="imageslider_teaser_8814812955708">
+                                                <h4>手机数据线丨原装手机数据线包邮</h4>
+                                                手机数据线丨原装手机数据线包邮
+                                                <span>查看更多</span>
+                                            </a>
+                                        </div>
+                                    </li>
+                                    <li style="float: left; list-style: none; position: relative; width: 610px;" class="bx-clone">
+                                        <img src="~/Content/FrontEnd/css/02PI-AP-PH-bui-osb4top-load-bearing-capacity-610x430px.jpg" alt="" title="">
+                                        <div class="caption ">
+                                            <a href="" title="" target="_self" id="imageslider_teaser_8814812890172">
+                                                <h4>手机数据线丨原装手机数据线包邮</h4>
+                                                手机数据线丨原装手机数据线包邮
+                                                <span>查看更多</span>
+                                            </a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div><div class="bx-controls bx-has-pager bx-has-controls-direction"><div class="bx-pager bx-default-pager" style="bottom: 124px;"><div class="bx-pager-item"><a href="" data-slide-index="0" class="bx-pager-link active">1</a></div><div class="bx-pager-item"><a href="" data-slide-index="1" class="bx-pager-link">2</a></div><div class="bx-pager-item"><a href="" data-slide-index="2" class="bx-pager-link">3</a></div></div><div class="bx-controls-direction"><a class="bx-prev" href="" style="top: 215px;">Prev</a><a class="bx-next" href="" style="top: 215px;">Next</a></div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="teaser-col-right">
+                    <div class="module-teaser-image full-slider">
+                        <h3>手机数据线丨原装手机数据线包邮</h3>
+                        <a href="" title="" target="_self" id="teaserimage_teaser_8798065993789">
+                            <img src="~/Content/FrontEnd/css/Libanon-1-430x205px.jpg" />
+                        </a>
+                    </div>
+                    <div class="module-teaser-image full-slider">
+                        <h3>手机数据线</h3>
+                        <a href="" title="" target="_self" id="teaserimage_teaser_8798066026557">
+                            <img src="~/Content/FrontEnd/css/02PI-CO-PW-bui-timber-control-02f-430x205px.jpg" />
+                        </a>
+                    </div>
+                </div>
+                <div class="module-product-list">
+                    <h2>优惠产品</h2>
+                    <div style="float: right;margin-right: 20px;" class="more">
+                        <a href="">更多></a>
+                    </div>
+                    <div class="row">
+                        <div class="goodlist col-lg-12">
+                            @for (int i = 0; i < 5; i++)
+                            {
+                                <div class="col-lg-1-8 col-md-4 col-sm-6 col-xs-12">
+                                    <div class="thumbnail thumbnailh">
+                                        <div class="piccontent">
+                                            <a href="Goodcontent.html">
+                                                <img src="~/Content/FrontEnd/pic/good.jpg" alt="..." class="img-responsive">
+                                            </a>
+                                        </div>
+                                        <div class="caption">
+                                            <a href="Goodcontent.html">
+                                                <h4 style="font-size: 15px">华为P20 PRO</h4>
+                                            </a>
+                                            <div style="height:30px;">
+                                                <div style="float:left;">
+                                                    <span style="font-size:12px;line-height:30px;">券后：</span>
+                                                    <span style="font-size:16px;color:red;font-weight:bold;">￥30</span>
+                                                    <span style="font-size:10px;color:#a3a3a3;text-decoration:line-through">￥30</span>
+                                                </div>
+                                            </div>
+                                            <div style="height:25px;" class="theprice">
+                                                <div style="float: left;width: 40%;" class="tprice">
+                                                    <span style="font-size:10px;line-height:30px;">佣金</span>
+                                                    <span style="font-size:10px;color:coral;">0.1</span>
+                                                </div>
+                                                <div style="float:left;width:60%;padding-right:5px;" class="tprice2">
+                                                    <span style="font-size:10px;line-height:30px;">销量</span>
+                                                    <span style="font-size:10px;color:cornflowerblue;">1940</span>
+                                                </div>
+                                            </div>
+                                            <div style="width:100%;height:2px;background-color:#c0d6ff;"></div>
+                                            <div class="bottomd" style="height:60px;text-align:center;">
+                                                <div style="margin:0px auto 0px auto;cursor:pointer;" onclick="window.open(&#39;https://s.click.taobao.com/t?e=m%3D2%26s%3DTkMVMvrTE3EcQipKwQzePOeEDrYVVa64yK8Cckff7TXjf2vlNIV67sovtzaFxfDcNMWYSf9G9hGWxiiUBMVfAH2jMS%2FsUZMX7VamwfgcgwQWoIm3IbdsjotgwMO1YqTJ4q%2BRXokHRqt5Mf2rIwS0mYRPvA9GPmsyATWpNZv3pbpVHfJHrza1JbKnLumOPLsXQ8YHWqoQwb4zPArq6Rg47Q5%2BXl4gYqtDxgxdTc00KD8%3D&#39;);">
+                                                    <span style="font-size:12px;">领取优惠券：</span>
+                                                    <span style="font-size:12px;color:cornflowerblue;">0 元</span>
+                                                </div>
+                                                <div class="bottomcontent" style="width: 100%;height: 40px;background-color: #fff8e5;font-size: 10px;">
+                                                    <h>货不在贵贱,合心意就好.</h>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <br><div class="row"><div class=" col-md-9"></div><div class=" col-md-3"></div></div>
+                <div class="row">
+                    <div class=" col-md-9">
+                        <ul class="teaser-list module-group">
+                            <li>
+                                <div class="text">
+                                    <h4>文章</h4>
+                                    <p>手机数据线丨原装手机数据线包邮手机数据线丨原装手机数据线包邮 </p>
+                                    <p>手机数据线丨原装手机数据线包邮手机数据线丨原装手机数据线包邮 </p>
+                                    <p>手机数据线丨原装手机数据线包邮手机数据线丨原装手机数据线包邮 </p>
+                                    <p>手机数据线丨原装手机数据线包邮手机数据线丨原装手机数据线包邮 </p>
+                                    <p>手机数据线丨原装手机数据线包邮手机数据线丨原装手机数据线包邮 </p>
+                                    <a class="link-style" title="更多信息。" href="https://www.egger.com/shop/zh_CN/products/building/applications" target="_self">更多文章...</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="module-product-list">
+                        <h2>图集</h2>
+                        <div class="row">
+                            <div style="float: right;margin-right: 20px;" class="more">
+                                <a href="">更多></a>
+                            </div>
+                            <div class="col-lg-12">
+                                @for (int i = 0; i < 6; i++)
+                                {
+                                    <div class="col-lg-2 col-md-4 col-sm-6 col-xs-6">
+                                        <div class="thumbnail">
+                                            <a href="Goodcontent.html">
+                                                <img src="~/Content/FrontEnd/pic/good.jpg" alt="..." class="img-responsive">
+                                            </a>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                            <div class="col-lg-12">
+                                @for (int i = 0; i < 6; i++)
+                                {
+                                    <div class="col-lg-2 col-md-4 col-sm-6 col-xs-6">
+                                        <div class="thumbnail">
+                                            <a href="Goodcontent.html">
+                                                <img src="~/Content/FrontEnd/pic/good.jpg" alt="..." class="img-responsive">
+                                            </a>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div><br><br><br>
+                </div>
+            </div>
+        </section>
+
+        <!-- footer -->
+        <footer class="footer">
+            <div class="footer-links">
+                <div class="container">
+                    <div class="left-col">
+                        <div class="item contact"><h5><a href="" title="Kontakt">联系方式</a></h5> <p>邮箱：hr@pgy1789.com<br> 地址：@website.Address<br> </p></div>
+                    </div>
+                    <div class="right-col">
+                        <div class="bottom-row">
+                            <div class="item">
+                                <li><img src="@website.QRCodeUrl"></li>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-meta">
+                <div class="container">
+                    <ul class="meta-links">
+                        <li><span>@website.CompanyName 保留所有权利 </span></li>
+                        <li><span style="cursor:pointer;" onclick="window.open('http://www.miibeian.gov.cn')">@website.RecordNumber</span></li>
+                    </ul>
+                </div>
+            </div>
+            <span class="back-top" style="display: none; opacity: 1;"><img src="~/Content/FrontEnd/pic/back2.png"></span>
+        </footer>
+        <script type="text/javascript" src="~/Content/FrontEnd/css/jquery.min.js.下载"></script>
+        <script type="text/javascript" src="~/Content/FrontEnd/css/jquery-migrate-1.3.0.min.js.下载"></script>
+        <script type="text/javascript" src="~/Content/FrontEnd/css/jquery.blockUI.js.下载"></script>
+        <script type="text/javascript" src="~/Content/FrontEnd/css/bootstrap.min.js.下载"></script>
+        <script type="text/javascript" src="~/Content/FrontEnd/css/modernizr.min.js.下载"></script>
+        <script type="text/javascript" src="~/Content/FrontEnd/css/jquery.bxslider.min.js.下载"></script>
+        <script type="text/javascript" src="~/Content/FrontEnd/css/jquery.fancybox.pack.js.下载"></script>
+        <script type="text/javascript" src="~/Content/FrontEnd/css/isotope.pkgd.min.js.下载"></script>
+        <script type="text/javascript" src="~/Content/FrontEnd/css/ellipsis.min.js.下载"></script>
+        <script type="text/javascript" src="~/Content/FrontEnd/css/common.js.下载"></script>
+    </div>
+</body>
+</html>

@@ -1,0 +1,410 @@
+﻿@model Web.ViewModels.WebSiteViewModel
+
+@{
+    ViewBag.Title = "网站信息";
+    Layout = "~/Views/Shared/_WebSiteLayout.cshtml";
+}
+
+<style>
+    img {
+        width: auto;
+        height: auto;
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+    textarea {
+        -webkit-appearance: textarea;
+        background-color: white;
+        /*-webkit-rtl-ordering: logical;*/
+        user-select: text;
+        flex-direction: column;
+        resize: none;
+        cursor: auto;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        border-width: 1px;
+        border-style: solid;
+        border-color: initial;
+        border-image: initial;
+        padding: 2px;
+        border: 1px solid #CCC;
+    }
+
+    table tr td {
+        padding: 5px;
+    }
+
+    .default_img {
+        cursor: pointer;
+        background-image: url('../../Content/Images/add.png');
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+</style>
+
+<script>
+    var arr = ["JPG", "JPEG", "PNG", "GIF", "IMG"];
+
+    function ClickUpLoad(name) {
+        $('#' + name).click();
+    }
+
+    $(function () {
+        var logo = $('#LogoImgUrl');
+        var qrcode = $('#QRCodeUrl');
+        var bg = $('#BackgroundImg');
+
+        if (logo.val() != '') {
+            logo.parent().removeClass('default_img');
+        }
+
+        if (qrcode.val() != '') {
+            qrcode.parent().removeClass('default_img');
+        }
+
+        if (bg.val() != '') {
+            bg.parent().removeClass('default_img');
+        }
+
+        Load();
+    });
+
+    function Load() {
+        $('#logofile').change(function (e) {
+            var file = e.delegateTarget.files[0];
+            if (file == null) { return; }
+            var state = Verify(file);
+            if (state == false) { alert('文件名不合法'); return; }
+
+            var reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = function (ret) {
+                var picString = reader.result;
+                //ImgVerify(picString, 'logofile');
+                var img = $('#logoimg');
+                img.parent().removeClass('default_img');
+                img.attr({ "src": picString });
+            }
+        });
+
+        $('#qrcodefile').change(function (e) {
+            var file = e.delegateTarget.files[0];
+            if (file == null) { return; }
+            var state = Verify(file);
+            if (state == false) { alert('文件名不合法'); return; }
+
+            var reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = function (ret) {
+                var picString = reader.result;
+                //ImgVerify(picString, 'logofile');
+                var img = $('#qrcodeimg');
+                img.parent().removeClass('default_img');
+                img.attr({ "src": picString });
+            }
+        });
+
+        $('#bgfile').change(function (e) {
+            var file = e.delegateTarget.files[0];
+            if (file == null) { return; }
+            var state = Verify(file);
+            if (state == false) { alert('文件名不合法'); return; }
+
+            var reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = function (ret) {
+                var picString = reader.result;
+                //ImgVerify(picString, 'logofile');
+                var img = $('#bgimg');
+                img.parent().removeClass('default_img');
+                img.attr({ "src": picString });
+            }
+        })
+    }
+
+    //图片大小验证
+    function ImgVerify(picString, name) {
+        var imgver = true;
+        var img = new Image();
+        // 改变图片的src
+        img.src = picString;
+        img.onload = function () {
+            if (img.width < 500 || img.height < 500) {
+                alert('图片清晰度至少500X500像素');
+            }
+            else {
+                $('#' + name).attr({ "src": picString });
+            }
+        };
+    }
+
+    //验证后缀名
+    function Verify(file) {
+        var statu = false;
+
+        var index = file.name.lastIndexOf(".");
+        var ext = file.name.substr(index + 1);
+        ext = ext.toUpperCase();
+
+        for (var i = 0; i < arr.length; i++) {
+            if (ext == arr[i]) {
+                statu = true;
+            }
+        }
+        return statu;
+    }
+
+    //清除图片
+    function ClearImg(name) {
+        var img = $('#' + name);
+        img.parent().addClass('default_img');
+        img.attr({ "src": "" });
+
+        var obj;
+        switch (name) {
+            case "logoimg":
+                $('#LogoImgUrl').val('');
+                obj = document.getElementById('logofile');
+                break;
+            case "qrcodeimg":
+                $('#QRCodeUrl').val('');
+                obj = document.getElementById('qrcodefile');
+                break;
+            case "bgimg":
+                $('#BackgroundImg').val('');
+                obj = document.getElementById('bgfile');
+                break;
+        }
+        obj.outerHTML = obj.outerHTML;
+
+        //if (name == 'logoimg') {
+        //    $('#LogoImgUrl').val('');
+        //} else {
+        //    $('#QRCodeUrl').val('');
+        //}
+
+        //if (name == 'logoimg') {
+        //    var obj = document.getElementById('logofile');
+        //    obj.outerHTML = obj.outerHTML;
+        //}
+
+        //if (name == 'qrcodeimg') {
+        //    var obj = document.getElementById('qrcodefile');
+        //    obj.outerHTML = obj.outerHTML;
+        //}
+
+        Load();
+    }
+
+    //保存图片
+    function SaveImg(name) {
+        if ($('#WebSiteKey').val() == '00000000-0000-0000-0000-000000000000') {
+            alert('请先保存网站信息');
+            return;
+        }
+
+        var formData = new FormData();
+        formData.append(name, document.getElementById(name).files[0]);
+        formData.append("DomainName", $('#DomainName').val());
+        formData.append("WebSiteKey", $('#WebSiteKey').val());
+        formData.append("FileName", name);
+
+        switch (name) {
+            case "logofile":
+                formData.append("ImgUrl", $('#LogoImgUrl').val()); break;
+            case "qrcodefile":
+                formData.append("ImgUrl", $('#QRCodeUrl').val()); break;
+            case "bgfile":
+                formData.append("ImgUrl", $('#BackgroundImg').val()); break;
+        }
+
+        $.ajax({
+            url: '/WebSite/SaveImg',
+            type: 'post',
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                switch (name) {
+                    case "logofile":
+                        $('#LogoImgUrl').val(data.url); break;
+                    case "qrcodefile":
+                        $('#QRCodeUrl').val(data.url); break;
+                    case "bgfile":
+                        $('#BackgroundImg').val(data.url); break;
+                }
+
+                //if (name == 'logofile') {
+                //    $('#LogoImgUrl').val(data.url);
+                //} else {
+                //    $('#QRCodeUrl').val(data.url);
+                //}
+                alert(data.msg);
+            },
+            error: function () {
+                alert("上传失败！");
+            }
+        });
+    }
+
+    function OkClick() {
+        $.ajax({
+            url: '/WebSite/SaveWebSite',
+            type: 'post',
+            data: $('#website').serialize(),
+            success: function (data) {
+                if (data.result == false) {
+                    alert(data.message);
+                } else {
+                    alert('保存成功');
+                    if ($('#IsEdit').val() != 'True') {
+                        //var id = $('#WebSiteID').val();
+                        //$('#HiddenID').val(id);
+                        $('#IsEdit').val('True');
+                        $('#WebSiteKey').val(data.key + '')
+                    }
+                }
+            }
+        })
+    }
+</script>
+
+<div style="overflow:hidden;padding-top:5px;">
+    <div style="width:47%;min-width:460px;float:left;margin-bottom:10px;">
+        <div style="height:auto;overflow:hidden;">
+            <div style="float:left;width:100%;margin-bottom:10px;padding-right:5px;">
+                <form id="website">
+                    @Html.HiddenFor(m => m.IsEdit)
+                    @Html.Hidden("WebSiteKey", Model.WebSiteKey)
+                    <table style="font-size: 15px;width:100%;">
+                        <tbody>
+                            <tr>
+                                <td>域名：</td>
+                                <td>@Html.TextBox("DomainName", Model.DomainName, new { style = "width:100%;" })</td>
+                            </tr>
+                            <tr>
+                                <td>网站ID：</td>
+                                <td><span style="font-size:14px;">@Model.WebSiteID</span></td>
+                            </tr>
+                            <tr>
+                                <td>网站名称：</td>
+                                <td>@Html.TextBox("WebSiteName", Model.WebSiteName, new { style = "width:100%;" })</td>
+                            </tr>
+                            <tr>
+                                <td>公司名称：</td>
+                                <td>@Html.TextBox("CompanyName", Model.CompanyName, new { style = "width:100%;" })</td>
+                            </tr>
+                            <div hidden="hidden">
+                                @*<tr>
+                                        <td>联系电话：</td>
+                                        <td>@Html.TextBox("PhoneNumber", Model.PhoneNumber, new { style = "width:200px;" })</td>
+                                        <td>QQ：</td>
+                                        <td>@Html.TextBox("QQ", Model.QQ, new { style = "width:200px;" })</td>
+                                    </tr>*@
+                            </div>
+                            <tr>
+                                <td>邮箱：</td>
+                                <td>@Html.TextBox("Email", Model.Email, new { style = "width:100%;" })</td>
+                            </tr>
+                            <tr>
+                                <td>备案号：</td>
+                                <td>@Html.TextBox("RecordNumber", Model.RecordNumber, new { style = "width:100%;" })</td>
+                            </tr>
+                            <tr>
+                                <td>类目：</td>
+                                <td>@Html.TextBox("Category", Model.Category, new { style = "width:100%;" })</td>
+                            </tr>
+                            <div hidden="hidden">
+                                @*<tr>
+                                        <td>微信：</td>
+                                        <td>@Html.TextBox("WeChat", Model.WeChat, new { style = "width:200px;" })</td>
+                                    </tr>*@
+                            </div>
+                            <tr>
+                                <td colspan="2">描述：</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    @Html.TextArea("Description", Model.Description, new { style = "width:100%;height:50px;margin:0px;" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">关键字：</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    @Html.TextArea("Keywords", Model.Keywords, new { style = "width:100%;height:50px;margin:0px;" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">地址：</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    @Html.TextArea("Address", Model.Address, new { style = "width:100%;height:50px;margin:0px;" })
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+            <div style="float:left;padding-left:5px;">
+                <button class="btn btn-default wbtn" style="width:98px;line-height:25px;" onclick="OkClick()">保存</button>
+                <button class="btn btn-default wbtn" style="width:98px;line-height:25px;" onclick="document.location.href='/WebSite/WebSiteList'">返回</button>
+            </div>
+        </div>
+    </div>
+
+    <div style="width:53%;min-width:510px;float:left;">
+        <div style="width:304px;height:auto;float:left;border:1px solid #e0e0e0;">
+            <div style="height:25px;font-size:12px;border-bottom:1px solid #e0e0e0;padding-left:5px;">
+                <span style="line-height:25px;">上传 Logo</span>
+            </div>
+            <div class="default_img" style="width:300px;height:200px;" onclick="ClickUpLoad('logofile')">
+                <img id="logoimg" src="@Model.LogoImgUrl" />
+                @Html.Hidden("LogoImgUrl", Model.LogoImgUrl)
+            </div>
+            <div style="padding: 5px;border-top:1px solid #e0e0e0;">
+                @*<button class="btn btn-default wbtn" style="width:40%;">上传Logo图片</button>*@
+                <input style="display:none;" type="file" id="logofile" />
+                <button class="btn btn-default wbtn" style="width:48%;" onclick="ClearImg('logoimg')">清除</button>
+                <button class="btn btn-default wbtn" style="width:48%;float:right;" onclick="SaveImg('logofile')">保存</button>
+            </div>
+        </div>
+
+        <div style="width:204px;height:auto;float:right;border:1px solid #e0e0e0;">
+            <div style="height:25px;font-size:12px;border-bottom:1px solid #e0e0e0;padding-left:5px;">
+                <span style="line-height:25px;">上传二维码</span>
+            </div>
+            <div class="default_img" style="width:200px;height:200px;" onclick="ClickUpLoad('qrcodefile')">
+                <img id="qrcodeimg" src="@Model.QRCodeUrl" />
+                @Html.Hidden("QRCodeUrl", Model.QRCodeUrl)
+            </div>
+            <div hidden="hidden">
+                @*<button class="btn btn-default wbtn" style="width:100%;" font-size:15px;" onclick="ClickUpLoad('qrcodefile')">上传二维码图片</button>*@
+            </div>
+            <div style="padding:5px;border-top:1px solid #e0e0e0;">
+                <input style="display:none;" type="file" id="qrcodefile" />
+                <button class="btn btn-default wbtn" style="width:48%;" onclick="ClearImg('qrcodeimg')">清除</button>
+                <button class="btn btn-default wbtn" style="width:48%;float:right" onclick="SaveImg('qrcodefile')">保存</button>
+            </div>
+        </div>
+
+        <div style="width:100%;height:auto;border:1px solid #e0e0e0;float:left;margin-top:10px;">
+            <div style="height:25px;font-size:12px;border-bottom:1px solid #e0e0e0;padding-left:5px;">
+                <span style="line-height:25px;">上传背景图片</span>
+            </div>
+            <div class="default_img" style="width:100%;height:272px;" onclick="ClickUpLoad('bgfile')">
+                <img id="bgimg" src="@Model.BackgroundImg" />
+                @Html.Hidden("BackgroundImg", Model.BackgroundImg)
+            </div>
+            <div style="padding: 5px;border-top:1px solid #e0e0e0;">
+                @*<button class="btn btn-default wbtn" style="width:40%;" >上传背景图片</button>*@
+                <input style="display:none;" type="file" id="bgfile" />
+                <button class="btn btn-default wbtn" style="width:49%;" onclick="ClearImg('bgimg')">清除</button>
+                <button class="btn btn-default wbtn" style="width:49%;float:right;" onclick="SaveImg('bgfile')">保存</button>
+            </div>
+        </div>
+    </div>
+</div>

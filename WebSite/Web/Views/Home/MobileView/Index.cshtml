@@ -1,0 +1,161 @@
+﻿@model Web.ViewModels.HomeViewModel
+@{
+    var index = 0;
+    Layout = "~/Views/Shared/_MobileLayout.cshtml";
+}
+
+<style>
+    .more {
+        width: 100%;
+        height: 30px;
+        margin-top: 2%;
+        background-color: rgba(224, 243, 255, 0.50);
+        text-align: center;
+    }
+
+        .more:hover {
+            background-color: #e1e1e1;
+        }
+
+    tr {
+        height: 50px;
+    }
+
+    .head {
+        width: 100%;
+        height: 30px;
+        text-align: right;
+        margin-bottom: 2%;
+        border-bottom: 1px solid #fff;
+    }
+
+    .commoditytitle {
+        width: 100%;
+        height: 25px;
+        margin-top: 1%;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .articletitle {
+        width: 100%;
+        height: 25px;
+        margin-top: 1%;
+        float: left;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .after {
+        font-size: 15px;
+        height: 25px;
+        content: "...";
+        font-weight: bold;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        padding: 0px 3% 0px 15%;
+        background: -webkit-linear-gradient(left, transparent, #fff 55%);
+        background: -o-linear-gradient(right, transparent, #fff 55%);
+        background: -moz-linear-gradient(right, transparent, #fff 55%);
+        background: linear-gradient(to right, transparent, #fff 55%);
+    }
+
+    .pic {
+        margin: 1%;
+        width: 48%;
+        height: auto;
+        float: left;
+        background-color: aliceblue;
+    }
+</style>
+
+<div id="coupons" style="width: 100%;height:auto;margin-top:3%;">
+    <div id="chead" class="head">
+        <div style="font-size:18px; text-align:left;padding-left:2%;">优惠商品</div>
+    </div>
+    <div style="width:100%;overflow:hidden;">
+        @foreach (var item in Model.CouponsList)
+        {
+            //var i = Model.CouponsList.IndexOf(item);
+            var price = item.PriceNow - item.CouponMoney;
+            var commissionRate = Convert.ToInt32(Convert.ToDecimal(item.CommissionRate) * 100);
+
+            <div style="width:100%;margin-top:1%;float:left;background-color:white;">
+                <div style="width:30%;float:left;">
+                    <img src="@item.ImgUrl" />
+                </div>
+                <div style="width:70%;float:right;">
+                    <div class="commoditytitle" style="margin:2% 0px 0px 2%;">
+                        <span style="font-size:15px;line-height:25px;" onclick="window.open('@item.ClickUrl')">@item.Title</span>
+                        <div class="after">...</div>
+                    </div>
+                    <div style="overflow:hidden;margin:2% 0px 0px 2%;">
+                        <div style="float:left;width:63%;">
+                            <span style="font-size:6px;">券后：</span>
+                            <span style="font-size:6px;color:red;font-weight:bold;">￥@price</span>
+                            <span style="font-size:6px;color:#a3a3a3;text-decoration:line-through;">￥@item.PriceNow</span>
+                        </div>
+                        <div style="float:right;width:37%;padding-right:1%;">
+                            <span style="font-size:10px;">销量</span>
+                            <span style="font-size:10px;color:cornflowerblue;">@item.SalesCount</span>
+                        </div>
+                    </div>
+                    <div style="overflow:hidden;margin:2% 0px 0px 2%;">
+                        <div style="width:35%;float:left;">
+                            <span style="font-size:10px;">佣金</span>
+                            <span style="font-size:10px;color:coral;">@commissionRate%</span>
+                        </div>
+                        <div style="width:65%;float:right;text-align:center;" onclick="window.open('@item.ClickUrl');">
+                            <span style="font-size:10px;">领取优惠券：</span>
+                            <span style="font-size:10px;color:cornflowerblue;">@item.CouponMoney 元</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="more" onclick="MoreClick('coupons')">
+        <span style="font:15px bold;line-height:30px;">更多</span>
+    </div>
+</div>
+
+<div id="article" style="width: 100%;height:auto;margin-top:3%;">
+    <div id="ahead" class="head">
+        <div style="font-size:18px; text-align:left;padding-left:2%;">文章</div>
+    </div>
+    <div style="width:100%;overflow:hidden;">
+        @foreach (var item in Model.ArticleList)
+        {
+            <div class="articletitle">
+                @Html.ActionLink(item.Title, "ArticleInfo", new { inArticleID = item.ArticleID }, new { style = "font-size:15px;line-height:25px;", target = "_blank" })
+                <div class="after">...</div>
+            </div>
+        }
+    </div>
+    <div class="more">
+        <span style="font:15px bold;line-height:30px;" onclick="MoreClick('article')">更多</span>
+    </div>
+</div>
+
+<div id="pictures" style="width: 100%;height:auto;margin-top:3%;">
+    <div id="phead" class="head">
+        <div style="font-size:18px; text-align:left;padding-left:2%;">图集</div>
+    </div>
+    <div style="width:100%;overflow:hidden;">
+        @foreach (var item in Model.PictureList)
+        {
+            foreach (var img in item.Conten)
+            {
+                index++;
+                if (index > 6) { break; }
+                <div class="pic" onclick="window.open('/Home/PictureInfo?inPicID=@item.PictureID')">
+                    <img alt="@img.Desc" src="@img.Src" />
+                </div>
+            }
+        }
+    </div>
+    <div class="more" onclick="MoreClick('pictures')">
+        <span style="font:15px bold;line-height:30px;">更多</span>
+    </div>
+</div>

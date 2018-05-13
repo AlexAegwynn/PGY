@@ -1,0 +1,71 @@
+﻿@model Web.ViewModels.LoginUserViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>登陆</title>
+    <link rel="stylesheet" type="text/css" href="~/Content/Style/login.css" />
+</head>
+<body>
+    <div id="box"></div>
+    <div class="cent-box">
+        <div class="cent-box-header">
+            <h1 class="main-title" style="height: 70px;font-size: 2.5em;">登录</h1><br />
+        </div>
+
+        <div class="cont-main clearfix">
+            <form id="login">
+                <div class="login form">
+                    <div class="group">
+                        <div class="group-ipt email">
+                            <input type="text" name="name" id="name" class="ipt" placeholder="输入您的登陆账号" required>
+                        </div>
+                        <div class="group-ipt password">
+                            <input type="password" name="password" id="password" class="ipt" placeholder="输入您的登录密码" required>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <div class="button">
+                <button onclick="Login()" class="login-btn register-btn" id="button">登录</button>
+            </div>
+        </div>
+    </div>
+
+    @*<div class="footer">
+        <p>xx - xxx</p>
+        <p>Designed By xxx & <a href="zrong.me">xxx.com</a> 2018</p>
+    </div>*@
+    <script src="~/Scripts/WebSite/js/particles.js"></script>
+    <script src="~/Scripts/WebSite/js/background.js"></script>
+    <script src="~/Scripts/WebSite/js/jquery-1.9.1.min.js"></script>
+    <script>
+        function Login() {
+            $.ajax({
+                url: '/WebSite/Login',
+                type: 'post',
+                data: $('#login').serialize(),
+                success: function (data) {
+                    if (data.result) {
+                        document.location.href = '/WebSite/WebSiteList';
+                    } else {
+                        alert('用户名或密码错误');
+                    }
+                },
+                error: function () {
+                    alert('登录失败');
+                }
+            })
+        }
+    </script>
+</body>
+</html>

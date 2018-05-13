@@ -1,0 +1,88 @@
+﻿@{
+    ViewBag.Title = "首页";
+    Layout = "~/Views/Shared/_WebSiteLayout.cshtml";
+}
+
+<script>
+    function LinkInfo(key) {
+        if (key == '') {
+            document.location.href = '/WebSite/WebSiteInfo';
+        } else {
+            document.location.href = '/WebSite/WebSiteInfo?inKey=' + key;
+        }
+    }
+
+    function DeleteWebSite(key) {
+        if (confirm("确认删除？")) {
+            $.ajax({
+                url: '/WebSite/DeleteWebSite',
+                type: 'post',
+                data: {
+                    inKey: key
+                },
+                success: function (data) {
+                    if (data.result == true) {
+                        document.location.href = '/WebSite/Index';
+                    } else {
+                        alert(data.message);
+                    }
+                }
+            })
+        }
+    }
+</script>
+
+<div class="panel panel-default" style="margin-top:5px;">
+    <div class="panel-heading">
+        <span>网站列表</span>
+    </div>
+    <button class="btn btn-default addbtn" onclick="LinkInfo('')">添加</button>
+    <div class="panel-body">
+        <div class="row">
+            <div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>域名</th>
+                            <th style="min-width:50px;">编号</th>
+                            <th>网站名称</th>
+                            <th>类目</th>
+                            @*<th>公司名称</th>*@
+                            @*<th>联系电话</th>*@
+                            @*<th>QQ</th>*@
+                            @*<th>微信</th>*@
+                            @*<th>邮箱</th>*@
+                            @*<th>备案号</th>*@
+                            <th>动作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model as List<Model.WebSiteInfo>)
+                        {
+                            <tr>
+                                <td>
+                                    <span>@item.DomainName</span>
+                                    @Html.Hidden("key" + item.WebSiteID, item.WebSiteKey)
+                                </td>
+                                <td>@item.WebSiteID</td>
+                                <td>@item.WebSiteName</td>
+                                <td>@item.Category</td>
+                                @*<td>@item.CompanyName</td>*@
+                                @*<td>@item.PhoneNumber</td>
+                                    <td>@item.QQ</td>
+                                    <td>@item.WeChat</td>*@
+                                @*<td>@item.Email</td>*@
+                                @*<td>@item.RecordNumber</td>*@
+                                <td>
+                                    <button class="btn btn-default" style="width:50px;height:25px;padding:0px;margin:0px 0px 0px 5px;font-size:15px;" onclick="LinkInfo('@item.WebSiteKey')">编辑</button>
+                                    <button class="btn btn-default" style="width:50px;height:25px;padding:0px;margin:0px 0px 0px 5px;font-size:15px;" onclick="DeleteWebSite('@item.WebSiteKey')">删除</button>
+                                </td>
+                            </tr>
+                            @*<tr><td colspan="8"><span>地址：</span><span>@item.Address</span></td></tr>*@
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

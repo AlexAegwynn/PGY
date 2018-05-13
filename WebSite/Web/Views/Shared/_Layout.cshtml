@@ -1,0 +1,158 @@
+﻿@{
+    var website = ViewData["WebSite"] as Model.WebSiteInfo;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="@website.Keywords">
+    <meta name="description" content="@website.Description">
+    <title>@website.WebSiteName</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <style type="text/css">
+        body {
+            background-color: #fffdf7;
+            /*background-size:cover;*/
+            /*background-image: url("../../Content/Images/groovepaper.png");*/
+            font-size: .75em;
+            font-family: Verdana, Helvetica, Sans-Serif;
+            margin: 0;
+            padding: 0;
+            color: #696969;
+        }
+
+        .img {
+            width: 252px;
+            height: auto;
+            float: left;
+            margin-left: 18px;
+            border: 1px solid #e6e6e6;
+            background-color: white;
+        }
+
+            .img:hover {
+                border: 1px solid #ffbf70;
+            }
+
+        img {
+            width: auto;
+            height: auto;
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        .nav {
+            float: right;
+            width: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 20px;
+            margin-right: 50px;
+        }
+
+            .nav:hover {
+                color: #696969;
+            }
+
+        span {
+            font-size: 18px;
+        }
+
+        .page {
+            margin: 0 auto;
+            width: 90%;
+            min-width: 1170px;
+        }
+
+        .header {
+            width: 100%;
+            height: 200px;
+        }
+
+        .logo {
+            width: 100%;
+            float: left;
+            height: 100px;
+            margin-top: 50px;
+        }
+    </style>
+
+
+    <script src="~/Scripts/WebSite/Home.js"></script>
+    <script>
+        $(function () {
+            if ('@website.BackgroundImg' != '') {
+                $('#body').css('background-image', 'url("@website.BackgroundImg")');
+            }
+        });
+    </script>
+</head>
+
+<body id="body">
+    <div class="page" style="cursor:default;">
+        <div id="header" class="header" style="margin-bottom:15px;">
+            <div id="logo" class="logo">
+                <div style="width:200px;height:100px;float:left;margin-left:20px;">
+                    <img alt="Logo" src="@website.LogoImgUrl" />
+                </div>
+                <div style="float:left;text-align:center;padding:0px 0px 0px 20px;">
+                    <span style="font:45px bold KaiTi;">@website.WebSiteName</span>
+                </div>
+            </div>
+            <div id="nav" style="width:100%;float: left;padding-right: 70px;">
+                <div class="nav" onclick="document.location.href='/Home/Pictures'">图集</div>
+                <div class="nav" onclick="document.location.href='/Home/Article'">文章</div>
+                <div class="nav" onclick="document.location.href='/Home/Commodity'">商品</div>
+                <div class="nav" onclick="document.location.href='/Home/Index'">首页</div>
+            </div>
+        </div>
+        <div id="main">
+            @RenderBody()
+        </div>
+        <div id="footer" style="margin-top:30px; border-top:2px solid #e6e6e6; height:300px;">
+            <div style="width:70%;height:250px;float:left;">
+                <div style="margin:25px 0px 0px 20px;word-break: break-all;">
+                    <table>
+                        <tbody>
+                            @*<tr>
+                                    <td><span>电话：</span></td>
+                                    <td><span>@website.PhoneNumber </span></td>
+                                    <td><span>QQ：</span></td>
+                                    <td><span>@website.QQ</span></td>
+                                </tr>*@
+                            <tr>
+                                @*<td><span>微信：</span></td>
+                                    <td><span>@website.WeChat</span></td>*@
+                                <td>
+                                    <span>邮箱：</span>
+                                    <span>@website.Email</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span>地址：</span>
+                                    <span>@website.Address</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div style="width:30%;height:250px;float:left;">
+                <div style="width:200px;height:200px;margin:25px auto 0px auto;">
+                    <img alt="二维码" src="@website.QRCodeUrl" />
+                </div>
+            </div>
+            <div style="height:50px;width:100%;float:left;text-align:center;border-top:1px solid #808080">
+                <span>@website.CompanyName 保留所有权利 </span><span style="cursor:pointer;" onclick="window.open('http://www.miibeian.gov.cn')">@website.RecordNumber</span>
+            </div>
+        </div>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

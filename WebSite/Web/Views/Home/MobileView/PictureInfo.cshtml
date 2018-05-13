@@ -1,0 +1,335 @@
+﻿@{
+    Layout = null;
+    var mPic = Model as Web.ViewModels.PictureViewModel;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@mPic.Title</title>
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="https://zeptojs.com/zepto.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            background-color:black;
+        }
+
+        .slider_wrap {
+            position: relative;
+            height: 168px;
+            overflow: hidden;
+        }
+
+            .slider_wrap .slider_content {
+                height: 100%;
+                position: absolute;
+                background-color: black;
+                /*top: 0;
+                left: 0;*/
+            }
+
+            .slider_wrap .slider_item {
+                height: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
+
+                .slider_wrap .slider_item img {
+                    border: 0;
+                    width: 100%;
+                    position: absolute;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    /*height: 100%;*/
+                }
+
+            .slider_wrap .slider_btn {
+                width: 100%;
+                height: 10px;
+                position: absolute;
+                bottom: 10px;
+                left: 0;
+                text-align: center;
+            }
+
+            .slider_wrap .slider_btnlist {
+                width: 6px;
+                height: 6px;
+                border: 1px solid rgba(255,255,255,.8);
+                display: inline-block;
+                border-radius: 50%;
+                margin: 5px;
+            }
+
+                .slider_wrap .slider_btnlist.curr {
+                    background: rgba(255,255,255,.8);
+                }
+
+        .head {
+            height: 13%;
+            width: 97%;
+            position: absolute;
+            top: 0px;
+            z-index: 5;
+            color: white;
+            padding: 5% 0px 0px 3%;
+            background-color: black;
+        }
+
+        .btn {
+            width: 30px;
+            position: absolute;
+            top: 45%;
+            z-index: 999;
+            background: rgba(0,0,0,0);
+        }
+
+        img {
+            width: auto;
+            height: auto;
+            max-width: 100%;
+            max-height: 100%;
+        }
+    </style>
+    <script>
+        $(function () {
+            var a = $('.slider_wrap');
+            var height = $(window).height();
+            //height = height - (height / 5);
+            a.css('height', height);
+        });
+
+        $(document).ready(function () {
+
+            // 默认设置
+            var setting = {
+                'index': 0,
+                'duration': 300,
+                'interval': 3000,
+                'autoPlay': false,
+                'timingFn': 'ease'
+            }
+
+            //节点获取
+            var selector = {
+                'sliderWrap': '.slider_wrap',
+                'sliderCont': '.slider_content',
+                'sliderItem': '.slider_item',
+                'sliderBtn': '.slider_btn',
+                'sliderBtnList': '.slider_btnlist',
+                'showBtnList': '.curr'
+            }
+
+            //用于记录触屏的坐标以及触屏的时间
+            var touchRecord = {
+                'startX': '',
+                'startT': '',
+                'endX': '',
+                'endT': '',
+                'changeX': '',
+                'changeT': ''
+            }
+            var sliderWrap = $(selector.sliderWrap);
+            var sliderCont = sliderWrap.find(selector.sliderCont);
+            var sliderItem = sliderWrap.find(selector.sliderItem);
+            var sliderBtn = sliderWrap.find(selector.sliderBtn);
+            var sliderBtnList = sliderWrap.find(selector.sliderBtnList);
+            var timer = null;
+            var sliderWidth = $(window).width();
+            var sliderLength = sliderItem.length;
+            initStyle();
+            //createBtn();
+            addEvent();
+
+            //初始化样式
+            function initStyle() {
+                sliderWidth = $(window).width();
+                sliderWrap.css('width', sliderWidth);
+                sliderCont.css('width', sliderWidth);
+                sliderItem.css('width', sliderWidth);
+                transitionFn(setting.duration, 0);
+            }
+
+            //// 创建索引按钮
+            //function createBtn() {
+            //    var BtnList = '';
+            //    sliderItem.each(function () {
+            //        BtnList += "<p class=" + selector.sliderBtnList.slice(1) + "></p>";
+            //    });
+            //    var Btn = "<p class=" + selector.sliderBtn.slice(1) + ">" + BtnList + "</p>";
+            //    sliderWrap.append(Btn);
+            //    sliderBtn = sliderWrap.find(selector.sliderBtn);
+            //    sliderBtnList = sliderWrap.find(selector.sliderBtnList);
+            //    showBtnList();
+            //}
+
+            //// 当前按钮高亮显示
+            //function showBtnList() {
+            //    var showBtnList = selector.showBtnList.slice(1);
+            //    sliderBtnList.eq(setting.index).addClass(showBtnList).siblings().removeClass(showBtnList);
+            //}
+
+            // 设置过渡函数
+            function transitionFn(duration, changeX) {
+                // 索引处理，如果小于0则返回最大值 反之
+                if (setting.index < 0) setting.index = sliderLength - 1;
+                if (setting.index > sliderLength - 1) setting.index = 0;
+
+                // 保存当前显示张，下一张，上一张
+                var currItem = sliderItem.eq(setting.index);
+                var prevItem = sliderItem.eq(setting.index - 1);
+                var nextItem = sliderItem.eq(setting.index + 1);
+
+                // 如果当前张为第一张，则下一张为最后张 反之
+                if (setting.index - 1 < 0) prevItem = sliderItem.eq(sliderLength - 1);
+                if (setting.index + 1 > sliderLength - 1) nextItem = sliderItem.eq(0);
+
+                sliderItem.css({
+                    'left': 0,
+                    'z-index': -2,
+                    'transition': duration + 'ms ' + setting.timingFn,
+                    '-webkit-transition': duration + 'ms ' + setting.timingFn
+                });
+                currItem.css({
+                    'left': changeX,
+                    'z-index': 0
+                });
+                prevItem.css({
+                    'left': -sliderWidth + changeX,
+                    'z-index': -1
+                });
+                nextItem.css({
+                    'left': sliderWidth + changeX,
+                    'z-index': -1
+                });
+                //showBtnList();
+            }
+
+            // 触屏开始
+            function touchStartFn(e) {
+                var e = e || window.event;
+                e.preventDefault();
+                var touch = e.targetTouches[0];
+
+                //记录手指触屏的X坐标以及当前时间
+                touchRecord.startX = touch.pageX;
+                touchRecord.startT = new Date().getTime();
+                transitionFn(0, 0);
+                clearIntervalFn();
+            }
+            function touchMoveFn(e) {
+                var e = e || window.event;
+                e.preventDefault();
+                var touch = e.targetTouches[0];
+
+                //记录滑动过程中的X坐标并计算滑动过程中改变的X坐标
+                touchRecord.endX = touch.pageX;
+                touchRecord.changeX = touchRecord.endX - touchRecord.startX;
+                transitionFn(0, touchRecord.changeX);
+            }
+            function touchEndFn(e) {
+                var e = e || window.event;
+                e.preventDefault();
+                var touch = e.targetTouches[0];
+
+                //记录滑动结束的时间并计算滑动整个过程持续的时间
+                touchRecord.endT = new Date().getTime();
+                touchRecord.changeT = touchRecord.endT - touchRecord.startT;
+
+                // 如果不是触屏（改变的时间大于50）并且滑动持续的时间大于300毫秒 或者 滑动改变的位移大于需要过渡宽度的一半 则返回ture
+                var onNext = Boolean((touchRecord.changeT > 50 && touchRecord.changeT < 300) || Math.abs(touchRecord.changeX) >= sliderWidth / 2);
+
+                // 当手指左往右滑 即改变大于0 并且满足进行下一张的条件
+                if (touchRecord.changeX > 0 && onNext) {
+                    setting.index--;
+                } else if (touchRecord.changeX < 0 && onNext) {
+                    setting.index++;
+                }
+                transitionFn(setting.duration, 0);
+
+                // 过渡完成清除计时器，并且重置坐标记录
+                setIntervalFn();
+                touchRecord = {
+                    'startX': '',
+                    'startT': '',
+                    'endX': '',
+                    'endT': '',
+                    'changeX': '',
+                    'changeT': ''
+                }
+            }
+
+            //绑定事件
+            function addEvent() {
+                sliderWrap.bind({
+                    'touchstart': function () {
+                        touchStartFn()
+                    },
+                    'touchmove': function () {
+                        touchMoveFn()
+                    },
+                    'touchend': function () {
+                        touchEndFn()
+                    }
+                });
+                $(window).resize(function () {
+                    initStyle()
+                });
+                setIntervalFn();
+            }
+
+            //开启计时器
+            function setIntervalFn() {
+                clearIntervalFn();
+                if (setting.autoPlay) {
+                    timer = setInterval(function () {
+                        setting.index++;
+                        transitionFn(setting.duration, 0);
+                    },
+                        setting.interval);
+                }
+            }
+
+            //关闭计时器
+            function clearIntervalFn() {
+                clearInterval(timer);
+            }
+        });
+    </script>
+</head>
+<body>
+    <div class="head">
+        <span>@mPic.APPName</span>
+        <span>@mPic.RAdminName</span><br />
+        <span>@mPic.ReleaseTime</span>
+        <span id="test"></span>
+    </div>
+    <div class="slider_wrap">
+        @*<div id="next" class="btn" style="right: 0px;">
+            <img src="~/Content/Images/next.png" />
+        </div>
+        <div id="prev" class="btn" style="left: 0px;">
+            <img src="~/Content/Images/prev.png" />
+        </div>*@
+        <div class="slider_content">
+            @foreach (var item in mPic.Conten)
+            {
+                var index = mPic.Conten.IndexOf(item) + 1;
+                <div class="slider_item">
+                    <img src="@item.Src" alt="">
+                    <div style="width:94%;height:17%;position:absolute;bottom:0px;color:white;padding:3% 3% 0px 3%;background-color: black;">
+                        <span>@index / @mPic.Conten.Count</span>
+                        <span>@item.Desc</span>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</body>
+</html>

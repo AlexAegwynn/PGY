@@ -1,0 +1,126 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_MobileLayout.cshtml";
+}
+
+<style>
+    .ahead {
+        margin-top: 3%;
+    }
+
+    .btn {
+        padding: 0px;
+        width: 20%;
+        height: 20px;
+        float: left;
+        text-align: center;
+        border: 1px solid #CCC;
+        border-left: 0px;
+        border-radius: 0px;
+        cursor: pointer;
+    }
+
+    .category {
+        float: left;
+        width: 100%;
+        height: auto;
+        background-color: white;
+        margin-top: 2%;
+    }
+
+    .categoryitem {
+        float: left;
+        width: 20%;
+        min-width: 35px;
+        height: 30px;
+        text-align: center;
+        line-height: 30px;
+        cursor: pointer;
+    }
+
+    .articletitle {
+        width: 100%;
+        height: 25px;
+        margin-top: 1%;
+        float: left;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .after {
+        font-size: 15px;
+        height: 25px;
+        content: "...";
+        font-weight: bold;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        padding: 0px 3% 0px 15%;
+        background: -webkit-linear-gradient(left, transparent, #fff 55%);
+        background: -o-linear-gradient(right, transparent, #fff 55%);
+        background: -moz-linear-gradient(right, transparent, #fff 55%);
+        background: linear-gradient(to right, transparent, #fff 55%);
+    }
+
+    .sc {
+        width: 85%;
+        overflow: hidden;
+        float: left;
+        border-right: 1px solid #eaeaea;
+    }
+</style>
+
+<script>
+    function MoreCat() {
+        var sc = $('#sc');
+        var more = $('#more');
+
+        if (sc.height() == '30') {
+            sc.css('height', 'auto');
+            more.html('收起');
+        } else {
+            sc.css('height', '30');
+            more.html('更多');
+        }
+    }
+
+    function Search() {
+        var s = $('#search').val();
+        document.location.href = '/Home/Article?search=' + s;
+    }
+
+    function CategoryClick(str) {
+        document.location.href = '/Home/Article?category=' + str;
+    }
+</script>
+
+<div id="commodityhead" class="ahead">
+    <div style="width: 100%;float:left;">
+        <input id="search" type="text" value="@ViewBag.Search" style="width: 80%;height: 20px;float:left;font-size:10px;" />
+        <div class="btn" onclick="Search()"><span>搜索</span></div>
+    </div>
+    <div id="category" class="category">
+        <div id="sc" class="sc" style="height: 30px;">
+            <div id="all" name="cat" class="categoryitem" onclick="document.location.href='/Home/Article'"><span>全部</span></div>
+            @foreach (var item in ViewData["CategoryList"] as List<string>)
+            {
+                <div name="cat" class="categoryitem" onclick="CategoryClick('@item')"><span>@item</span></div>
+            }
+        </div>
+        <div style="width:15%;height:30px;float:left;text-align:center;" onclick="MoreCat()">
+            <span id="more" style="line-height:30px;font-size:.75em;color:#ff6a00;">更多</span>
+        </div>
+    </div>
+</div>
+<div style="width:100%; overflow:hidden;font-size:15px;">
+    @{
+        List<Web.ViewModels.ArticleViewModel> list = Model as List<Web.ViewModels.ArticleViewModel>;
+        foreach (var item in list)
+        {
+            <div class="articletitle">
+                @Html.ActionLink(item.Title, "ArticleInfo", new { inArticleID = item.ArticleID }, new { style = "font-size:15px;line-height:25px;", target = "_blank" })
+                <div class="after">...</div>
+            </div>
+        }
+    }
+</div>

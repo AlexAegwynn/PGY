@@ -1,0 +1,62 @@
+﻿[
+  {
+    "DomainName": "localhost",
+    "WebSiteID": "2"
+  },
+  {
+    "DomainName": "www.sppxw.com",
+    "WebSiteID": "5"
+  },
+  {
+    "DomainName": "sppxw.com",
+    "WebSiteID": "5"
+  },
+  {
+    "DomainName": "www.wxwhcb.cn",
+    "WebSiteID": "10"
+  },
+  {
+    "DomainName": "wxwhcb.cn",
+    "WebSiteID": "10"
+  },
+  {
+    "DomainName": "www.youdianke.cn",
+    "WebSiteID": "8"
+  },
+  {
+    "DomainName": "youdianke.cn",
+    "WebSiteID": "8"
+  },
+  {
+    "DomainName": "www.youdianke.com",
+    "WebSiteID": "9"
+  },
+  {
+    "DomainName": "youdianke.com",
+    "WebSiteID": "9"
+  },
+  {
+    "DomainName": "www.jzmkw.com",
+    "WebSiteID": "7"
+  },
+  {
+    "DomainName": "jzmkw.com",
+    "WebSiteID": "7"
+  },
+  {
+    "DomainName": "www.sppxw.cn",
+    "WebSiteID": "4"
+  },
+  {
+    "DomainName": "sppxw.cn",
+    "WebSiteID": "4"
+  },
+  {
+    "DomainName": "www.jzmkw.cn",
+    "WebSiteID": "6"
+  },
+  {
+    "DomainName": "jzmkw.cn",
+    "WebSiteID": "6"
+  }
+]

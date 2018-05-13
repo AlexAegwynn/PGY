@@ -1,0 +1,136 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .ahead {
+        height: auto;
+        overflow:hidden;
+        background-color: white;
+        border-top: 3px solid #c3c3c3;
+        border-bottom: 3px solid #c3c3c3;
+    }
+
+    .content {
+        width: 100%;
+        overflow: hidden;
+        font-size: 15px;
+        margin-top: 25px;
+    }
+
+    .btn {
+        width: 60px;
+        height: 30px;
+        float: left;
+        text-align: center;
+        line-height: 15px;
+        border: 1px solid #CCC;
+        border-left: 0px;
+        border-radius: 0px;
+        cursor: pointer;
+    }
+
+    .category {
+        float: left;
+        width: 10%;
+        height: 44px;
+        text-align: center;
+        line-height: 44px;
+        cursor: pointer;
+    }
+
+        .category:hover {
+            background-color: #c3c3c3;
+        }
+
+    .more {
+        width: 10%;
+        height: 44px;
+        float: left;
+        text-align: center;
+        cursor: pointer;
+    }
+
+    .catbox {
+        width: 90%;
+        overflow: hidden;
+        float: left;
+        border-right: 1px solid #eaeaea;
+        background-color:white;
+    }
+</style>
+
+<script>
+    function Search() {
+        var s = $('#search').val();
+        document.location.href = '/Home/Article?search=' + s;
+    }
+
+    function CategoryClick(str) {
+        document.location.href = '/Home/Article?category=' + str;
+    }
+
+    function MoreCat() {
+        var catbox = $('#categorybox');
+        var more = $('#more');
+
+        if (catbox.height() == '44') {
+            catbox.css('height', 'auto');
+            more.html('收起');
+        } else {
+            catbox.css('height', '44');
+            more.html('更多');
+        }
+    }
+</script>
+
+<div id="commodityhead" class="ahead">
+    <div id="categorylist" style="float:left;width:75%;">
+        <div id="categorybox" class="catbox" style="height:44px;">
+            <div class="category" onclick="document.location.href='/Home/Article'"><span>全部</span></div>
+            @foreach (var item in ViewData["CategoryList"] as List<string>)
+            {
+                <div class="category" onclick="CategoryClick('@item')"><span>@item</span></div>
+            }
+        </div>
+        <div class="more" onclick="MoreCat()">
+            <span id="more" style="line-height:44px;color:orange;">更多</span>
+        </div>
+    </div>
+    <div style="height: 44px; width: 25%; float: right;padding-top:7px;">
+        <input id="search" type="text" value="@ViewBag.Search" style="width: 70%;height: 30px;float:left;font-size:15px;" />
+        <div class="btn" onclick="Search()"><span>搜索</span></div>
+    </div>
+</div>
+
+<div class="content">
+    @{
+        List<Web.ViewModels.ArticleViewModel> list = Model as List<Web.ViewModels.ArticleViewModel>;
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>标题</th>
+                    <th>发布者</th>
+                    <th>发布时间</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in list)
+                {
+                    <tr>
+                        <td style="width:70%;word-break:break-all;">
+                            @Html.ActionLink(item.Title, "ArticleInfo", new { inArticleID = item.ArticleID }, new { style = "font-size:15px;", target = "_blank" })
+                        </td>
+                        <td>
+                            <span>@item.RAdminName</span>
+                        </td>
+                        <td>
+                            <span>@item.ReleaseTime</span>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>

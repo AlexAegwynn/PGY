@@ -1,0 +1,290 @@
+$(function () {
+    function loadMap(){
+        //list box
+        if($('.language-list-box').is(':visible')&&$('.language-list-box div').length==0){
+            $('.language-list-box').load(ACC.languageList_path, function(){
+                $('.language-list-box .selectpicker').selectpicker('refresh');
+                $('.language-list-box select.selectpicker').on('change', function(){
+                    var selected = $('.language-list-box .selectpicker option:selected').val();
+                    $('.language-list-content').find('div:nth-child('+selected+')').show().siblings().hide();
+                });
+            });
+        }
+        //map box
+        if($('.language-map-box').is(':visible')&&$('#language-map div').length==0){
+            $('#map-select').val('world');
+            $('#map-select').selectpicker('refresh');
+
+            $.getJSON('/_ui/eggerweb/common-egger/js/country-lang.json', function(data) {
+                // Assign id's
+                $.each(data, function() {
+                    this.id = this.code;
+                });
+
+                // Instantiate chart
+                $("#language-map").highcharts('Map', {
+                    title: {
+                        text: null
+                    },
+                    chart: {
+                        spacing: [0, 0, 0, 0],
+                        plotBackgroundColor: '#FFFFFF',
+                        resetZoomButton: {
+                            theme: {
+                                display: 'none'
+                            }
+                        }
+                    },
+                    mapNavigation: {
+                        enabled: true,
+                        enableMouseWheelZoom: false,
+                        enableDoubleClickZoom: false,
+                        enableDoubleClickZoomTo: false,
+                        enableTouchZoom: true,
+                        buttons: {
+                            zoomIn: {
+                                y: -30,
+                                onclick: function(){
+                                    hideTooltip();
+                                    this.mapZoom(0.5);
+                                }
+                            },
+                            zoomOut: {
+                                y: 10,
+                                onclick: function(){
+                                    hideTooltip();
+                                    this.mapZoom(2);
+                                }
+                            }
+                        },
+                        buttonOptions: {
+                            theme: {
+                                fill: '#E3E3E3',
+                                'stroke-width': 0,
+                                stroke: 'silver',
+                                r: 0,
+                                states: {
+                                    hover: {
+                                        fill: '#E3E3E3'
+                                    },
+                                    select: {
+                                        fill: '#E3E3E3'
+                                    }
+                                }
+                            },
+                            style: {
+                                cursor: 'pointer'
+                            },
+                            x: -20,
+                            align: 'right',
+                            verticalAlign: 'bottom'
+                        }
+                    },
+                    legend: {
+                        enabled: false
+                    },
+                    credits: {
+                        enabled: false
+                    },
+                    colorAxis: {
+                        lineColor: '#FFFFFF',
+                        lineWidth: 2,
+                        minColor: '#8C8D8F',
+                        maxColor: '#8C8D8F'
+                    },
+                    series: [{
+                        data: data,
+                        mapData: Highcharts.maps['custom/world-highres3'],
+                        joinBy: ['iso-a2', 'code'],
+                        name: 'Country',
+                        borderColor: 'white',
+                        borderWidth: 1,
+                        cursor: 'pointer',
+                        allowPointSelect: true,
+                        color: '#8C8D8F',
+                        states: {
+                            hover: {
+                                color: '#E41937'
+                            },
+                            select: {
+                                color: '#E41937'
+                            }
+                        },
+                        point: {
+                            events: {
+                                click: function (e) {
+                                    var key = this.code;
+                                    var html = '<h3>'+ this.name +'</h3>';
+                                    var lang = this.lang;
+                                    if(lang){
+                                        $.each(lang, function (i, l) {
+                                            html += '<a href="'+ l.url +'" title="'+ l.name +'">'+ l.name +'</a>';
+                                        });
+                                    }else{
+                                        html += '<a href="#" title="'+ key +'">'+ key +'</a>';
+                                    }
+                                    $('#powerTip').html(html);
+                                    $('#powerTip').find('a').on('click',function(e){
+                                    	e.preventDefault();
+                                    	var href = $(this).attr('href');
+                                    	common.setCookie('SessionLangConfirmed',href);
+                                    	window.location.href = href; 
+                                    })
+                                    e.stopPropagation();
+                                    var mapBoxOffset = $('#highmaps').offset();
+                                    var relativeX = (e.pageX - mapBoxOffset.left);
+                                    var relativeY = (e.pageY - mapBoxOffset.top);
+                                    var tipWidth = $('#powerTip').outerWidth();
+                                    var tipHeight = $('#powerTip').outerHeight();
+                                    var tipTop = relativeY - tipHeight - 11;
+                                    var tipLeft =  relativeX - tipWidth/2;
+                                    var maxLeft =  $('#highmaps').width() - tipWidth;
+                                    var maxTop = $('#highmaps').height() - tipHeight;
+                                    var posTop = 0;
+                                    var posLeft = 0;
+                                    if(tipTop>= 0 && tipLeft < 0){
+                                        posTop = relativeY - tipHeight/2;
+                                        posLeft = relativeX + 11;
+                                        $('#powerTip').removeClass().addClass('e');
+                                        if(posTop>maxTop){
+                                            posTop = relativeY - tipHeight;
+                                            $('#powerTip').removeClass().addClass('sw');
+                                        }
+                                    }
+                                    if(tipTop>= 0 && tipLeft > maxLeft){
+                                        posTop = relativeY - tipHeight/2;
+                                        posLeft = relativeX - tipWidth - 11;
+                                        $('#powerTip').removeClass().addClass('w');
+                                        if(posTop>maxTop){
+                                            posTop = relativeY - tipHeight;
+                                            $('#powerTip').removeClass().addClass('se');
+                                        }
+                                    }
+                                    if(tipTop>=0 && tipLeft>=0 && tipLeft<= maxLeft){
+                                        posTop = tipTop;
+                                        posLeft = tipLeft;
+                                        $('#powerTip').removeClass().addClass('n');
+                                    }
+                                    if(tipTop<0 && tipLeft>=0 && tipLeft<= maxLeft){
+                                        posTop = relativeY + 11;
+                                        posLeft = tipLeft;
+                                        $('#powerTip').removeClass().addClass('s');
+                                    }
+                                    if(tipTop<0 && tipLeft<0){
+                                        posTop = relativeY;
+                                        posLeft = relativeX + 11;
+                                        $('#powerTip').removeClass().addClass('nw');
+                                    }
+                                    if(tipTop<0 && tipLeft>maxLeft){
+                                        posTop = relativeY;
+                                        posLeft = relativeX - tipWidth - 11;
+                                        $('#powerTip').removeClass().addClass('ne');
+                                    }
+                                    $('#powerTip').css({'left': posLeft, 'top': posTop});
+                                    showTooltip();
+
+                                    var p = this.series.chart.getSelectedPoints();
+                                    if(p.length > 0 && p[0].x == this.x){
+                                        hideTooltip();
+                                    }
+                                }
+                            }
+                        }
+                    }],
+                    tooltip: {
+                        enabled: false
+                    }
+                });
+            });
+        }
+    }
+
+    /* language select */
+    $('.main-nav .language').click(function(e){
+        e.stopPropagation();
+        e.preventDefault();
+        $(this).parent().toggleClass('active');
+        $('.language-wrap').slideToggle(function(){
+            loadMap();
+        });
+    });
+
+    $(document).not($(".language-wrap")).click(function(){
+        $('.main-nav .language').parent().removeClass('active');
+        $('.language-wrap').slideUp();
+    });
+
+    $('.language-wrap .highmaps').click(function(e){
+        e.stopPropagation();
+    });
+
+    $('.language-wrap').on('click','.dropdown-menu li',function(event){
+        $(this).parents().find('.btn-group.bootstrap-select').removeClass('open');
+        event.stopPropagation();
+    });
+
+    $('#map-select').change(function(e){
+        e.stopPropagation();
+        var hckey = $(this).val();
+        hideTooltip();
+        switch(hckey){
+            case 'world':
+                $('#language-map').highcharts().mapZoom();
+                break;
+            case 'DE':
+                $('#language-map').highcharts().get(hckey).zoomTo();
+                $('#language-map').highcharts().mapZoom(3);
+                break;
+            case 'US':
+                $('#language-map').highcharts().get(hckey).zoomTo();
+                $('#language-map').highcharts().mapZoom(1.3);
+                break;
+            case 'PY':
+                $('#language-map').highcharts().get(hckey).zoomTo();
+                $('#language-map').highcharts().mapZoom(8);
+                break;
+            case 'CF':
+                $('#language-map').highcharts().get(hckey).zoomTo();
+                $('#language-map').highcharts().mapZoom(9);
+                break;
+            case 'CN':
+                $('#language-map').highcharts().get(hckey).zoomTo();
+                $('#language-map').highcharts().mapZoom(1.7);
+                break;
+            case 'AU':
+                $('#language-map').highcharts().get(hckey).zoomTo();
+                $('#language-map').highcharts().mapZoom(2);
+                break;
+        }
+    });
+
+    function showTooltip(){
+        $('#powerTip').css({'visibility': 'visible', 'z-index': 3});
+    }
+    function hideTooltip(){
+        $('#powerTip').css({'visibility': 'hidden', 'z-index': 1});
+    }
+
+    $(window).scroll(function(){
+        hideTooltip();
+    });
+
+    $(window).resize(function(){
+        hideTooltip();
+        loadMap();
+    });
+
+    var isMove = false;
+    $("#language-map").mousedown(function(){
+        isMove = true;
+    });
+    $("#language-map").mousemove(function(e){
+        if(isMove){
+            hideTooltip();
+        }
+    });
+    $("#language-map").mouseup(function(){
+        isMove = false;
+    });
+
+});

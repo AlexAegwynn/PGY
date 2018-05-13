@@ -1,0 +1,118 @@
+﻿@{
+    var website = ViewData["WebSite"] as Model.WebSiteInfo;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="keywords" content="@website.Keywords">
+    <meta name="description" content="@website.Description">
+    <title>@ViewBag.Title</title>
+    @*@Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")*@
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/WebSite/Home.js"></script>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        body {
+            background-color: #5c87b2;
+            background-image: url("../../Content/Images/groovepaper.png");
+            font-size: .75em;
+            font-family: Verdana, Helvetica, Sans-Serif;
+            margin: 0;
+            padding: 0;
+            color: #696969;
+        }
+
+        .page {
+            margin: 0 auto;
+            width: 90%;
+            /*height:100vh;*/
+            height: auto;
+            overflow: hidden;
+        }
+
+        .header {
+            width: 100%;
+            height: auto;
+            overflow: hidden;
+            margin-top: 8%;
+            float: left;
+        }
+
+        img {
+            width: auto;
+            height: auto;
+            max-width: 100%;
+            max-height: 100%;
+            z-index: 1;
+        }
+
+        .nav {
+            width: 100%;
+            float: left;
+            /*height:5%;*/
+            margin-top: 4%;
+            border-bottom: 2px solid #CCC;
+            /*background-color: white;
+            border: 2px solid #CCC;
+            border-left:none;
+            border-right:none;*/
+        }
+
+        .navitem {
+            width: 25%;
+            float: left;
+            /*margin: 2% 0px 0px 0px;*/
+            font: 20px bold;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="page" style="cursor:default;">
+        <div id="header" class="header">
+            <div style="width:35%;height:auto;float:left;">
+                <img alt="Logo" src="@website.LogoImgUrl" />
+            </div>
+            <div style="width:64%;float:left;text-align:center;margin:1% 0px 0px 1%;">
+                <span style="font:15px bold KaiTi;">@website.WebSiteName</span>
+            </div>
+        </div>
+        <div id="nav" class="nav">
+            <div class="navitem" onclick="document.location.href='/Home/Index'">首页</div>
+            <div class="navitem" onclick="document.location.href='/Home/Commodity'">商品</div>
+            <div class="navitem" onclick="document.location.href='/Home/Article'">文章</div>
+            <div class="navitem" onclick="document.location.href='/Home/Pictures'">图集</div>
+        </div>
+        <div id="main" style="width:100%;height:auto;float:left;margin-top:1%;">
+            @RenderBody()
+        </div>
+        <div id="footer" style="width:100%;height:auto;float:left;padding-top:3%;margin-top:2%;border-top:2px solid #CCC">
+            <div style="width:70%;height:auto;float:left;padding:0px 1% 0px 1%;">
+                <div style="width:100%;height:auto;">
+                    <span>邮箱：</span>
+                    <span>@website.Email</span>
+                </div>
+                <div style="width:100%;height:auto;word-break: break-all;">
+                    <span>地址：</span>
+                    <span>@website.Address</span>
+                </div>
+            </div>
+            <div style="width:30%;height:auto;float:right;">
+                <img alt="二维码" src="@website.QRCodeUrl" />
+            </div>
+            <div style="height:50px;width:100%;float:left;text-align:center;border-top:1px solid #808080;margin-top:2%;">
+                <span>@website.CompanyName 保留所有权利 @website.RecordNumber</span>
+            </div>
+        </div>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
