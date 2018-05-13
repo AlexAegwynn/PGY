@@ -54,12 +54,10 @@ namespace Web.Controllers
 
             ViewData["WebSite"] = WebSiteInfo;
 
-            if (State)
-            {
-                return View("/Views/Home/MobileView/Index.cshtml", vModel);
-            }
-
-            return View("/Views/Home/Test/IndexTest.cshtml", vModel);
+            //if (State)
+            //{
+            //    return View("/Views/Home/MobileView/Index.cshtml", vModel);
+            //}
 
             return View(vModel);
         }
@@ -102,12 +100,10 @@ namespace Web.Controllers
             //ViewBag.Coupon = coupon;
             ViewBag.Search = search;
 
-            if (State)
-            {
-                return View("/Views/Home/MobileView/Commodity.cshtml", vModel);
-            }
-
-            return View("/Views/Home/Test/Commodity.cshtml", vModel);
+            //if (State)
+            //{
+            //    return View("/Views/Home/MobileView/Commodity.cshtml", vModel);
+            //}
 
             return View(vModel);
         }

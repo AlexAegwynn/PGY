@@ -1,119 +1,13 @@
 ﻿@{
-    int count = ViewBag.Count;
     //string coupon = ViewBag.Coupon;
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    //Layout = null;
+    Layout = "~/Views/Shared/Test/_Layout.cshtml";
     Web.ViewModels.CommodityViewModel cModel = Model as Web.ViewModels.CommodityViewModel;
 }
-<script src="~/Scripts/clipboard.min.js"></script>
-
-<style>
-    .chead {
-        height: 50px;
-        margin: 0px 0px 25px 0px;
-        background-color: white;
-        border-top: 3px solid #c3c3c3;
-        border-bottom: 3px solid #c3c3c3;
-    }
-
-    .btn {
-        width: 60px;
-        height: 30px;
-        float: left;
-        text-align: center;
-        line-height: 15px;
-        border: 1px solid #CCC;
-        border-left: 0px;
-        border-radius: 0px;
-        cursor: pointer;
-    }
-
-    .category {
-        float: left;
-        width: 100px;
-        height: 44px;
-        text-align: center;
-        line-height: 44px;
-        cursor: pointer;
-    }
-
-        .category:hover {
-            background-color: #c3c3c3;
-        }
-
-    .commodity {
-        float: left;
-        width: 252px;
-        height: 392px;
-        margin: 15px 0px 5px 28px;
-        background-color: white;
-        border: 1px solid #CCC;
-    }
-
-        .commodity:hover {
-            border-color: #a5d0fa;
-            box-shadow: #a5d0fa 0px 0px 5px 2px;
-        }
-
-    img {
-        width: auto;
-        height: auto;
-        max-width: 100%;
-        max-height: 100%;
-        z-index: 1;
-    }
-
-    .title {
-        position: relative;
-        overflow: hidden;
-    }
-
-        .title::after {
-            font-size: 12px;
-            height: 30px;
-            content: "...";
-            font-weight: bold;
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            padding: 0 20px 1px 40px;
-            background: -webkit-linear-gradient(left, transparent, #fff 55%);
-            background: -o-linear-gradient(right, transparent, #fff 55%);
-            background: -moz-linear-gradient(right, transparent, #fff 55%);
-            background: linear-gradient(to right, transparent, #fff 55%);
-        }
-
-    .copydiv {
-        display: none;
-        width: 100%;
-        height: 30px;
-        background-color: rgba(214, 245, 255, 0.60);
-        bottom: 0px;
-        position: absolute;
-        text-align: center;
-    }
-
-        .copydiv:hover {
-            background-color: rgba(214, 245, 255, 0.85);
-        }
-
-    .textdiv {
-        display: none;
-        width: 450px;
-        height: 392px;
-        padding: 5px 0 0 5px;
-        background-color: rgb(214, 245, 255);
-        position: absolute;
-        top: 0px;
-        right: -455px;
-        z-index: 999;
-        word-break: break-all;
-        font-size: 12px;
-        box-shadow: rgba(216, 216, 216, 0.64) 0px 0px 5px 3px;
-    }
-</style>
 
 <script>
     var page = '@ViewBag.Page';
+    var total = '@cModel.PageCode';
     $(function () {
         if (page != '') {
             if (page <= '3') {
@@ -123,9 +17,16 @@
                 }
             } else {
                 var index = parseInt(page) - 2;
-                for (var i = 1; i <= 5; i++) {
-                    $('#pg_' + i).children().html(i + index);
-                    index++;
+                if (parseInt(page) + 2 > total) {
+                    alert();
+                } else {
+                    for (var i = 1; i <= 5; i++) {
+                        if (index <= total) {
+                            $('#pg_3').css('background-color', '#ffd28a');
+                            $('#pg_' + i).children().html(index);
+                        }
+                        index++;
+                    }
                 }
             }
         }
@@ -139,102 +40,103 @@
         var search = $('#search').val();
         document.location.href = '/Home/Commodity?page=' + page + '&&search=' + search; // + '&&coupon=' + cou;
     }
+
+    function Search() {
+        var search = $('#search').val();
+        document.location.href = '/Home/Commodity?&&search=' + search;
+    }
 </script>
 
-@*@Html.Hidden("hcoupon", coupon)*@
-@Html.Hidden("hcount", count)
-
-<div id="commodityhead" class="chead">
-    <div style="float:left;width:75%;height:44px;padding:0px 0px 0px 0px;">
-        <div class="category" onclick="document.location.href='/Home/Commodity'"><span>全部</span></div>
-    </div>
-    <div style="height: 44px; width: 25%; float: right;padding-top:7px;">
-        <input id="search" type="text" value="@ViewBag.Search" style="width: 70%;height: 30px;float:left;font-size:15px;" />
-        <div class="btn" onclick="Search()"><span>搜索</span></div>
-    </div>
-</div>
-
-<div id="commoditymain" style="overflow:hidden;margin:0px auto 0px auto;">
-    @{
-        foreach (var item in cModel.ItemInfo)
-        {
-            var index = cModel.ItemInfo.IndexOf(item);
-            var price = item.ZKPice > 0 ? item.ZKPice : item.PriceNow;
-            var finalprice = price - item.CouponMoney;
-            var commissionRate = Convert.ToInt32(Convert.ToDecimal(item.CommissionRate) * 100);
-
-            <div class="commodity" onmouseover="ShowCopy('@index')" onmouseout="HideCopy('@index')">
-                <div style="width: 250px; height: 250px;position:relative;cursor:pointer;">
-                    <img onclick="window.open('@item.ClickUrl')" src="@item.ImgUrl" />
-                    <div id="showcopy_@index" class="copydiv" onmouseover="ShowText('@index')" onmouseout="HideText('@index')" onclick="CopyClick('@index')">
-                        <span id="copytext_@index" style="font-size:15px;line-height:30px;font-weight:bold;">复制文案</span>
-                    </div>
-                    <div id="board_@index" class="textdiv">
-                        <img src="@item.ImgSmall" /><br />
-                        <b>@item.Title</b><br />
-                        <b>【在售价 @price，劵后价 @finalprice 元】</b><br />
-                        <b>领券： @item.ClickUrl</b><br />
-                        @if (item.UrlShort != "")
-                        {
-                            <b>下单： @item.UrlShort</b><br />
-                        }
-                        <b>@item.TitleSub</b><br />
-                    </div>
-                </div>
-                <div style="width:250px;height:95px; background-color:#fffffb;padding-left:5px;margin-bottom:10px;">
-                    <div class="title" style="height:40px;padding-left:15px;">
-                        <span style="line-height:40px;cursor:pointer;" onclick="window.open('@item.ClickUrl')">@item.Title</span>
-                    </div>
-                    <div style="height:30px;">
-                        <div style="float:left;width:65%;">
-                            <span style="font-size:15px;line-height:30px;">券后：</span>
-                            <span style="font-size:16px;color:red;font-weight:bold;">￥@finalprice</span>
-                            <span style="font-size:10px;color:#a3a3a3;text-decoration:line-through">￥@price</span>
-                        </div>
-                        <div style="float:right;width:35%;padding-right:5px;">
-                            <span style="font-size:15px;line-height:30px;">销量</span>
-                            <span style="font-size:15px;color:cornflowerblue;">@item.SalesCount</span>
-                        </div>
-                    </div>
-                    <div style="height:25px;">
-                        <span style="font-size:13px;line-height:25px;">佣金</span>
-                        <span style="font-size:13px;color:coral;">@commissionRate%</span>
-                    </div>
-                </div>
-                <div style="width:240px;height:2px;background-color:#c0d6ff;margin: 0px auto 0px auto;"></div>
-                <div style="height:33px;text-align:center;">
-                    <div style="width:70%;margin:0px auto 0px auto;cursor:pointer;" onclick="window.open('@item.ClickUrl');">
-                        <span style="font-size:15px;line-height:33px;">领取优惠券：</span>
-                        <span style="font-size:15px;color:cornflowerblue;">@item.CouponMoney 元</span>
-                    </div>
-                </div>
+@Html.Hidden("hcount", cModel.PageCode)
+<section class="main" data-showsapoverlay="">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-2">
+                <h1 class="page-header">全部商品</h1>
             </div>
-        }
-    }
-</div>
-
-<div id="pagecount" style="width:100%;height:40px;margin-top:20px;">
-    <div style="float:right;margin-right:5%;width:40%;height:40px;">
-        <div style="float:left;width:10%;height:40px;margin-right:2%;">
-            <span style="line-height:40px;font-size:12px;">共 @count 页</span>
-        </div>
-        <div class="pagebtn" style="margin-right:11px;" onclick="PageClick('@ViewBag.Page', 'Previous')">
-            <span style="line-height:40px;font-size:12px;">上一页</span>
-        </div>
-
-        @for (int i = 1; i <= 5; i++)
-        {
-            if (i > count) { break; }
-            <div id="pg_@i" class="num">
-                <span style="line-height:40px;font-size:12px;"></span>
+            <div class="col-lg-10 thesearch">
+                <input id="search" type="text" value="@ViewBag.Search" style="border: 1px solid #ccc;border-radius: 4px;">
+                <button type="button" class="btn btn-primary" style="" onclick="Search()">搜索</button>
             </div>
-        }
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                @foreach (var item in cModel.ItemsInfos)
+                {
+                    var price = item.ZKPice != "" ? Convert.ToSingle(item.ZKPice) : item.PriceNow;
+                    var finalprice = price - item.CouponMoney;
+                    var commissionRate = Convert.ToInt32(Convert.ToDecimal(item.CommissionRate) * 100);
 
-        <div class="pagebtn" style="margin-left:10px;" onclick="PageClick('@ViewBag.Page', 'Next')">
-            <span style="line-height:40px;font-size:12px;">下一页</span>
+                    <div class="col-lg-1-8 col-md-4 col-sm-6 col-xs-12" style="margin-bottom:10px;">
+                        <div class="thumbnail thumbnailh">
+                            <div class="piccontent">
+                                <a href="@item.ClickUrl" target="_blank">
+                                    <img src="@item.ImgUrl" alt="..." class="img-responsive">
+                                </a>
+                            </div>
+                            <div class="caption">
+                                <a href="@item.ClickUrl" target="_blank">
+                                    <h4 style="font-size: 15px">@item.Title</h4>
+                                </a>
+                                <div style="height:30px;">
+                                    <div style="float:left;">
+                                        <span style="font-size:12px;line-height:30px;">券后：</span>
+                                        <span style="font-size:16px;color:red;font-weight:bold;">￥@finalprice</span>
+                                        <span style="font-size:10px;color:#a3a3a3;text-decoration:line-through">￥@price</span>
+                                    </div>
+                                </div>
+                                <div style="height:25px;" class="theprice">
+                                    <div style="float: left;width: 40%;" class="tprice">
+                                        <span style="font-size:10px;line-height:30px;">佣金</span>
+                                        <span style="font-size:10px;color:coral;">@commissionRate%</span>
+                                    </div>
+                                    <div style="float:left;width:60%;padding-right:5px;" class="tprice2">
+                                        <span style="font-size:10px;line-height:30px;">销量</span>
+                                        <span style="font-size:10px;color:cornflowerblue;">@item.SalesCount</span>
+                                    </div>
+                                </div>
+                                <div style="width:100%;height:2px;background-color:#c0d6ff;"></div>
+                                <div class="bottomd" style="height:60px;text-align:center;">
+                                    <div style="margin:0px auto 0px auto;cursor:pointer;" onclick="window.open('@item.ClickUrl');">
+                                        <span style="font-size:12px;">领取优惠券：</span>
+                                        <span style="font-size:12px;color:cornflowerblue;">@item.CouponMoney 元</span>
+                                    </div>
+                                    <div class="bottomcontent" style="width: 100%;height: 40px;background-color: #fff8e5;font-size: 10px;">
+                                        <h>货不在贵贱,合心意就好.</h>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
         </div>
     </div>
-</div>
+
+    <div id="pagecount" style="width:100%;height:30px;margin-top:20px;cursor:default;">
+        <div style="float:right;margin-right:5%;width:40%;height:30px;">
+            <div style="float:left;width:10%;height:30px;margin-right:2%;">
+                <span style="line-height:30px;font-size:12px;">共 @cModel.PageCode 页</span>
+            </div>
+            <div class="pagebtn" style="margin-right:11px;" onclick="PageClick('@ViewBag.Page', 'Previous')">
+                <span style="line-height:30px;font-size:12px;">上一页</span>
+            </div>
+            @for (int i = 1; i <= 5; i++)
+            {
+                if (i > cModel.PageCode) { break; }
+                <div id="pg_@i" class="num">
+                    <span style="line-height:30px;font-size:12px;"></span>
+                </div>
+            }
+            @*<div id="pg" class="num">
+                    <span style="line-height:30px;font-size:12px;">@ViewBag.Page</span>
+                </div>*@
+            <div class="pagebtn" style="margin-left:10px;" onclick="PageClick('@ViewBag.Page', 'Next')">
+                <span style="line-height:30px;font-size:12px;">下一页</span>
+            </div>
+        </div>
+    </div>
+</section>
 
 <style>
     .pagebtn {
@@ -242,7 +144,7 @@
         float: left;
         cursor: pointer;
         width: 12%;
-        height: 40px;
+        height: 30px;
         text-align: center;
     }
 
@@ -250,12 +152,8 @@
         border: 1px solid rgba(216, 216, 216, 0.64);
         float: left;
         width: 8%;
-        height: 40px;
+        height: 30px;
         text-align: center;
         margin-left: -1px;
     }
-
-        .num:hover {
-            border: 1px solid #ff8721;
-        }
 </style>
