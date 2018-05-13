@@ -17,16 +17,14 @@
                 }
             } else {
                 var index = parseInt(page) - 2;
-                if (parseInt(page) + 2 > total) {
-                    alert();
-                } else {
-                    for (var i = 1; i <= 5; i++) {
-                        if (index <= total) {
-                            $('#pg_3').css('background-color', '#ffd28a');
-                            $('#pg_' + i).children().html(index);
-                        }
-                        index++;
+                for (var i = 1; i <= 5; i++) {
+                    if (index <= total) {
+                        $('#pg_3').css('background-color', '#ffd28a');
+                        $('#pg_' + i).children().html(index);
+                    } else {
+                        $('#pg_' + i).attr('hidden', 'hidden');
                     }
+                    index++;
                 }
             }
         }
