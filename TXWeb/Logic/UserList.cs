@@ -8,6 +8,15 @@ namespace Logic
 {
     public class UserList
     {
-
+        /// <summary>
+        /// 获取用户
+        /// </summary>
+        /// <param name="inName"></param>
+        /// <param name="inPassword"></param>
+        /// <returns></returns>
+        public static Model.UserList GetUser(string inName, string inPassword)
+        {
+            return Data.UserList.GetUser(inName, inPassword);
+        }
     }
 }
