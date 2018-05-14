@@ -240,6 +240,7 @@
     <Content Include="Scripts\Home\ellipsis.min.js" />
     <Content Include="Scripts\Home\common.js" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\clipboard.js" />
     <Content Include="Scripts\clipboard.min.js" />
@@ -331,15 +332,11 @@
     <Content Include="Views\Home\ArticleInfo.cshtml" />
     <Content Include="Views\Shared\_MobileLayout.cshtml" />
     <Content Include="Views\Home\MobileView\Article.cshtml" />
-    <Content Include="Views\Home\MobileView\Commodity.cshtml" />
-    <Content Include="Views\Home\MobileView\Index.cshtml" />
     <Content Include="Views\Home\MobileView\Pictures.cshtml" />
     <Content Include="Views\Home\PictureInfo.cshtml" />
     <Content Include="Views\Home\MobileView\PictureInfo.cshtml" />
     <Content Include="Views\WebSite\Index.cshtml" />
-    <Content Include="Views\Home\Test\IndexTest.cshtml" />
     <Content Include="Views\Shared\Test\_Layout.cshtml" />
-    <Content Include="Views\Home\Test\Commodity.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

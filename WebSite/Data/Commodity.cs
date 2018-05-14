@@ -39,7 +39,7 @@ namespace Data
 
             DataTable dt = SqlHelper.ExecuteDataTable(CommandType.Text, sql.ToString(), paras);
             List<Model.ItemsInfo> list = new List<Model.ItemsInfo>();
-            List<string> NumIIDList = new List<string>();
+
             string numIIDs = string.Empty;
 
             foreach (DataRow item in dt.Rows)
