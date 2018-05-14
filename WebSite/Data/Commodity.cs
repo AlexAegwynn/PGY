@@ -19,8 +19,12 @@ namespace Data
         /// <returns></returns>
         public static List<Model.ItemsInfo> GetItemsInfos(int inRows, int inPageCount, int inWebID, string inSearch)
         {
+            #region SQL
+            string str = " NumIID,Title,TitleSub,UrlShort,PriceNow,SalesCount,ClickUrl,CommissionRate," +
+                                                                    "CouponMoney,ImgUrl,ImgSmall,RemainCount,TotalCount,CouponInfo,IsEnable";
+            
             StringBuilder sql = new StringBuilder();
-            sql.Append(" SELECT TOP " + inRows + " * FROM Web_ItemWeb a ");
+            sql.Append(" SELECT TOP " + inRows + str + " FROM Web_ItemWeb a ");
             sql.Append(" LEFT JOIN rpt_ItemsInfo b ON a.IID = b.ID ");
             sql.Append(" WHERE a.WID = @inWebID AND b.Title LIKE '%'+ @inSearch +'%' ");
             sql.Append(" AND a.ID NOT IN (  ");
@@ -28,6 +32,7 @@ namespace Data
             sql.Append(" LEFT JOIN rpt_ItemsInfo b ON a.IID = b.ID ");
             sql.Append(" WHERE a.WID = @inWebID AND b.Title LIKE '%'+ @inSearch +'%' ) ");
             sql.Append(" ORDER BY a.ID ASC ");
+            #endregion
 
             SqlParameter[] paras = new SqlParameter[]
             {
@@ -46,52 +51,52 @@ namespace Data
             {
                 Model.ItemsInfo model = new Model.ItemsInfo
                 {
-                    ID = Convert.ToInt64(item["ID"]),
+                    //ID = Convert.ToInt64(item["ID"]),
                     NumIID = Convert.ToInt64(item["NumIID"]),
                     Title = item["Title"].ToString(),
-                    KeyWordStr = item["KeyWordStr"].ToString(),
+                    //KeyWordStr = item["KeyWordStr"].ToString(),
                     TitleSub = item["TitleSub"].ToString(),
-                    IsPush = Convert.ToInt32(item["IsPush"]),
-                    PushTime = Convert.ToInt64(item["PushTime"]),
-                    TitleDescribe = item["TitleDescribe"].ToString(),
-                    CatID = Convert.ToInt64(item["NumIID"]),
-                    Navigation = Convert.ToInt32(item["Navigation"]),
+                    //IsPush = Convert.ToInt32(item["IsPush"]),
+                    //PushTime = Convert.ToInt64(item["PushTime"]),
+                    //TitleDescribe = item["TitleDescribe"].ToString(),
+                    //CatID = Convert.ToInt64(item["CatID"]),
+                    //Navigation = Convert.ToInt32(item["Navigation"]),
                     //OrderUrl = item["OrderUrl"].ToString(),
                     ImgUrl = item["ImgUrl"].ToString(),
                     ImgSmall = item["ImgSmall"].ToString(),
                     PriceNow = Convert.ToSingle(item["PriceNow"]),
-                    IsTmall = Convert.ToInt32(item["IsTmall"]),
+                    //IsTmall = Convert.ToInt32(item["IsTmall"]),
                     SalesCount = Convert.ToInt32(item["SalesCount"]),
-                    IsGood = Convert.ToInt32(item["IsGood"]),
-                    CreateTime = Convert.ToInt64(item["CreateTime"]),
-                    UpdateTime = Convert.ToInt64(item["UpdateTime"]),
+                    //IsGood = Convert.ToInt32(item["IsGood"]),
+                    //CreateTime = Convert.ToInt64(item["CreateTime"]),
+                    //UpdateTime = Convert.ToInt64(item["UpdateTime"]),
                     IsEnable = Convert.ToInt32(item["IsEnable"]),
-                    ActivityID = item["ActivityID"].ToString(),
-                    TimeStart = Convert.ToInt64(item["TimeStart"]),
-                    TimeEnd = Convert.ToInt64(item["TimeEnd"]),
+                    //ActivityID = item["ActivityID"].ToString(),
+                    //TimeStart = Convert.ToInt64(item["TimeStart"]),
+                    //TimeEnd = Convert.ToInt64(item["TimeEnd"]),
                     ClickUrl = item["ClickUrl"].ToString(),
                     UrlShort = item["UrlShort"].ToString(),
                     TotalCount = Convert.ToInt32(item["TotalCount"]),
                     RemainCount = Convert.ToInt32(item["RemainCount"]),
                     CommissionRate = Convert.ToSingle(item["CommissionRate"]),
-                    Commission = Convert.ToSingle(item["Commission"]),
+                    //Commission = Convert.ToSingle(item["Commission"]),
                     CouponInfo = item["CouponInfo"].ToString(),
                     CouponMoney = Convert.ToSingle(item["CouponMoney"]),
-                    TimeUpdate = Convert.ToInt64(item["TimeUpdate"]),
-                    CouponType = Convert.ToInt32(item["CouponType"]),
-                    UseCount = Convert.ToInt32(item["UseCount"]),
-                    Nick = item["Nick"].ToString(),
-                    SellerID = Convert.ToInt64(item["SellerID"])
+                    //TimeUpdate = Convert.ToInt64(item["TimeUpdate"]),
+                    //CouponType = Convert.ToInt32(item["CouponType"]),
+                    //UseCount = Convert.ToInt32(item["UseCount"]),
+                    //Nick = item["Nick"].ToString(),
+                    //SellerID = Convert.ToInt64(item["SellerID"])
                 };
                 numIIDs += model.NumIID + ",";
                 list.Add(model);
             }
 
-            var zkList = Common.TBApi.GetZKPice(numIIDs);
+            List <Top.Api.Domain.NTbkItem> zkList = Common.TBApi.GetZKPice(numIIDs);
 
             for (int i = 0; i < list.Count; i++)
             {
-                list[i].ZKPice = zkList[i];
+                list[i].ZKPice = zkList[i].ZkFinalPrice;
             }
 
             return list;
