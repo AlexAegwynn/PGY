@@ -142,6 +142,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Global.asax.cs">
@@ -152,6 +153,8 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\css\index.css" />
+    <Content Include="Content\css\login.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -169,6 +172,57 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\Js\background.js" />
+    <Content Include="Scripts\Js\bootstrap-wysiwyg.js" />
+    <Content Include="Scripts\Js\froala_editor.min.js" />
+    <Content Include="Scripts\Js\froala_editor_ie8.min.js" />
+    <Content Include="Scripts\Js\jquery.hotkeys.js" />
+    <Content Include="Scripts\Js\langs\ar.js" />
+    <Content Include="Scripts\Js\langs\bs.js" />
+    <Content Include="Scripts\Js\langs\cs.js" />
+    <Content Include="Scripts\Js\langs\da.js" />
+    <Content Include="Scripts\Js\langs\de.js" />
+    <Content Include="Scripts\Js\langs\en_ca.js" />
+    <Content Include="Scripts\Js\langs\en_gb.js" />
+    <Content Include="Scripts\Js\langs\en_us.js" />
+    <Content Include="Scripts\Js\langs\es.js" />
+    <Content Include="Scripts\Js\langs\fa.js" />
+    <Content Include="Scripts\Js\langs\fi.js" />
+    <Content Include="Scripts\Js\langs\fr.js" />
+    <Content Include="Scripts\Js\langs\he.js" />
+    <Content Include="Scripts\Js\langs\hr.js" />
+    <Content Include="Scripts\Js\langs\hu.js" />
+    <Content Include="Scripts\Js\langs\id.js" />
+    <Content Include="Scripts\Js\langs\it.js" />
+    <Content Include="Scripts\Js\langs\ja.js" />
+    <Content Include="Scripts\Js\langs\ko.js" />
+    <Content Include="Scripts\Js\langs\me.js" />
+    <Content Include="Scripts\Js\langs\nb.js" />
+    <Content Include="Scripts\Js\langs\nl.js" />
+    <Content Include="Scripts\Js\langs\pl.js" />
+    <Content Include="Scripts\Js\langs\pt_br.js" />
+    <Content Include="Scripts\Js\langs\pt_pt.js" />
+    <Content Include="Scripts\Js\langs\ro.js" />
+    <Content Include="Scripts\Js\langs\ru.js" />
+    <Content Include="Scripts\Js\langs\sr.js" />
+    <Content Include="Scripts\Js\langs\sv.js" />
+    <Content Include="Scripts\Js\langs\th.js" />
+    <Content Include="Scripts\Js\langs\tr.js" />
+    <Content Include="Scripts\Js\langs\zh_cn.js" />
+    <Content Include="Scripts\Js\langs\zh_tw.js" />
+    <Content Include="Scripts\Js\libs\jquery-1.11.1.min.js" />
+    <Content Include="Scripts\Js\particles.js" />
+    <Content Include="Scripts\Js\plugins\block_styles.min.js" />
+    <Content Include="Scripts\Js\plugins\char_counter.min.js" />
+    <Content Include="Scripts\Js\plugins\colors.min.js" />
+    <Content Include="Scripts\Js\plugins\file_upload.min.js" />
+    <Content Include="Scripts\Js\plugins\font_family.min.js" />
+    <Content Include="Scripts\Js\plugins\font_size.min.js" />
+    <Content Include="Scripts\Js\plugins\lists.min.js" />
+    <Content Include="Scripts\Js\plugins\media_manager.min.js" />
+    <Content Include="Scripts\Js\plugins\tables.min.js" />
+    <Content Include="Scripts\Js\plugins\video.min.js" />
+    <Content Include="Scripts\Js\prettify.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
@@ -187,10 +241,13 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\Login\LoginPartial.cshtml" />
+    <Content Include="Views\Login\RegisterPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

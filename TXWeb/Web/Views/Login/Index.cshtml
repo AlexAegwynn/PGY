@@ -3,15 +3,78 @@
 }
 
 <!DOCTYPE html>
-
-<html>
+<html lang="zh">
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>登陆</title>
+    <link href="~/Content/css/login.css" rel="stylesheet" />
+    <script>
+        function NavClick(state) {
+            var url = '';
+            if (state == 'login') {
+                url = '/Login/LoginPartial';
+                $('#login').addClass('active');
+                $('#register').removeClass('active');
+                $('#activediv').css('left', '0');
+            } else {
+                url = '/Login/RegisterPartial';
+                $('#login').removeClass('active');
+                $('#register').addClass('active');
+                $('#activediv').css('left', '4em');
+            }
+
+            $.ajax({
+                url: url,
+                success: function (data) {
+                    $('#content').html(data);
+                }
+            })
+        }
+    </script>
 </head>
 <body>
-    <div>
-    
+<div id="box"></div>
+<div class="cent-box">
+    <div class="cent-box-header">
+        <h1 class="main-title" style="height: 70px;font-size: 2.5em;">同学网</h1>
     </div>
+
+    <div class="cont-main clearfix">
+        <div class="index-tab">
+            <div class="index-slide-nav">
+                <a id="login" onclick="NavClick('login')" style="cursor:pointer;" class="active">登录</a>
+                <a id="register" onclick="NavClick('register')" style="cursor:pointer;">注册</a>
+                <div id="activediv" class="slide-bar" style=""></div>
+            </div>
+        </div>
+
+        <div id="content">
+            @Html.Partial("LoginPartial")
+        </div>
+    </div>
+</div>
+
+<div class="footer">
+    <p>xx - xxx</p>
+    <p>Designed By xxx & <a href="zrong.me">xxx.com</a> 2018</p>
+</div>
+
+<script src="~/Scripts/Js/particles.js"></script>
+<script src="~/Scripts/Js/background.js"></script>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+
+<script>
+	$("#remember-me").click(function(){
+		var n = document.getElementById("remember-me").checked;
+		if(n){
+			$(".zt").show();
+		}else{
+			$(".zt").hide();
+		}
+	});
+</script>
 </body>
 </html>

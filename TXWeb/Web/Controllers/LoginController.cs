@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace Web.Controllers
 {
-    public class LoginController : Controller
+    public class LoginController : BaseController
     {
         // GET: Login
         public ActionResult Index()
@@ -14,17 +14,28 @@ namespace Web.Controllers
             return View();
         }
 
-        public JsonResult ExistUser(string inName, string inPassword)
+        public PartialViewResult LoginPartial()
+        {
+            return PartialView();
+        }
+
+        public PartialViewResult RegisterPartial()
+        {
+            return PartialView();
+        }
+
+        [HttpPost]
+        public JsonResult ExistUser(string inEmail, string inPassword)
         {
             JsonResult json = new JsonResult();
 
-            if (string.IsNullOrEmpty(inName) || string.IsNullOrEmpty(inPassword))
+            if (string.IsNullOrEmpty(inEmail) || string.IsNullOrEmpty(inPassword))
             {
                 json.Data = new { result = false, msg = "用户名或密码不能为空！" };
                 return json;
             }
 
-            Model.UserList model = Logic.UserList.GetUser(inName, inPassword);
+            Model.UserList model = Logic.UserList.GetUser(inEmail, inPassword);
 
             if (model != null)
             {

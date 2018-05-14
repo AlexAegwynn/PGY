@@ -1,0 +1,42 @@
+﻿<script>
+    function LoginClick() {
+        $.ajax({
+            url: '/Login/ExistUser',
+            type: 'post',
+            data: $('#loginform').serialize(),
+            success: function (data) {
+                if (data.result) {
+                    document.location.href = '/Home/Index';
+                } else {
+                    alert(data.msg);
+                }
+            }
+        })
+    }
+</script>
+
+<div class="login form">
+    <form id="loginform">
+        <div class="group">
+            <div class="group-ipt email">
+                <input type="text" name="inEmail" id="inEmail" class="ipt" placeholder="输入您的登陆账号" required>
+            </div>
+            <div class="group-ipt password">
+                <input type="password" name="inPassword" id="inPassword" class="ipt" placeholder="输入您的登录密码" required>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="button">
+    <button onclick="LoginClick()" class="login-btn register-btn" id="button">登录</button>
+</div>
+
+<div class="remember clearfix">
+    <label class="remember-me">
+        <span class="icon">
+            <span class="zt"></span>
+        </span>
+        <input type="checkbox" name="remember-me" id="remember-me" class="remember-mecheck" checked>记住密码
+    </label>
+</div>
