@@ -2431,7 +2431,7 @@ var EG = {
 
         EG.tooltip();
         EG.tooltips();
-        //EG.errorTips();
+        EG.errorTips();
         EG.profileFlyout();
         EG.cartFlyout();
 		EG.supportmax();
