@@ -19,6 +19,11 @@ namespace Model
         public string Name { get; set; } = string.Empty;
 
         /// <summary>
+        /// 用户密码
+        /// </summary>
+        public string Password { get; set; } = string.Empty;
+
+        /// <summary>
         /// 班级
         /// </summary>
         public string Class { get; set; } = string.Empty;
