@@ -156,6 +156,12 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\css\index.css" />
     <Content Include="Content\css\login.css" />
+    <Content Include="Content\Images\1.jpg" />
+    <Content Include="Content\Images\add.png" />
+    <Content Include="Content\Images\good.jpg" />
+    <Content Include="Content\Images\imgmap.png" />
+    <Content Include="Content\Images\jpg1.jpg" />
+    <Content Include="Content\Images\logo1.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -236,14 +242,14 @@
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Login\LoginPartial.cshtml" />
     <Content Include="Views\Login\RegisterPartial.cshtml" />
+    <Content Include="Views\Home\UserPartial.cshtml" />
+    <Content Include="Views\Home\UserListPartial.cshtml" />
+    <Content Include="Views\Home\CommodityPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

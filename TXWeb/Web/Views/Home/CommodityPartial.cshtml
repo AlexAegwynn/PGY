@@ -1,0 +1,48 @@
+﻿
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">
+            个人商品
+            <button type="button" class="btn btn-primary">+添加商品</button>
+        </h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        @for (int i = 0; i < 8; i++)
+        {
+            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6">
+                <div class="thumbnail">
+                    <a href="">
+                        <img src="~/Content/Images/good.jpg" alt="..." class="img-responsive">
+                    </a>
+                    <div class="caption">
+                        <a href="">
+                            <h4>华为P20 PRO</h4>
+                        </a>
+                        <p style="color:red;">
+                            现货当天发 送399豪礼Huawei/华为 P20 pro全网通手机华为
+                        </p>
+                        <div style="height: 46px;">
+                            <h>同学价:<h class="price">¥3788</h></h>
+                            <h style="display: block;">市场价:<h class="price">¥3788</h></h>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<div class="row" style="text-align: center;">
+    <ul class="pagination">
+        <li class="disabled"><a href="#">&laquo;上一页</a></li>
+        <li class="active"><a href="#">1</a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">4</a></li>
+        <li><a href="#">5</a></li>
+        <li><a style="border-top:none;border-bottom: none;">...</a></li>
+        <li><a href="#">&raquo;下一页</a></li>
+    </ul>
+</div>
