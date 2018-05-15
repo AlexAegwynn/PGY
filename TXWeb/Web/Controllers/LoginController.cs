@@ -8,7 +8,8 @@ namespace Web.Controllers
 {
     public class LoginController : BaseController
     {
-        // GET: Login
+        private static string VerificationCode = "123";
+
         public ActionResult Index()
         {
             return View();
@@ -21,7 +22,9 @@ namespace Web.Controllers
 
         public PartialViewResult RegisterPartial()
         {
-            return PartialView();
+            ViewModels.UserViewModel vModel = new ViewModels.UserViewModel();
+
+            return PartialView(vModel);
         }
 
         [HttpPost]
@@ -45,6 +48,46 @@ namespace Web.Controllers
             else
             {
                 json.Data = new { result = false, msg = "用户名或密码错误！" };
+            }
+
+            return json;
+        }
+
+        [HttpPost]
+        public JsonResult RegisterUser(ViewModels.UserViewModel inModel)
+        {
+            JsonResult json = new JsonResult();
+
+            if (inModel.Password != inModel.ConfirmPwd)
+            {
+                json.Data = new { result = false, msg = "密码不一致" }; return json;
+            }
+
+            if (inModel.VerificationCode != VerificationCode)
+            {
+                json.Data = new { result = false, msg = "验证码不正确" }; return json;
+            }
+
+            Model.UserList model = new Model.UserList
+            {
+                Name = inModel.Name,
+                Email = inModel.Email,
+                Password = inModel.Password,
+                PhoneNumber = inModel.PhoneNumber
+            };
+
+            int result = Logic.UserList.CreateUser(model);
+
+            if (result == 1)
+            {
+                Model.UserList login = Logic.UserList.GetUser(model.Email, model.Password);
+                HttpContext.Session["UserInfo"] = login;
+
+                json.Data = new { result = true, msg = "" };
+            }
+            else
+            {
+                json.Data = new { result = false, msg = "注册失败" };
             }
 
             return json;

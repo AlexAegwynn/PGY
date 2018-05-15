@@ -19,5 +19,13 @@ namespace Web.Controllers
 
             base.OnActionExecuting(filterContext);
         }
+
+        protected Model.UserList LoginUser
+        {
+            get
+            {
+                return HttpContext.Session["UserInfo"] as Model.UserList;
+            }
+        }
     }
 }

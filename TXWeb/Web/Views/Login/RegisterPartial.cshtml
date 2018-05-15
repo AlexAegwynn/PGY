@@ -1,29 +1,74 @@
-﻿<div class="login form">
-    <div class="group">
-        <div class="group-ipt email">
-            <input type="email" name="email" id="email" class="ipt" placeholder="邮箱地址" required>
-        </div>
-        <div class="group-ipt user">
-            <input type="text" name="user" id="user" class="ipt" placeholder="输入用户名" required>
-        </div>
-        <div class="group-ipt password">
-            <input type="password" name="password" id="password" class="ipt" placeholder="设置登录密码" required>
-        </div>
-        <div class="group-ipt password1">
-            <input type="password" name="password1" id="password1" class="ipt" placeholder="重复密码" required>
-        </div>
-        <div class="group-ipt tel">
-            <input type="tel" name="tel" id="tel" class="ipt" placeholder="手机号码" style="width: 70%;" required>
-            <div style="float: right;line-height: 43px;margin-right: 5px;">
-                <button type="submit" class="login-btn register-btn button2" id="getcode">发送验证码</button>
+﻿@model Web.ViewModels.UserViewModel
+<script>
+    function RegisterClick() {
+        var email = $('#email').val();
+        if (email == '') {
+            alert('邮箱不能为空'); return;
+        }
+        var name = $('#name').val();
+        if (name == '') {
+            alert('用户名不能为空'); return;
+        }
+        var password = $('#password').val();
+        if (password == '') {
+            alert('密码不能为空'); return;
+        }
+        var confirmpwd = $('#confirmpwd').val();
+        if (confirmpwd == '') {
+            alert('重复密码不能为空');
+        }
+        var phone = $('#phonenumber').val();
+        if (phone == '') {
+            alert('手机不能为空'); return;
+        }
+        var verificationCode = $('#verificationCode').val();
+        if (verificationCode == '') {
+            alert('验证码不能为空'); return;
+        }
+
+        $.ajax({
+            url: '/Login/RegisterUser',
+            type: 'post',
+            data: $('#registerform').serialize(),
+            success: function (data) {
+                if (data.result) {
+                    document.location.href = '/Home/Index';
+                } else {
+                    alert(data.msg);
+                }
+            }
+        })
+    }
+</script>
+
+<div class="login form">
+    <form id="registerform">
+        <div class="group">
+            <div class="group-ipt email">
+                <input type="email" name="email" id="email" class="ipt" placeholder="邮箱地址" required>
+            </div>
+            <div class="group-ipt user">
+                <input type="text" name="name" id="name" class="ipt" placeholder="输入用户名" required>
+            </div>
+            <div class="group-ipt password">
+                <input type="password" name="password" id="password" class="ipt" placeholder="设置登录密码" required>
+            </div>
+            <div class="group-ipt password1">
+                <input type="password" name="confirmPwd" id="confirmPwd" class="ipt" placeholder="重复密码" required>
+            </div>
+            <div class="group-ipt tel">
+                <input type="tel" name="phoneNumber" id="phoneNumber" class="ipt" placeholder="手机号码" style="width: 70%;" required>
+                <div style="float: right;line-height: 43px;margin-right: 5px;">
+                    <button type="submit" class="login-btn register-btn button2" id="getcode">发送验证码</button>
+                </div>
+            </div>
+            <div class="group-ipt code">
+                <input type="code" name="verificationCode" id="verificationCode" class="ipt" placeholder="输入验证码" required>
             </div>
         </div>
-        <div class="group-ipt code">
-            <input type="code" name="code" id="code" class="ipt" placeholder="输入验证码" required>
-        </div>
-    </div>
+    </form>
 </div>
 
 <div class="button">
-    <button type="submit" class="login-btn register-btn" id="button">注册</button>
+    <button onclick="RegisterClick()" class="login-btn register-btn" id="button">注册</button>
 </div>
