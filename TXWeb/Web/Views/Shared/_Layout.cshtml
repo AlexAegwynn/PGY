@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@{
+    var LoginUser = ViewData["LoginUser"] as Web.ViewModels.UserViewModel;
+}
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
@@ -6,10 +10,9 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>个人商品</title>
+    <title>首页</title>
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
     <link href="~/Content/css/index.css" rel="stylesheet" />
-
     <style>
         .page-header a, .page-header a:hover, .page-header a:visited, .page-header a:link, .page-header a:active {
             text-decoration: none;
@@ -20,9 +23,17 @@
     <script src="~/Scripts/bootstrap.min.js"></script>
 
     <script>
+        var isadmin = '@LoginUser.IsAdmin';
         $(function () {
+            var url = '';
+            if (isadmin == 'True') {
+                url = '/Home/UserListPartial';
+            } else {
+                url = '/Home/CommodityPartial';
+            }
+
             $.ajax({
-                url: '/Home/CommodityPartial',
+                url: url,
                 success: function (data) {
                     $('#content').html(data);
                 }
@@ -63,6 +74,13 @@
                     $('#content').html(data);
                 }
             })
+        }
+
+        function UserClick() {
+            $('#info').removeClass('active')
+            $('#comm').addClass('active');
+            $('#allcomm').removeClass('active');
+            alert();
         }
     </script>
 </head>
@@ -105,7 +123,7 @@
                             <img src="~/Content/Images/1.jpg" class="iconimg" />
                         </div>
                         <div class="iword">
-                            <h5>欢迎你,用户名</h5>
+                            <h5>欢迎你, @LoginUser.Name</h5>
                         </div>
                     </div>
                     <ul class="nav in" id="side-menu">
@@ -116,13 +134,28 @@
                                 <span class="glyphicon glyphicon-chevron-right" style="float: right;"></span>
                             </a>
                         </li>
-                        <li>
-                            <a id="comm" onclick="ComClick('')" class="active">
-                                <i class="glyphicon glyphicon-info-sign"></i>
-                                个人商品
-                                <span class="glyphicon glyphicon-chevron-right" style="float: right;"></span>
-                            </a>
-                        </li>
+                        @{
+                            if (LoginUser.IsAdmin)
+                            {
+                                <li>
+                                    <a id="comm" onclick="UserClick()" class="active">
+                                        <i class="glyphicon glyphicon-info-sign"></i>
+                                        用户列表
+                                        <span class="glyphicon glyphicon-chevron-right" style="float: right;"></span>
+                                    </a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li>
+                                    <a id="comm" onclick="ComClick('')" class="active">
+                                        <i class="glyphicon glyphicon-info-sign"></i>
+                                        个人商品
+                                        <span class="glyphicon glyphicon-chevron-right" style="float: right;"></span>
+                                    </a>
+                                </li>
+                            }
+                        }
                         <li>
                             <a id="allcomm" onclick="ComClick('All')">
                                 <i class="glyphicon glyphicon-list"></i>

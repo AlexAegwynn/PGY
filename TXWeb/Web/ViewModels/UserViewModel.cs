@@ -36,5 +36,10 @@ namespace Web.ViewModels
         /// 验证码
         /// </summary>
         public string VerificationCode { get; set; } = string.Empty;
+
+        /// <summary>
+        /// 是否管理员
+        /// </summary>
+        public bool IsAdmin { get; set; } = false;
     }
 }
