@@ -10,9 +10,19 @@ namespace Web.Controllers
     {
         public ActionResult Index()
         {
-
-
             return View();
+        }
+
+        public PartialViewResult UserPartial()
+        {
+            return PartialView();
+        }
+
+        public PartialViewResult CommodityPartial(string isAll = "")
+        {
+            ViewBag.IsAll = isAll == "All" ? true : false;
+
+            return PartialView();
         }
     }
 }

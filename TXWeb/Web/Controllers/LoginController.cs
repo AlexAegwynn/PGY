@@ -92,5 +92,11 @@ namespace Web.Controllers
 
             return json;
         }
+
+        public ActionResult Logout()
+        {
+            HttpContext.Session.Remove("UserInfo");
+            return RedirectToAction("Index");
+        }
     }
 }

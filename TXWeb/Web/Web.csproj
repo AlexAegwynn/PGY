@@ -154,8 +154,23 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\css\font-awesome.css" />
+    <Content Include="Content\css\font-awesome.min.css" />
+    <Content Include="Content\css\froala_editor.css" />
+    <Content Include="Content\css\froala_editor.min.css" />
+    <Content Include="Content\css\froala_page.css" />
+    <Content Include="Content\css\froala_page.min.css" />
     <Content Include="Content\css\index.css" />
     <Content Include="Content\css\login.css" />
+    <Content Include="Content\css\themes\dark.css" />
+    <Content Include="Content\css\themes\dark.min.css" />
+    <Content Include="Content\css\themes\gray.css" />
+    <Content Include="Content\css\themes\gray.min.css" />
+    <Content Include="Content\css\themes\red.css" />
+    <Content Include="Content\css\themes\red.min.css" />
+    <Content Include="Content\css\themes\royal.css" />
+    <Content Include="Content\css\themes\royal.min.css" />
+    <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\Images\1.jpg" />
     <Content Include="Content\Images\add.png" />
     <Content Include="Content\Images\good.jpg" />
@@ -171,6 +186,11 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\fonts\FontAwesome.otf" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

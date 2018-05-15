@@ -9,12 +9,62 @@
     <title>个人商品</title>
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
     <link href="~/Content/css/index.css" rel="stylesheet" />
+
     <style>
         .page-header a, .page-header a:hover, .page-header a:visited, .page-header a:link, .page-header a:active {
             text-decoration: none;
             color: white;
         }
     </style>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+
+    <script>
+        $(function () {
+            $.ajax({
+                url: '/Home/CommodityPartial',
+                success: function (data) {
+                    $('#content').html(data);
+                }
+            })
+        })
+
+        function ComClick(state) {
+            if (state == 'All') {
+                $('#info').removeClass('active')
+                $('#comm').removeClass('active');
+                $('#allcomm').addClass('active');
+            } else {
+                $('#info').removeClass('active')
+                $('#comm').addClass('active');
+                $('#allcomm').removeClass('active');
+            }
+
+            $.ajax({
+                url: '/Home/CommodityPartial',
+                type: 'post',
+                data: {
+                    isAll: state
+                },
+                success: function (data) {
+                    $('#content').html(data);
+                }
+            })
+        }
+
+        function InfoClick() {
+            $('#info').addClass('active')
+            $('#comm').removeClass('active');
+            $('#allcomm').removeClass('active');
+
+            $.ajax({
+                url: '/Home/UserPartial',
+                success: function (data) {
+                    $('#content').html(data);
+                }
+            })
+        }
+    </script>
 </head>
 <body style="cursor:default;">
     <div>
@@ -41,7 +91,7 @@
                         </li>
                         <li class="divider"></li>
                         <li>
-                            <a href="">
+                            <a href="/Login/Logout">
                                 <i class="glyphicon glyphicon-log-out"></i>退出
                             </a>
                         </li>
@@ -60,21 +110,21 @@
                     </div>
                     <ul class="nav in" id="side-menu">
                         <li>
-                            <a href="">
+                            <a id="info" onclick="InfoClick()">
                                 <i class="glyphicon glyphicon-user"></i>
                                 基本信息
                                 <span class="glyphicon glyphicon-chevron-right" style="float: right;"></span>
                             </a>
                         </li>
                         <li>
-                            <a href="" class="active">
+                            <a id="comm" onclick="ComClick('')" class="active">
                                 <i class="glyphicon glyphicon-info-sign"></i>
                                 个人商品
                                 <span class="glyphicon glyphicon-chevron-right" style="float: right;"></span>
                             </a>
                         </li>
                         <li>
-                            <a href="">
+                            <a id="allcomm" onclick="ComClick('All')">
                                 <i class="glyphicon glyphicon-list"></i>
                                 所有商品
                                 <span class="glyphicon glyphicon-chevron-right" style="float: right;"></span>
@@ -88,8 +138,5 @@
             @RenderBody()
         </div>
     </div>
-
-    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-    <script src="~/Scripts/bootstrap.min.js"></script>
 </body>
 </html>
