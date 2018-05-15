@@ -5,7 +5,7 @@
 }
 
 <section class="main" data-showsapoverlay="">
-    <div class="container" style="cursor:default;">
+    <div style="width:95%;margin:0 auto;">
         <div hidden="hidden" class="page-title headline-full-width" style="margin-top: 50px;">
             <h1>手机数据线丨原装手机数据线包邮</h1>
         </div>
@@ -119,19 +119,12 @@
                                 </div>
                                 <div class="caption">
                                     <a href="@item.ClickUrl" target="_blank">
-                                        <h4 style="font-size: 15px">@item.Title</h4>
+                                        <h4 style="font-size: 14px;overflow: hidden;height: 32px;">@item.Title</h4>
                                     </a>
-                                    <div style="height:30px;">
-                                        <div style="float:left;">
-                                            <span style="font-size:12px;line-height:30px;">券后：</span>
-                                            <span style="font-size:16px;color:red;font-weight:bold;">￥@finalprice</span>
-                                            <span style="font-size:10px;color:#a3a3a3;text-decoration:line-through">￥@price</span>
-                                        </div>
-                                    </div>
                                     <div style="height:25px;" class="theprice">
                                         <div style="float: left;width: 40%;" class="tprice">
                                             <span style="font-size:10px;line-height:30px;">佣金</span>
-                                            <span style="font-size:10px;color:coral;">@commissionRate%</span>
+                                            <span style="font-size:15px;color:coral;font-weight:bold;">@commissionRate%</span>
                                         </div>
                                         <div style="float:left;width:60%;padding-right:5px;" class="tprice2">
                                             <span style="font-size:10px;line-height:30px;">销量</span>
@@ -139,12 +132,17 @@
                                         </div>
                                     </div>
                                     <div style="width:100%;height:2px;background-color:#c0d6ff;"></div>
-                                    <div class="bottomd" style="height:60px;text-align:center;">
-                                        <div style="margin:0px auto 0px auto;cursor:pointer;" onclick="window.open('@item.ClickUrl');">
-                                            <span style="font-size:12px;">领取优惠券：</span>
-                                            <span style="font-size:12px;color:cornflowerblue;">@item.CouponMoney 元</span>
+                                    <div class="bottomd" style="height:71px;">
+                                        <div class="col-lg-4 col-xs-4" style="padding-left: 0;padding-right: 0;border: 1px solid cornflowerblue;background-color: white;line-height: 20px;height: 21px;text-align: center;text-align: center;margin-top: 5px;" onclick="window.open('@item.ClickUrl');">
+                                            <span style="float: left;font-size: 12px;background-color: cornflowerblue;color: white;width: 20px;line-height: 20px;height: 20px;text-align: center;">券</span>
+                                            <span style="font-size: 12px;color: cornflowerblue;float: left;line-height: 20px;width: 60%;text-align: center;">@item.CouponMoney 元</span>
                                         </div>
-                                        <div class="bottomcontent" style="width: 100%;height: 40px;background-color: #fff8e5;font-size: 10px;">
+                                        <div class="col-lg-8 col-xs-8" style="padding-left:0;padding-right:0;text-align:center;">
+                                            <span style="font-size:12px;line-height:30px;float:left;">券后:</span>
+                                            <span style="font-size:13px;color:red;font-weight:bold;line-height:30px;float:left;">￥@finalprice</span>
+                                            <span style="font-size:10px;color:#a3a3a3;text-decoration:line-through;line-height:30px;float:left;">￥@price</span>
+                                        </div>
+                                        <div class="bottomcontent col-lg-12" style="width: 100%;height: 40px;background-color: #fff8e5;font-size: 10px;">
                                             <h>货不在贵贱,合心意就好.</h>
                                         </div>
                                     </div>
