@@ -30,6 +30,7 @@ namespace Data
             sql.Append(" WHERE a.WID = @inWebID AND b.Title LIKE '%'+ @inSearch +'%' ");
             sql.Append(" AND a.ID NOT IN (  ");
             sql.Append(" SELECT TOP " + inPageCount + " a.ID FROM Web_ItemWeb a ");
+            sql.Append(" LEFT JOIN rpt_ItemsInfo b ON a.IID = b.ID ");
             sql.Append(" WHERE a.WID = @inWebID AND b.Title LIKE '%'+ @inSearch +'%' ORDER BY a.ID ASC ) ");
             sql.Append(" ORDER BY a.ID ASC ");
             #endregion
