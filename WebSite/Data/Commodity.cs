@@ -20,17 +20,17 @@ namespace Data
         public static List<Model.ItemsInfo> GetItemsInfos(int inRows, int inPageCount, int inWebID, string inSearch)
         {
             #region SQL
-            string str = " NumIID,Title,TitleSub,UrlShort,PriceNow,SalesCount,ClickUrl,CommissionRate," +
-                                                                    "CouponMoney,ImgUrl,ImgSmall,RemainCount,TotalCount,CouponInfo,IsEnable";
+            string str = " b.NumIID,Title,TitleSub,UrlShort,PriceNow,SalesCount,ClickUrl,CommissionRate, "+
+                                                " CouponMoney,ImgUrl,ImgSmall,RemainCount,TotalCount,CouponInfo,IsEnable, c.CommentStr ";
             
             StringBuilder sql = new StringBuilder();
             sql.Append(" SELECT TOP " + inRows + str + " FROM Web_ItemWeb a ");
             sql.Append(" LEFT JOIN rpt_ItemsInfo b ON a.IID = b.ID ");
+            sql.Append(" LEFT JOIN Web_commentWeb c ON c.NumIID = b.NumIID ");
             sql.Append(" WHERE a.WID = @inWebID AND b.Title LIKE '%'+ @inSearch +'%' ");
             sql.Append(" AND a.ID NOT IN (  ");
             sql.Append(" SELECT TOP " + inPageCount + " a.ID FROM Web_ItemWeb a ");
-            sql.Append(" LEFT JOIN rpt_ItemsInfo b ON a.IID = b.ID ");
-            sql.Append(" WHERE a.WID = @inWebID AND b.Title LIKE '%'+ @inSearch +'%' ) ");
+            sql.Append(" WHERE a.WID = @inWebID AND b.Title LIKE '%'+ @inSearch +'%' ORDER BY a.ID ASC ) ");
             sql.Append(" ORDER BY a.ID ASC ");
             #endregion
 
@@ -87,6 +87,7 @@ namespace Data
                     //UseCount = Convert.ToInt32(item["UseCount"]),
                     //Nick = item["Nick"].ToString(),
                     //SellerID = Convert.ToInt64(item["SellerID"])
+                    CommentStr = item["CommentStr"].ToString()
                 };
                 numIIDs += model.NumIID + ",";
                 list.Add(model);

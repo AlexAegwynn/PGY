@@ -6,7 +6,7 @@
 
 <section class="main" data-showsapoverlay="">
     <div style="width:95%;margin:0 auto;">
-        <div hidden="hidden" class="page-title headline-full-width" style="margin-top: 50px;">
+        @*<div hidden="hidden" class="page-title headline-full-width" style="margin-top: 50px;">
             <h1>手机数据线丨原装手机数据线包邮</h1>
         </div>
 
@@ -95,7 +95,7 @@
                     <img src="~/Content/FrontEnd/css/02PI-CO-PW-bui-timber-control-02f-430x205px.jpg" />
                 </a>
             </div>
-        </div>
+        </div>*@
 
         <div class="module-product-list" style="margin-top:25px;">
             <h2>优惠产品</h2>
@@ -114,7 +114,7 @@
                             <div class="thumbnail thumbnailh">
                                 <div class="piccontent">
                                     <a href="@item.ClickUrl" target="_blank">
-                                        <img src="@item.ImgUrl" alt="..." class="img-responsive" style="width:223px;height:223px;">
+                                        <img src="@item.ImgUrl" alt="..." class="img-responsive">
                                     </a>
                                 </div>
                                 <div class="caption">
@@ -143,7 +143,7 @@
                                             <span style="font-size:10px;color:#a3a3a3;text-decoration:line-through;line-height:30px;float:left;">￥@price</span>
                                         </div>
                                         <div class="bottomcontent col-lg-12" style="width: 100%;height: 40px;background-color: #fff8e5;font-size: 10px;">
-                                            <h>货不在贵贱,合心意就好.</h>
+                                            <h>@item.CommentStr</h>
                                         </div>
                                     </div>
                                 </div>
@@ -174,7 +174,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="module-product-list">
+            @*<div class="module-product-list">
                 <h2>图集</h2>
                 <div class="row" style="margin-bottom:10px;">
                     <div style="float: right;margin: -30px 20px 0px 0px;" class="more">
@@ -199,7 +199,7 @@
                         }
                     </div>
                 </div>
-            </div>
+            </div>*@
         </div><br><br><br>
     </div>
 </section>
