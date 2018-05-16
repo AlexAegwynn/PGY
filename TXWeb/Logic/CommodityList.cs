@@ -18,6 +18,16 @@ namespace Logic
         }
 
         /// <summary>
+        /// 获取用户商品列表
+        /// </summary>
+        /// <param name="inUserID"></param>
+        /// <returns></returns>
+        public static List<Model.CommodityList> GetUserCommodityList(int inUserID)
+        {
+            return Data.CommodityList.GetUserCommodityList(inUserID);
+        }
+
+        /// <summary>
         /// 获取商品信息
         /// </summary>
         /// <param name="inCommodityID"></param>

@@ -48,7 +48,7 @@ namespace Web.Controllers
             HomeViewModel vModel = new HomeViewModel()
             {
                 ArticleList = GetArticleList().Take(6).ToList(),
-                PictureList = GetPictureList(),
+                //PictureList = GetPictureList(),
                 CouponsList = list
             };
 
