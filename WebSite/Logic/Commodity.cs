@@ -5,8 +5,8 @@ using System.Text;
 
 namespace Logic
 {
-	public class Commodity
-	{
+    public class Commodity
+    {
         /// <summary>
         /// 获取商品列表，inWebID 网站ID， page 页码， inSearch 搜索关键字，rows 每页商品数
         /// </summary>
@@ -15,6 +15,16 @@ namespace Logic
         {
             page = (page - 1) * rows;
             return Data.Commodity.GetItemsInfos(rows, page, inWebID, inSearch);
+        }
+
+        /// <summary>
+        /// 获取商品列表【无分页，无搜索】
+        /// </summary>
+        /// <param name="inWebID"></param>
+        /// <returns></returns>
+        public static List<Model.ItemsInfo> GetItemsInfos2(int inWebID, int inTop = 0)
+        {
+            return Data.Commodity.GetItemsInfos2(inWebID, inTop);
         }
 
         /// <summary>

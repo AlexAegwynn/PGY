@@ -10,6 +10,7 @@
         color:red;
         font-weight:bold;
     }
+
 </style>
 
 <script>
@@ -38,11 +39,12 @@
             }
         }
 
-        if (searchstr != '') {
-            var regExp = new RegExp(searchstr, 'g');
+        if (searchstr != '') {            
+            var regExp = new RegExp(searchstr, 'gi');
             $('h4').each(function () {                
                 var html = $(this).html();
-                var newHtml = html.replace(regExp, '<span class="highlight">' + searchstr + '</span>');
+                var str = html.match(regExp);
+                var newHtml = html.replace(regExp, '<span class="highlight">' + str + '</span>');
 
                 $(this).html(newHtml);
             });
@@ -97,7 +99,7 @@
                             </div>
                             <div class="caption">
                                 <a href="@item.ClickUrl" target="_blank">
-                                    <h4 style="font-size: 13px;overflow: hidden;height: 29px;">@item.Title</h4>
+                                    <h4 class="title">@item.Title</h4>
                                 </a>
                                 <div style="height:25px;" class="theprice">
                                     @*<div style="float: left;width: 40%;" class="tprice">

@@ -20,9 +20,9 @@ namespace Data
         public static List<Model.ItemsInfo> GetItemsInfos(int inRows, int inPageCount, int inWebID, string inSearch)
         {
             #region SQL
-            string str = " b.NumIID,Title,TitleSub,UrlShort,PriceNow,SalesCount,ClickUrl,CommissionRate, "+
+            string str = " b.NumIID,Title,TitleSub,UrlShort,PriceNow,SalesCount,ClickUrl,CommissionRate, " +
                                                 " CouponMoney,ImgUrl,ImgSmall,RemainCount,TotalCount,CouponInfo,IsEnable, c.CommentStr ";
-            
+
             StringBuilder sql = new StringBuilder();
             sql.Append(" SELECT TOP " + inRows + str + " FROM Web_ItemWeb a ");
             sql.Append(" LEFT JOIN rpt_ItemsInfo b ON a.IID = b.ID ");
@@ -94,11 +94,83 @@ namespace Data
                 list.Add(model);
             }
 
-            List <Top.Api.Domain.NTbkItem> zkList = Common.TBApi.GetZKPice(numIIDs);
+            List<Top.Api.Domain.NTbkItem> zkList = Common.TBApi.GetZKPice(numIIDs);
 
             for (int i = 0; i < list.Count; i++)
             {
                 list[i].ZKPice = zkList[i].ZkFinalPrice;
+            }
+
+            return list;
+        }
+
+        /// <summary>
+        /// 获取商品列表【无分页，无搜索】
+        /// </summary>
+        /// <param name="inWebID"></param>
+        /// <returns></returns>
+        public static List<Model.ItemsInfo> GetItemsInfos2(int inWebID, int inTop)
+        {
+            string str = @" b.NumIID,Title,TitleSub,UrlShort,PriceNow,SalesCount,ClickUrl,CommissionRate, " +
+                                                                " CouponMoney,ImgUrl,ImgSmall,RemainCount,TotalCount,CouponInfo,IsEnable, c.CommentStr ";
+            string top = inTop == 0 ? string.Empty : "TOP " + inTop;
+
+            StringBuilder sql = new StringBuilder();
+            sql.Append(" SELECT " + top + str + " FROM Web_ItemWeb a ");
+            sql.Append(" LEFT JOIN rpt_ItemsInfo b ON a.IID = b.ID ");
+            sql.Append(" LEFT JOIN Web_commentWeb c ON c.NumIID = b.NumIID ");
+            sql.Append(" WHERE a.WID = @inWebID ORDER BY a.ID ASC ");
+
+            SqlParameter para = new SqlParameter("@inWebID", SqlDbType.Int, 32);
+            para.Value = inWebID;
+
+            DataTable dt = SqlHelper.ExecuteDataTable(CommandType.Text, sql.ToString(), para);
+
+            List<Model.ItemsInfo> list = new List<Model.ItemsInfo>();
+
+            foreach (DataRow item in dt.Rows)
+            {
+                Model.ItemsInfo model = new Model.ItemsInfo
+                {
+                    //ID = Convert.ToInt64(item["ID"]),
+                    NumIID = Convert.ToInt64(item["NumIID"]),
+                    Title = item["Title"].ToString(),
+                    //KeyWordStr = item["KeyWordStr"].ToString(),
+                    TitleSub = item["TitleSub"].ToString(),
+                    //IsPush = Convert.ToInt32(item["IsPush"]),
+                    //PushTime = Convert.ToInt64(item["PushTime"]),
+                    //TitleDescribe = item["TitleDescribe"].ToString(),
+                    //CatID = Convert.ToInt64(item["CatID"]),
+                    //Navigation = Convert.ToInt32(item["Navigation"]),
+                    //OrderUrl = item["OrderUrl"].ToString(),
+                    ImgUrl = item["ImgUrl"].ToString(),
+                    ImgSmall = item["ImgSmall"].ToString(),
+                    PriceNow = Convert.ToSingle(item["PriceNow"]),
+                    //IsTmall = Convert.ToInt32(item["IsTmall"]),
+                    SalesCount = Convert.ToInt32(item["SalesCount"]),
+                    //IsGood = Convert.ToInt32(item["IsGood"]),
+                    //CreateTime = Convert.ToInt64(item["CreateTime"]),
+                    //UpdateTime = Convert.ToInt64(item["UpdateTime"]),
+                    IsEnable = Convert.ToInt32(item["IsEnable"]),
+                    //ActivityID = item["ActivityID"].ToString(),
+                    //TimeStart = Convert.ToInt64(item["TimeStart"]),
+                    //TimeEnd = Convert.ToInt64(item["TimeEnd"]),
+                    ClickUrl = item["ClickUrl"].ToString(),
+                    UrlShort = item["UrlShort"].ToString(),
+                    TotalCount = Convert.ToInt32(item["TotalCount"]),
+                    RemainCount = Convert.ToInt32(item["RemainCount"]),
+                    CommissionRate = Convert.ToSingle(item["CommissionRate"]),
+                    //Commission = Convert.ToSingle(item["Commission"]),
+                    CouponInfo = item["CouponInfo"].ToString(),
+                    CouponMoney = Convert.ToSingle(item["CouponMoney"]),
+                    //TimeUpdate = Convert.ToInt64(item["TimeUpdate"]),
+                    //CouponType = Convert.ToInt32(item["CouponType"]),
+                    //UseCount = Convert.ToInt32(item["UseCount"]),
+                    //Nick = item["Nick"].ToString(),
+                    //SellerID = Convert.ToInt64(item["SellerID"])
+                    CommentStr = item["CommentStr"].ToString()
+                };
+                list.Add(model);
             }
 
             return list;

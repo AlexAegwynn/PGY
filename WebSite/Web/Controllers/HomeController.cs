@@ -43,7 +43,8 @@ namespace Web.Controllers
         {
             WebSiteInfo = Logic.WebSite.GetWebSite(WebSiteID);
 
-            List<Model.ItemsInfo> list = Logic.Commodity.GetItemsInfos(Convert.ToInt32(WebSiteID), 1, "", 5);
+            //List<Model.ItemsInfo> list = Logic.Commodity.GetItemsInfos(Convert.ToInt32(WebSiteID), 1, "", 5);
+            List<Model.ItemsInfo> list = Logic.Commodity.GetItemsInfos2(Convert.ToInt32(WebSiteID), 5);
 
             HomeViewModel vModel = new HomeViewModel()
             {
@@ -79,12 +80,21 @@ namespace Web.Controllers
 
             ViewData["WebSite"] = WebSiteInfo;
 
-            decimal total = Logic.Commodity.GetTotal(Convert.ToInt32(WebSiteID), search);
+            List<Model.ItemsInfo> list = Logic.Commodity.GetItemsInfos2(Convert.ToInt32(WebSiteID));
+            if (search != "")
+            {
+                list = (from l in list where l.Title.ToUpper().IndexOf(search.ToUpper()) >= 0 select l).ToList();
+            }
+
+            decimal total = list.Count;
             int pageCode = Convert.ToInt32(Math.Ceiling(total / 30));
+
+            list = list.Skip((page - 1) * 30).Take(30).ToList();
 
             CommodityViewModel vModel = new CommodityViewModel();
             vModel.PageCode = pageCode;
-            vModel.ItemsInfos = Logic.Commodity.GetItemsInfos(Convert.ToInt32(WebSiteID), page, search);
+            vModel.ItemsInfos = list;
+            //vModel.ItemsInfos = Logic.Commodity.GetItemsInfos(Convert.ToInt32(WebSiteID), page, search);
 
             //switch (coupon)
             //{
