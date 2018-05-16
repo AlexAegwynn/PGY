@@ -5,9 +5,18 @@
     Web.ViewModels.CommodityViewModel cModel = Model as Web.ViewModels.CommodityViewModel;
 }
 
+<style>
+    .highlight{
+        color:red;
+        font-weight:bold;
+    }
+</style>
+
 <script>
     var page = '@ViewBag.Page';
     var total = '@cModel.PageCode';
+    var searchstr = '@ViewBag.Search'
+
     $(function () {
         if (page != '') {
             if (page <= '3') {
@@ -27,6 +36,16 @@
                     index++;
                 }
             }
+        }
+
+        if (searchstr != '') {
+            var regExp = new RegExp(searchstr, 'g');
+            $('h4').each(function () {                
+                var html = $(this).html();
+                var newHtml = html.replace(regExp, '<span class="highlight">' + searchstr + '</span>');
+
+                $(this).html(newHtml);
+            });
         }
     });
 
