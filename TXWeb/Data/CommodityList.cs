@@ -59,6 +59,11 @@ namespace Data
             return list.Count > 0 ? list[0] : null;
         }
 
+        /// <summary>
+        /// 更新商品
+        /// </summary>
+        /// <param name="inModel"></param>
+        /// <returns></returns>
         public static int UpdateCommodity(Model.CommodityList inModel)
         {
             StringBuilder sql = new StringBuilder();
@@ -74,9 +79,32 @@ namespace Data
             return result;
         }
 
+        /// <summary>
+        /// 创建商品
+        /// </summary>
+        /// <param name="inModel"></param>
+        /// <returns></returns>
         public static int CreateCommodity(Model.CommodityList inModel)
         {
-            int result = 0;
+            StringBuilder sql = new StringBuilder();
+            sql.Append(" IF( OBJECT_ID ('AutoInsert') IS NOT NULL ) ");
+            sql.Append(" DROP TRIGGER AutoInsert  ");
+            sql.Append(" GO ");
+            sql.Append(" CREATE TRIGGER AutoInsert ");
+            sql.Append(" ON Tx_CommodityList FOR INSERT AS ");
+            sql.Append(" DECLARE @CommodityID INT ");
+            sql.Append(" SELECT @CommodityID = CommodityID FROM inserted ");
+            sql.Append(" INSERT INTO Tx_UserCommodityList( UserID, CommodityID ) ");
+            sql.Append(" VALUES( @inUserID , @CommodityID ) ");
+            sql.Append(" GO ");
+            sql.Append(" INSERT INTO Tx_CommodityList ( ");
+            sql.Append(" Title, Category, Price, TxPrice, Unit, ImgUrl, Description ");
+            sql.Append(" ) VALUES ( ");
+            sql.Append(" @inTitle, @inCategory, @inPrice, @inTxPrice, @inUnit, @inImgUrl, @inDescription ) ");
+
+            SqlParameter[] paras = GetParas(inModel);
+
+            int result = SqlHelper.ExecuteNonQuery(CommandType.Text, sql.ToString(), paras);
 
             return result;
         }
@@ -111,7 +139,7 @@ namespace Data
         }
 
         /// <summary>
-        /// 获取商品参数
+        /// 私有方法，获取商品参数
         /// </summary>
         /// <returns></returns>
         private static SqlParameter[] GetParas(Model.CommodityList inModel)

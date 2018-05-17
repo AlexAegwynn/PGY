@@ -48,5 +48,17 @@ namespace Web.Controllers
 
             return PartialView();
         }
+
+        public PartialViewResult CommodityInfo()
+        {
+            return PartialView();
+        }
+
+        public JsonResult AddCommodity()
+        {
+            JsonResult json = new JsonResult();
+
+            return json;
+        }
     }
 }

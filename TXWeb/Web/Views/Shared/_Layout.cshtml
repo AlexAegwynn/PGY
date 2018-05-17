@@ -82,6 +82,15 @@
             $('#allcomm').removeClass('active');
             alert();
         }
+
+        function AddCom() {
+            $.ajax({
+                url: '/Home/CommodityInfo',
+                success: function (data) {
+                    $('#content').html(data);
+                }
+            })
+        }
     </script>
 </head>
 <body style="cursor:default;">

@@ -149,6 +149,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\CommodityViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -270,6 +271,7 @@
     <Content Include="Views\Home\UserPartial.cshtml" />
     <Content Include="Views\Home\UserListPartial.cshtml" />
     <Content Include="Views\Home\CommodityPartial.cshtml" />
+    <Content Include="Views\Home\CommodityInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
