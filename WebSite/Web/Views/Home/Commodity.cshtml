@@ -75,7 +75,7 @@
     <div class="" style="width:95%;margin:0 auto;">
         <div class="row">
             <div class="col-lg-2">
-                <h1 class="page-header">全部商品</h1>
+                <h1 class="page-header">优惠商品</h1>
             </div>
             <div class="col-lg-10 thesearch">
                 <input id="search" type="text" value="@ViewBag.Search" style="border: 1px solid #ccc;border-radius: 4px;">
@@ -103,9 +103,9 @@
                                 </a>
                                 <div style="height:25px;" class="theprice">
                                     @*<div style="float: left;width: 40%;" class="tprice">
-                                        <span style="font-size:10px;line-height:30px;">佣金</span>
-                                        <span style="font-size:15px;color:coral;font-weight:bold;">@commissionRate%</span>
-                                    </div>*@
+                                            <span style="font-size:10px;line-height:30px;">佣金</span>
+                                            <span style="font-size:15px;color:coral;font-weight:bold;">@commissionRate%</span>
+                                        </div>*@
                                     <div style="float:left;width:100%;padding-right:5px;" class="tprice2">
                                         <span style="font-size:10px;line-height:30px;">销量</span>
                                         <span style="font-size:10px;color:cornflowerblue;">@item.SalesCount</span>
@@ -157,6 +157,28 @@
             </div>
         </div>
     </div>
+
+    <div class="row">
+        <div class=" col-md-9"></div>
+        <div class=" col-md-3"></div>
+    </div>
+
+    <div class="row" style="padding:50px 0px 0px 50px;">
+        <div class=" col-md-9" style="margin-bottom:30px;">
+            <ul class="teaser-list module-group">
+                <li style="cursor:default;">
+                    <div class="text">
+                        <h4>文章</h4>
+                        @foreach (var item in ViewData["ArticleList"] as List<Web.ViewModels.ArticleViewModel>)
+                        {
+                            <p style="cursor:pointer;" onclick="window.open('/Home/ArticleInfo?inArticleID=@item.ArticleID')">@item.Title</p>
+                        }
+                        <a class="link-style" title="更多信息。" href="/Home/Article" target="_self">更多文章...</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div><br><br><br>
 </section>
 
 <style>
