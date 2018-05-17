@@ -1,8 +1,59 @@
 ﻿
-@{
-    //Layout = "~/Views/Shared/_Layout.cshtml";
-    Layout = null;
-}
-
-<h2>AddCommodity</h2>
-
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">添加商品</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                商品信息
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <form role="form">
+                            <div class="form-group">
+                                <label>标题/Title</label>
+                                <input class="form-control" placeholder="请输入商品的标题">
+                            </div>
+                            <div class="form-group">
+                                <label>分类/Classification</label>
+                                <select class="form-control">
+                                    <option>分类1</option>
+                                    <option>分类2</option>
+                                    <option>分类3</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>价格/Price</label>
+                                市场价:
+                                <input class="form-control" style="width: 20%;display: inline-block;">
+                                同学价:
+                                <input class="form-control" style="width: 20%;display: inline-block;">
+                            </div>
+                            <div class="form-group">
+                                <label>单位/Unit</label>
+                                <input class="form-control" placeholder="请输入你的单位">
+                            </div>
+                            <div class="form-group">
+                                <label>图片/Picture</label>
+                                <div style="width: 150px;height: 150px;background-color: black;margin:5px;">
+                                    <img src="~/Content/Images/add.png" style="width: 150px;height: 150px;">
+                                </div>
+                                <input type="file">
+                            </div>
+                            <div class="form-group">
+                                <label>内容/Content</label>
+                                <textarea class="form-control" rows="4"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-info">提交</button>
+                        </form>
+                        <button class="btn btn-info">返回</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

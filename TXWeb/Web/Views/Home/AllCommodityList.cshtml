@@ -1,0 +1,139 @@
+﻿
+<style>
+    .input1 {
+        width: 60px;
+        padding: 0 2px;
+        height: 30px;
+        border: solid 1px #dfdfdf;
+        line-height: normal;
+        font-family: arial;
+    }
+
+    .input2 {
+        width: 150px;
+        height: 30px;
+        border: 1px solid #dfdfdf;
+        font-family: arial;
+        line-height: normal;
+        float: left;
+    }
+
+    .bbutton {
+        border: 0;
+        border-radius: 3px;
+        color: white;
+        line-height: 27px;
+        background: #0f88eb;
+    }
+
+    .fontcolor {
+        color: white !important;
+    }
+</style>
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">
+            所有商品
+        </h1>
+    </div>
+</div>
+
+<div class="row" style="margin-left:2px;margin-bottom: 15px;">
+    <div class="col-lg-12" style="height: 36px;">
+        <div class="div1">
+            <div class="div2"><span>分类A</span></div>
+            <div class="div3">
+                <ul id="ul1">
+                    <li class="aa1"><a href="#">分类1</a></li>
+                    <li class="aa1"><a href="#">分类2</a></li>
+                    <li class="aa1"><a href="#">分类3</a></li>
+                    <li class="aa1"><a href="#">分类4</a></li>
+                    <li class="aa1"><a href="#">分类5</a></li>
+                    <li class="aa1"><a href="#">分类6</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row" style="margin-left:2px;margin-bottom: 15px;">
+    <div class="col-lg-12" style="height: 41px;">
+        <div class="div1" style="background-color: #f5f5f5;border: solid 1px #e8e8e8;">
+            <div style="height: 34px;padding-left: 20px;">
+                <h6 style="float: left;">价格区间：</h6>
+                <ul style="float: left;margin-left: -35px; ">
+                    <li style="float: left;width: 62px;"><input type="text" name="sprice" placeholder="¥" class="input1"></li>
+                    <li style="float: left;width: 10px;text-align: center;">-</li>
+                    <li style="float: left;width: 62px;"><input type="text" name="hprice" placeholder="¥" class="input1"></li>
+                </ul>
+                <div>
+                    <a href="#"><button class="bbutton">确定</button></a>
+                </div>
+            </div>
+            <div style="height: 34px;display: inline;">
+                <h6 style="float: left;margin-top:-22px;padding-left: 50px;">关键词搜索：</h6>
+                <ul style="float: left; margin-top:-32px;margin-left: -40px;">
+                    <li style="float: left;width: 150px;">
+                        <input type="text" name="theseach" class="input2">
+                    </li>
+                    <li style="margin-left: 152px;margin-top:-2px; ">
+                        <a href="#"><button class="bbutton">搜索</button></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        @for (int i = 0; i < 8; i++)
+        {
+            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6">
+                <div class="thumbnail">
+                    <a href="Goodcontent.html">
+                        <img src="pic/good.jpg" alt="..." class="img-responsive">
+                    </a>
+                    <div class="caption">
+                        <a href="Goodcontent.html">
+                            <h4>华为P20 PRO</h4>
+                        </a>
+                        <p style="color:red;">
+                            现货当天发 送399豪礼Huawei/华为 P20 pro全网通手机华为
+                        </p>
+                        <div style="height: 46px;">
+                            <h>同学价:<h class="price">¥3788</h></h>
+                            <h style="display: block;">市场价:<h class="price" style="font-size: 15px;">¥3788</h></h>
+                            <a href="cminfo.html">
+                                <h1 style="font-size: 15px;padding-left: 75%;margin-top: -20px;">同学名</h1>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<div class="row" style="text-align: center;">
+    <ul class="pagination">
+        <li class="disabled"><a href="#">&laquo;上一页</a></li>
+        <li class="active"><a href="#">1</a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">4</a></li>
+        <li><a href="#">5</a></li>
+        <li><a style="border-top:none;border-bottom: none;">...</a></li>
+        <li><a href="#">&raquo;下一页</a></li>
+    </ul>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#ul1 li").click(function () {
+            $(this).addClass("selected").siblings().removeClass("selected");
+            $("#ul1 li a").removeClass("fontcolor");
+            $(this).children("a").addClass("fontcolor");
+        })
+    })
+</script>

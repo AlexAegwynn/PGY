@@ -10,51 +10,73 @@ namespace Web.Controllers
     {
         public ActionResult Index()
         {
-            Model.UserList model = LoginUser;
-            if (model == null)
+            if (LoginUser == null)
             {
                 return RedirectToAction("Index", "Login");
             }
 
-            ViewModels.UserViewModel vModel = new ViewModels.UserViewModel
+            if (LoginUser.IsAdmin)
             {
-                Name = model.Name,
-                Email = model.Email,
-                IsAdmin = Convert.ToBoolean(model.IsAdmin)
-            };
+                return RedirectToAction("UserList");
+            }
+            else
+            {
+                return RedirectToAction("CommodityList");
+            }
+        }
 
-            ViewData["LoginUser"] = vModel;
+        public ActionResult UserList()
+        {
+            List<Model.UserList> list = Logic.UserList.GetUsers();
+
+            ViewData["LoginUser"] = LoginUser;
+            ViewBag.Module = "comoruser";
 
             return View();
         }
 
-        public PartialViewResult UserListPartial()
+        public ActionResult UserInfo()
         {
-            List<Model.UserList> list = Logic.UserList.GetUsers();
+            ViewData["LoginUser"] = LoginUser;
+            ViewBag.Module = "info";
 
-            return PartialView();
+            return View();
         }
 
-        public PartialViewResult UserPartial()
+        public ActionResult CommodityList()
         {
+            ViewData["LoginUser"] = LoginUser;
+            ViewBag.Module = "comoruser";
 
-
-            return PartialView();
+            return View();
         }
 
-        public PartialViewResult CommodityPartial(string isAll = "")
+        public ActionResult AllCommodityList()
         {
-            ViewBag.IsAll = isAll == "All" ? true : false;
+            ViewData["LoginUser"] = LoginUser;
+            ViewBag.Module = "allcomm";
 
-            return PartialView();
+            return View();
         }
 
-        public PartialViewResult CommodityInfo()
+        public ActionResult CommodityInfo(string inCommodityID = "")
         {
-            return PartialView();
+            ViewData["LoginUser"] = LoginUser;
+            ViewBag.Module = "comoruser";
+
+            return View();
         }
 
+        [HttpPost]
         public JsonResult AddCommodity()
+        {
+            JsonResult json = new JsonResult();
+
+            return json;
+        }
+
+        [HttpPost]
+        public JsonResult UpdateCommodity()
         {
             JsonResult json = new JsonResult();
 

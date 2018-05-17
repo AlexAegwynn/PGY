@@ -23,73 +23,52 @@
     <script src="~/Scripts/bootstrap.min.js"></script>
 
     <script>
-        var isadmin = '@LoginUser.IsAdmin';
+        var module = '@ViewBag.Module';
         $(function () {
-            var url = '';
-            if (isadmin == 'True') {
-                url = '/Home/UserListPartial';
-            } else {
-                url = '/Home/CommodityPartial';
+            switch (module) {
+                case "info":
+                    $('#info').addClass('active')
+                    $('#comoruser').removeClass('active');
+                    $('#allcomm').removeClass('active');
+                    break;
+                case "comoruser":
+                    $('#info').removeClass('active')
+                    $('#comoruser').addClass('active');
+                    $('#allcomm').removeClass('active');
+                    break;
+                case "allcomm":
+                    $('#info').removeClass('active')
+                    $('#comoruser').removeClass('active');
+                    $('#allcomm').addClass('active');
+                    break;
+                default: break;
             }
-
-            $.ajax({
-                url: url,
-                success: function (data) {
-                    $('#content').html(data);
-                }
-            })
         })
 
-        function ComClick(state) {
-            if (state == 'All') {
-                $('#info').removeClass('active')
-                $('#comm').removeClass('active');
-                $('#allcomm').addClass('active');
-            } else {
-                $('#info').removeClass('active')
-                $('#comm').addClass('active');
-                $('#allcomm').removeClass('active');
+        function ModuleClick(state) {
+            var str = '';
+
+            switch (state) {
+                case "userinfo":
+                    str = 'UserInfo'; break;
+                case "userlist":
+                    str = 'UserList'; break;
+                case "comm":
+                    str = 'CommodityList'; break;
+                case "allcomm":
+                    str = 'AllCommodityList'; break;
+                default: break;
             }
 
-            $.ajax({
-                url: '/Home/CommodityPartial',
-                type: 'post',
-                data: {
-                    isAll: state
-                },
-                success: function (data) {
-                    $('#content').html(data);
-                }
-            })
+            document.location.href = '/Home/' + str;
         }
 
-        function InfoClick() {
-            $('#info').addClass('active')
-            $('#comm').removeClass('active');
-            $('#allcomm').removeClass('active');
-
-            $.ajax({
-                url: '/Home/UserPartial',
-                success: function (data) {
-                    $('#content').html(data);
-                }
-            })
-        }
-
-        function UserClick() {
-            $('#info').removeClass('active')
-            $('#comm').addClass('active');
-            $('#allcomm').removeClass('active');
-            alert();
-        }
-
-        function AddCom() {
-            $.ajax({
-                url: '/Home/CommodityInfo',
-                success: function (data) {
-                    $('#content').html(data);
-                }
-            })
+        function ComClick(cid) {
+            if (cid == '') {
+                document.location.href = '/Home/CommodityInfo';
+            } else {
+                document.location.href = '/Home/CommodityInfo?inCommodityID=' + cid;
+            }
         }
     </script>
 </head>
@@ -137,7 +116,7 @@
                     </div>
                     <ul class="nav in" id="side-menu">
                         <li>
-                            <a id="info" onclick="InfoClick()">
+                            <a id="info" onclick="ModuleClick('userinfo')">
                                 <i class="glyphicon glyphicon-user"></i>
                                 基本信息
                                 <span class="glyphicon glyphicon-chevron-right" style="float: right;"></span>
@@ -147,7 +126,7 @@
                             if (LoginUser.IsAdmin)
                             {
                                 <li>
-                                    <a id="comm" onclick="UserClick()" class="active">
+                                    <a id="comoruser" onclick="ModuleClick('userlist')">
                                         <i class="glyphicon glyphicon-info-sign"></i>
                                         用户列表
                                         <span class="glyphicon glyphicon-chevron-right" style="float: right;"></span>
@@ -157,7 +136,7 @@
                             else
                             {
                                 <li>
-                                    <a id="comm" onclick="ComClick('')" class="active">
+                                    <a id="comoruser" onclick="ModuleClick('comm')">
                                         <i class="glyphicon glyphicon-info-sign"></i>
                                         个人商品
                                         <span class="glyphicon glyphicon-chevron-right" style="float: right;"></span>
@@ -166,7 +145,7 @@
                             }
                         }
                         <li>
-                            <a id="allcomm" onclick="ComClick('All')">
+                            <a id="allcomm" onclick="ModuleClick('allcomm')">
                                 <i class="glyphicon glyphicon-list"></i>
                                 所有商品
                                 <span class="glyphicon glyphicon-chevron-right" style="float: right;"></span>

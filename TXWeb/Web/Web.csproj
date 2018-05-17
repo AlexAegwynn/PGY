@@ -264,14 +264,14 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Login\LoginPartial.cshtml" />
     <Content Include="Views\Login\RegisterPartial.cshtml" />
-    <Content Include="Views\Home\UserPartial.cshtml" />
-    <Content Include="Views\Home\UserListPartial.cshtml" />
-    <Content Include="Views\Home\CommodityPartial.cshtml" />
+    <Content Include="Views\Home\UserInfo.cshtml" />
+    <Content Include="Views\Home\UserList.cshtml" />
     <Content Include="Views\Home\CommodityInfo.cshtml" />
+    <Content Include="Views\Home\AllCommodityList.cshtml" />
+    <Content Include="Views\Home\CommodityList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
