@@ -20,19 +20,12 @@ namespace Web.Controllers
             base.OnActionExecuting(filterContext);
         }
 
-        protected ViewModels.UserViewModel LoginUser
+        protected ViewModels.LoginViewModel LoginUser
         {
             get
             {
-                Model.UserList model = HttpContext.Session["UserInfo"] as Model.UserList;
-                if (model == null) { return null; }
-
-                ViewModels.UserViewModel vModel = new ViewModels.UserViewModel
-                {
-                    Name = model.Name,
-                    Email = model.Email,
-                    IsAdmin = Convert.ToBoolean(model.IsAdmin)
-                };
+                ViewModels.LoginViewModel vModel = HttpContext.Session["UserInfo"] as ViewModels.LoginViewModel;
+                if (vModel == null) { return null; }
 
                 return vModel;
             }

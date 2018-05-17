@@ -27,6 +27,11 @@ namespace Web.Controllers
 
         public ActionResult UserList()
         {
+            if (LoginUser == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
             List<Model.UserList> list = Logic.UserList.GetUsers();
 
             ViewData["LoginUser"] = LoginUser;
@@ -37,15 +42,30 @@ namespace Web.Controllers
 
         public ActionResult UserInfo()
         {
+            if (LoginUser == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
             ViewData["LoginUser"] = LoginUser;
+
+            ViewModels.UserViewModel vModel = new ViewModels.UserViewModel();
+            vModel.User = Logic.UserList.GetUser(LoginUser.UserID);
+
             ViewBag.Module = "info";
 
-            return View();
+            return View(vModel);
         }
 
         public ActionResult CommodityList()
         {
-            ViewData["LoginUser"] = LoginUser;
+            if (LoginUser == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+            ViewData["LoginUser"] = LoginUser;           
+
             ViewBag.Module = "comoruser";
 
             return View();
@@ -53,6 +73,11 @@ namespace Web.Controllers
 
         public ActionResult AllCommodityList()
         {
+            if (LoginUser == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
             ViewData["LoginUser"] = LoginUser;
             ViewBag.Module = "allcomm";
 
@@ -61,6 +86,11 @@ namespace Web.Controllers
 
         public ActionResult CommodityInfo(string inCommodityID = "")
         {
+            if (LoginUser == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
             ViewData["LoginUser"] = LoginUser;
             ViewBag.Module = "comoruser";
 
