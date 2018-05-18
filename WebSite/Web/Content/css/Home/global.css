@@ -181,7 +181,7 @@ select.selectpicker { visibility: hidden; display: none;}
 .header-top .container { overflow: hidden;}
 .logo { float: left; width: 157px;}
 .logo a, .logo img { display: block; width: 100%;}
-.claim { font-size:20px;float: right; width: 370px;  padding:33px 0 0;font-weight: bold;color: #a5a5a5;}
+.claim { font-size:20px;float: right; width: 600px;  padding:4px 0 0;font-weight: bold;color: #a5a5a5;}
 .claim img { display: block; width: 100%; height: auto; }
 .claim strong, .claim span { padding-right: 2px;}
 .top-login-box > .dropdown-toggle {width: 200px; overflow: hidden;}

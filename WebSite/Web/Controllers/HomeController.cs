@@ -102,6 +102,7 @@ namespace Web.Controllers
                         if (item.NumIID == zk.NumIid)
                         {
                             item.ZKPice = zk.ZkFinalPrice;
+                            break;
                         }
                     }
                 }
@@ -234,7 +235,9 @@ namespace Web.Controllers
 
             ViewData["WebSite"] = WebSiteInfo;
 
-            List<ArticleViewModel> list = GetArticleList().Take(6).ToList();
+            List<ArticleViewModel> list = GetArticleList().Skip((page - 1) / 6).Take(6).ToList();
+            ViewBag.PageCode = page;
+            ViewBag.PageCount = 8;
 
             return PartialView(list);
         }
@@ -306,7 +309,7 @@ namespace Web.Controllers
 
             return View(list[0]);
         }
-        
+
         public JsonResult Test(string numiid)
         {
             JsonResult json = new JsonResult();

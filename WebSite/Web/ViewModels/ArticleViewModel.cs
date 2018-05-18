@@ -39,4 +39,9 @@ namespace Web.ViewModels
         /// </summary>
         public string APPName { get; set; }
     }
+
+    public class Article
+    {
+
+    }
 }
