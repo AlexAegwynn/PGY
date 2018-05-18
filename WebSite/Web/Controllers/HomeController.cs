@@ -63,6 +63,8 @@ namespace Web.Controllers
         //    return View(vModel);
         //}
 
+        private static string test = string.Empty;
+
         public ActionResult Index(int page = 1, string coupon = "", string search = "")
         {
             WebSiteInfo = Logic.WebSite.GetWebSite(WebSiteID);
@@ -80,6 +82,35 @@ namespace Web.Controllers
 
             list = list.Skip((page - 1) * 20).Take(20).ToList();
 
+            try
+            {
+                string numIIDs = string.Empty;
+
+                foreach (var item in list)
+                {
+                    numIIDs += item.NumIID + ",";
+                }
+
+                List<Top.Api.Domain.NTbkItem> zklist = Common.TBApi.GetZKPice(numIIDs);
+
+                test = "<p>" + zklist.Count.ToString() + "_" + list.Count + "</p><br /><br />" + numIIDs;
+
+                foreach (var item in list)
+                {
+                    foreach (var zk in zklist)
+                    {
+                        if (item.NumIID == zk.NumIid)
+                        {
+                            item.ZKPice = zk.ZkFinalPrice;
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                return Content("<p>" + e.Message + "</p><br /><br />" + test);
+            }
+
             CommodityViewModel vModel = new CommodityViewModel();
             vModel.PageCode = pageCode;
             vModel.ItemsInfos = list;
@@ -89,7 +120,7 @@ namespace Web.Controllers
 
             ViewData["ArticleList"] = GetArticleList().Take(6).ToList();
 
-            return View("~/Views/Home/Commodity.cshtml",vModel);
+            return View("~/Views/Home/Commodity.cshtml", vModel);
         }
 
         /// <summary>
@@ -263,6 +294,17 @@ namespace Web.Controllers
             }
 
             return View(list[0]);
+        }
+        
+        public JsonResult Test(string numiid)
+        {
+            JsonResult json = new JsonResult();
+
+            List<Top.Api.Domain.NTbkItem> zklist = Common.TBApi.GetZKPice(numiid);
+
+            json.Data = new { result = zklist.Count };
+
+            return json;
         }
 
         /// <summary>

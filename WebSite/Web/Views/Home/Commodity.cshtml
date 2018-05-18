@@ -68,10 +68,26 @@
         var search = $('#search').val();
         document.location.href = '/Home/Index?&&search=' + search;
     }
+
+    function Test() {
+        $.ajax({
+            url: '/Home/Test',
+            type: 'post',
+            data: {
+                numiid: $('#testid').val()
+            },
+            success: function (data) {
+                alert(data.result);
+            }
+        })
+    }
 </script>
 
 @Html.Hidden("hcount", cModel.PageCode)
 <section class="main" data-showsapoverlay="">
+    @*<input id="testid" value="" />
+    <button onclick="Test()" >test</button>*@
+
     <div class="" style="width:95%;margin:0 auto;">
         <div class="row">
             <div class="col-lg-2">
