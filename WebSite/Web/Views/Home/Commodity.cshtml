@@ -6,22 +6,21 @@
 }
 
 <style>
-    .highlight{
-        color:red;
-        font-weight:bold;
+    .highlight {
+        color: red;
+        font-weight: bold;
     }
-
 </style>
 
 <script>
-    var page = '@ViewBag.Page';
-    var total = '@cModel.PageCode';
-    var searchstr = '@ViewBag.Search'
+    var page = '@cModel.PageCode';
+    var total = '@cModel.PageCount';
+    var searchstr = '@cModel.Search'
 
     $(function () {
         if (page != '') {
             if (page <= 3) {
-                $('#pg_' + page).css('background-color', '#ffd28a');
+                $('#pg_' + page).addClass('active');
                 for (var i = 1; i <= 5; i++) {
                     $('#pg_' + i).children().html(i);
                 }
@@ -29,19 +28,19 @@
                 var index = parseInt(page) - 2;
                 for (var i = 1; i <= 5; i++) {
                     if (index <= total) {
-                        $('#pg_3').css('background-color', '#ffd28a');
+                        $('#pg_3').addClass('active');
                         $('#pg_' + i).children().html(index);
                     } else {
-                        $('#pg_' + i).attr('hidden', 'hidden');
+                        $('#pg_' + i).children().attr('hidden', 'hidden');
                     }
                     index++;
                 }
             }
         }
 
-        if (searchstr != '') {            
+        if (searchstr != '') {
             var regExp = new RegExp(searchstr, 'gi');
-            $('h4').each(function () {                
+            $('h4').each(function () {
                 var html = $(this).html();
                 var str = html.match(regExp);
                 var newHtml = html.replace(regExp, '<span class="highlight">' + str + '</span>');
@@ -49,12 +48,19 @@
                 $(this).html(newHtml);
             });
         }
+
+        $.ajax({
+            url: '/Home/ArticlePartial',
+            success: function (data) {
+                $('#article').html(data);
+            }
+        })
     });
 
     function PageClick(page, state) {
         if (state != '') {
             if (state == 'Next') { page++; } else { page--; }
-            if (page > $('#hcount').val()) { return; }
+            if (page > total) { return; }
             if (page < 1) { return; }
         } else {
             page = $('#pg_' + page).children().html();
@@ -68,33 +74,17 @@
         var search = $('#search').val();
         document.location.href = '/Home/Index?&&search=' + search;
     }
-
-    function Test() {
-        $.ajax({
-            url: '/Home/Test',
-            type: 'post',
-            data: {
-                numiid: $('#testid').val()
-            },
-            success: function (data) {
-                alert(data.result);
-            }
-        })
-    }
 </script>
 
-@Html.Hidden("hcount", cModel.PageCode)
+@Html.Hidden("hcount", cModel.PageCount)
 <section class="main" data-showsapoverlay="">
-    @*<input id="testid" value="" />
-    <button onclick="Test()" >test</button>*@
-
     <div class="" style="width:95%;margin:0 auto;">
         <div class="row">
             <div class="col-lg-2">
                 <h1 class="page-header">优惠商品</h1>
             </div>
             <div class="col-lg-10 thesearch">
-                <input id="search" type="text" value="@ViewBag.Search" style="border: 1px solid #ccc;border-radius: 4px;">
+                <input id="search" type="text" value="@cModel.Search" style="border: 1px solid #ccc;border-radius: 4px;">
                 <button type="button" class="btn btn-primary" style="" onclick="Search()">搜索</button>
             </div>
         </div>
@@ -150,28 +140,17 @@
         </div>
     </div>
 
-    <div id="pagecount" style="width:100%;height:30px;margin-top:20px;cursor:default;">
-        <div style="float:right;margin-right:5%;width:40%;height:30px;">
-            <div style="float:left;width:10%;height:30px;margin-right:2%;">
-                <span style="line-height:30px;font-size:12px;">共 @cModel.PageCode 页</span>
-            </div>
-            <div class="pagebtn" style="margin-right:11px;" onclick="PageClick('@ViewBag.Page', 'Previous')">
-                <span style="line-height:30px;font-size:12px;">上一页</span>
-            </div>
-            @for (int i = 1; i <= 5; i++)
+    <div class="row" style="text-align: center;">
+        <ul class="pagination">
+            <li><span style="cursor:default;">共 @cModel.PageCount 页</span></li>
+            <li><a onclick="PageClick('@cModel.PageCode', 'Previous')" style="cursor:pointer;">&laquo;上一页</a></li>
+            @for (int i = 1; i < 6; i++)
             {
-                if (i > cModel.PageCode) { break; }
-                <div id="pg_@i" class="num" onclick="PageClick('@i','')">
-                    <span style="line-height:30px;font-size:12px;"></span>
-                </div>
+                if (i > cModel.PageCount) { break; }
+                <li id="pg_@i"><a onclick="PageClick('@i','')" style="cursor:pointer;"></a></li>
             }
-            @*<div id="pg" class="num">
-                    <span style="line-height:30px;font-size:12px;">@ViewBag.Page</span>
-                </div>*@
-            <div class="pagebtn" style="margin-left:10px;" onclick="PageClick('@ViewBag.Page', 'Next')">
-                <span style="line-height:30px;font-size:12px;">下一页</span>
-            </div>
-        </div>
+            <li><a onclick="PageClick('@cModel.PageCode', 'Next')" style="cursor:pointer;">&raquo;下一页</a></li>
+        </ul>
     </div>
 
     <div class="row">
@@ -179,22 +158,10 @@
         <div class=" col-md-3"></div>
     </div>
 
-    <div class="row" style="padding:50px 0px 0px 50px;">
-        <div class=" col-md-9" style="margin-bottom:30px;">
-            <ul class="teaser-list module-group">
-                <li style="cursor:default;">
-                    <div class="text">
-                        <h4>文章</h4>
-                        @foreach (var item in ViewData["ArticleList"] as List<Web.ViewModels.ArticleViewModel>)
-                        {
-                            <p style="cursor:pointer;" onclick="window.open('/Home/ArticleInfo?inArticleID=@item.ArticleID')">@item.Title</p>
-                        }
-                        <a class="link-style" title="更多信息。" href="/Home/Article" target="_self">更多文章...</a>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </div><br><br><br>
+    <div id="article">
+
+    </div>
+    <br><br><br>
 </section>
 
 <style>

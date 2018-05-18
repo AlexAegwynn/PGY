@@ -1,4 +1,18 @@
-﻿
+﻿@model Web.ViewModels.CommodityInfoViewModel
+
+<script>
+    function CommodityClick() {
+        $.ajax({
+            url: '/Home/SaveCommodity',
+            type: 'post',
+            data: $('#cominfo').serialize(),
+            success: function (data) {
+                alert();
+            }
+        })
+    }
+</script>
+
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header">添加商品</h1>
@@ -13,14 +27,15 @@
             <div class="panel-body">
                 <div class="row">
                     <div class="col-lg-6">
-                        <form role="form">
+                        <form id="cominfo" role="form">
                             <div class="form-group">
                                 <label>标题/Title</label>
-                                <input class="form-control" placeholder="请输入商品的标题">
+                                @Html.TextBoxFor(m => m.CommodityInfo.Title, new { @class = "form-control", @placeholder = "请输入商品的标题" })
+                                @*<input name="title" value="" class="form-control" placeholder="请输入商品的标题">*@
                             </div>
                             <div class="form-group">
                                 <label>分类/Classification</label>
-                                <select class="form-control">
+                                <select name="category" class="form-control">
                                     <option>分类1</option>
                                     <option>分类2</option>
                                     <option>分类3</option>
@@ -29,27 +44,32 @@
                             <div class="form-group">
                                 <label>价格/Price</label>
                                 市场价:
-                                <input class="form-control" style="width: 20%;display: inline-block;">
+                                @Html.TextBoxFor(m => m.CommodityInfo.Price, new { @class = "form-control", @style = "width: 20%;display: inline-block;" })
+                                @*<input name="price" class="form-control" style="width: 20%;display: inline-block;">*@
                                 同学价:
-                                <input class="form-control" style="width: 20%;display: inline-block;">
+                                @Html.TextBoxFor(m => m.CommodityInfo.TxPrice, new { @class = "form-control", @style = "width: 20%;display: inline-block;" })
+                                @*<input name="txprice" class="form-control" style="width: 20%;display: inline-block;">*@
                             </div>
                             <div class="form-group">
                                 <label>单位/Unit</label>
-                                <input class="form-control" placeholder="请输入你的单位">
+                                @Html.TextBoxFor(m => m.CommodityInfo.Unit, new { @class = "form-control", @placeholder = "请输入你的单位" })
+                                @*<input name="unit" class="form-control" placeholder="请输入你的单位">*@
                             </div>
                             <div class="form-group">
                                 <label>图片/Picture</label>
                                 <div style="width: 150px;height: 150px;background-color: black;margin:5px;">
                                     <img src="~/Content/Images/add.png" style="width: 150px;height: 150px;">
                                 </div>
+                                @Html.Hidden("ImgUrl")
                                 <input type="file">
                             </div>
                             <div class="form-group">
                                 <label>内容/Content</label>
-                                <textarea class="form-control" rows="4"></textarea>
+                                @Html.TextAreaFor(m => m.CommodityInfo.Description, new { @class = "form-control", @rows = "4" })
+                                @*<textarea class="form-control" rows="4"></textarea>*@
                             </div>
-                            <button type="submit" class="btn btn-info">提交</button>
                         </form>
+                        <button onclick="CommodityClick()" class="btn btn-info">提交</button>
                         <button class="btn btn-info">返回</button>
                     </div>
                 </div>

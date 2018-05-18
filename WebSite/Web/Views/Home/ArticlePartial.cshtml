@@ -1,0 +1,29 @@
+﻿
+<div class="row articles" id="thearticle" style="padding:50px 0px 0px 50px;">
+    <div class=" col-md-9" style="margin-bottom:30px;">
+        <ul class="teaser-list module-group">
+            <li style="cursor:default;">
+                <div class="text">
+                    <h4>文章</h4>
+                    @foreach (var item in Model as List<Web.ViewModels.ArticleViewModel>)
+                    {
+                        <p style="cursor:pointer;" onclick="window.open('/Home/ArticleInfo?inArticleID=@item.ArticleID')">@item.Title</p>
+                    }
+                    @*<a class="link-style" title="更多信息。" href="/Home/Article" target="_self">更多文章...</a>*@
+                </div>
+            </li>
+        </ul>
+        @*<div class="row" style="text-align: center;">
+                <ul class="pagination">
+                    <li class="disabled"><a href="#">&laquo;上一页</a></li>
+                    <li class="active"><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                    <li><a style="border-top:none;border-bottom: none;">...</a></li>
+                    <li><a href="#">&raquo;下一页</a></li>
+                </ul>
+            </div>*@
+    </div>
+</div>

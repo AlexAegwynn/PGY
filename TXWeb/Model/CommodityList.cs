@@ -47,10 +47,15 @@ namespace Model
         /// 商品描述
         /// </summary>
         public string Description { get; set; } = string.Empty;
+        
+        /// <summary>
+        /// 用户ID【Tx_UserList】
+        /// </summary>
+        public int UserID { get; set; } = 0;
 
-        ///// <summary>
-        ///// 内容
-        ///// </summary>
-        //public string ComContent { get; set; } = string.Empty;
+        /// <summary>
+        /// 用户名【Tx_UserList】
+        /// </summary>
+        public string Name { get; set; } = string.Empty;
     }
 }

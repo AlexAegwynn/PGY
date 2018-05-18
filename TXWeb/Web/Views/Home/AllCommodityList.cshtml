@@ -1,4 +1,48 @@
-﻿
+﻿@model Web.ViewModels.CommodityViewModel
+
+<script>
+    var page = '@Model.PageCode';
+    var total = '@Model.PageCount';
+
+    $(function () {
+        if (page != '') {
+            if (page <= 3) {
+                $('#pg_' + page).addClass('active');
+                for (var i = 1; i <= 5; i++) {
+                    $('#pg_' + i).children().html(i);
+                }
+            } else {
+                var index = parseInt(page) - 2;
+                for (var i = 1; i <= 5; i++) {
+                    if (index <= total) {
+                        $('#pg_3').addClass('active');
+                        $('#pg_' + i).children().html(index);
+                    } else {
+                        $('#pg_' + i).attr('hidden', 'hidden');
+                    }
+                    index++;
+                }
+            }
+        }
+    })
+
+    function PageClick(code, state) {
+        if (state != '') {
+            if (state == 'Next') { code++; } else { code--; }
+            if (code > total) { return; }
+            if (code < 1) { return; }
+        } else {
+            code = $('#pg_' + code).children().html();
+        }
+
+        document.location.href = '/Home/CommodityList?page=' + code;
+    }
+
+    function UserInfo(uid) {
+        alert(uid);
+    }
+</script>
+
 <style>
     .input1 {
         width: 60px;
@@ -88,25 +132,25 @@
 
 <div class="row">
     <div class="col-lg-12">
-        @for (int i = 0; i < 8; i++)
+        @foreach (var item in Model.CommodityList)
         {
             <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6">
                 <div class="thumbnail">
-                    <a href="Goodcontent.html">
+                    <a onclick="ComClick('')" style="cursor:pointer;">
                         <img src="~/Content/Images/good.jpg" alt="..." class="img-responsive">
                     </a>
                     <div class="caption">
-                        <a href="Goodcontent.html">
-                            <h4>华为P20 PRO</h4>
+                        <a onclick="ComClick('')" style="cursor:pointer;">
+                            <h4>@item.Title</h4>
                         </a>
                         <p style="color:red;">
-                            现货当天发 送399豪礼Huawei/华为 P20 pro全网通手机华为
+                            @item.Description
                         </p>
                         <div style="height: 46px;">
-                            <h>同学价:<h class="price">¥3788</h></h>
-                            <h style="display: block;">市场价:<h class="price" style="font-size: 15px;">¥3788</h></h>
-                            <a href="cminfo.html">
-                                <h1 style="font-size: 15px;padding-left: 75%;margin-top: -20px;">同学名</h1>
+                            <h>同学价:<h class="price">¥@item.TxPrice</h></h>
+                            <h style="display: block;">市场价:<h class="price">¥@item.Price</h></h>
+                            <a style="cursor:pointer;" onclick="UserInfo('@item.UserID')">
+                                <h1 style="font-size: 15px;padding-left: 75%;margin-top: -20px;">@item.Name</h1>
                             </a>
                         </div>
                     </div>
@@ -118,14 +162,13 @@
 
 <div class="row" style="text-align: center;">
     <ul class="pagination">
-        <li class="disabled"><a href="#">&laquo;上一页</a></li>
-        <li class="active"><a href="#">1</a></li>
-        <li><a href="#">2</a></li>
-        <li><a href="#">3</a></li>
-        <li><a href="#">4</a></li>
-        <li><a href="#">5</a></li>
-        <li><a style="border-top:none;border-bottom: none;">...</a></li>
-        <li><a href="#">&raquo;下一页</a></li>
+        <li><a onclick="PageClick('@Model.PageCode', 'Previous')">&laquo;上一页</a></li>
+        @for (int i = 1; i < 6; i++)
+        {
+            if (i > Model.PageCount) { break; }
+            <li id="pg_@i"><a onclick="PageClick('@i','')"></a></li>
+        }
+        <li><a onclick="PageClick('@Model.PageCode', 'Next')">&raquo;下一页</a></li>
     </ul>
 </div>
 

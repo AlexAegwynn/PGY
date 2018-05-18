@@ -112,13 +112,10 @@ namespace Web.Controllers
             }
 
             CommodityViewModel vModel = new CommodityViewModel();
-            vModel.PageCode = pageCode;
+            vModel.PageCount = pageCode;
             vModel.ItemsInfos = list;
-
-            ViewBag.Page = page; //当前页数
-            ViewBag.Search = search;
-
-            ViewData["ArticleList"] = GetArticleList().Take(6).ToList();
+            vModel.PageCode = page; //当前页数
+            vModel.Search = search;
 
             return View("~/Views/Home/Commodity.cshtml", vModel);
         }
@@ -149,12 +146,12 @@ namespace Web.Controllers
             }
 
             decimal total = list.Count;
-            int pageCode = Convert.ToInt32(Math.Ceiling(total / 20));
+            int pageCount = Convert.ToInt32(Math.Ceiling(total / 20));
 
             list = list.Skip((page - 1) * 20).Take(20).ToList();
 
             CommodityViewModel vModel = new CommodityViewModel();
-            vModel.PageCode = pageCode;
+            vModel.PageCount = pageCount;
             vModel.ItemsInfos = list;
             //vModel.ItemsInfos = Logic.Commodity.GetItemsInfos(Convert.ToInt32(WebSiteID), page, search);
 
@@ -168,11 +165,11 @@ namespace Web.Controllers
             //}
 
             //ViewBag.Count = vModel.PageCode; //总页数
-            ViewBag.Page = page; //当前页数
+            vModel.PageCode = page; //当前页数
             //ViewBag.Coupon = coupon;
-            ViewBag.Search = search;
+            vModel.Search = search;
 
-            ViewData["ArticleList"] = GetArticleList().Take(6).ToList();
+            //ViewData["ArticleList"] = GetArticleList().Take(6).ToList();
 
             //if (State)
             //{
@@ -226,6 +223,20 @@ namespace Web.Controllers
             }
 
             return View(list);
+        }
+
+        public PartialViewResult ArticlePartial(int page = 1)
+        {
+            if (WebSiteInfo == null)
+            {
+                WebSiteInfo = Logic.WebSite.GetWebSite(WebSiteID);
+            }
+
+            ViewData["WebSite"] = WebSiteInfo;
+
+            List<ArticleViewModel> list = GetArticleList().Take(6).ToList();
+
+            return PartialView(list);
         }
 
         /// <summary>

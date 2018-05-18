@@ -101,7 +101,7 @@ namespace Data
         {
             StringBuilder sql = new StringBuilder();
             sql.Append(" UPDATE Tx_UserList SET ");
-            sql.Append(" Name = @inName, Password = @inPassword, Class = @inClass, Sex = @inSex, ");
+            sql.Append(" Name = @inName, Class = @inClass, Sex = @inSex, ");
             sql.Append(" Email = @inEmail, PhoneNumber = @inPhoneNumber, WeChat = @inWeChat, ");
             sql.Append(" QQ = @inQQ, Address = @inAddress, EnterpriseInfo = @inEnterpriseInfo, ");
             sql.Append(" IsAdmin = @inIsAdmin WHERE UserID = @inUserID ");

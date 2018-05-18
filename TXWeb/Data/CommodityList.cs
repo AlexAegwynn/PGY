@@ -16,7 +16,8 @@ namespace Data
         /// <returns></returns>
         public static List<Model.CommodityList> GetCommodityList()
         {
-            string sql = @" SELECT * FROM Tx_CommodityList ";
+            string sql = @" SELECT UserID, Name, b.* FROM Tx_UserCommodityList a " +
+                                            " LEFT JOIN Tx_CommodityList b ON a.CommodityID = b.CommodityID ";
 
             DataTable dt = SqlHelper.ExecuteDataTable(CommandType.Text, sql);
 
@@ -30,7 +31,7 @@ namespace Data
         /// <returns></returns>
         public static List<Model.CommodityList> GetUserCommodityList(int inUserID)
         {
-            string sql = @" SELECT b.* FROM Tx_UserCommodityList a " +
+            string sql = @" SELECT UserID, Name, b.* FROM Tx_UserCommodityList a " +
                                     " LEFT JOIN Tx_CommodityList b ON a.CommodityID = b.CommodityID WHERE UserID = @inUserID ";
 
             SqlParameter para = new SqlParameter("@inUserID", SqlDbType.Int, 32);
@@ -54,9 +55,31 @@ namespace Data
             para.Value = inCommodityID;
 
             DataTable dt = SqlHelper.ExecuteDataTable(CommandType.Text, sql, para);
-            List<Model.CommodityList> list = GetCommodities(dt);
+            Model.CommodityList model = new Model.CommodityList();
 
-            return list.Count > 0 ? list[0] : null;
+            if (dt.Rows.Count > 0)
+            {
+                Model.CommodityList item = new Model.CommodityList
+                {
+                    CommodityID = Convert.ToInt32(dt.Rows[0]["CommodityID"]),
+                    Title = dt.Rows[0]["Title"].ToString(),
+                    Category = dt.Rows[0]["Category"].ToString(),
+                    Price = Convert.ToInt32(dt.Rows[0]["Price"]),
+                    TxPrice = Convert.ToInt32(dt.Rows[0]["TxPrice"]),
+                    Unit = dt.Rows[0]["Unit"].ToString(),
+                    ImgUrl = dt.Rows[0]["ImgUrl"].ToString(),
+                    Description = dt.Rows[0]["Description"].ToString(),
+                    UserID = Convert.ToInt32(dt.Rows[0]["UserID"]),
+                    Name = dt.Rows[0]["Name"].ToString()
+                };
+                model = item;
+            }
+            else
+            {
+                model = null;
+            }
+
+            return model;
         }
 
         /// <summary>
@@ -129,7 +152,9 @@ namespace Data
                     TxPrice = Convert.ToInt32(item["TxPrice"]),
                     Unit = item["Unit"].ToString(),
                     ImgUrl = item["ImgUrl"].ToString(),
-                    Description = item["Description"].ToString()
+                    Description = item["Description"].ToString(),
+                    UserID = Convert.ToInt32(item["UserID"]),
+                    Name = item["Name"].ToString()
                 };
 
                 list.Add(model);

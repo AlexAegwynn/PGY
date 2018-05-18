@@ -195,6 +195,7 @@
     <Content Include="Content\Images\next.png" />
     <Content Include="Content\Images\prev.png" />
     <Content Include="Content\Images\right.png" />
+    <Content Include="Content\Images\rightlogo.jpg" />
     <Content Include="Content\Images\topbg.jpg" />
     <Content Include="Content\css\WebSite\index.css" />
     <Content Include="Content\css\WebSite\login.css" />
@@ -341,6 +342,7 @@
     <Content Include="Views\Home\MobileView\PictureInfo.cshtml" />
     <Content Include="Views\WebSite\Index.cshtml" />
     <Content Include="Views\Shared\Test\_Layout.cshtml" />
+    <Content Include="Views\Home\ArticlePartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
