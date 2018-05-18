@@ -39,27 +39,57 @@ namespace Web.Controllers
         /// 首页
         /// </summary>
         /// <returns></returns>
-        public ActionResult Index()
+        //public ActionResult Index()
+        //{
+        //    WebSiteInfo = Logic.WebSite.GetWebSite(WebSiteID);
+
+        //    //List<Model.ItemsInfo> list = Logic.Commodity.GetItemsInfos(Convert.ToInt32(WebSiteID), 1, "", 5);
+        //    List<Model.ItemsInfo> list = Logic.Commodity.GetItemsInfos2(Convert.ToInt32(WebSiteID), 5);
+
+        //    HomeViewModel vModel = new HomeViewModel()
+        //    {
+        //        ArticleList = GetArticleList().Take(6).ToList(),
+        //        //PictureList = GetPictureList(),
+        //        CouponsList = list
+        //    };
+
+        //    ViewData["WebSite"] = WebSiteInfo;
+
+        //    //if (State)
+        //    //{
+        //    //    return View("/Views/Home/MobileView/Index.cshtml", vModel);
+        //    //}
+
+        //    return View(vModel);
+        //}
+
+        public ActionResult Index(int page = 1, string coupon = "", string search = "")
         {
             WebSiteInfo = Logic.WebSite.GetWebSite(WebSiteID);
 
-            List<Model.ItemsInfo> list = Logic.Commodity.GetItemsInfos(Convert.ToInt32(WebSiteID), 1, "", 5);
-
-            HomeViewModel vModel = new HomeViewModel()
-            {
-                ArticleList = GetArticleList().Take(6).ToList(),
-                PictureList = GetPictureList(),
-                CouponsList = list
-            };
-
             ViewData["WebSite"] = WebSiteInfo;
 
-            //if (State)
-            //{
-            //    return View("/Views/Home/MobileView/Index.cshtml", vModel);
-            //}
+            List<Model.ItemsInfo> list = Logic.Commodity.GetItemsInfos2(Convert.ToInt32(WebSiteID));
+            if (search != "")
+            {
+                list = (from l in list where l.Title.ToUpper().IndexOf(search.ToUpper()) >= 0 select l).ToList();
+            }
 
-            return View(vModel);
+            decimal total = list.Count;
+            int pageCode = Convert.ToInt32(Math.Ceiling(total / 20));
+
+            list = list.Skip((page - 1) * 20).Take(20).ToList();
+
+            CommodityViewModel vModel = new CommodityViewModel();
+            vModel.PageCode = pageCode;
+            vModel.ItemsInfos = list;
+
+            ViewBag.Page = page; //当前页数
+            ViewBag.Search = search;
+
+            ViewData["ArticleList"] = GetArticleList().Take(6).ToList();
+
+            return View("~/Views/Home/Commodity.cshtml",vModel);
         }
 
         /// <summary>
@@ -72,19 +102,30 @@ namespace Web.Controllers
         /// <returns></returns>
         public ActionResult Commodity(/*int inPageRows, */int page = 1, string coupon = "", string search = "")
         {
-            if (WebSiteInfo == null)
-            {
-                WebSiteInfo = Logic.WebSite.GetWebSite(WebSiteID);
-            }
+            //if (WebSiteInfo == null)
+            //{
+            //    WebSiteInfo = Logic.WebSite.GetWebSite(WebSiteID);
+            //}
+
+            WebSiteInfo = Logic.WebSite.GetWebSite(WebSiteID);
 
             ViewData["WebSite"] = WebSiteInfo;
 
-            decimal total = Logic.Commodity.GetTotal(Convert.ToInt32(WebSiteID), search);
-            int pageCode = Convert.ToInt32(Math.Ceiling(total / 30));
+            List<Model.ItemsInfo> list = Logic.Commodity.GetItemsInfos2(Convert.ToInt32(WebSiteID));
+            if (search != "")
+            {
+                list = (from l in list where l.Title.ToUpper().IndexOf(search.ToUpper()) >= 0 select l).ToList();
+            }
+
+            decimal total = list.Count;
+            int pageCode = Convert.ToInt32(Math.Ceiling(total / 20));
+
+            list = list.Skip((page - 1) * 20).Take(20).ToList();
 
             CommodityViewModel vModel = new CommodityViewModel();
             vModel.PageCode = pageCode;
-            vModel.ItemsInfos = Logic.Commodity.GetItemsInfos(Convert.ToInt32(WebSiteID), page, search);
+            vModel.ItemsInfos = list;
+            //vModel.ItemsInfos = Logic.Commodity.GetItemsInfos(Convert.ToInt32(WebSiteID), page, search);
 
             //switch (coupon)
             //{
@@ -99,6 +140,8 @@ namespace Web.Controllers
             ViewBag.Page = page; //当前页数
             //ViewBag.Coupon = coupon;
             ViewBag.Search = search;
+
+            ViewData["ArticleList"] = GetArticleList().Take(6).ToList();
 
             //if (State)
             //{

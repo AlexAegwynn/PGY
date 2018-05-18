@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@{
+    var LoginUser = ViewData["LoginUser"] as Web.ViewModels.LoginViewModel;
+}
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
@@ -6,7 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>个人商品</title>
+    <title>首页</title>
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
     <link href="~/Content/css/index.css" rel="stylesheet" />
     <style>
@@ -15,6 +19,58 @@
             color: white;
         }
     </style>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+
+    <script>
+        var module = '@ViewBag.Module';
+        $(function () {
+            switch (module) {
+                case "info":
+                    $('#info').addClass('active')
+                    $('#comoruser').removeClass('active');
+                    $('#allcomm').removeClass('active');
+                    break;
+                case "comoruser":
+                    $('#info').removeClass('active')
+                    $('#comoruser').addClass('active');
+                    $('#allcomm').removeClass('active');
+                    break;
+                case "allcomm":
+                    $('#info').removeClass('active')
+                    $('#comoruser').removeClass('active');
+                    $('#allcomm').addClass('active');
+                    break;
+                default: break;
+            }
+        })
+
+        function ModuleClick(state) {
+            var str = '';
+
+            switch (state) {
+                case "userinfo":
+                    str = 'UserInfo'; break;
+                case "userlist":
+                    str = 'UserList'; break;
+                case "comm":
+                    str = 'CommodityList'; break;
+                case "allcomm":
+                    str = 'AllCommodityList'; break;
+                default: break;
+            }
+
+            document.location.href = '/Home/' + str;
+        }
+
+        function ComClick(cid) {
+            if (cid == '') {
+                document.location.href = '/Home/CommodityInfo';
+            } else {
+                document.location.href = '/Home/CommodityInfo?inCommodityID=' + cid;
+            }
+        }
+    </script>
 </head>
 <body style="cursor:default;">
     <div>
@@ -41,7 +97,7 @@
                         </li>
                         <li class="divider"></li>
                         <li>
-                            <a href="">
+                            <a href="/Login/Logout">
                                 <i class="glyphicon glyphicon-log-out"></i>退出
                             </a>
                         </li>
@@ -55,26 +111,41 @@
                             <img src="~/Content/Images/1.jpg" class="iconimg" />
                         </div>
                         <div class="iword">
-                            <h5>欢迎你,用户名</h5>
+                            <h5>欢迎你, @LoginUser.Name</h5>
                         </div>
                     </div>
                     <ul class="nav in" id="side-menu">
                         <li>
-                            <a href="">
+                            <a id="info" onclick="ModuleClick('userinfo')">
                                 <i class="glyphicon glyphicon-user"></i>
                                 基本信息
                                 <span class="glyphicon glyphicon-chevron-right" style="float: right;"></span>
                             </a>
                         </li>
+                        @{
+                            if (LoginUser.IsAdmin)
+                            {
+                                <li>
+                                    <a id="comoruser" onclick="ModuleClick('userlist')">
+                                        <i class="glyphicon glyphicon-info-sign"></i>
+                                        用户列表
+                                        <span class="glyphicon glyphicon-chevron-right" style="float: right;"></span>
+                                    </a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li>
+                                    <a id="comoruser" onclick="ModuleClick('comm')">
+                                        <i class="glyphicon glyphicon-info-sign"></i>
+                                        个人商品
+                                        <span class="glyphicon glyphicon-chevron-right" style="float: right;"></span>
+                                    </a>
+                                </li>
+                            }
+                        }
                         <li>
-                            <a href="" class="active">
-                                <i class="glyphicon glyphicon-info-sign"></i>
-                                个人商品
-                                <span class="glyphicon glyphicon-chevron-right" style="float: right;"></span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="">
+                            <a id="allcomm" onclick="ModuleClick('allcomm')">
                                 <i class="glyphicon glyphicon-list"></i>
                                 所有商品
                                 <span class="glyphicon glyphicon-chevron-right" style="float: right;"></span>
@@ -88,8 +159,5 @@
             @RenderBody()
         </div>
     </div>
-
-    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-    <script src="~/Scripts/bootstrap.min.js"></script>
 </body>
 </html>

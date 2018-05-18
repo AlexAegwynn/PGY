@@ -5,9 +5,19 @@
     Web.ViewModels.CommodityViewModel cModel = Model as Web.ViewModels.CommodityViewModel;
 }
 
+<style>
+    .highlight{
+        color:red;
+        font-weight:bold;
+    }
+
+</style>
+
 <script>
     var page = '@ViewBag.Page';
     var total = '@cModel.PageCode';
+    var searchstr = '@ViewBag.Search'
+
     $(function () {
         if (page != '') {
             if (page <= '3') {
@@ -27,6 +37,17 @@
                     index++;
                 }
             }
+        }
+
+        if (searchstr != '') {            
+            var regExp = new RegExp(searchstr, 'gi');
+            $('h4').each(function () {                
+                var html = $(this).html();
+                var str = html.match(regExp);
+                var newHtml = html.replace(regExp, '<span class="highlight">' + str + '</span>');
+
+                $(this).html(newHtml);
+            });
         }
     });
 
@@ -54,7 +75,7 @@
     <div class="" style="width:95%;margin:0 auto;">
         <div class="row">
             <div class="col-lg-2">
-                <h1 class="page-header">全部商品</h1>
+                <h1 class="page-header">优惠商品</h1>
             </div>
             <div class="col-lg-10 thesearch">
                 <input id="search" type="text" value="@ViewBag.Search" style="border: 1px solid #ccc;border-radius: 4px;">
@@ -78,31 +99,31 @@
                             </div>
                             <div class="caption">
                                 <a href="@item.ClickUrl" target="_blank">
-                                    <h4 style="font-size: 14px;overflow: hidden;height: 32px;">@item.Title</h4>
+                                    <h4 class="title">@item.Title</h4>
                                 </a>
                                 <div style="height:25px;" class="theprice">
-                                    <div style="float: left;width: 40%;" class="tprice">
-                                        <span style="font-size:10px;line-height:30px;">佣金</span>
-                                        <span style="font-size:15px;color:coral;font-weight:bold;">@commissionRate%</span>
-                                    </div>
-                                    <div style="float:left;width:60%;padding-right:5px;" class="tprice2">
+                                    @*<div style="float: left;width: 40%;" class="tprice">
+                                            <span style="font-size:10px;line-height:30px;">佣金</span>
+                                            <span style="font-size:15px;color:coral;font-weight:bold;">@commissionRate%</span>
+                                        </div>*@
+                                    <div style="float:left;width:100%;padding-right:5px;" class="tprice2">
                                         <span style="font-size:10px;line-height:30px;">销量</span>
                                         <span style="font-size:10px;color:cornflowerblue;">@item.SalesCount</span>
                                     </div>
                                 </div>
                                 <div style="width:100%;height:2px;background-color:#c0d6ff;"></div>
-                                <div class="bottomd" style="height:71px;">
+                                <div class="bottomd" style="height:73px;">
                                     <div class="col-lg-4 col-xs-4" style="padding-left: 0;padding-right: 0;border: 1px solid cornflowerblue;background-color: white;line-height: 20px;height: 21px;text-align: center;text-align: center;margin-top: 5px;" onclick="window.open('@item.ClickUrl');">
                                         <span style="float: left;font-size: 12px;background-color: cornflowerblue;color: white;width: 20px;line-height: 20px;height: 20px;text-align: center;">券</span>
                                         <span style="font-size: 12px;color: cornflowerblue;float: left;line-height: 20px;width: 60%;text-align: center;">@item.CouponMoney 元</span>
                                     </div>
                                     <div class="col-lg-8 col-xs-8" style="padding-left:0;padding-right:0;text-align:center;">
                                         <span style="font-size:12px;line-height:30px;float:left;">券后:</span>
-                                        <span style="font-size:13px;color:red;font-weight:bold;line-height:30px;float:left;">￥@finalprice</span>
-                                        <span style="font-size:10px;color:#a3a3a3;text-decoration:line-through;line-height:30px;float:left;">￥@price</span>
+                                        <span style="font-size:18px;color:red;font-weight:bold;line-height:30px;float:left;">￥@finalprice</span>
+                                        @*<span style="font-size:10px;color:#a3a3a3;text-decoration:line-through;line-height:30px;float:left;">￥@price</span>*@
                                     </div>
-                                    <div class="bottomcontent col-lg-12" style="width: 100%;height: 40px;background-color: #fff8e5;font-size: 10px;">
-                                        <h>货不在贵贱,合心意就好.</h>
+                                    <div class="bottomcontent col-lg-12" style="width: 100%;height: 48px;background-color: #fff8e5;font-size: 10px;overflow:hidden;">
+                                        <h>@item.CommentStr</h>
                                     </div>
                                 </div>
                             </div>
@@ -136,6 +157,28 @@
             </div>
         </div>
     </div>
+
+    <div class="row">
+        <div class=" col-md-9"></div>
+        <div class=" col-md-3"></div>
+    </div>
+
+    <div class="row" style="padding:50px 0px 0px 50px;">
+        <div class=" col-md-9" style="margin-bottom:30px;">
+            <ul class="teaser-list module-group">
+                <li style="cursor:default;">
+                    <div class="text">
+                        <h4>文章</h4>
+                        @foreach (var item in ViewData["ArticleList"] as List<Web.ViewModels.ArticleViewModel>)
+                        {
+                            <p style="cursor:pointer;" onclick="window.open('/Home/ArticleInfo?inArticleID=@item.ArticleID')">@item.Title</p>
+                        }
+                        <a class="link-style" title="更多信息。" href="/Home/Article" target="_self">更多文章...</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div><br><br><br>
 </section>
 
 <style>

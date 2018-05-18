@@ -8,7 +8,7 @@ namespace Web.ViewModels
     public class CommodityViewModel
     {
         /// <summary>
-        /// 页码
+        /// 总页数
         /// </summary>
         public int PageCode { get; set; }
 

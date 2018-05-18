@@ -9,14 +9,24 @@ namespace Logic
     public class UserList
     {
         /// <summary>
-        /// 获取用户
+        /// 根据邮箱和密码获取用户
         /// </summary>
-        /// <param name="inName"></param>
+        /// <param name="inEmail"></param>
         /// <param name="inPassword"></param>
         /// <returns></returns>
-        public static Model.UserList GetUser(string inEmail, string inPassword)
+        public static Model.UserList ExistUser(string inEmail, string inPassword)
         {
-            return Data.UserList.GetUser(inEmail, inPassword);
+            return Data.UserList.ExistUser(inEmail, inPassword);
+        }
+
+        /// <summary>
+        /// 根据用户ID获取用户
+        /// </summary>
+        /// <param name="inUserID"></param>
+        /// <returns></returns>
+        public static Model.UserList GetUser(int inUserID)
+        {
+            return Data.UserList.GetUser(inUserID);
         }
 
         /// <summary>

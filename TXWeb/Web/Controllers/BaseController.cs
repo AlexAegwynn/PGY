@@ -13,18 +13,21 @@ namespace Web.Controllers
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             DomainName = filterContext.RequestContext.HttpContext.Request.Url.Host;
-            
+
             string isLocal = DomainName == "localhost" ? "Development" : "Release";
             Common.Keys.ConnectionString(isLocal);
 
             base.OnActionExecuting(filterContext);
         }
 
-        protected Model.UserList LoginUser
+        protected ViewModels.LoginViewModel LoginUser
         {
             get
             {
-                return HttpContext.Session["UserInfo"] as Model.UserList;
+                ViewModels.LoginViewModel vModel = HttpContext.Session["UserInfo"] as ViewModels.LoginViewModel;
+                if (vModel == null) { return null; }
+
+                return vModel;
             }
         }
     }

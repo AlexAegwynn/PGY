@@ -4460,6 +4460,10 @@ form .share-box-wrap h2 {  margin-bottom: 18px;}
     .nav-overlay { display: none !important;}
 }
 
+@media (min-width: 1200px){
+    .img-responsive { width: 223px!important;height: 223px!important; }
+}
+
 @media (min-width: 768px) {
     .container { width: 684px;}
     .footer-links .bottom-row .item ul { display: block !important;}

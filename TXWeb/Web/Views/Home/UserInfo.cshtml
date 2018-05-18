@@ -1,0 +1,119 @@
+﻿@model Web.ViewModels.UserViewModel
+@{
+    var m = Model.User.Sex == 1 ? "checked" : null;
+    var w = Model.User.Sex == 0 ? "checked" : null;
+}
+
+<link href="~/Content/css/font-awesome.css" rel="stylesheet" />
+<link href="~/Content/css/froala_editor.min.css" rel="stylesheet" />
+<style>
+    section {
+        width: 100%;
+        margin: auto;
+        text-align: left;
+        margin-top: 10px;
+    }
+</style>
+
+<script>
+    //$(function () {
+    //    var obj = $('#einfo');
+    //    obj.before('<p>123456</p>');
+    //})
+</script>
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">基本信息</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                个人信息
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div>
+                        <form id="userinfo" role="form">
+                            @Html.Hidden("UserID", Model.User.UserID)
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>姓名/Name</label>
+                                    <input id="name" name="name" value="@Model.User.Name" class="form-control" placeholder="请输入你的姓名">
+                                </div>
+                                <div class="form-group">
+                                    <label>班级/Class</label>
+                                    <input id="class" name="class" value="@Model.User.Class" class="form-control" placeholder="请输入你的班级">
+                                </div>
+                                <div class="form-group">
+                                    <label>性别/Sex</label>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="sex" id="optionsRadiosInline1" value="0" @m>男
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="sex" id="optionsRadiosInline2" value="1" @w>女
+                                    </label>
+                                </div>
+                                <div class="form-group">
+                                    <label>电子邮箱/E-mail</label>
+                                    <input id="email" name="email" value="@Model.User.Email" class="form-control" placeholder="请输入你的电子邮箱">
+                                </div>
+                                <div class="form-group">
+                                    <label>电话/Telephone</label>
+                                    <input id="phoneNumber" name="phoneNumber" value="@Model.User.PhoneNumber" class="form-control" placeholder="请输入你的电话号码">
+                                </div>
+                                <div class="form-group">
+                                    <label>微信/Weixin</label>
+                                    <input id="wechat" name="wechat" value="@Model.User.WeChat" class="form-control" placeholder="请输入你的微信号码">
+                                </div>
+                                <div class="form-group">
+                                    <label>QQ</label>
+                                    <input id="qq" name="qq" value="@Model.User.QQ" class="form-control" placeholder="请输入你的QQ号码">
+                                </div>
+                                <div class="form-group">
+                                    <label>地址/Address</label>
+                                    @Html.TextAreaFor(addr => addr.User.Address, new { @class = "form-control", @rows = "4" })
+                                    @*<textarea id="address" name="address" class="form-control" rows="4"></textarea>*@<textarea id="address" name="address" class="form-control" rows="4"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-lg-11">
+                                <div class="form-group">
+                                    <label>企业信息/Enterprise information</label>
+                                    <section id="editor">
+                                        <div id="edit">
+
+                                        </div>
+                                    </section>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="col-lg-6">
+                            <button type="submit" class="btn btn-info">提交</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/Js/froala_editor.min.js"></script>
+<!--[if lt IE 9]>
+<script src="~/Scripts/Js/froala_editor_ie8.min.js"></script>
+<![endif]-->
+<script src="~/Scripts/Js/plugins/tables.min.js"></script>
+<script src="~/Scripts/Js/plugins/lists.min.js"></script>
+<script src="~/Scripts/Js/plugins/colors.min.js"></script>
+<script src="~/Scripts/Js/plugins/media_manager.min.js"></script>
+<script src="~/Scripts/Js/plugins/font_family.min.js"></script>
+<script src="~/Scripts/Js/plugins/font_size.min.js"></script>
+<script src="~/Scripts/Js/plugins/block_styles.min.js"></script>
+<script src="~/Scripts/Js/plugins/video.min.js"></script>
+
+<script>
+    $(function () {
+        $('#edit').editable({ inlineMode: false, alwaysBlank: true })
+    });
+</script>

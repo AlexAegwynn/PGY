@@ -38,11 +38,19 @@ namespace Web.Controllers
                 return json;
             }
 
-            Model.UserList model = Logic.UserList.GetUser(inEmail, inPassword);
+            Model.UserList model = Logic.UserList.ExistUser(inEmail, inPassword);
 
             if (model != null)
             {
-                HttpContext.Session["UserInfo"] = model;
+                ViewModels.LoginViewModel vModel = new ViewModels.LoginViewModel
+                {
+                    UserID = model.UserID,
+                    Name = model.Name,
+                    Email = model.Email,
+                    IsAdmin = Convert.ToBoolean(model.IsAdmin)
+                };
+
+                HttpContext.Session["UserInfo"] = vModel;
                 json.Data = new { result = true, msg = "" };
             }
             else
@@ -54,7 +62,7 @@ namespace Web.Controllers
         }
 
         [HttpPost]
-        public JsonResult RegisterUser(ViewModels.UserViewModel inModel)
+        public JsonResult RegisterUser(ViewModels.LoginViewModel inModel)
         {
             JsonResult json = new JsonResult();
 
@@ -80,8 +88,16 @@ namespace Web.Controllers
 
             if (result == 1)
             {
-                Model.UserList login = Logic.UserList.GetUser(model.Email, model.Password);
-                HttpContext.Session["UserInfo"] = login;
+                Model.UserList login = Logic.UserList.ExistUser(model.Email, model.Password);
+                ViewModels.LoginViewModel vModel = new ViewModels.LoginViewModel
+                {
+                    UserID = login.UserID,
+                    Name = login.Name,
+                    Email = login.Email,
+                    IsAdmin = Convert.ToBoolean(login.IsAdmin)
+                };
+
+                HttpContext.Session["UserInfo"] = vModel;
 
                 json.Data = new { result = true, msg = "" };
             }
@@ -91,6 +107,12 @@ namespace Web.Controllers
             }
 
             return json;
+        }
+
+        public ActionResult Logout()
+        {
+            HttpContext.Session.Remove("UserInfo");
+            return RedirectToAction("Index");
         }
     }
 }

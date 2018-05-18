@@ -48,9 +48,9 @@ namespace Model
         /// </summary>
         public string Description { get; set; } = string.Empty;
 
-        /// <summary>
-        /// 内容
-        /// </summary>
-        public string ComContent { get; set; } = string.Empty;
+        ///// <summary>
+        ///// 内容
+        ///// </summary>
+        //public string ComContent { get; set; } = string.Empty;
     }
 }

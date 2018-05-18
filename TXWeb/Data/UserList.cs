@@ -11,12 +11,12 @@ namespace Data
     public class UserList
     {
         /// <summary>
-        /// 获取用户
+        /// 根据邮箱和密码获取用户
         /// </summary>
-        /// <param name="inName"></param>
+        /// <param name="inEmail"></param>
         /// <param name="inPassword"></param>
         /// <returns></returns>
-        public static Model.UserList GetUser(string inEmail, string inPassword)
+        public static Model.UserList ExistUser(string inEmail, string inPassword)
         {
             string sql = @" SELECT * FROM Tx_UserList WHERE Email = @inEmail AND Password = @inPassword ";
 
@@ -29,6 +29,25 @@ namespace Data
             paras[1].Value = inPassword;
 
             DataTable dt = SqlHelper.ExecuteDataTable(CommandType.Text, sql, paras);
+            List<Model.UserList> list = GetUserList(dt);
+
+            return list.Count > 0 ? list[0] : null;
+        }
+
+        /// <summary>
+        /// 根据用户ID获取用户
+        /// </summary>
+        /// <param name="inUserID"></param>
+        /// <returns></returns>
+        public static Model.UserList GetUser(int inUserID)
+        {
+            string sql = @" SELECT * FROM Tx_UserList WHERE UserID = @inUserID ";
+
+            SqlParameter para = new SqlParameter("@inUserID", SqlDbType.Int, 32);
+            para.Value = inUserID;
+
+            DataTable dt = SqlHelper.ExecuteDataTable(CommandType.Text, sql, para);
+
             List<Model.UserList> list = GetUserList(dt);
 
             return list.Count > 0 ? list[0] : null;

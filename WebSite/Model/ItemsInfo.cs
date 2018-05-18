@@ -161,5 +161,10 @@ namespace Model
         /// 折扣价【非表字段】
         /// </summary>
         public string ZKPice { get; set; } = "";
+
+        /// <summary>
+        /// 商品评价【Web_commentWeb 表字段】
+        /// </summary>
+        public string CommentStr { get; set; } = "";
     }
 }
