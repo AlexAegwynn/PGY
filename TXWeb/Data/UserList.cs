@@ -77,7 +77,7 @@ namespace Data
         {
             StringBuilder sql = new StringBuilder();
             sql.Append(" INSERT INTO Tx_UserList ( ");
-            sql.Append(" Name, Password, Class, Sex, ");
+            sql.Append(" UserName, Password, Class, Sex, ");
             sql.Append(" Email, PhoneNumber, WeChat, ");
             sql.Append(" QQ, Address, EnterpriseInfo, IsAdmin ");
             sql.Append(" ) VALUES ( ");
@@ -101,7 +101,7 @@ namespace Data
         {
             StringBuilder sql = new StringBuilder();
             sql.Append(" UPDATE Tx_UserList SET ");
-            sql.Append(" Name = @inName, Class = @inClass, Sex = @inSex, ");
+            sql.Append(" UserName = @inName, Class = @inClass, Sex = @inSex, ");
             sql.Append(" Email = @inEmail, PhoneNumber = @inPhoneNumber, WeChat = @inWeChat, ");
             sql.Append(" QQ = @inQQ, Address = @inAddress, EnterpriseInfo = @inEnterpriseInfo, ");
             sql.Append(" IsAdmin = @inIsAdmin WHERE UserID = @inUserID ");
@@ -143,7 +143,7 @@ namespace Data
                 Model.UserList model = new Model.UserList
                 {
                     UserID = Convert.ToInt32(item["UserID"]),
-                    Name = item["Name"].ToString(),
+                    UserName = item["UserName"].ToString(),
                     Password = item["Password"].ToString(),
                     Class = item["Class"].ToString(),
                     Sex = Convert.ToInt32(item["Sex"]),
@@ -177,8 +177,8 @@ namespace Data
                 list.Add(userid);
             }
 
-            SqlParameter name = new SqlParameter("@inName", SqlDbType.NVarChar, 50);
-            name.Value = inModel.Name;
+            SqlParameter name = new SqlParameter("@inUserName", SqlDbType.NVarChar, 50);
+            name.Value = inModel.UserName;
             list.Add(name);
 
             SqlParameter password = new SqlParameter("@inPassword", SqlDbType.NVarChar, 50);

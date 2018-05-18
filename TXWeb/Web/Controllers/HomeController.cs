@@ -150,6 +150,7 @@ namespace Web.Controllers
             int result = 0;
             if (isAdd)
             {
+                inModel.CommodityInfo.UserID = LoginUser.UserID;
                 result = Logic.CommodityList.CreateCommodity(inModel.CommodityInfo);
             }
             else

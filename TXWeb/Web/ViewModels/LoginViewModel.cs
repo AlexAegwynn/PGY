@@ -15,7 +15,7 @@ namespace Web.ViewModels
         /// <summary>
         /// 用户名
         /// </summary>
-        public string Name { get; set; } = string.Empty;
+        public string UserName { get; set; } = string.Empty;
 
         /// <summary>
         /// 邮箱

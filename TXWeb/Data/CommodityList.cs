@@ -16,7 +16,7 @@ namespace Data
         /// <returns></returns>
         public static List<Model.CommodityList> GetCommodityList()
         {
-            string sql = @" SELECT UserID, Name, b.* FROM Tx_UserCommodityList a " +
+            string sql = @" SELECT UserID, UserName, b.* FROM Tx_UserCommodityList a " +
                                             " LEFT JOIN Tx_CommodityList b ON a.CommodityID = b.CommodityID ";
 
             DataTable dt = SqlHelper.ExecuteDataTable(CommandType.Text, sql);
@@ -31,8 +31,9 @@ namespace Data
         /// <returns></returns>
         public static List<Model.CommodityList> GetUserCommodityList(int inUserID)
         {
-            string sql = @" SELECT UserID, Name, b.* FROM Tx_UserCommodityList a " +
-                                    " LEFT JOIN Tx_CommodityList b ON a.CommodityID = b.CommodityID WHERE UserID = @inUserID ";
+            string sql = @" SELECT a.UserID, c.UserName, b.* FROM Tx_UserCommodityList a " +
+                                  " LEFT JOIN Tx_CommodityList b ON a.CommodityID = b.CommodityID " +
+                                  " LEFT JOIN Tx_UserList c ON c.UserID = a.UserID WHERE a.UserID = @inUserID ";
 
             SqlParameter para = new SqlParameter("@inUserID", SqlDbType.Int, 32);
             para.Value = inUserID;
@@ -55,7 +56,7 @@ namespace Data
             para.Value = inCommodityID;
 
             DataTable dt = SqlHelper.ExecuteDataTable(CommandType.Text, sql, para);
-            Model.CommodityList model = new Model.CommodityList();
+            Model.CommodityList model = null;
 
             if (dt.Rows.Count > 0)
             {
@@ -68,15 +69,9 @@ namespace Data
                     TxPrice = Convert.ToInt32(dt.Rows[0]["TxPrice"]),
                     Unit = dt.Rows[0]["Unit"].ToString(),
                     ImgUrl = dt.Rows[0]["ImgUrl"].ToString(),
-                    Description = dt.Rows[0]["Description"].ToString(),
-                    UserID = Convert.ToInt32(dt.Rows[0]["UserID"]),
-                    Name = dt.Rows[0]["Name"].ToString()
+                    Description = dt.Rows[0]["Description"].ToString()
                 };
                 model = item;
-            }
-            else
-            {
-                model = null;
             }
 
             return model;
@@ -111,7 +106,7 @@ namespace Data
         {
             StringBuilder sql = new StringBuilder();
             sql.Append(" IF( OBJECT_ID ('AutoInsert') IS NOT NULL ) ");
-            sql.Append(" DROP TRIGGER AutoInsert  ");
+            sql.Append(" DROP TRIGGER AutoInsert \n ");
             sql.Append(" GO ");
             sql.Append(" CREATE TRIGGER AutoInsert ");
             sql.Append(" ON Tx_CommodityList FOR INSERT AS ");
@@ -154,7 +149,7 @@ namespace Data
                     ImgUrl = item["ImgUrl"].ToString(),
                     Description = item["Description"].ToString(),
                     UserID = Convert.ToInt32(item["UserID"]),
-                    Name = item["Name"].ToString()
+                    UserName = item["UserName"].ToString()
                 };
 
                 list.Add(model);
@@ -205,6 +200,10 @@ namespace Data
             SqlParameter description = new SqlParameter("@inDescription", SqlDbType.NVarChar, 500);
             description.Value = inModel.Description;
             list.Add(description);
+
+            SqlParameter userid = new SqlParameter("@inUserID", SqlDbType.Int, 32);
+            userid.Value = inModel.UserID;
+            list.Add(userid);
 
             return list.ToArray();
         }

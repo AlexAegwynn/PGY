@@ -45,7 +45,7 @@ namespace Web.Controllers
                 ViewModels.LoginViewModel vModel = new ViewModels.LoginViewModel
                 {
                     UserID = model.UserID,
-                    Name = model.Name,
+                    UserName = model.UserName,
                     Email = model.Email,
                     IsAdmin = Convert.ToBoolean(model.IsAdmin)
                 };
@@ -78,7 +78,7 @@ namespace Web.Controllers
 
             Model.UserList model = new Model.UserList
             {
-                Name = inModel.Name,
+                UserName = inModel.UserName,
                 Email = inModel.Email,
                 Password = inModel.Password,
                 PhoneNumber = inModel.PhoneNumber
@@ -92,7 +92,7 @@ namespace Web.Controllers
                 ViewModels.LoginViewModel vModel = new ViewModels.LoginViewModel
                 {
                     UserID = login.UserID,
-                    Name = login.Name,
+                    UserName = login.UserName,
                     Email = login.Email,
                     IsAdmin = Convert.ToBoolean(login.IsAdmin)
                 };
