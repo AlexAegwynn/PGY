@@ -20,7 +20,7 @@
 
     $(function () {
         if (page != '') {
-            if (page <= '3') {
+            if (page <= 3) {
                 $('#pg_' + page).css('background-color', '#ffd28a');
                 for (var i = 1; i <= 5; i++) {
                     $('#pg_' + i).children().html(i);
@@ -61,12 +61,12 @@
         }
         //var cou = $('#hcoupon').val();
         var search = $('#search').val();
-        document.location.href = '/Home/Commodity?page=' + page + '&&search=' + search; // + '&&coupon=' + cou;
+        document.location.href = '/Home/Index?page=' + page + '&&search=' + search; // + '&&coupon=' + cou;
     }
 
     function Search() {
         var search = $('#search').val();
-        document.location.href = '/Home/Commodity?&&search=' + search;
+        document.location.href = '/Home/Index?&&search=' + search;
     }
 </script>
 

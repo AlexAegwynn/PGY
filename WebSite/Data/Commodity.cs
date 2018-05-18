@@ -119,7 +119,7 @@ namespace Data
             sql.Append(" SELECT " + top + str + " FROM Web_ItemWeb a ");
             sql.Append(" LEFT JOIN rpt_ItemsInfo b ON a.IID = b.ID ");
             sql.Append(" LEFT JOIN Web_commentWeb c ON c.NumIID = b.NumIID ");
-            sql.Append(" WHERE a.WID = @inWebID ORDER BY a.ID ASC ");
+            sql.Append(" WHERE a.WID = @inWebID ORDER BY a.ID DESC ");
 
             SqlParameter para = new SqlParameter("@inWebID", SqlDbType.Int, 32);
             para.Value = inWebID;
