@@ -98,7 +98,7 @@ namespace Web.Controllers
             return View(vModel);
         }
 
-        public ActionResult AllCommodityList(int page = 1)
+        public ActionResult AllCommodityList(int page = 1, string sprice = "", string hprice = "", string search = "", string cate = "")
         {
             if (LoginUser == null)
             {
@@ -108,14 +108,44 @@ namespace Web.Controllers
             ViewData["LoginUser"] = LoginUser;
 
             var list = Logic.CommodityList.GetCommodityList();
+
+            if (search != "")
+            {
+                list = (from c in list where c.Title.ToUpper().IndexOf(search.ToUpper()) >= 0 select c).ToList();
+            }
+            if (sprice != "")
+            {
+                list = (from c in list where c.Price >= Convert.ToInt32(sprice) select c).ToList();
+            }
+            if (hprice != "")
+            {
+                list = (from c in list where c.Price <= Convert.ToInt32(hprice) select c).ToList();
+            }
+
             decimal count = Math.Ceiling(Convert.ToDecimal(list.Count) / 8);
 
             list = list.Skip((page - 1) * 8).Take(8).ToList();
 
-            ViewModels.CommodityViewModel vModel = new ViewModels.CommodityViewModel();
-            vModel.CommodityList = list;
-            vModel.PageCode = page;
-            vModel.PageCount = Convert.ToInt32(count);
+            ViewModels.CommodityViewModel vModel = new ViewModels.CommodityViewModel
+            {
+                CommodityList = list,
+                PageCode = page,
+                PageCount = Convert.ToInt32(count),
+                SPrice = sprice,
+                HPrice = hprice,
+                Search = search
+            };
+            
+            foreach (var item in Enum.GetValues(typeof(Common.Categorys)))
+            {
+                ViewModels.Catagory cat = new ViewModels.Catagory
+                {
+                    CategoryID = Convert.ToInt32(item),
+                    CategoryStr = item.ToString()
+                };
+
+                vModel.CateList.Add(cat);
+            }
 
             ViewBag.Module = "allcomm";
 
@@ -155,16 +185,10 @@ namespace Web.Controllers
             }
             else
             {
-                //result = Logic.CommodityList
+                result = Logic.CommodityList.UpdateCommodity(inModel.CommodityInfo);
             }
 
-            return json;
-        }
-
-        [HttpPost]
-        public JsonResult UpdateCommodity()
-        {
-            JsonResult json = new JsonResult();
+            json.Data = new { result = result > 0 };
 
             return json;
         }

@@ -7,7 +7,11 @@
             type: 'post',
             data: $('#cominfo').serialize(),
             success: function (data) {
-                alert();
+                if (data.result) {
+                    alert('保存成功');
+                } else {
+                    alert('保存失败');
+                }
             }
         })
     }
@@ -28,6 +32,7 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <form id="cominfo" role="form">
+                            @Html.HiddenFor(m => m.CommodityInfo.CommodityID)
                             <div class="form-group">
                                 <label>标题/Title</label>
                                 @Html.TextBoxFor(m => m.CommodityInfo.Title, new { @class = "form-control", @placeholder = "请输入商品的标题" })

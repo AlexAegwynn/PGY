@@ -1,6 +1,6 @@
-﻿@model Web.ViewModels.ArticleViewModel
+﻿@model Web.ViewModels.Article
 @{
-    var pageWidth = Convert.ToBoolean(ViewData["Mobile"]) ? "width:90%" : "";
+    //var pageWidth = Convert.ToBoolean(ViewData["Mobile"]) ? "width:90%" : "";
     Layout = null;
 }
 
@@ -49,7 +49,7 @@
     <div hidden="hidden">
         @Html.Hidden("Conten", Model.Conten)
     </div>
-    <div id="page" class="page" style="@pageWidth">
+    <div id="page" class="page" style="width:90%">
         <div style="margin-top:5%;text-align:left;">
             <h1>@Model.Title</h1>
         </div>

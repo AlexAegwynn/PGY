@@ -8,6 +8,19 @@ namespace Web.ViewModels
     public class ArticleViewModel
     {
         /// <summary>
+        /// 总页数
+        /// </summary>
+        public int ToPag { get; set; } = 0;
+
+        /// <summary>
+        /// 文章信息列表
+        /// </summary>
+        public List<Article> Article { get; set; }
+    }
+
+    public class Article
+    {
+        /// <summary>
         /// 文章ID
         /// </summary>
         public string ArticleID { get; set; }
@@ -38,10 +51,5 @@ namespace Web.ViewModels
         /// APP名称
         /// </summary>
         public string APPName { get; set; }
-    }
-
-    public class Article
-    {
-
     }
 }

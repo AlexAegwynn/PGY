@@ -1,6 +1,8 @@
-﻿
+﻿@{ 
+    var aModel = Model as Web.ViewModels.ArticleViewModel;
+}
 <script>
-    @*var apage = '@ViewBag.PageCode';
+    var apage = '@ViewBag.PageCode';
     var atotal = '@ViewBag.PageCount';
     $(function () {
         if (apage != '') {
@@ -42,7 +44,7 @@
                 $('#article').html(data);
             }
         })
-    }*@
+    }
 </script>
 
 <div class="row articles" id="thearticle" style="padding:50px 0px 0px 50px;">
@@ -51,9 +53,9 @@
             <li style="cursor:default;">
                 <div class="text">
                     <h4>文章</h4>
-                    @foreach (var item in Model as List<Web.ViewModels.ArticleViewModel>)
+                    @foreach (var item in aModel.Article)
                     {
-                        <p style="cursor:pointer;" onclick="window.open('/Home/ArticleInfo?inArticleID=@item.ArticleID')">@item.Title</p>
+                        <p style="cursor:pointer;" onclick="window.open('/Home/ArticleInfo?inArticleID=@item.ArticleID&&page=@ViewBag.PageCode')">@item.Title</p>
                     }
                     @*<a class="link-style" title="更多信息。" href="/Home/Article" target="_self">更多文章...</a>*@
                 </div>
@@ -61,7 +63,7 @@
         </ul>
     </div>
 </div>
-@*<div class="row" style="text-align: center;">
+<div class="row" style="text-align: center;">
     <ul class="pagination">
         <li><span style="cursor:default;">共 @ViewBag.PageCount 页</span></li>
         <li><a onclick="APageClick('@ViewBag.PageCode', 'Previous')" style="cursor:pointer;">&laquo;上一页</a></li>
@@ -72,4 +74,4 @@
         }
         <li><a onclick="APageClick('@ViewBag.PageCode', 'Next')" style="cursor:pointer;">&raquo;下一页</a></li>
     </ul>
-</div>*@
+</div>

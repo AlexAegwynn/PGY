@@ -47,7 +47,7 @@ namespace Data
         /// <param name="isTrans">是否使用事务</param>
         /// <param name="sqlParameters">以数组形式提供SqlCommand命令中用到的参数列表</param>
         /// <returns>受影响行数</returns>
-        public static int ExecuteNonQuery(string commandText, CommandType commandType, bool isTrans, params SqlParameter[] sqlParameters)
+        public static int ExecuteNonQueryVoid(string commandText, CommandType commandType, bool isTrans, params SqlParameter[] sqlParameters)
         {
             if (string.IsNullOrEmpty(connectionString))
             {
@@ -69,6 +69,22 @@ namespace Data
             }
         }
 
+        /// <summary>
+        /// 执行触发器
+        /// </summary>
+        /// <param name="commandText"></param>
+        /// <returns></returns>
+        public static int ExecuteNonQueryTrigger(string commandText)
+        {
+            using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+            {
+                sqlConnection.Open();//打开连接
+                SqlCommand sqlCommand = new SqlCommand();
+                sqlCommand.Connection = sqlConnection;
+                sqlCommand.CommandText = commandText;
+                return sqlCommand.ExecuteNonQuery();
+            }
+        }
         #endregion
 
         #region 私有方法
@@ -102,7 +118,7 @@ namespace Data
                 throw ex;
             }
         }
-
+        
         /// <summary>
         /// 执行返回受影响行数的SqlCommand命令（使用事务）
         /// </summary>

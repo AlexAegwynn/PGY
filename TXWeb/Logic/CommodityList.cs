@@ -46,5 +46,15 @@ namespace Logic
         {
             return Data.CommodityList.CreateCommodity(inModel);
         }
+
+        /// <summary>
+        /// 更新商品
+        /// </summary>
+        /// <param name="inModel"></param>
+        /// <returns></returns>
+        public static int UpdateCommodity(Model.CommodityList inModel)
+        {
+            return Data.CommodityList.UpdateCommodity(inModel);
+        }
     }
 }

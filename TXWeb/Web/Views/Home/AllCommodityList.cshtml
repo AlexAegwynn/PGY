@@ -24,6 +24,19 @@
                 }
             }
         }
+
+        $("#ul1 li").click(function () {
+            //$(this).addClass("selected").siblings().removeClass("selected");
+            //$("#ul1 li a").removeClass("fontcolor");
+            //$(this).children("a").addClass("fontcolor");
+            //var value = $(this).children().html();
+            //if (value == '全部') {
+            //    value = '';
+            //}
+            var value = $(this).attr('id');
+            $('#cate').val(value);
+            $('#sform').submit();
+        })
     })
 
     function PageClick(code, state) {
@@ -35,7 +48,13 @@
             code = $('#pg_' + code).children().html();
         }
 
-        document.location.href = '/Home/CommodityList?page=' + code;
+        $('#page').val(code);
+        $('#sform').submit();
+    }
+
+    function Search() {
+        $('#page').val(1);
+        $('#sform').submit();
     }
 
     function UserInfo(uid) {
@@ -89,12 +108,10 @@
             <div class="div2"><span>分类A</span></div>
             <div class="div3">
                 <ul id="ul1">
-                    <li class="aa1"><a href="#">分类1</a></li>
-                    <li class="aa1"><a href="#">分类2</a></li>
-                    <li class="aa1"><a href="#">分类3</a></li>
-                    <li class="aa1"><a href="#">分类4</a></li>
-                    <li class="aa1"><a href="#">分类5</a></li>
-                    <li class="aa1"><a href="#">分类6</a></li>
+                    @foreach (var item in Model.CateList)
+                    {
+                        <li id="cat_@item.CategoryID" class="aa1"><a style="cursor:pointer;">@item.CategoryStr</a></li>
+                    }
                 </ul>
             </div>
         </div>
@@ -104,28 +121,32 @@
 <div class="row" style="margin-left:2px;margin-bottom: 15px;">
     <div class="col-lg-12" style="height: 41px;">
         <div class="div1" style="background-color: #f5f5f5;border: solid 1px #e8e8e8;">
-            <div style="height: 34px;padding-left: 20px;">
-                <h6 style="float: left;">价格区间：</h6>
-                <ul style="float: left;margin-left: -35px; ">
-                    <li style="float: left;width: 62px;"><input type="text" name="sprice" placeholder="¥" class="input1"></li>
-                    <li style="float: left;width: 10px;text-align: center;">-</li>
-                    <li style="float: left;width: 62px;"><input type="text" name="hprice" placeholder="¥" class="input1"></li>
-                </ul>
-                <div>
-                    <a href="#"><button class="bbutton">确定</button></a>
+            <form id="sform" action="/Home/AllCommodityList" method="post">
+                @Html.Hidden("page", Model.PageCode)
+                @Html.Hidden("cate", Model.CatID)
+                <div style="height: 34px;padding-left: 20px;">
+                    <h6 style="float: left;">价格区间：</h6>
+                    <ul style="float: left;margin-left: -35px; ">
+                        <li style="float: left;width: 62px;"><input type="text" name="sprice" id="sprice" placeholder="¥" class="input1" value="@Model.SPrice"></li>
+                        <li style="float: left;width: 10px;text-align: center;">-</li>
+                        <li style="float: left;width: 62px;"><input type="text" name="hprice" id="hprice" placeholder="¥" class="input1" value="@Model.HPrice"></li>
+                    </ul>
+                    @*<div>
+                            <button class="bbutton">确定</button>
+                        </div>*@
                 </div>
-            </div>
-            <div style="height: 34px;display: inline;">
-                <h6 style="float: left;margin-top:-22px;padding-left: 50px;">关键词搜索：</h6>
-                <ul style="float: left; margin-top:-32px;margin-left: -40px;">
-                    <li style="float: left;width: 150px;">
-                        <input type="text" name="theseach" class="input2">
-                    </li>
-                    <li style="margin-left: 152px;margin-top:-2px; ">
-                        <a href="#"><button class="bbutton">搜索</button></a>
-                    </li>
-                </ul>
-            </div>
+                <div style="height: 34px;display: inline;">
+                    <h6 style="float: left;margin-top:-22px;padding-left: 50px;">关键词搜索：</h6>
+                    <ul style="float: left; margin-top:-32px;margin-left: -40px;">
+                        <li style="float: left;width: 150px;">
+                            <input type="text" name="search" id="search" value="@Model.Search" class="input2">
+                        </li>
+                        <li style="margin-left: 152px;margin-top:-2px; ">
+                            <button onclick="Search()" class="bbutton">搜索</button>
+                        </li>
+                    </ul>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -150,7 +171,7 @@
                             <h>同学价:<h class="price">¥@item.TxPrice</h></h>
                             <h style="display: block;">市场价:<h class="price">¥@item.Price</h></h>
                             <a style="cursor:pointer;" onclick="UserInfo('@item.UserID')">
-                                <h1 style="font-size: 15px;padding-left: 75%;margin-top: -20px;">@item.Name</h1>
+                                <h1 style="font-size: 15px;padding-left: 75%;margin-top: -20px;">@item.UserName</h1>
                             </a>
                         </div>
                     </div>
@@ -171,13 +192,3 @@
         <li><a onclick="PageClick('@Model.PageCode', 'Next')">&raquo;下一页</a></li>
     </ul>
 </div>
-
-<script>
-    $(document).ready(function () {
-        $("#ul1 li").click(function () {
-            $(this).addClass("selected").siblings().removeClass("selected");
-            $("#ul1 li a").removeClass("fontcolor");
-            $(this).children("a").addClass("fontcolor");
-        })
-    })
-</script>
