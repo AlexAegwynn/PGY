@@ -8,9 +8,19 @@ namespace Web.ViewModels
     public class CommodityViewModel
     {
         /// <summary>
-        /// 总页数
+        /// 页码
         /// </summary>
         public int PageCode { get; set; }
+
+        /// <summary>
+        /// 总页数
+        /// </summary>
+        public int PageCount { get; set; }
+
+        /// <summary>
+        /// 搜索关键字
+        /// </summary>
+        public string Search { get; set; }
 
         /// <summary>
         /// 商品列表

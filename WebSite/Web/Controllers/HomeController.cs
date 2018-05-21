@@ -21,18 +21,6 @@ namespace Web.Controllers
         /// 站点信息
         /// </summary>
         private static Model.WebSiteInfo WebSiteInfo = null;
-        ///// <summary>
-        ///// 文章列表
-        ///// </summary>
-        //private static List<ArticleViewModel> ArticleList = new List<ArticleViewModel>();
-        ///// <summary>
-        ///// 图集列表
-        ///// </summary>
-        //private static List<PictureViewModel> PictureList = new List<PictureViewModel>();
-        ///// <summary>
-        ///// 商品列表
-        ///// </summary>
-        //private static List<CommodityViewModel> CommodityList = new List<CommodityViewModel>();
         #endregion
 
         /// <summary>
@@ -63,6 +51,8 @@ namespace Web.Controllers
         //    return View(vModel);
         //}
 
+        private static string test = string.Empty;
+
         public ActionResult Index(int page = 1, string coupon = "", string search = "")
         {
             WebSiteInfo = Logic.WebSite.GetWebSite(WebSiteID);
@@ -80,16 +70,43 @@ namespace Web.Controllers
 
             list = list.Skip((page - 1) * 20).Take(20).ToList();
 
+            try
+            {
+                string numIIDs = string.Empty;
+
+                foreach (var item in list)
+                {
+                    numIIDs += item.NumIID + ",";
+                }
+
+                List<Top.Api.Domain.NTbkItem> zklist = Common.TBApi.GetZKPice(numIIDs);
+
+                test = "<p>" + zklist.Count.ToString() + "_" + list.Count + "</p><br /><br />" + numIIDs;
+
+                foreach (var item in list)
+                {
+                    foreach (var zk in zklist)
+                    {
+                        if (item.NumIID == zk.NumIid)
+                        {
+                            item.ZKPice = zk.ZkFinalPrice;
+                            break;
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                return Content("<p>" + e.Message + "</p><br /><br />" + test);
+            }
+
             CommodityViewModel vModel = new CommodityViewModel();
-            vModel.PageCode = pageCode;
+            vModel.PageCount = pageCode;
             vModel.ItemsInfos = list;
+            vModel.PageCode = page; //当前页数
+            vModel.Search = search;
 
-            ViewBag.Page = page; //当前页数
-            ViewBag.Search = search;
-
-            ViewData["ArticleList"] = GetArticleList().Take(6).ToList();
-
-            return View("~/Views/Home/Commodity.cshtml",vModel);
+            return View("~/Views/Home/Commodity.cshtml", vModel);
         }
 
         /// <summary>
@@ -118,12 +135,12 @@ namespace Web.Controllers
             }
 
             decimal total = list.Count;
-            int pageCode = Convert.ToInt32(Math.Ceiling(total / 20));
+            int pageCount = Convert.ToInt32(Math.Ceiling(total / 20));
 
             list = list.Skip((page - 1) * 20).Take(20).ToList();
 
             CommodityViewModel vModel = new CommodityViewModel();
-            vModel.PageCode = pageCode;
+            vModel.PageCount = pageCount;
             vModel.ItemsInfos = list;
             //vModel.ItemsInfos = Logic.Commodity.GetItemsInfos(Convert.ToInt32(WebSiteID), page, search);
 
@@ -137,11 +154,11 @@ namespace Web.Controllers
             //}
 
             //ViewBag.Count = vModel.PageCode; //总页数
-            ViewBag.Page = page; //当前页数
+            vModel.PageCode = page; //当前页数
             //ViewBag.Coupon = coupon;
-            ViewBag.Search = search;
+            vModel.Search = search;
 
-            ViewData["ArticleList"] = GetArticleList().Take(6).ToList();
+            //ViewData["ArticleList"] = GetArticleList().Take(6).ToList();
 
             //if (State)
             //{
@@ -151,13 +168,53 @@ namespace Web.Controllers
             return View(vModel);
         }
 
-        /// <summary>
-        /// 文章列表页
-        /// </summary>
-        /// <param name="category">分类条件</param>
-        /// <param name="search">搜索条件</param>
-        /// <returns></returns>
-        public ActionResult Article(string category = "", string search = "")
+        ///// <summary>
+        ///// 文章列表页
+        ///// </summary>
+        ///// <param name="category">分类条件</param>
+        ///// <param name="search">搜索条件</param>
+        ///// <returns></returns>
+        //public ActionResult Article(string category = "", string search = "")
+        //{
+        //    if (WebSiteInfo == null)
+        //    {
+        //        WebSiteInfo = Logic.WebSite.GetWebSite(WebSiteID);
+        //    }
+
+        //    ViewData["WebSite"] = WebSiteInfo;
+
+        //    List<ArticleViewModel> list = GetArticleList();
+
+        //    //if (list.Count == 0)
+        //    //{
+        //    //    list = GetArticleList();
+        //    //}
+
+        //    List<string> categoryList = (from l in list select l.DomainName).ToList();
+        //    categoryList = categoryList.Distinct().ToList();
+
+        //    if (search != "")
+        //    {
+        //        list = (from a in list where a.Title.Contains(search) || a.RAdminName.Contains(search) select a).ToList();
+        //    }
+
+        //    if (category != "")
+        //    {
+        //        list = (from a in list where a.DomainName.Contains(category) select a).ToList();
+        //    }
+
+        //    ViewData["CategoryList"] = categoryList;
+        //    ViewBag.Search = search;
+
+        //    if (State)
+        //    {
+        //        return View("/Views/Home/MobileView/Article.cshtml", list);
+        //    }
+
+        //    return View(list);
+        //}
+
+        public PartialViewResult ArticlePartial(int page = 1)
         {
             if (WebSiteInfo == null)
             {
@@ -166,35 +223,11 @@ namespace Web.Controllers
 
             ViewData["WebSite"] = WebSiteInfo;
 
-            List<ArticleViewModel> list = GetArticleList();
+            ArticleViewModel vModel = GetArticleList(page);
+            ViewBag.PageCode = page;
+            ViewBag.PageCount = vModel.ToPag;
 
-            //if (list.Count == 0)
-            //{
-            //    list = GetArticleList();
-            //}
-
-            List<string> categoryList = (from l in list select l.DomainName).ToList();
-            categoryList = categoryList.Distinct().ToList();
-
-            if (search != "")
-            {
-                list = (from a in list where a.Title.Contains(search) || a.RAdminName.Contains(search) select a).ToList();
-            }
-
-            if (category != "")
-            {
-                list = (from a in list where a.DomainName.Contains(category) select a).ToList();
-            }
-
-            ViewData["CategoryList"] = categoryList;
-            ViewBag.Search = search;
-
-            if (State)
-            {
-                return View("/Views/Home/MobileView/Article.cshtml", list);
-            }
-
-            return View(list);
+            return PartialView(vModel);
         }
 
         /// <summary>
@@ -202,18 +235,18 @@ namespace Web.Controllers
         /// </summary>
         /// <param name="inArticleID">文章ID</param>
         /// <returns></returns>
-        public ActionResult ArticleInfo(string inArticleID)
+        public ActionResult ArticleInfo(string inArticleID, int page = 1)
         {
             if (string.IsNullOrEmpty(inArticleID))
             {
                 return RedirectToAction("Index");
             }
+            ArticleViewModel vModel = GetArticleList(page);
 
-            List<ArticleViewModel> list = (from a in GetArticleList() where a.ArticleID == inArticleID select a).ToList();
-            list[0].Conten = list[0].Conten.Trim('\'');
-            ViewData["Mobile"] = Request.Browser.IsMobileDevice;
-
-            return View(list[0]);
+            vModel.Article = (from a in vModel.Article where a.ArticleID == inArticleID select a).ToList();
+            vModel.Article[0].Conten = vModel.Article[0].Conten.Trim('\'');
+            
+            return View(vModel.Article[0]);
         }
 
         /// <summary>
@@ -265,29 +298,40 @@ namespace Web.Controllers
             return View(list[0]);
         }
 
+        public JsonResult Test(string numiid)
+        {
+            JsonResult json = new JsonResult();
+
+            List<Top.Api.Domain.NTbkItem> zklist = Common.TBApi.GetZKPice(numiid);
+
+            json.Data = new { result = zklist.Count };
+
+            return json;
+        }
+
         /// <summary>
         /// 私有方法，获取文章列表
         /// </summary>
         /// <returns></returns>
-        private static List<ArticleViewModel> GetArticleList()
+        private static ArticleViewModel GetArticleList(int page = 1, int rows = 6)
         {
-            string url = string.Format("http://121.10.200.52:54321/GetArticleWeb.ashx?WID={0}", WebSiteID);
+            string url = string.Format("http://121.10.200.52:54321/GetArticleWeb.ashx?WID={0}&&pizetop={1}&&pizenum={2}", WebSiteID, page, rows);
 
             var data = new WebClient().DownloadData(url);
             var jsonData = Encoding.UTF8.GetString(data);
 
-            List<ArticleViewModel> list = new List<ArticleViewModel>();
+            ArticleViewModel vModel = new ArticleViewModel();
 
             if (jsonData != "{}")
             {
-                list = JsonConvert.DeserializeObject<List<ArticleViewModel>>(jsonData);
-                foreach (var item in list)
+                vModel = JsonConvert.DeserializeObject<ArticleViewModel>(jsonData);
+                foreach (var item in vModel.Article)
                 {
-                    item.ArticleID = list.IndexOf(item).ToString();
+                    item.ArticleID = vModel.Article.IndexOf(item).ToString();
                 }
             }
 
-            return list;
+            return vModel;
         }
 
         /// <summary>

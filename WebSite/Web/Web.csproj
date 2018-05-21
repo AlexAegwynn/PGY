@@ -100,6 +100,10 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
+    <Reference Include="TopSdk, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Common\Library\TopSdk.dll</HintPath>
+    </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
@@ -191,6 +195,7 @@
     <Content Include="Content\Images\next.png" />
     <Content Include="Content\Images\prev.png" />
     <Content Include="Content\Images\right.png" />
+    <Content Include="Content\Images\rightlogo.jpg" />
     <Content Include="Content\Images\topbg.jpg" />
     <Content Include="Content\css\WebSite\index.css" />
     <Content Include="Content\css\WebSite\login.css" />
@@ -323,21 +328,17 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Commodity.cshtml" />
     <Content Include="Views\Home\Pictures.cshtml" />
-    <Content Include="Views\Home\Article.cshtml" />
     <Content Include="Views\WebSite\WebSiteList.cshtml" />
     <Content Include="Views\Shared\_WebSiteLayout.cshtml" />
     <Content Include="Views\WebSite\WebSiteInfo.cshtml" />
     <Content Include="Views\Home\ArticleInfo.cshtml" />
     <Content Include="Views\Shared\_MobileLayout.cshtml" />
-    <Content Include="Views\Home\MobileView\Article.cshtml" />
-    <Content Include="Views\Home\MobileView\Pictures.cshtml" />
     <Content Include="Views\Home\PictureInfo.cshtml" />
-    <Content Include="Views\Home\MobileView\PictureInfo.cshtml" />
     <Content Include="Views\WebSite\Index.cshtml" />
     <Content Include="Views\Shared\Test\_Layout.cshtml" />
+    <Content Include="Views\Home\ArticlePartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

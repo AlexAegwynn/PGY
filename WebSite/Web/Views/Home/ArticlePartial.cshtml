@@ -1,0 +1,77 @@
+﻿@{ 
+    var aModel = Model as Web.ViewModels.ArticleViewModel;
+}
+<script>
+    var apage = '@ViewBag.PageCode';
+    var atotal = '@ViewBag.PageCount';
+    $(function () {
+        if (apage != '') {
+            if (apage <= 3) {
+                $('#apg_' + apage).addClass('active');
+                for (var i = 1; i <= 5; i++) {
+                    $('#apg_' + i).children().html(i);
+                }
+            } else {
+                var index = parseInt(apage) - 2;
+                for (var i = 1; i <= 5; i++) {
+                    if (index <= atotal) {
+                        $('#apg_3').addClass('active');
+                        $('#apg_' + i).children().html(index);
+                    } else {
+                        $('#apg_' + i).children().attr('hidden', 'hidden');
+                    }
+                    index++;
+                }
+            }
+        }
+    })
+
+    function APageClick(page, state) {
+        if (state != '') {
+            if (state == 'Next') { page++; } else { page--; }
+            if (page > atotal) { return; }
+            if (page < 1) { return; }
+        } else {
+            page = $('#apg_' + page).children().html();
+        }
+
+        $.ajax({
+            url: '/Home/ArticlePartial',
+            data: {
+                page: page
+            },
+            success: function (data) {
+                $('#article').html(data);
+            }
+        })
+    }
+</script>
+
+<div class="row articles" id="thearticle" style="padding:50px 0px 0px 50px;">
+    <div class=" col-md-9" style="margin-bottom:30px;">
+        <ul class="teaser-list module-group">
+            <li style="cursor:default;">
+                <div class="text">
+                    <h4>文章</h4>
+                    @foreach (var item in aModel.Article)
+                    {
+                        <p style="cursor:pointer;" onclick="window.open('/Home/ArticleInfo?inArticleID=@item.ArticleID&&page=@ViewBag.PageCode')">@item.Title</p>
+                    }
+                    @*<a class="link-style" title="更多信息。" href="/Home/Article" target="_self">更多文章...</a>*@
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="row" style="text-align: center;">
+    <ul class="pagination">
+        <li><span style="cursor:default;">共 @ViewBag.PageCount 页</span></li>
+        <li><a onclick="APageClick('@ViewBag.PageCode', 'Previous')" style="cursor:pointer;">&laquo;上一页</a></li>
+        @for (int i = 1; i < 6; i++)
+        {
+            if (i > ViewBag.PageCount) { break; }
+            <li id="apg_@i"><a onclick="APageClick('@i','')" style="cursor:pointer;"></a></li>
+        }
+        <li><a onclick="APageClick('@ViewBag.PageCode', 'Next')" style="cursor:pointer;">&raquo;下一页</a></li>
+    </ul>
+</div>

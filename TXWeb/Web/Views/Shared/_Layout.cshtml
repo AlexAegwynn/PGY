@@ -62,14 +62,6 @@
 
             document.location.href = '/Home/' + str;
         }
-
-        function ComClick(cid) {
-            if (cid == '') {
-                document.location.href = '/Home/CommodityInfo';
-            } else {
-                document.location.href = '/Home/CommodityInfo?inCommodityID=' + cid;
-            }
-        }
     </script>
 </head>
 <body style="cursor:default;">
@@ -111,7 +103,7 @@
                             <img src="~/Content/Images/1.jpg" class="iconimg" />
                         </div>
                         <div class="iword">
-                            <h5>欢迎你, @LoginUser.Name</h5>
+                            <h5>欢迎你, @LoginUser.UserName</h5>
                         </div>
                     </div>
                     <ul class="nav in" id="side-menu">

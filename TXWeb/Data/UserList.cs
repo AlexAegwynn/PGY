@@ -77,7 +77,7 @@ namespace Data
         {
             StringBuilder sql = new StringBuilder();
             sql.Append(" INSERT INTO Tx_UserList ( ");
-            sql.Append(" Name, Password, Class, Sex, ");
+            sql.Append(" UserName, Password, Class, Sex, ");
             sql.Append(" Email, PhoneNumber, WeChat, ");
             sql.Append(" QQ, Address, EnterpriseInfo, IsAdmin ");
             sql.Append(" ) VALUES ( ");
@@ -101,7 +101,7 @@ namespace Data
         {
             StringBuilder sql = new StringBuilder();
             sql.Append(" UPDATE Tx_UserList SET ");
-            sql.Append(" Name = @inName, Password = @inPassword, Class = @inClass, Sex = @inSex, ");
+            sql.Append(" UserName = @inUserName, Class = @inClass, Sex = @inSex, ");
             sql.Append(" Email = @inEmail, PhoneNumber = @inPhoneNumber, WeChat = @inWeChat, ");
             sql.Append(" QQ = @inQQ, Address = @inAddress, EnterpriseInfo = @inEnterpriseInfo, ");
             sql.Append(" IsAdmin = @inIsAdmin WHERE UserID = @inUserID ");
@@ -143,7 +143,7 @@ namespace Data
                 Model.UserList model = new Model.UserList
                 {
                     UserID = Convert.ToInt32(item["UserID"]),
-                    Name = item["Name"].ToString(),
+                    UserName = item["UserName"].ToString(),
                     Password = item["Password"].ToString(),
                     Class = item["Class"].ToString(),
                     Sex = Convert.ToInt32(item["Sex"]),
@@ -177,16 +177,16 @@ namespace Data
                 list.Add(userid);
             }
 
-            SqlParameter name = new SqlParameter("@inName", SqlDbType.NVarChar, 50);
-            name.Value = inModel.Name;
+            SqlParameter name = new SqlParameter("@inUserName", SqlDbType.NVarChar, 50);
+            name.Value = inModel.UserName ?? string.Empty;
             list.Add(name);
 
             SqlParameter password = new SqlParameter("@inPassword", SqlDbType.NVarChar, 50);
-            password.Value = inModel.Password;
+            password.Value = inModel.Password ?? string.Empty;
             list.Add(password);
 
             SqlParameter _class = new SqlParameter("@inClass", SqlDbType.NVarChar, 50);
-            _class.Value = inModel.Class;
+            _class.Value = inModel.Class ?? string.Empty;
             list.Add(_class);
 
             SqlParameter sex = new SqlParameter("@inSex", SqlDbType.Int, 32);
@@ -194,27 +194,27 @@ namespace Data
             list.Add(sex);
 
             SqlParameter email = new SqlParameter("@inEmail", SqlDbType.NVarChar, 50);
-            email.Value = inModel.Email;
+            email.Value = inModel.Email ?? string.Empty;
             list.Add(email);
 
             SqlParameter phonenumber = new SqlParameter("@inPhoneNumber", SqlDbType.NVarChar, 50);
-            phonenumber.Value = inModel.PhoneNumber;
+            phonenumber.Value = inModel.PhoneNumber ?? string.Empty;
             list.Add(phonenumber);
 
             SqlParameter wechat = new SqlParameter("@inWeChat", SqlDbType.NVarChar, 50);
-            wechat.Value = inModel.WeChat;
+            wechat.Value = inModel.WeChat ?? string.Empty;
             list.Add(wechat);
 
             SqlParameter qq = new SqlParameter("@inQQ", SqlDbType.NVarChar, 50);
-            qq.Value = inModel.QQ;
+            qq.Value = inModel.QQ ?? string.Empty;
             list.Add(qq);
 
             SqlParameter address = new SqlParameter("@inAddress", SqlDbType.NVarChar, 500);
-            address.Value = inModel.Address;
+            address.Value = inModel.Address ?? string.Empty;
             list.Add(address);
 
             SqlParameter enterpriseinfo = new SqlParameter("@inEnterpriseInfo", SqlDbType.NVarChar, -1);
-            enterpriseinfo.Value = inModel.EnterpriseInfo;
+            enterpriseinfo.Value = inModel.EnterpriseInfo ?? string.Empty;
             list.Add(enterpriseinfo);
 
             SqlParameter isadmin = new SqlParameter("@inIsAdmin", SqlDbType.Int, 32);

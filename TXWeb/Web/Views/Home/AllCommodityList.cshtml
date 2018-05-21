@@ -1,4 +1,67 @@
-﻿
+﻿@model Web.ViewModels.CommodityViewModel
+
+<script>
+    var page = '@Model.PageCode';
+    var total = '@Model.PageCount';
+
+    $(function () {
+        if (page != '') {
+            if (page <= 3) {
+                $('#pg_' + page).addClass('active');
+                for (var i = 1; i <= 5; i++) {
+                    $('#pg_' + i).children().html(i);
+                }
+            } else {
+                var index = parseInt(page) - 2;
+                for (var i = 1; i <= 5; i++) {
+                    if (index <= total) {
+                        $('#pg_3').addClass('active');
+                        $('#pg_' + i).children().html(index);
+                    } else {
+                        $('#pg_' + i).attr('hidden', 'hidden');
+                    }
+                    index++;
+                }
+            }
+        }
+
+        $("#ul1 li").click(function () {
+            //$(this).addClass("selected").siblings().removeClass("selected");
+            //$("#ul1 li a").removeClass("fontcolor");
+            //$(this).children("a").addClass("fontcolor");
+            //var value = $(this).children().html();
+            //if (value == '全部') {
+            //    value = '';
+            //}
+            var value = $(this).attr('id');
+            $('#cate').val(value);
+            $('#sform').submit();
+        })
+    })
+
+    function PageClick(code, state) {
+        if (state != '') {
+            if (state == 'Next') { code++; } else { code--; }
+            if (code > total) { return; }
+            if (code < 1) { return; }
+        } else {
+            code = $('#pg_' + code).children().html();
+        }
+
+        $('#page').val(code);
+        $('#sform').submit();
+    }
+
+    function Search() {
+        $('#page').val(1);
+        $('#sform').submit();
+    }
+
+    function UserInfo(uid) {
+        alert(uid);
+    }
+</script>
+
 <style>
     .input1 {
         width: 60px;
@@ -45,12 +108,10 @@
             <div class="div2"><span>分类A</span></div>
             <div class="div3">
                 <ul id="ul1">
-                    <li class="aa1"><a href="#">分类1</a></li>
-                    <li class="aa1"><a href="#">分类2</a></li>
-                    <li class="aa1"><a href="#">分类3</a></li>
-                    <li class="aa1"><a href="#">分类4</a></li>
-                    <li class="aa1"><a href="#">分类5</a></li>
-                    <li class="aa1"><a href="#">分类6</a></li>
+                    @foreach (var item in Model.CateList)
+                    {
+                        <li id="cat_@item.CategoryID" class="aa1"><a style="cursor:pointer;">@item.CategoryStr</a></li>
+                    }
                 </ul>
             </div>
         </div>
@@ -60,53 +121,57 @@
 <div class="row" style="margin-left:2px;margin-bottom: 15px;">
     <div class="col-lg-12" style="height: 41px;">
         <div class="div1" style="background-color: #f5f5f5;border: solid 1px #e8e8e8;">
-            <div style="height: 34px;padding-left: 20px;">
-                <h6 style="float: left;">价格区间：</h6>
-                <ul style="float: left;margin-left: -35px; ">
-                    <li style="float: left;width: 62px;"><input type="text" name="sprice" placeholder="¥" class="input1"></li>
-                    <li style="float: left;width: 10px;text-align: center;">-</li>
-                    <li style="float: left;width: 62px;"><input type="text" name="hprice" placeholder="¥" class="input1"></li>
-                </ul>
-                <div>
-                    <a href="#"><button class="bbutton">确定</button></a>
+            <form id="sform" action="/Home/AllCommodityList" method="post">
+                @Html.Hidden("page", Model.PageCode)
+                @Html.Hidden("cate", Model.CatID)
+                <div style="height: 34px;padding-left: 20px;">
+                    <h6 style="float: left;">价格区间：</h6>
+                    <ul style="float: left;margin-left: -35px; ">
+                        <li style="float: left;width: 62px;"><input type="text" name="sprice" id="sprice" placeholder="¥" class="input1" value="@Model.SPrice"></li>
+                        <li style="float: left;width: 10px;text-align: center;">-</li>
+                        <li style="float: left;width: 62px;"><input type="text" name="hprice" id="hprice" placeholder="¥" class="input1" value="@Model.HPrice"></li>
+                    </ul>
+                    @*<div>
+                            <button class="bbutton">确定</button>
+                        </div>*@
                 </div>
-            </div>
-            <div style="height: 34px;display: inline;">
-                <h6 style="float: left;margin-top:-22px;padding-left: 50px;">关键词搜索：</h6>
-                <ul style="float: left; margin-top:-32px;margin-left: -40px;">
-                    <li style="float: left;width: 150px;">
-                        <input type="text" name="theseach" class="input2">
-                    </li>
-                    <li style="margin-left: 152px;margin-top:-2px; ">
-                        <a href="#"><button class="bbutton">搜索</button></a>
-                    </li>
-                </ul>
-            </div>
+                <div style="height: 34px;display: inline;">
+                    <h6 style="float: left;margin-top:-22px;padding-left: 50px;">关键词搜索：</h6>
+                    <ul style="float: left; margin-top:-32px;margin-left: -40px;">
+                        <li style="float: left;width: 150px;">
+                            <input type="text" name="search" id="search" value="@Model.Search" class="input2">
+                        </li>
+                        <li style="margin-left: 152px;margin-top:-2px; ">
+                            <button onclick="Search()" class="bbutton">搜索</button>
+                        </li>
+                    </ul>
+                </div>
+            </form>
         </div>
     </div>
 </div>
 
 <div class="row">
     <div class="col-lg-12">
-        @for (int i = 0; i < 8; i++)
+        @foreach (var item in Model.CommodityList)
         {
             <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6">
                 <div class="thumbnail">
-                    <a href="Goodcontent.html">
+                    <a onclick="ComClick('')" style="cursor:pointer;">
                         <img src="~/Content/Images/good.jpg" alt="..." class="img-responsive">
                     </a>
                     <div class="caption">
-                        <a href="Goodcontent.html">
-                            <h4>华为P20 PRO</h4>
+                        <a onclick="ComClick('')" style="cursor:pointer;">
+                            <h4>@item.Title</h4>
                         </a>
                         <p style="color:red;">
-                            现货当天发 送399豪礼Huawei/华为 P20 pro全网通手机华为
+                            @item.Description
                         </p>
                         <div style="height: 46px;">
-                            <h>同学价:<h class="price">¥3788</h></h>
-                            <h style="display: block;">市场价:<h class="price" style="font-size: 15px;">¥3788</h></h>
-                            <a href="cminfo.html">
-                                <h1 style="font-size: 15px;padding-left: 75%;margin-top: -20px;">同学名</h1>
+                            <h>同学价:<h class="price">¥@item.TxPrice</h></h>
+                            <h style="display: block;">市场价:<h class="price">¥@item.Price</h></h>
+                            <a style="cursor:pointer;" onclick="UserInfo('@item.UserID')">
+                                <h1 style="font-size: 15px;padding-left: 75%;margin-top: -20px;">@item.UserName</h1>
                             </a>
                         </div>
                     </div>
@@ -118,23 +183,12 @@
 
 <div class="row" style="text-align: center;">
     <ul class="pagination">
-        <li class="disabled"><a href="#">&laquo;上一页</a></li>
-        <li class="active"><a href="#">1</a></li>
-        <li><a href="#">2</a></li>
-        <li><a href="#">3</a></li>
-        <li><a href="#">4</a></li>
-        <li><a href="#">5</a></li>
-        <li><a style="border-top:none;border-bottom: none;">...</a></li>
-        <li><a href="#">&raquo;下一页</a></li>
+        <li><a onclick="PageClick('@Model.PageCode', 'Previous')">&laquo;上一页</a></li>
+        @for (int i = 1; i < 6; i++)
+        {
+            if (i > Model.PageCount) { break; }
+            <li id="pg_@i"><a onclick="PageClick('@i','')"></a></li>
+        }
+        <li><a onclick="PageClick('@Model.PageCode', 'Next')">&raquo;下一页</a></li>
     </ul>
 </div>
-
-<script>
-    $(document).ready(function () {
-        $("#ul1 li").click(function () {
-            $(this).addClass("selected").siblings().removeClass("selected");
-            $("#ul1 li a").removeClass("fontcolor");
-            $(this).children("a").addClass("fontcolor");
-        })
-    })
-</script>
