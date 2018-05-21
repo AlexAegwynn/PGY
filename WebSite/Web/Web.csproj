@@ -312,6 +312,7 @@
     <Content Include="Scripts\WebSite\plugins\tables.min.js" />
     <Content Include="Scripts\WebSite\plugins\video.min.js" />
     <Content Include="Scripts\WebSite\prettify.js" />
+    <Content Include="Content\Images\rightlogo.jpg" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
