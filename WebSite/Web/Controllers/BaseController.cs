@@ -20,7 +20,8 @@ namespace Web.Controllers
             DomainName = filterContext.RequestContext.HttpContext.Request.Url.Host;
             State = filterContext.RequestContext.HttpContext.Request.Browser.IsMobileDevice;
 
-            string isLocal = DomainName == "localhost" ? "Development" : "Release";
+            //string isLocal = DomainName == "localhost" ? "Development" : "Release";
+            string isLocal = DomainName = "Release";
             Common.Keys.ConnectionString(isLocal);
 
             base.OnActionExecuting(filterContext);
@@ -35,7 +36,7 @@ namespace Web.Controllers
             {
                 if (ID == string.Empty) { GetWebSiteID(); }
 
-                return ID;
+                return ID = "5";
             }
         }
 

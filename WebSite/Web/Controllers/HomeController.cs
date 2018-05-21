@@ -315,7 +315,7 @@ namespace Web.Controllers
         /// <returns></returns>
         private static ArticleViewModel GetArticleList(int page = 1, int rows = 6)
         {
-            string url = string.Format("http://121.10.200.52:54321/GetArticleWeb.ashx?WID={0}&&pizetop={1}&&pizenum={2}", WebSiteID, page, rows);
+            string url = string.Format("http://121.10.200.52:54321/GetArticleWeb.ashx?WID={0}&&pizetop={1}&&pizenum={2}", 5, page, rows);
 
             var data = new WebClient().DownloadData(url);
             var jsonData = Encoding.UTF8.GetString(data);

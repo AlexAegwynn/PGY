@@ -38,7 +38,7 @@ namespace Web.Controllers
             ViewData["LoginUser"] = LoginUser;
             ViewBag.Module = "comoruser";
 
-            return View();
+            return View(list);
         }
 
         public ActionResult UserInfo()

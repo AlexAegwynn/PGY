@@ -226,30 +226,30 @@
     -webkit-transition-duration: 0.4s;
     transition-duration: 0.4s;
 	}
-	.icon-qq{
-	width: 22px;
+.icon-qq {
+    width: 22px;
     height: 22px;
     display: inline-block;
-    background-image: url(../pic/imgmap.png);
+    background-image: url('../Images/imgmap.png');
     vertical-align: bottom;
     background-position: -1% -1%;
-	}
-	.icon-tel{
-	width: 22px;
+}
+.icon-tel {
+    width: 22px;
     height: 22px;
     display: inline-block;
-    background-image: url(../pic/imgmap.png);
+    background-image: url('../Images/imgmap.png');
     vertical-align: bottom;
     background-position: 8% -1%;
-	}
-	.icon-email{
-	width: 22px;
+}
+.icon-email {
+    width: 22px;
     height: 22px;
     display: inline-block;
-    background-image: url(../pic/imgmap.png);
+    background-image: url('../Images/imgmap.png');
     vertical-align: bottom;
     background-position: 137% -1%;
-	}
+}
 	.white-bg{
 	background-color: white;
 	}
