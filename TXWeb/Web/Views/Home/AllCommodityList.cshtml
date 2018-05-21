@@ -58,7 +58,11 @@
     }
 
     function UserInfo(uid) {
-        alert(uid);
+        document.location.href = '/Home/UserPreview?inUserID=' + uid;
+    }
+
+    function AComClick(cid) {
+        document.location.href = '/Home/CommodityPreview?inCommodityID=' + cid;
     }
 </script>
 
@@ -157,11 +161,11 @@
         {
             <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6">
                 <div class="thumbnail">
-                    <a onclick="ComClick('')" style="cursor:pointer;">
+                    <a onclick="AComClick('@item.CommodityID')" style="cursor:pointer;">
                         <img src="~/Content/Images/good.jpg" alt="..." class="img-responsive">
                     </a>
                     <div class="caption">
-                        <a onclick="ComClick('')" style="cursor:pointer;">
+                        <a onclick="AComClick('@item.CommodityID')" style="cursor:pointer;">
                             <h4>@item.Title</h4>
                         </a>
                         <p style="color:red;">

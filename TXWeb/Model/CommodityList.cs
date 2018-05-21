@@ -21,7 +21,7 @@ namespace Model
         /// <summary>
         /// 分类
         /// </summary>
-        public string Category { get; set; } = string.Empty;
+        public int Category { get; set; } = 0;
 
         /// <summary>
         /// 价格
@@ -57,5 +57,10 @@ namespace Model
         /// 用户名【Tx_UserList】
         /// </summary>
         public string UserName { get; set; } = string.Empty;
+
+        /// <summary>
+        /// 班级【Tx_UserList】
+        /// </summary>
+        public string Class { get; set; } = string.Empty;
     }
 }

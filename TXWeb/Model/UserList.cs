@@ -67,5 +67,10 @@ namespace Model
         /// 是否管理员，0为普通用户，1为管理员，默认0
         /// </summary>
         public int IsAdmin { get; set; } = 0;
+
+        /// <summary>
+        /// 单位【Tx_CommodityList】
+        /// </summary>
+        public string Unit { get; set; } = string.Empty;
     }
 }

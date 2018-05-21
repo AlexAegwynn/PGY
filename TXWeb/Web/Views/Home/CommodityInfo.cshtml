@@ -1,25 +1,126 @@
 ﻿@model Web.ViewModels.CommodityInfoViewModel
 
+@{
+    var title = Model.IsEdit ? "编辑商品信息" : "添加商品";
+}
+
 <script>
+    var arr = ["JPG", "JPEG", "PNG", "GIF", "IMG"];
+
+    $(function () {
+        var pic = $('#CommodityInfo_ImgUrl');
+
+        if (pic.val() != '') {
+            pic.parent().removeClass('default_img');
+        }
+
+        Load();
+    })
+
+    function ClickUpLoad() {
+        $('#picfile').click();
+    }
+
+    function ClearImg() {
+        var img = $('#pic');
+        img.parent().addClass('default_img');
+        img.attr({ "src": "" });
+
+        $('#CommodityInfo_ImgUrl').val('');
+        var obj = document.getElementById('picfile');
+        obj.outerHTML = obj.outerHTML;
+
+        Load();
+    }
+
+    function Load() {
+        $('#picfile').change(function (e) {
+            var file = e.delegateTarget.files[0];
+            if (file == null) { return; }
+            var state = Verify(file);
+            if (state == false) { alert('文件名不合法'); return; }
+
+            var reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = function (ret) {
+                var picString = reader.result;
+                //ImgVerify(picString, 'logofile');
+                var img = $('#pic');
+                img.parent().removeClass('default_img');
+                img.attr({ "src": picString });
+            }
+        });
+    }
+
+    function Verify(file) {
+        var statu = false;
+
+        var index = file.name.lastIndexOf(".");
+        var ext = file.name.substr(index + 1);
+        ext = ext.toUpperCase();
+
+        for (var i = 0; i < arr.length; i++) {
+            if (ext == arr[i]) {
+                statu = true;
+            }
+        }
+        return statu;
+    }
+
     function CommodityClick() {
+        var formData = new FormData(document.getElementById('cominfo'));
+
         $.ajax({
             url: '/Home/SaveCommodity',
             type: 'post',
-            data: $('#cominfo').serialize(),
+            data: formData,
+            contentType: false,
+            processData: false,
             success: function (data) {
                 if (data.result) {
-                    alert('保存成功');
+                    document.location.href = '/Home/CommodityList';
                 } else {
                     alert('保存失败');
                 }
             }
         })
     }
+
+    function ShowClear() {
+        $('#clear').css('display', 'block');
+    }
+
+    function HideClear() {
+        $('#clear').css('display', 'none');
+    }
 </script>
+
+<style>
+    .default_img {
+        background-image: url('../../Content/Images/add.png');
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+
+    .imgdiv {
+        cursor: pointer;
+        width: 150px;
+        height: 150px;
+        margin: 5px;
+        position: relative;
+    }
+
+    .img {
+        width: auto;
+        height: auto;
+        max-width: 100%;
+        max-height: 100%;
+    }
+</style>
 
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header">添加商品</h1>
+        <h1 class="page-header">@title</h1>
     </div>
 </div>
 <div class="row">
@@ -40,11 +141,12 @@
                             </div>
                             <div class="form-group">
                                 <label>分类/Classification</label>
-                                <select name="category" class="form-control">
-                                    <option>分类1</option>
-                                    <option>分类2</option>
-                                    <option>分类3</option>
-                                </select>
+                                @Html.DropDownListFor(m => m.CommodityInfo.Category, ViewData["CatList"] as IEnumerable<SelectListItem>, new { @class = "form-control" })
+                                @*<select name="category" class="form-control">
+                                        <option>分类1</option>
+                                        <option>分类2</option>
+                                        <option>分类3</option>
+                                    </select>*@
                             </div>
                             <div class="form-group">
                                 <label>价格/Price</label>
@@ -62,11 +164,12 @@
                             </div>
                             <div class="form-group">
                                 <label>图片/Picture</label>
-                                <div style="width: 150px;height: 150px;background-color: black;margin:5px;">
-                                    <img src="~/Content/Images/add.png" style="width: 150px;height: 150px;">
+                                <div class="imgdiv default_img" onclick="ClickUpLoad()">
+                                    <img id="pic" src="@Model.CommodityInfo.ImgUrl" class="img">
+                                    @Html.HiddenFor(m => m.CommodityInfo.ImgUrl)
                                 </div>
-                                @Html.Hidden("ImgUrl")
-                                <input type="file">
+                                <div class="btn btn-danger" onclick="ClearImg()">清除图片</div>
+                                <input style="display:none;" id="picfile" name="picfile" type="file">
                             </div>
                             <div class="form-group">
                                 <label>内容/Content</label>
@@ -75,7 +178,7 @@
                             </div>
                         </form>
                         <button onclick="CommodityClick()" class="btn btn-info">提交</button>
-                        <button class="btn btn-info">返回</button>
+                        <button onclick="document.location.href = '/Home/CommodityList';" class="btn btn-info">返回</button>
                     </div>
                 </div>
             </div>

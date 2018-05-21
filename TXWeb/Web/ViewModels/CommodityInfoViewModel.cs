@@ -7,6 +7,8 @@ namespace Web.ViewModels
 {
     public class CommodityInfoViewModel
     {
+        public bool IsEdit { get; set; } = false;
+
         public Model.CommodityList CommodityInfo { get; set; } = new Model.CommodityList();
     }
 }

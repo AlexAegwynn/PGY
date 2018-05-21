@@ -275,6 +275,8 @@
     <Content Include="Views\Home\CommodityInfo.cshtml" />
     <Content Include="Views\Home\AllCommodityList.cshtml" />
     <Content Include="Views\Home\CommodityList.cshtml" />
+    <Content Include="Views\Home\CommodityPreview.cshtml" />
+    <Content Include="Views\Home\UserPreview.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
