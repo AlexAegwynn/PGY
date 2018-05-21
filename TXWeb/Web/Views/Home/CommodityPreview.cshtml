@@ -1,0 +1,55 @@
+﻿@model Web.ViewModels.CommodityInfoViewModel
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">商品信息</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                商品信息
+            </div>
+            <div class="panel-body">
+                <div class="row" style="padding:15px;">
+                    <div class="col-lg-6">
+                        <div style="">
+                            <img src="@Model.CommodityInfo.ImgUrl">
+                        </div>
+                    </div>
+                    <div class="col-lg-6 gcontent">
+                        <div>
+                            <h4>@Model.CommodityInfo.Title</h4>
+                        </div>
+                        <div class="pricecontent">
+                            <h style="float: left;padding-top: 10px;">价格:</h>
+                            <div style="float: left;margin-left: 10px;">
+                                <h5>同学价:<h class="price">¥@Model.CommodityInfo.Price</h></h5>
+                                <h5>市场价:<h class="price">¥@Model.CommodityInfo.TxPrice</h></h5>
+                            </div>
+                        </div>
+                        <div class="bcontent">
+                            <div>
+                                <h5 class="h5o">分类:<h class="h5i" style="padding-left: 10px;">@Model.CommodityInfo.Category</h></h5>
+                            </div>
+                            <div style="display: block;display: -webkit-box;">
+                                <h5 class="h5o">
+                                    同学名:<h class="h5i" style="padding-left: 10px;">@Model.CommodityInfo.UserName</h>
+                                </h5>
+                                <h5 class="h5o" style="margin-left: 5%;">班级:<h class="h5i" style="padding-left: 10px;">@Model.CommodityInfo.Class</h></h5>
+                            </div>
+                            <div>
+                                <h5 class="h5o">单位:<h class="h5i" style="padding-left: 10px;">@Model.CommodityInfo.Unit</h></h5>
+                            </div>
+                            <div>
+                                <h5 class="h5o">内容:</h5>
+                                <h style="color: black;">@Model.CommodityInfo.Description</h>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

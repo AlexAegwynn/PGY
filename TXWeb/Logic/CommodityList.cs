@@ -38,6 +38,16 @@ namespace Logic
         }
 
         /// <summary>
+        /// 根据商品ID获取图片路径
+        /// </summary>
+        /// <param name="inCommodityID"></param>
+        /// <returns></returns>
+        public static string GetImgUrl(int inCommodityID)
+        {
+            return Data.CommodityList.GetImgUrl(inCommodityID);
+        }
+
+        /// <summary>
         /// 创建商品
         /// </summary>
         /// <param name="inModel"></param>

@@ -19,7 +19,7 @@ namespace Data
             StringBuilder sql = new StringBuilder();
             sql.Append(" SELECT a.UserID, UserName, b.* FROM Tx_UserCommodityList a ");
             sql.Append(" LEFT JOIN Tx_CommodityList b ON a.CommodityID = b.CommodityID ");
-            sql.Append(" LEFT JOIN Tx_UserList c ON a.UserID = c.UserID ");
+            sql.Append(" LEFT JOIN Tx_UserList c ON a.UserID = c.UserID ORDER BY CommodityID DESC ");
 
             DataTable dt = SqlHelper.ExecuteDataTable(CommandType.Text, sql.ToString());
 
@@ -35,7 +35,7 @@ namespace Data
         {
             string sql = @" SELECT a.UserID, c.UserName, b.* FROM Tx_UserCommodityList a " +
                                   " LEFT JOIN Tx_CommodityList b ON a.CommodityID = b.CommodityID " +
-                                  " LEFT JOIN Tx_UserList c ON c.UserID = a.UserID WHERE a.UserID = @inUserID ";
+                                  " LEFT JOIN Tx_UserList c ON c.UserID = a.UserID WHERE a.UserID = @inUserID ORDER BY CommodityID DESC ";
 
             SqlParameter para = new SqlParameter("@inUserID", SqlDbType.Int, 32);
             para.Value = inUserID;
@@ -52,12 +52,15 @@ namespace Data
         /// <returns></returns>
         public static Model.CommodityList GetCommodity(int inCommodityID)
         {
-            string sql = @" SELECT * FROM Tx_CommodityList WHERE CommodityID = @inCommodityID ";
+            StringBuilder sql = new StringBuilder();
+            sql.Append(" SELECT c.UserID, UserName, Class, b.* FROM Tx_UserCommodityList a ");
+            sql.Append(" LEFT JOIN Tx_CommodityList b ON a.CommodityID = b.CommodityID ");
+            sql.Append(" LEFT JOIN Tx_UserList c ON a.UserID = c.UserID WHERE a.CommodityID = @inCommodityID ");
 
             SqlParameter para = new SqlParameter("@inCommodityID", SqlDbType.Int, 32);
             para.Value = inCommodityID;
 
-            DataTable dt = SqlHelper.ExecuteDataTable(CommandType.Text, sql, para);
+            DataTable dt = SqlHelper.ExecuteDataTable(CommandType.Text, sql.ToString(), para);
             Model.CommodityList model = null;
 
             if (dt.Rows.Count > 0)
@@ -66,12 +69,15 @@ namespace Data
                 {
                     CommodityID = Convert.ToInt32(dt.Rows[0]["CommodityID"]),
                     Title = dt.Rows[0]["Title"].ToString(),
-                    Category = dt.Rows[0]["Category"].ToString(),
+                    Category = Convert.ToInt32(dt.Rows[0]["Category"]),
                     Price = Convert.ToInt32(dt.Rows[0]["Price"]),
                     TxPrice = Convert.ToInt32(dt.Rows[0]["TxPrice"]),
                     Unit = dt.Rows[0]["Unit"].ToString(),
                     ImgUrl = dt.Rows[0]["ImgUrl"].ToString(),
-                    Description = dt.Rows[0]["Description"].ToString()
+                    Description = dt.Rows[0]["Description"].ToString(),
+                    UserID = Convert.ToInt32(dt.Rows[0]["UserID"]),
+                    UserName = dt.Rows[0]["UserName"].ToString(),
+                    Class = dt.Rows[0]["Class"].ToString()
                 };
                 model = item;
             }
@@ -79,6 +85,29 @@ namespace Data
             return model;
         }
 
+        /// <summary>
+        /// 根据商品ID获取图片路径
+        /// </summary>
+        /// <param name="inCommodityID"></param>
+        /// <returns></returns>
+        public static string GetImgUrl(int inCommodityID)
+        {
+            string sql = @" SELECT ImgUrl FROM Tx_CommodityList WHERE CommodityID = @inCommodityID ";
+
+            SqlParameter para = new SqlParameter("@inCommodityID", SqlDbType.Int, 32);
+            para.Value = inCommodityID;
+
+            DataTable dt = SqlHelper.ExecuteDataTable(CommandType.Text, sql, para);
+            string imgUrl = string.Empty;
+
+            if (dt.Rows.Count > 0)
+            {
+                imgUrl = dt.Rows[0]["ImgUrl"].ToString();
+            }
+
+            return imgUrl;
+        }
+        
         /// <summary>
         /// 更新商品
         /// </summary>
@@ -148,7 +177,7 @@ namespace Data
                 {
                     CommodityID = Convert.ToInt32(item["CommodityID"]),
                     Title = item["Title"].ToString(),
-                    Category = item["Category"].ToString(),
+                    Category = Convert.ToInt32(item["Category"]),
                     Price = Convert.ToInt32(item["Price"]),
                     TxPrice = Convert.ToInt32(item["TxPrice"]),
                     Unit = item["Unit"].ToString(),
@@ -184,7 +213,7 @@ namespace Data
             list.Add(title);
 
             SqlParameter category = new SqlParameter("@inCategory", SqlDbType.NVarChar, 50);
-            category.Value = inModel.Category ?? string.Empty;
+            category.Value = inModel.Category;
             list.Add(category);
 
             SqlParameter price = new SqlParameter("@inPrice", SqlDbType.Int, 32);

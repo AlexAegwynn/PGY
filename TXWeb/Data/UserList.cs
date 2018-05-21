@@ -41,16 +41,26 @@ namespace Data
         /// <returns></returns>
         public static Model.UserList GetUser(int inUserID)
         {
-            string sql = @" SELECT * FROM Tx_UserList WHERE UserID = @inUserID ";
+            StringBuilder sql = new StringBuilder();
+            sql.Append(" SELECT a.*, c.Unit FROM Tx_UserList a ");
+            sql.Append(" LEFT JOIN Tx_UserCommodityList b ON a.UserID = b.UserID ");
+            sql.Append(" LEFT JOIN Tx_CommodityList c ON c.CommodityID = b.CommodityID ");
+            sql.Append(" WHERE a.UserID = @inUserID ");
 
             SqlParameter para = new SqlParameter("@inUserID", SqlDbType.Int, 32);
             para.Value = inUserID;
 
-            DataTable dt = SqlHelper.ExecuteDataTable(CommandType.Text, sql, para);
+            DataTable dt = SqlHelper.ExecuteDataTable(CommandType.Text, sql.ToString(), para);
 
             List<Model.UserList> list = GetUserList(dt);
+            Model.UserList model = list.Count > 0 ? list[0] : null;
 
-            return list.Count > 0 ? list[0] : null;
+            if (model != null)
+            {
+                model.Unit = dt.Rows[0]["Unit"].ToString();
+            }
+
+            return model;
         }
 
         /// <summary>
