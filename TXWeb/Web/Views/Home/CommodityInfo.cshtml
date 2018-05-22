@@ -68,6 +68,15 @@
     }
 
     function CommodityClick() {
+
+        if (document.getElementById("CommodityInfo_Title").value == '') {
+            alert('标题不能为空!');
+            return false;
+            console.log('a');
+        }
+        //输入不为空
+       
+
         var formData = new FormData(document.getElementById('cominfo'));
 
         $.ajax({
@@ -177,7 +186,7 @@
                                 @*<textarea class="form-control" rows="4"></textarea>*@
                             </div>
                         </form>
-                        <button onclick="CommodityClick()" class="btn btn-info">提交</button>
+                        <button onclick="CommodityClick()" class="btn btn-info" id="oSubmit">提交</button>
                         <button onclick="document.location.href = '/Home/CommodityList';" class="btn btn-info">返回</button>
                     </div>
                 </div>
