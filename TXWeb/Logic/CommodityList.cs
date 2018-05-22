@@ -66,5 +66,16 @@ namespace Logic
         {
             return Data.CommodityList.UpdateCommodity(inModel);
         }
+
+        /// <summary>
+        /// 删除商品
+        /// </summary>
+        /// <param name="inCommodityID"></param>
+        /// <param name="inUserID"></param>
+        /// <returns></returns>
+        public static int DeleteCommodity(int inCommodityID, int inUserID)
+        {
+            return Data.CommodityList.DeleteCommodity(inCommodityID, inUserID);
+        }
     }
 }

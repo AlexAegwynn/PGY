@@ -345,5 +345,24 @@ namespace Web.Controllers
 
             return json;
         }
+
+        [HttpPost]
+        public JsonResult DeleteCommodity(int inCommodityID)
+        {
+            JsonResult json = new JsonResult();
+
+            int result = Logic.CommodityList.DeleteCommodity(inCommodityID, LoginUser.UserID);
+
+            if (result > 0)
+            {
+                json.Data = new { result = true };
+            }
+            else
+            {
+                json.Data = new { result = false, msg = "删除失败" };
+            }
+
+            return json;
+        }
     }
 }

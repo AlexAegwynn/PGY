@@ -107,7 +107,7 @@ namespace Data
 
             return imgUrl;
         }
-        
+
         /// <summary>
         /// 更新商品
         /// </summary>
@@ -158,6 +158,36 @@ namespace Data
             SqlParameter[] paras = GetParas(inModel);
 
             int result = SqlHelper.ExecuteNonQuery(CommandType.Text, sql.ToString(), paras);
+
+            return result;
+        }
+
+        /// <summary>
+        /// 删除商品
+        /// </summary>
+        /// <param name="inCommodityID"></param>
+        /// <param name="inUserID"></param>
+        /// <returns></returns>
+        public static int DeleteCommodity(int inCommodityID, int inUserID)
+        {
+            StringBuilder deleteTrigger = new StringBuilder();
+            deleteTrigger.Append(" IF( OBJECT_ID ('ComAutoDelete') IS NOT NULL ) ");
+            deleteTrigger.Append(" DROP TRIGGER ComAutoDelete ");
+            SqlHelper.ExecuteNonQueryVoid(deleteTrigger.ToString(), CommandType.Text, false);
+
+            StringBuilder createTrigger = new StringBuilder();
+            createTrigger.Append(" CREATE TRIGGER ComAutoDelete ");
+            createTrigger.Append(" ON Tx_CommodityList FOR DELETE AS ");
+            createTrigger.Append(" DELETE FROM Tx_UserCommodityList ");
+            createTrigger.Append(" WHERE UserID = " + inUserID + " AND CommodityID = " + inCommodityID);
+            SqlHelper.ExecuteNonQueryTrigger(createTrigger.ToString());
+
+            string sql = @" DELETE FROM Tx_CommodityList WHERE CommodityID = @inCommodityID ";
+
+            SqlParameter para = new SqlParameter("@inCommodityID", SqlDbType.Int, 32);
+            para.Value = inCommodityID;
+
+            int result = SqlHelper.ExecuteNonQuery(CommandType.Text, sql, para);
 
             return result;
         }

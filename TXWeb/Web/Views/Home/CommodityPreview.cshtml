@@ -1,5 +1,7 @@
 ﻿@model Web.ViewModels.CommodityInfoViewModel
-
+@{ 
+    var src = Model.CommodityInfo.ImgUrl == "" ? "../Content/Images/noimage.gif" : Model.CommodityInfo.ImgUrl;
+}
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header">商品信息</h1>
@@ -15,7 +17,7 @@
                 <div class="row" style="padding:15px;">
                     <div class="col-lg-6">
                         <div style="">
-                            <img src="@Model.CommodityInfo.ImgUrl" style="height:400px;width:400px;">
+                            <img src="@src" style="height:400px;width:400px;">
                         </div>
                     </div>
                     <div class="col-lg-6 gcontent">

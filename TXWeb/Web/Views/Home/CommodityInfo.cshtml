@@ -93,6 +93,23 @@
     function HideClear() {
         $('#clear').css('display', 'none');
     }
+
+    function DeleteComm(cid) {
+        $.ajax({
+            url: '/Home/DeleteCommodity',
+            type: 'post',
+            data: {
+                inCommodityID: cid
+            },
+            success: function (data) {
+                if (data.result) {
+                    document.location.href = '/Home/CommodityList';
+                } else {
+                    alert(data.msg);
+                }
+            }
+        })
+    }
 </script>
 
 <style>
@@ -179,6 +196,7 @@
                         </form>
                         <button onclick="CommodityClick()" class="btn btn-info">提交</button>
                         <button onclick="document.location.href = '/Home/CommodityList';" class="btn btn-info">返回</button>
+                        <button onclick="DeleteComm('@Model.CommodityInfo.CommodityID')" class="btn btn-info">删除商品</button>
                     </div>
                 </div>
             </div>
