@@ -57,6 +57,7 @@
                     <div>
                         <form id="userinfo" role="form">
                             @Html.Hidden("User.UserID", Model.User.UserID)
+                            @Html.HiddenFor(v => v.User.IsAdmin)
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label>姓名/Name</label>

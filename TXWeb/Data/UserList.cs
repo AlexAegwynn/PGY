@@ -131,11 +131,14 @@ namespace Data
         {
             string deleteTrigger = @" IF( OBJECT_ID ('AutoDelete') IS NOT NULL ) DROP TRIGGER AutoDelete ";
             SqlHelper.ExecuteNonQueryVoid(deleteTrigger, CommandType.Text, false);
-            
+
             StringBuilder createTrigger = new StringBuilder();
             createTrigger.Append(" CREATE TRIGGER AutoDelete ");
             createTrigger.Append(" ON Tx_UserList FOR DELETE AS ");
-            createTrigger.Append(" DELETE FROM Tx_UserCommodityList WHERE UserID = @inUserID ");
+            createTrigger.Append(" DECLARE @CommodityID INT ");
+            createTrigger.Append(" SELECT @CommodityID = CommodityID FROM Tx_UserCommodityList ");
+            createTrigger.Append(" DELETE FROM Tx_CommodityList WHERE CommodityID = @CommodityID ");
+            createTrigger.Append(" DELETE FROM Tx_UserCommodityList WHERE UserID = " + inUserID );
             SqlHelper.ExecuteNonQueryTrigger(createTrigger.ToString());
 
             string sql = @" DELETE FROM Tx_UserList WHERE UserID = @inUserID ";

@@ -112,7 +112,16 @@ namespace Web.Controllers
         {
             JsonResult json = new JsonResult();
 
+            int result = Logic.UserList.DeleteUser(inUserID);
 
+            if (result > 0)
+            {
+                json.Data = new { result = true };
+            }
+            else
+            {
+                json.Data = new { result = false, msg = "删除失败" };
+            }
 
             return json;
         }
@@ -235,7 +244,7 @@ namespace Web.Controllers
 
             return View(vModel);
         }
-        
+
         public ActionResult CommodityPreview(int inCommodityID)
         {
             if (LoginUser == null)

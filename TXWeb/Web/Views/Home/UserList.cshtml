@@ -5,7 +5,22 @@
     }
 
     function DeleteUser(uid) {
-
+        if (confirm('确认删除？')) {
+            $.ajax({
+                url: '/Home/DelectUser',
+                type: 'post',
+                data: {
+                    inUserID: uid
+                },
+                success: function (data) {
+                    if (data.result) {
+                        document.location.reload();
+                    } else {
+                        alert(data.msg);
+                    }
+                }
+            })
+        }
     }
 </script>
 
@@ -43,7 +58,10 @@
                     <td>
                         <div>
                             <button onclick="UpdateUser('@item.UserID')" class="btn btn-primary">编辑</button>
-                            <button onclick="DeleteUser('@item.UserID')" class="btn btn-primary">删除</button>
+                            @if (item.IsAdmin == 0)
+                            {
+                                <button onclick="DeleteUser('@item.UserID')" class="btn btn-primary">删除</button>
+                            }
                         </div>
                     </td>
                 </tr>
