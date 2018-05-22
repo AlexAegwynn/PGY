@@ -30,6 +30,13 @@
             }
         })
     }
+
+    $(function () {
+        $('.selector').on('froalaEditor.keypress', function (e, editor, keypressEvent) {
+            // Do something here.
+            alert();
+        });
+    })
 </script>
 
 <div class="row">
