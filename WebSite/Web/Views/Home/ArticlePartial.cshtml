@@ -1,4 +1,4 @@
-﻿@{ 
+﻿@{
     var aModel = Model as Web.ViewModels.ArticleViewModel;
 }
 <script>
@@ -47,6 +47,16 @@
     }
 </script>
 
+<style>
+    .decoration {
+        cursor: pointer;
+    }
+
+        .decoration:hover {
+            text-decoration: underline;
+        }
+</style>
+
 <div class="row articles" id="thearticle" style="padding:50px 0px 0px 50px;">
     <div class=" col-md-9" style="margin-bottom:30px;">
         <ul class="teaser-list module-group">
@@ -55,7 +65,7 @@
                     <h4>文章</h4>
                     @foreach (var item in aModel.Article)
                     {
-                        <p style="cursor:pointer;" onclick="window.open('/Home/ArticleInfo?inArticleID=@item.ArticleID&&page=@ViewBag.PageCode')">@item.Title</p>
+                        <p class="decoration" onclick="window.open('/Home/ArticleInfo?inArticleID=@item.ArticleID&&page=@ViewBag.PageCode')">@item.Title</p>
                     }
                     @*<a class="link-style" title="更多信息。" href="/Home/Article" target="_self">更多文章...</a>*@
                 </div>

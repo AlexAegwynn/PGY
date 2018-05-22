@@ -21,7 +21,8 @@ namespace Web.Controllers
             State = filterContext.RequestContext.HttpContext.Request.Browser.IsMobileDevice;
 
             //string isLocal = DomainName == "localhost" ? "Development" : "Release";
-            string isLocal = DomainName = "Release";
+            //string isLocal = DomainName = "Release";
+            string isLocal = DomainName = "Development";
             Common.Keys.ConnectionString(isLocal);
 
             base.OnActionExecuting(filterContext);
