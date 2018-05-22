@@ -16,7 +16,14 @@
 </style>
 
 <script>
-    function UserClick() {        
+    function UserClick() {
+        var value = $('#edit')[0].childNodes[1].innerHTML + '';
+        value = value.replace(/[<>&"']/g, function (c) {
+            return { '<': '&lt;', '>': '&gt;', '&': '&amp;', '"': '&quot;', "'": '&apos;' }[c];
+        });
+                
+        $('#User_EnterpriseInfo').val(value);
+
         $.ajax({
             url: '/Home/UpdateUser',
             type: 'post',
@@ -30,13 +37,6 @@
             }
         })
     }
-
-    $(function () {
-        $('.selector').on('froalaEditor.keypress', function (e, editor, keypressEvent) {
-            // Do something here.
-            alert();
-        });
-    })
 </script>
 
 <div class="row">
@@ -96,6 +96,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-11">
+                                @Html.Hidden("User.EnterpriseInfo")
                                 <div class="form-group">
                                     <label>企业信息/Enterprise information</label>
                                     <section id="editor">
@@ -132,5 +133,10 @@
 <script>
     $(function () {
         $('#edit').editable({ inlineMode: false, alwaysBlank: true })
+
+        var value = $('#User_EnterpriseInfo').val();
+        value = value.replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&amp;/g, "&").replace(/&quot;/g, '"').replace(/&apos;/g, "'");
+
+        $('#edit')[0].childNodes[1].innerHTML = value;
     });
 </script>

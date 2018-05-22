@@ -1,5 +1,12 @@
 ﻿@model Web.ViewModels.UserViewModel
 
+<script>
+    $(function () {
+        var value = $('#User_EnterpriseInfo').val();
+        value = value.replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&amp;/g, "&").replace(/&quot;/g, '"').replace(/&apos;/g, "'");
+        $('#upreview').html(value);
+    })
+</script>
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header">同学信息</h1>
@@ -49,7 +56,8 @@
                 <div class="panel-heading">
                     公司详情
                 </div>
-                <div class="panel-body">
+                @Html.HiddenFor(m => m.User.EnterpriseInfo)
+                <div id="upreview" class="panel-body">
                     <div style="margin: 0px 0px 16px; padding: 0px; color: rgb(51, 51, 51); font-family: Arial, &quot;Microsoft YaHei&quot;; font-size: 16px; text-align: center;">
                         <span style="font-size:24px;"><strong>这样羞羞哒的蒲公英年会还是头次见</strong></span>
                     </div>
