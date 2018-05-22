@@ -39,9 +39,14 @@ namespace Data
         /// </summary>
         /// <param name="inEmail"></param>
         /// <returns></returns>
-        public static int ExistUser(string inEmail)
+        public static int ExistUser(string inEmail, int inUserID)
         {
             string sql = @" SELECT Email FROM Tx_UserList WHERE Email = @inEmail ";
+
+            if (inUserID != 0)
+            {
+                sql += " AND UserID != " + inUserID;
+            }
 
             SqlParameter para = new SqlParameter("@inEmail", SqlDbType.NVarChar, 50);
             para.Value = inEmail;
@@ -154,7 +159,7 @@ namespace Data
             createTrigger.Append(" DECLARE @CommodityID INT ");
             createTrigger.Append(" SELECT @CommodityID = CommodityID FROM Tx_UserCommodityList ");
             createTrigger.Append(" DELETE FROM Tx_CommodityList WHERE CommodityID = @CommodityID ");
-            createTrigger.Append(" DELETE FROM Tx_UserCommodityList WHERE UserID = " + inUserID );
+            createTrigger.Append(" DELETE FROM Tx_UserCommodityList WHERE UserID = " + inUserID);
             SqlHelper.ExecuteNonQueryTrigger(createTrigger.ToString());
 
             string sql = @" DELETE FROM Tx_UserList WHERE UserID = @inUserID ";

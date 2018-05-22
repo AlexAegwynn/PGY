@@ -95,9 +95,9 @@ namespace Web.Controllers
         {
             JsonResult json = new JsonResult();
 
-            if (Logic.UserList.ExistUser(inModel.User.Email) > 0)
+            if (Logic.UserList.ExistUser(inModel.User.Email, inModel.User.UserID) > 0)
             {
-                json.Data = new { result = false, msg = "邮箱已存在" };
+                json.Data = new { result = false, msg = "邮箱已存在" }; return json;
             }
 
             if (Logic.UserList.UpdateUser(inModel.User) == 1)

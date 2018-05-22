@@ -24,9 +24,9 @@ namespace Logic
         /// </summary>
         /// <param name="inEmail"></param>
         /// <returns></returns>
-        public static int ExistUser(string inEmail)
+        public static int ExistUser(string inEmail, int inUserID = 0)
         {
-            return Data.UserList.ExistUser(inEmail);
+            return Data.UserList.ExistUser(inEmail, inUserID);
         }
 
         /// <summary>
