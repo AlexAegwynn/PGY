@@ -76,6 +76,11 @@ namespace Web.Controllers
                 json.Data = new { result = false, msg = "验证码不正确" }; return json;
             }
 
+            if (Logic.UserList.ExistUser(inModel.Email) > 0)
+            {
+                json.Data = new { result = false, msg = "邮箱已被注册" }; return json;
+            }
+
             Model.UserList model = new Model.UserList
             {
                 UserName = inModel.UserName,

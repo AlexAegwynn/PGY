@@ -35,6 +35,22 @@ namespace Data
         }
 
         /// <summary>
+        /// 判断邮箱是否已存在
+        /// </summary>
+        /// <param name="inEmail"></param>
+        /// <returns></returns>
+        public static int ExistUser(string inEmail)
+        {
+            string sql = @" SELECT Email FROM Tx_UserList WHERE Email = @inEmail ";
+
+            SqlParameter para = new SqlParameter("@inEmail", SqlDbType.NVarChar, 50);
+            para.Value = inEmail;
+
+            DataTable dt = SqlHelper.ExecuteDataTable(CommandType.Text, sql, para);
+            return dt.Rows.Count;
+        }
+
+        /// <summary>
         /// 根据用户ID获取用户
         /// </summary>
         /// <param name="inUserID"></param>

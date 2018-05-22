@@ -20,6 +20,16 @@ namespace Logic
         }
 
         /// <summary>
+        /// 判断邮箱是否已存在
+        /// </summary>
+        /// <param name="inEmail"></param>
+        /// <returns></returns>
+        public static int ExistUser(string inEmail)
+        {
+            return Data.UserList.ExistUser(inEmail);
+        }
+
+        /// <summary>
         /// 根据用户ID获取用户
         /// </summary>
         /// <param name="inUserID"></param>
