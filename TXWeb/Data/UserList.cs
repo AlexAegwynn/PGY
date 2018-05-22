@@ -91,7 +91,7 @@ namespace Data
             sql.Append(" Email, PhoneNumber, WeChat, ");
             sql.Append(" QQ, Address, EnterpriseInfo, IsAdmin ");
             sql.Append(" ) VALUES ( ");
-            sql.Append(" @inName, @inPassword, @inClass, @inSex, ");
+            sql.Append(" @inUserName, @inPassword, @inClass, @inSex, ");
             sql.Append(" @inEmail, @inPhoneNumber, @inWeChat, ");
             sql.Append(" @inQQ, @inAddress, @inEnterpriseInfo, @inIsAdmin ) ");
 
