@@ -129,6 +129,7 @@
 <script src="~/Scripts/Js/plugins/font_size.min.js"></script>
 <script src="~/Scripts/Js/plugins/block_styles.min.js"></script>
 <script src="~/Scripts/Js/plugins/video.min.js"></script>
+<script src="~/Scripts/Js/langs/zh_cn.js"></script>
 
 <script>
     $(function () {
@@ -139,4 +140,9 @@
 
         $('#edit')[0].childNodes[1].innerHTML = value;
     });
+    $('#edit').editable({
+        inlineMode: false,
+        language: "zh_cn", //设置为中文
+        alwaysBlank: true
+    })
 </script>
