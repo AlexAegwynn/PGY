@@ -72,8 +72,8 @@
             success: function (data) {
                 if (data.result) {
                     if (oRemember.checked) {
-                        document.cookie = "inEmail=" + $('#inEmail').val();
-                        document.cookie = "inPassword=" + $('#inPassword').val();
+                        document.cookie = "inEmail=" + $('#inEmail').val() +";path=/";
+                        document.cookie = "inPassword=" + $('#inPassword').val() + ";path=/";
                     } else {
                         delCookie('inEmail');
                         delCookie('inPassword');
