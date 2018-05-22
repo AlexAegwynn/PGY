@@ -2,6 +2,8 @@
 @{
     var m = Model.User.Sex == 0 ? "checked" : null;
     var w = Model.User.Sex == 1 ? "checked" : null;
+
+    var title = ViewBag.Module == "comoruser" ? "用户信息" : "基本信息";
 }
 
 <link href="~/Content/css/font-awesome.css" rel="stylesheet" />
@@ -21,7 +23,7 @@
         value = value.replace(/[<>&"']/g, function (c) {
             return { '<': '&lt;', '>': '&gt;', '&': '&amp;', '"': '&quot;', "'": '&apos;' }[c];
         });
-                
+
         $('#User_EnterpriseInfo').val(value);
 
         $.ajax({
@@ -41,7 +43,7 @@
 
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header">基本信息</h1>
+        <h1 class="page-header">@title</h1>
     </div>
 </div>
 <div class="row">
@@ -109,6 +111,10 @@
                         </form>
                         <div class="col-lg-6">
                             <button onclick="UserClick()" class="btn btn-info">提交</button>
+                            @if (ViewBag.Module == "comoruser")
+                            {
+                                <button onclick="document.location.href = '/Home/UserList';" class="btn btn-info">返回</button>
+                            }
                         </div>
                     </div>
                 </div>

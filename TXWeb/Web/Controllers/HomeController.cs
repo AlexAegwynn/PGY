@@ -73,6 +73,23 @@ namespace Web.Controllers
             return View(vModel);
         }
 
+        public ActionResult UpdateUser(int inUserID)
+        {
+            if (LoginUser == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+            ViewData["LoginUser"] = LoginUser;
+
+            ViewModels.UserViewModel vModel = new ViewModels.UserViewModel();
+            vModel.User = Logic.UserList.GetUser(inUserID);
+
+            ViewBag.Module = "comoruser";
+
+            return View("~/Views/Home/UserInfo.cshtml", vModel);
+        }
+
         [HttpPost]
         public JsonResult UpdateUser(ViewModels.UserViewModel inModel)
         {
@@ -86,6 +103,16 @@ namespace Web.Controllers
             {
                 json.Data = new { result = false, msg = "保存失败" };
             }
+
+            return json;
+        }
+
+        [HttpPost]
+        public JsonResult DelectUser(int inUserID)
+        {
+            JsonResult json = new JsonResult();
+
+
 
             return json;
         }
