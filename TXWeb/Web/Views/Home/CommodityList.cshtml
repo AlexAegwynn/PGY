@@ -63,13 +63,13 @@
             <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6">
                 <div class="thumbnail">
                     <a onclick="ComClick('@item.CommodityID')" style="cursor:pointer;">
-                        <img src="~/Content/Images/good.jpg" alt="..." class="img-responsive">
+                        <img src="~/Content/Images/noimage.gif" alt="..." class="img-responsive">
                     </a>
                     <div class="caption">
                         <a onclick="ComClick('@item.CommodityID')" style="cursor:pointer;">
                             <h4>@item.Title</h4>
                         </a>
-                        <p style="color:red;">
+                        <p style="color:red;overflow:hidden;height:38px;">
                             @item.Description
                         </p>
                         <div style="height: 46px;">
