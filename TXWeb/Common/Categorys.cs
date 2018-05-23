@@ -9,10 +9,8 @@ namespace Common
     public enum Categorys
     {
         全部 = 0,
-        分类1 = 1,
-        分类2 = 2,
-        分类3 = 3,
-        分类4 = 4,
-        分类5 = 5
+        商品类 = 1,
+        信息类 = 2,
+        服务类 = 3
     };
 }

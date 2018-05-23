@@ -14,6 +14,11 @@ namespace Model
         public int LogID { get; set; } = 0;
 
         /// <summary>
+        /// 用户ID
+        /// </summary>
+        public int UserID { get; set; } = 0;
+
+        /// <summary>
         /// 用户名
         /// </summary>
         public string UserName { get; set; } = string.Empty;

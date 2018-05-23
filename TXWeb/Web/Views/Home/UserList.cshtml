@@ -48,10 +48,11 @@
         <tbody>
             @foreach (var item in Model as List<Model.UserList>)
             {
+                var sex = item.Sex == 0 ? "男" : "女";
                 <tr>
                     <td><span>@item.UserName</span></td>
                     <td><span>@item.Class</span></td>
-                    <td><span>@item.Sex</span></td>
+                    <td><span>@sex</span></td>
                     <td><span>@item.Email</span></td>
                     <td><span>@item.PhoneNumber</span></td>
                     <td><span>@item.QQ</span></td>

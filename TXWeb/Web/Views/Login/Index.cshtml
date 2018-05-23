@@ -12,6 +12,19 @@
     <title>登陆</title>
     <link href="~/Content/css/login.css" rel="stylesheet" />
     <script>
+        var module = '@ViewBag.Module';
+        $(function () {
+            if (module == 'Register') {
+                $('#login').removeClass('active');
+                $('#register').addClass('active');
+                $('#activediv').css('left', '4em');
+            } else {
+                $('#login').addClass('active');
+                $('#register').removeClass('active');
+                $('#activediv').css('left', '0');
+            }
+        })
+
         function NavClick(state) {
             var url = '';
             if (state == 'login') {
