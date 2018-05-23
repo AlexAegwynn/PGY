@@ -18,10 +18,10 @@
         if (confirmpwd == '') {
             alert('重复密码不能为空');
         }
-        //var phone = $('#phonenumber').val();
-        //if (phone == '') {
-        //    alert('手机不能为空'); return;
-        //}
+        var phone = $('#phonenumber').val();
+        if (phone == '') {
+            alert('手机不能为空'); return;
+        }
         var verificationCode = $('#verificationCode').val();
         if (verificationCode == '') {
             alert('验证码不能为空'); return;
@@ -48,13 +48,28 @@
             alert('请输入手机号码'); return;
         }
 
-        var reg = /^1[3|4|5|8][0-9]\d{4,8}$/;
-        if (!reg.test(number)) {
-            alert('请输入正确的手机号码'); return;
-        }
+        var timer = null;
+        clearInterval(timer);
+        var time = 60;
+        var that = document.getElementById("getcode");
+        timer = setInterval(function () {
+            console.log(time);
+            if (time <= 0) {
+                clearInterval(timer);
+                that.innerText = "";
+                that.innerText = "点击重新发送";
+                that.disabled = false;
+            } else {
+                that.disabled = true;
+                that.innerText = "";
+                that.innerText = "剩余" + (time) + "秒";
+                time--;
+            }
+        }, 1000);
+        //短信倒计时
 
         $.ajax({
-            url: '/Login/VerifyPhone',
+            url: '/Home/VerifyPhone',
             type: 'post',
             data: {
                 inPhoneNumber: number
@@ -88,7 +103,7 @@
             <div class="group-ipt tel">
                 <input type="tel" name="phoneNumber" id="phoneNumber" class="ipt" placeholder="手机号码" style="width: 70%;" required>
                 <div style="float: right;line-height: 43px;margin-right: 5px;">
-                    <button type="button" onclick="VerifyPhone()" class="login-btn register-btn button2" id="getcode">发送验证码</button>
+                    <button onclick="VerifyPhone()" class="login-btn register-btn button2" id="getcode">发送验证码</button>
                 </div>
             </div>
             <div class="group-ipt code">
