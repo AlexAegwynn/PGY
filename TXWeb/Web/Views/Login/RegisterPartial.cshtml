@@ -1,5 +1,6 @@
 ﻿
 <script>
+    //提交注册表单
     function RegisterClick() {
         var email = $('#email').val();
         if (email == '') {
@@ -39,6 +40,29 @@
             }
         })
     }
+
+    //发送验证码
+    function VerifyPhone() {
+        var number = $('#phoneNumber').val();
+        if (number == '') {
+            alert('请输入手机号码'); return;
+        }
+
+        $.ajax({
+            url: '/Home/VerifyPhone',
+            type: 'post',
+            data: {
+                inPhoneNumber: number
+            },
+            success: function (data) {
+                if (data.result) {
+                    alert('验证码发送成功');
+                } else {
+                    alert(data.msg);
+                }
+            }
+        })
+    }
 </script>
 
 <div class="login form">
@@ -59,7 +83,7 @@
             <div class="group-ipt tel">
                 <input type="tel" name="phoneNumber" id="phoneNumber" class="ipt" placeholder="手机号码" style="width: 70%;" required>
                 <div style="float: right;line-height: 43px;margin-right: 5px;">
-                    <button type="submit" class="login-btn register-btn button2" id="getcode">发送验证码</button>
+                    <button onclick="VerifyPhone()" class="login-btn register-btn button2" id="getcode">发送验证码</button>
                 </div>
             </div>
             <div class="group-ipt code">

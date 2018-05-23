@@ -75,7 +75,7 @@
             console.log('a');
         }
         //输入不为空
-       
+
 
         var formData = new FormData(document.getElementById('cominfo'));
 
@@ -104,20 +104,22 @@
     }
 
     function DeleteComm(cid) {
-        $.ajax({
-            url: '/Home/DeleteCommodity',
-            type: 'post',
-            data: {
-                inCommodityID: cid
-            },
-            success: function (data) {
-                if (data.result) {
-                    document.location.href = '/Home/CommodityList';
-                } else {
-                    alert(data.msg);
+        if (confirm('确认删除？')) {
+            $.ajax({
+                url: '/Home/DeleteCommodity',
+                type: 'post',
+                data: {
+                    inCommodityID: cid
+                },
+                success: function (data) {
+                    if (data.result) {
+                        document.location.href = '/Home/CommodityList';
+                    } else {
+                        alert(data.msg);
+                    }
                 }
-            }
-        })
+            })
+        }
     }
 </script>
 

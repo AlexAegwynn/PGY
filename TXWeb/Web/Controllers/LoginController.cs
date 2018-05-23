@@ -8,7 +8,7 @@ namespace Web.Controllers
 {
     public class LoginController : BaseController
     {
-        private static string VerificationCode = "123";
+        private static string VerificationCode = string.Empty;
 
         public ActionResult Index()
         {
@@ -81,6 +81,9 @@ namespace Web.Controllers
                 json.Data = new { result = false, msg = "邮箱已被注册" }; return json;
             }
 
+
+
+
             Model.UserList model = new Model.UserList
             {
                 UserName = inModel.UserName,
@@ -110,6 +113,18 @@ namespace Web.Controllers
             {
                 json.Data = new { result = false, msg = "注册失败" };
             }
+
+            return json;
+        }
+
+        [HttpPost]
+        public JsonResult VerifyPhone(string inPhoneNumber)
+        {
+            JsonResult json = new JsonResult();
+
+            VerificationCode = "123";
+
+            json.Data = new { result = true };
 
             return json;
         }
