@@ -48,6 +48,11 @@
             alert('请输入手机号码'); return;
         }
 
+        var reg = /^1[3|4|5|8][0-9]\d{4,8}$/;
+        if (!reg.test(number)) {
+            alert('请输入正确的手机号码'); return;
+        }
+
         var timer = null;
         clearInterval(timer);
         var time = 60;
@@ -69,7 +74,7 @@
         //短信倒计时
 
         $.ajax({
-            url: '/Home/VerifyPhone',
+            url: '/Login/VerifyPhone',
             type: 'post',
             data: {
                 inPhoneNumber: number
@@ -103,7 +108,7 @@
             <div class="group-ipt tel">
                 <input type="tel" name="phoneNumber" id="phoneNumber" class="ipt" placeholder="手机号码" style="width: 70%;" required>
                 <div style="float: right;line-height: 43px;margin-right: 5px;">
-                    <button onclick="VerifyPhone()" class="login-btn register-btn button2" id="getcode">发送验证码</button>
+                    <button type="button" onclick="VerifyPhone()" class="login-btn register-btn button2" id="getcode">发送验证码</button>
                 </div>
             </div>
             <div class="group-ipt code">
