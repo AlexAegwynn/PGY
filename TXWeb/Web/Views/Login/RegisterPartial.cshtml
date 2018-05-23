@@ -48,6 +48,26 @@
             alert('请输入手机号码'); return;
         }
 
+        var timer = null;
+        clearInterval(timer);
+        var time = 60;
+        var that = document.getElementById("getcode");
+        timer = setInterval(function () {
+            console.log(time);
+            if (time <= 0) {
+                clearInterval(timer);
+                that.innerText = "";
+                that.innerText = "点击重新发送";
+                that.disabled = false;
+            } else {
+                that.disabled = true;
+                that.innerText = "";
+                that.innerText = "剩余" + (time) + "秒";
+                time--;
+            }
+        }, 1000);
+        //短信倒计时
+
         $.ajax({
             url: '/Home/VerifyPhone',
             type: 'post',
