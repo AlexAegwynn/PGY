@@ -3,6 +3,7 @@
 <script>
     var page = '@Model.PageCode';
     var total = '@Model.PageCount';
+    var catid = '#@Model.CatID'
 
     $(function () {
         if (page != '') {
@@ -38,6 +39,8 @@
             $('#page').val('');
             $('#sform').submit();
         })
+
+        $(catid).addClass('chose');
     })
 
     function PageClick(code, state) {
