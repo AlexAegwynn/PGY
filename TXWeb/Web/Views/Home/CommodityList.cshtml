@@ -68,7 +68,7 @@
         @foreach (var item in Model.CommodityList)
         {
             var src = item.ImgUrl == "" ? "../Content/Images/noimage.gif" : item.ImgUrl;
-            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6">
+            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
                 <div class="thumbnail">
                     <a onclick="ComClick('@item.CommodityID')" style="cursor:pointer;">
                         <img src="@src" alt="..." class="img-responsive">

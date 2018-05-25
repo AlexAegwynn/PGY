@@ -151,6 +151,15 @@
 	.div3 a{
 		color: black;
 	}
+    .div4 {
+        height: 34px;
+        padding-left: 20px;
+    }
+    .h61 {
+        float: left;
+        margin-top: -22px;
+        padding-left: 50px;
+    }
 	.price{
 		font-size: 18px;
 		color: #f40;
@@ -283,3 +292,27 @@
     	border-left: 1px solid #e7e7e7;
 	}
 	}
+
+    @media (max-width: 991px){
+        .navbar-brand{
+            float:inherit;
+        }
+        .navbar-top-links{
+            text-align:center;
+        }
+        .div1{
+            line-height:60px;
+        }
+        .div2{
+            width:20%;
+        }
+        .div3{
+            width:80%;
+        }
+        .div4{
+            height:70px;
+        }
+        .h61{
+            padding-left:20px;
+        }
+    }
