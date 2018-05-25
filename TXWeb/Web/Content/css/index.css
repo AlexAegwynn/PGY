@@ -323,4 +323,7 @@
             height: 100%;
             width: 100%;
         }
+        #cpreview img{
+            width:100%;
+        }
     }
