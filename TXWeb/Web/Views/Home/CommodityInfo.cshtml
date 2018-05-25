@@ -68,6 +68,9 @@
     }
 
     function CommodityClick() {
+        //var price = document.getElementById('CommodityInfo_Price');
+        //var txPrice = document.getElementById('CommodityInfo_TxPrice');
+        
 
         if (document.getElementById("CommodityInfo_Title").value == '') {
             alert('标题不能为空!');
@@ -179,10 +182,10 @@
                             <div class="form-group">
                                 <label>价格/Price</label>
                                 市场价:
-                                @Html.TextBoxFor(m => m.CommodityInfo.Price, new { @class = "form-control", @style = "width: 20%;display: inline-block;" })
+                                @Html.TextBoxFor(m => m.CommodityInfo.Price, new { @class = "form-control", @style = "width: 20%;display: inline-block;", @onkeyup = @"value=value.replace(/[^\d^\.]+/g,'')" })
                                 @*<input name="price" class="form-control" style="width: 20%;display: inline-block;">*@
                                 同学价:
-                                @Html.TextBoxFor(m => m.CommodityInfo.TxPrice, new { @class = "form-control", @style = "width: 20%;display: inline-block;" })
+                                @Html.TextBoxFor(m => m.CommodityInfo.TxPrice, new { @class = "form-control", @style = "width: 20%;display: inline-block;", @onkeyup = @"value=value.replace(/[^\d^\.]+/g,'')" })
                                 @*<input name="txprice" class="form-control" style="width: 20%;display: inline-block;">*@
                             </div>
                             <div class="form-group">
@@ -200,7 +203,7 @@
                                 <input style="display:none;" id="picfile" name="picfile" type="file">
                             </div>
                             <div class="form-group">
-                                <label>内容/Content</label>
+                                <label>商品描述/Description</label>
                                 @Html.TextAreaFor(m => m.CommodityInfo.Description, new { @class = "form-control", @rows = "4" })
                                 @*<textarea class="form-control" rows="4"></textarea>*@
                             </div>

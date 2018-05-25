@@ -70,8 +70,8 @@ namespace Data
                     CommodityID = Convert.ToInt32(dt.Rows[0]["CommodityID"]),
                     Title = dt.Rows[0]["Title"].ToString(),
                     Category = Convert.ToInt32(dt.Rows[0]["Category"]),
-                    Price = Convert.ToInt32(dt.Rows[0]["Price"]),
-                    TxPrice = Convert.ToInt32(dt.Rows[0]["TxPrice"]),
+                    Price = Convert.ToDecimal(dt.Rows[0]["Price"]),
+                    TxPrice = Convert.ToDecimal(dt.Rows[0]["TxPrice"]),
                     Unit = dt.Rows[0]["Unit"].ToString(),
                     ImgUrl = dt.Rows[0]["ImgUrl"].ToString(),
                     Description = dt.Rows[0]["Description"].ToString(),
@@ -119,7 +119,7 @@ namespace Data
             sql.Append(" UPDATE Tx_CommodityList SET ");
             sql.Append(" Title = @inTitle, Category = @inCategory, Price = @inPrice, ");
             sql.Append(" TxPrice = @inTxPrice, Unit = @inUnit, ImgUrl = @inImgUrl, ");
-            sql.Append(" Description = @inDescription WHERE CommodityID = @inCommodityID ");
+            sql.Append(" Description = @inDescription, ComContent = @inComContent WHERE CommodityID = @inCommodityID ");
 
             SqlParameter[] paras = GetParas(inModel);
 
@@ -151,9 +151,9 @@ namespace Data
 
             StringBuilder sql = new StringBuilder();
             sql.Append(" INSERT INTO Tx_CommodityList ( ");
-            sql.Append(" Title, Category, Price, TxPrice, Unit, ImgUrl, Description ");
+            sql.Append(" Title, Category, Price, TxPrice, Unit, ImgUrl, Description, ComContent ");
             sql.Append(" ) VALUES ( ");
-            sql.Append(" @inTitle, @inCategory, @inPrice, @inTxPrice, @inUnit, @inImgUrl, @inDescription ) ");
+            sql.Append(" @inTitle, @inCategory, @inPrice, @inTxPrice, @inUnit, @inImgUrl, @inDescription, @inComContent ) ");
 
             SqlParameter[] paras = GetParas(inModel);
 
@@ -208,11 +208,12 @@ namespace Data
                     CommodityID = Convert.ToInt32(item["CommodityID"]),
                     Title = item["Title"].ToString(),
                     Category = Convert.ToInt32(item["Category"]),
-                    Price = Convert.ToInt32(item["Price"]),
-                    TxPrice = Convert.ToInt32(item["TxPrice"]),
+                    Price = Convert.ToDecimal(item["Price"]),
+                    TxPrice = Convert.ToDecimal(item["TxPrice"]),
                     Unit = item["Unit"].ToString(),
                     ImgUrl = item["ImgUrl"].ToString(),
                     Description = item["Description"].ToString(),
+                    ComContent = item["ComContent"].ToString(),
                     UserID = Convert.ToInt32(item["UserID"]),
                     UserName = item["UserName"].ToString()
                 };
@@ -246,11 +247,11 @@ namespace Data
             category.Value = inModel.Category;
             list.Add(category);
 
-            SqlParameter price = new SqlParameter("@inPrice", SqlDbType.Int, 32);
+            SqlParameter price = new SqlParameter("@inPrice", SqlDbType.Decimal, 32);
             price.Value = inModel.Price;
             list.Add(price);
 
-            SqlParameter txprice = new SqlParameter("@inTxPrice", SqlDbType.Int, 32);
+            SqlParameter txprice = new SqlParameter("@inTxPrice", SqlDbType.Decimal, 32);
             txprice.Value = inModel.TxPrice;
             list.Add(txprice);
 
@@ -265,6 +266,10 @@ namespace Data
             SqlParameter description = new SqlParameter("@inDescription", SqlDbType.NVarChar, 500);
             description.Value = inModel.Description ?? string.Empty;
             list.Add(description);
+
+            SqlParameter comContent = new SqlParameter("@inComContent", SqlDbType.NVarChar, -1);
+            comContent.Value = inModel.ComContent ?? string.Empty;
+            list.Add(comContent);
 
             SqlParameter userid = new SqlParameter("@inUserID", SqlDbType.Int, 32);
             userid.Value = inModel.UserID;

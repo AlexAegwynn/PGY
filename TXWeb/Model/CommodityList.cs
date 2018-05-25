@@ -26,12 +26,12 @@ namespace Model
         /// <summary>
         /// 价格
         /// </summary>
-        public int Price { get; set; } = 0;
+        public decimal Price { get; set; } = 0;
 
         /// <summary>
         /// 同学价
         /// </summary>
-        public int TxPrice { get; set; } = 0;
+        public decimal TxPrice { get; set; } = 0;
 
         /// <summary>
         /// 单位
@@ -48,6 +48,11 @@ namespace Model
         /// </summary>
         public string Description { get; set; } = string.Empty;
         
+        /// <summary>
+        /// 商品内容
+        /// </summary>
+        public string ComContent { get; set; } = string.Empty;
+
         /// <summary>
         /// 用户ID【Tx_UserList】
         /// </summary>
