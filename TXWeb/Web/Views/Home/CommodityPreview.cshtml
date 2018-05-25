@@ -1,7 +1,15 @@
 ﻿@model Web.ViewModels.CommodityInfoViewModel
-@{ 
+@{
     var src = Model.CommodityInfo.ImgUrl == "" ? "../Content/Images/noimage.gif" : Model.CommodityInfo.ImgUrl;
 }
+<script>
+    $(function () {
+        var value = $('#CommodityInfo_ComContent').val();
+        value = value.replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&amp;/g, "&").replace(/&quot;/g, '"').replace(/&apos;/g, "'");
+        $('#cpreview').html(value);
+    })
+</script>
+
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header">商品信息</h1>
@@ -57,7 +65,8 @@
             <div class="panel-heading">
                 宝贝详情
             </div>
-            <div class="panel-body">
+            @Html.HiddenFor(m => m.CommodityInfo.ComContent)
+            <div id="cpreview" class="panel-body">
                 内容内容内容内容内容内容内容内容内容内容内容内容内容
             </div>
         </div>

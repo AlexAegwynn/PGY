@@ -88,6 +88,12 @@
         }
         //输入不为空
 
+        var value = $('#edit')[0].childNodes[1].innerHTML + '';
+        value = value.replace(/[<>&"']/g, function (c) {
+            return { '<': '&lt;', '>': '&gt;', '&': '&amp;', '"': '&quot;', "'": '&apos;' }[c];
+        });
+
+        $('#CommodityInfo_ComContent').val(value);
 
         var formData = new FormData(document.getElementById('cominfo'));
 
@@ -183,10 +189,10 @@
                                 <label>分类/Classification</label>
                                 @Html.DropDownListFor(m => m.CommodityInfo.Category, ViewData["CatList"] as IEnumerable<SelectListItem>, new { @class = "form-control" })
                                 @*<select name="category" class="form-control">
-                                        <option>分类1</option>
-                                        <option>分类2</option>
-                                        <option>分类3</option>
-                                    </select>*@
+                <option>分类1</option>
+                <option>分类2</option>
+                <option>分类3</option>
+            </select>*@
                             </div>
                             <div class="form-group">
                                 <label>价格/Price</label>
@@ -212,10 +218,11 @@
                                 <input style="display:none;" id="picfile" name="picfile" type="file">
                             </div>
                             <div class="form-group">
-                                <label>描述/describe</label>
+                                <label>描述/Describe</label>
                                 @Html.TextAreaFor(m => m.CommodityInfo.Description, new { @class = "form-control", @rows = "4" })
                                 @*<textarea class="form-control" rows="4"></textarea>*@
                             </div>
+                            @Html.Hidden("CommodityInfo.ComContent")
                         </form>
                         <div class="col-lg-11">
                             <div class="form-group">
@@ -228,9 +235,9 @@
                             </div>
                         </div>
                         <div class="col-lg-12">
-                        <button onclick="CommodityClick()" class="btn btn-info" id="oSubmit">提交</button>
-                        <button onclick="document.location.href = '/Home/CommodityList';" class="btn btn-info">返回</button>
-                        <button onclick="DeleteComm('@Model.CommodityInfo.CommodityID')" class="btn btn-info">删除商品</button>
+                            <button onclick="CommodityClick()" class="btn btn-info" id="oSubmit">提交</button>
+                            <button onclick="document.location.href = '/Home/CommodityList';" class="btn btn-info">返回</button>
+                            <button onclick="DeleteComm('@Model.CommodityInfo.CommodityID')" class="btn btn-info">删除商品</button>
                         </div>
                     </div>
                 </div>
@@ -254,6 +261,13 @@
 <script src="~/Scripts/Js/langs/zh_cn.js"></script>
 
 <script>
+    $(function () {
+        var value = $('#CommodityInfo_ComContent').val();
+        value = value.replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&amp;/g, "&").replace(/&quot;/g, '"').replace(/&apos;/g, "'");
+
+        $('#edit')[0].childNodes[1].innerHTML = value;
+    })
+
     $('#edit').editable({
         inlineMode: false,
         language: "zh_cn", //设置为中文

@@ -75,6 +75,7 @@ namespace Data
                     Unit = dt.Rows[0]["Unit"].ToString(),
                     ImgUrl = dt.Rows[0]["ImgUrl"].ToString(),
                     Description = dt.Rows[0]["Description"].ToString(),
+                    ComContent = dt.Rows[0]["ComContent"].ToString(),
                     UserID = Convert.ToInt32(dt.Rows[0]["UserID"]),
                     UserName = dt.Rows[0]["UserName"].ToString(),
                     Class = dt.Rows[0]["Class"].ToString()
