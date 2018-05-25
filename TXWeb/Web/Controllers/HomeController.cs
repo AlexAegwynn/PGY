@@ -58,11 +58,16 @@ namespace Web.Controllers
             return View(vModel);
         }
 
-        public ActionResult UserPreview(int inUserID)
+        public ActionResult UserPreview(int inUserID = 0)
         {
             if (LoginUser == null)
             {
                 return RedirectToAction("Index", "Login");
+            }
+
+            if (inUserID == 0)
+            {
+                return RedirectToAction("AllCommodityList");
             }
 
             ViewData["LoginUser"] = LoginUser;
@@ -73,11 +78,16 @@ namespace Web.Controllers
             return View(vModel);
         }
 
-        public ActionResult UpdateUser(int inUserID)
+        public ActionResult UpdateUser(int inUserID = 0)
         {
             if (LoginUser == null)
             {
                 return RedirectToAction("Index", "Login");
+            }
+
+            if (inUserID == 0)
+            {
+                return RedirectToAction("UserList");
             }
 
             ViewData["LoginUser"] = LoginUser;
@@ -113,19 +123,22 @@ namespace Web.Controllers
         }
 
         [HttpPost]
-        public JsonResult DelectUser(int inUserID)
+        public JsonResult DelectUser(int inUserID = 0)
         {
             JsonResult json = new JsonResult();
 
-            int result = Logic.UserList.DeleteUser(inUserID);
+            if (inUserID != 0)
+            {
+                int result = Logic.UserList.DeleteUser(inUserID);
 
-            if (result > 0)
-            {
-                json.Data = new { result = true };
-            }
-            else
-            {
-                json.Data = new { result = false, msg = "删除失败" };
+                if (result > 0)
+                {
+                    json.Data = new { result = true };
+                }
+                else
+                {
+                    json.Data = new { result = false, msg = "删除失败" };
+                }
             }
 
             return json;
@@ -250,11 +263,16 @@ namespace Web.Controllers
             return View(vModel);
         }
 
-        public ActionResult CommodityPreview(int inCommodityID)
+        public ActionResult CommodityPreview(int inCommodityID = 0)
         {
             if (LoginUser == null)
             {
                 return RedirectToAction("Index", "Login");
+            }
+
+            if (inCommodityID == 0)
+            {
+                return RedirectToAction("AllCommodityList");
             }
 
             ViewData["LoginUser"] = LoginUser;
@@ -347,19 +365,22 @@ namespace Web.Controllers
         }
 
         [HttpPost]
-        public JsonResult DeleteCommodity(int inCommodityID)
+        public JsonResult DeleteCommodity(int inCommodityID = 0)
         {
             JsonResult json = new JsonResult();
 
-            int result = Logic.CommodityList.DeleteCommodity(inCommodityID, LoginUser.UserID);
+            if (inCommodityID != 0)
+            {
+                int result = Logic.CommodityList.DeleteCommodity(inCommodityID, LoginUser.UserID);
 
-            if (result > 0)
-            {
-                json.Data = new { result = true };
-            }
-            else
-            {
-                json.Data = new { result = false, msg = "删除失败" };
+                if (result > 0)
+                {
+                    json.Data = new { result = true };
+                }
+                else
+                {
+                    json.Data = new { result = false, msg = "删除失败" };
+                }
             }
 
             return json;
