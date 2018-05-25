@@ -326,4 +326,12 @@
         #cpreview img{
             width:100%;
         }
+        .gooddiv{
+            padding-left:0;
+            padding-right:0;
+        }
+        .img-responsive{
+            width:100%!important;
+            height:100%!important;
+        }
     }

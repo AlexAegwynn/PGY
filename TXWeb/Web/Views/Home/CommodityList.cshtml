@@ -49,8 +49,8 @@
 
 <style>
     .img-responsive {
-        width: 218px!important;
-        height: 218px!important;
+        width: 218px;
+        height: 218px;
     }
 </style>
 
@@ -64,7 +64,7 @@
 </div>
 
 <div class="row">
-    <div class="col-lg-12">
+    <div class="col-lg-12 gooddiv">
         @foreach (var item in Model.CommodityList)
         {
             var src = item.ImgUrl == "" ? "../Content/Images/noimage.gif" : item.ImgUrl;
