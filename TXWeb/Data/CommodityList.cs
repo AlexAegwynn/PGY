@@ -17,7 +17,7 @@ namespace Data
         public static List<Model.CommodityList> GetCommodityList()
         {
             StringBuilder sql = new StringBuilder();
-            sql.Append(" SELECT a.UserID, UserName, b.* FROM Tx_UserCommodityList a ");
+            sql.Append(" SELECT a.UserID, UserName, Class, b.* FROM Tx_UserCommodityList a ");
             sql.Append(" LEFT JOIN Tx_CommodityList b ON a.CommodityID = b.CommodityID ");
             sql.Append(" LEFT JOIN Tx_UserList c ON a.UserID = c.UserID ORDER BY CommodityID DESC ");
 
@@ -33,7 +33,7 @@ namespace Data
         /// <returns></returns>
         public static List<Model.CommodityList> GetUserCommodityList(int inUserID)
         {
-            string sql = @" SELECT a.UserID, c.UserName, b.* FROM Tx_UserCommodityList a " +
+            string sql = @" SELECT a.UserID, c.UserName, Class, b.* FROM Tx_UserCommodityList a " +
                                   " LEFT JOIN Tx_CommodityList b ON a.CommodityID = b.CommodityID " +
                                   " LEFT JOIN Tx_UserList c ON c.UserID = a.UserID WHERE a.UserID = @inUserID ORDER BY CommodityID DESC ";
 
@@ -216,7 +216,8 @@ namespace Data
                     Description = item["Description"].ToString(),
                     ComContent = item["ComContent"].ToString(),
                     UserID = Convert.ToInt32(item["UserID"]),
-                    UserName = item["UserName"].ToString()
+                    UserName = item["UserName"].ToString(),
+                    Class = item["Class"].ToString()
                 };
 
                 list.Add(model);
