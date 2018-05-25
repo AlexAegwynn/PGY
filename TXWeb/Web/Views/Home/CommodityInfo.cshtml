@@ -4,6 +4,18 @@
     var title = Model.IsEdit ? "编辑商品信息" : "添加商品";
 }
 
+<link href="~/Content/css/font-awesome.css" rel="stylesheet" />
+<link href="~/Content/css/froala_editor.min.css" rel="stylesheet" />
+
+<style>
+    section {
+        width: 100%;
+        margin: auto;
+        text-align: left;
+        margin-top: 10px;
+    }
+</style>
+
 <script>
     var arr = ["JPG", "JPEG", "PNG", "GIF", "IMG"];
 
@@ -68,9 +80,6 @@
     }
 
     function CommodityClick() {
-        //var price = document.getElementById('CommodityInfo_Price');
-        //var txPrice = document.getElementById('CommodityInfo_TxPrice');
-        
 
         if (document.getElementById("CommodityInfo_Title").value == '') {
             alert('标题不能为空!');
@@ -162,8 +171,8 @@
             </div>
             <div class="panel-body">
                 <div class="row">
-                    <div class="col-lg-6">
-                        <form id="cominfo" role="form">
+                    <div class="col-lg-12">
+                        <form id="cominfo" role="form" class="col-lg-6">
                             @Html.HiddenFor(m => m.CommodityInfo.CommodityID)
                             <div class="form-group">
                                 <label>标题/Title</label>
@@ -182,10 +191,10 @@
                             <div class="form-group">
                                 <label>价格/Price</label>
                                 市场价:
-                                @Html.TextBoxFor(m => m.CommodityInfo.Price, new { @class = "form-control", @style = "width: 20%;display: inline-block;", @onkeyup = @"value=value.replace(/[^\d^\.]+/g,'')" })
+                                @Html.TextBoxFor(m => m.CommodityInfo.Price, new { @class = "form-control", @style = "width: 20%;display: inline-block;" })
                                 @*<input name="price" class="form-control" style="width: 20%;display: inline-block;">*@
                                 同学价:
-                                @Html.TextBoxFor(m => m.CommodityInfo.TxPrice, new { @class = "form-control", @style = "width: 20%;display: inline-block;", @onkeyup = @"value=value.replace(/[^\d^\.]+/g,'')" })
+                                @Html.TextBoxFor(m => m.CommodityInfo.TxPrice, new { @class = "form-control", @style = "width: 20%;display: inline-block;" })
                                 @*<input name="txprice" class="form-control" style="width: 20%;display: inline-block;">*@
                             </div>
                             <div class="form-group">
@@ -203,17 +212,51 @@
                                 <input style="display:none;" id="picfile" name="picfile" type="file">
                             </div>
                             <div class="form-group">
-                                <label>商品描述/Description</label>
+                                <label>描述/describe</label>
                                 @Html.TextAreaFor(m => m.CommodityInfo.Description, new { @class = "form-control", @rows = "4" })
                                 @*<textarea class="form-control" rows="4"></textarea>*@
                             </div>
                         </form>
+                        <div class="col-lg-11">
+                            <div class="form-group">
+                                <label>内容/Content</label>
+                                <section id="editor">
+                                    <div id="edit">
+
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
                         <button onclick="CommodityClick()" class="btn btn-info" id="oSubmit">提交</button>
                         <button onclick="document.location.href = '/Home/CommodityList';" class="btn btn-info">返回</button>
                         <button onclick="DeleteComm('@Model.CommodityInfo.CommodityID')" class="btn btn-info">删除商品</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<script src="~/Scripts/Js/froala_editor.min.js"></script>
+<!--[if lt IE 9]>
+<script src="~/Scripts/Js/froala_editor_ie8.min.js"></script>
+<![endif]-->
+<script src="~/Scripts/Js/plugins/tables.min.js"></script>
+<script src="~/Scripts/Js/plugins/lists.min.js"></script>
+<script src="~/Scripts/Js/plugins/colors.min.js"></script>
+<script src="~/Scripts/Js/plugins/media_manager.min.js"></script>
+<script src="~/Scripts/Js/plugins/font_family.min.js"></script>
+<script src="~/Scripts/Js/plugins/font_size.min.js"></script>
+<script src="~/Scripts/Js/plugins/block_styles.min.js"></script>
+<script src="~/Scripts/Js/plugins/video.min.js"></script>
+<script src="~/Scripts/Js/langs/zh_cn.js"></script>
+
+<script>
+    $('#edit').editable({
+        inlineMode: false,
+        language: "zh_cn", //设置为中文
+        alwaysBlank: true
+    })
+</script>
