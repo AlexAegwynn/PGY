@@ -115,6 +115,10 @@
 		zoom: 1;padding-top: 4px;
 		background: #fff;
 	}
+    .contentpic {
+        height: 400px;
+        width: 400px;
+    }
 	.selected{
 		color: white!important;
     	background-color: #f60;
@@ -314,5 +318,9 @@
         }
         .h61{
             padding-left:20px;
+        }
+        .contentpic {
+            height: 100%;
+            width: 100%;
         }
     }
