@@ -62,11 +62,12 @@ namespace Data
         /// <returns></returns>
         public static Model.UserList GetUser(int inUserID)
         {
-            StringBuilder sql = new StringBuilder();
-            sql.Append(" SELECT a.*, c.Unit FROM Tx_UserList a ");
-            sql.Append(" LEFT JOIN Tx_UserCommodityList b ON a.UserID = b.UserID ");
-            sql.Append(" LEFT JOIN Tx_CommodityList c ON c.CommodityID = b.CommodityID ");
-            sql.Append(" WHERE a.UserID = @inUserID ");
+            string sql = @" SELECT * FROM Tx_UserList WHERE UserID = @inUserID ";
+            //StringBuilder sql = new StringBuilder();
+            //sql.Append(" SELECT * FROM Tx_UserList WHERE UserID = @inUserID ");
+            //sql.Append(" LEFT JOIN Tx_UserCommodityList b ON a.UserID = b.UserID ");
+            //sql.Append(" LEFT JOIN Tx_CommodityList c ON c.CommodityID = b.CommodityID ");
+            //sql.Append(" WHERE a.UserID = @inUserID ");
 
             SqlParameter para = new SqlParameter("@inUserID", SqlDbType.Int, 32);
             para.Value = inUserID;
@@ -76,10 +77,10 @@ namespace Data
             List<Model.UserList> list = GetUserList(dt);
             Model.UserList model = list.Count > 0 ? list[0] : null;
 
-            if (model != null)
-            {
-                model.Unit = dt.Rows[0]["Unit"].ToString();
-            }
+            //if (model != null)
+            //{
+            //    model.Unit = dt.Rows[0]["Unit"].ToString();
+            //}
 
             return model;
         }
@@ -108,11 +109,11 @@ namespace Data
         {
             StringBuilder sql = new StringBuilder();
             sql.Append(" INSERT INTO Tx_UserList ( ");
-            sql.Append(" UserName, Password, Class, Sex, ");
+            sql.Append(" UserName, Password, CompanyName, Class, Sex, ");
             sql.Append(" Email, PhoneNumber, WeChat, ");
             sql.Append(" QQ, Address, EnterpriseInfo, IsAdmin ");
             sql.Append(" ) VALUES ( ");
-            sql.Append(" @inUserName, @inPassword, @inClass, @inSex, ");
+            sql.Append(" @inUserName, @inPassword, @inCompanyName, @inClass, @inSex, ");
             sql.Append(" @inEmail, @inPhoneNumber, @inWeChat, ");
             sql.Append(" @inQQ, @inAddress, @inEnterpriseInfo, @inIsAdmin ) ");
 
@@ -132,7 +133,7 @@ namespace Data
         {
             StringBuilder sql = new StringBuilder();
             sql.Append(" UPDATE Tx_UserList SET ");
-            sql.Append(" UserName = @inUserName, Class = @inClass, Sex = @inSex, ");
+            sql.Append(" UserName = @inUserName, CompanyName = @inCompanyName, Class = @inClass, Sex = @inSex, ");
             sql.Append(" Email = @inEmail, PhoneNumber = @inPhoneNumber, WeChat = @inWeChat, ");
             sql.Append(" QQ = @inQQ, Address = @inAddress, EnterpriseInfo = @inEnterpriseInfo, ");
             sql.Append(" IsAdmin = @inIsAdmin WHERE UserID = @inUserID ");
@@ -187,6 +188,7 @@ namespace Data
                 {
                     UserID = Convert.ToInt32(item["UserID"]),
                     UserName = item["UserName"].ToString(),
+                    CompanyName = item["CompanyName"].ToString(),
                     Password = item["Password"].ToString(),
                     Class = item["Class"].ToString(),
                     Sex = Convert.ToInt32(item["Sex"]),
@@ -227,6 +229,10 @@ namespace Data
             SqlParameter password = new SqlParameter("@inPassword", SqlDbType.NVarChar, 50);
             password.Value = inModel.Password ?? string.Empty;
             list.Add(password);
+
+            SqlParameter companyName = new SqlParameter("@inCompanyName", SqlDbType.NVarChar, 150);
+            companyName.Value = inModel.CompanyName ?? string.Empty;
+            list.Add(companyName);
 
             SqlParameter _class = new SqlParameter("@inClass", SqlDbType.NVarChar, 50);
             _class.Value = inModel.Class ?? string.Empty;

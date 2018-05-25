@@ -1,6 +1,7 @@
 ﻿@model Web.ViewModels.CommodityInfoViewModel
 @{
     var src = Model.CommodityInfo.ImgUrl == "" ? "../Content/Images/noimage.gif" : Model.CommodityInfo.ImgUrl;
+    var catstr = (Common.Categorys)Enum.Parse(typeof(Common.Categorys), Model.CommodityInfo.Category.ToString(), true);
 }
 <script>
     $(function () {
@@ -8,6 +9,10 @@
         value = value.replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&amp;/g, "&").replace(/&quot;/g, '"').replace(/&apos;/g, "'");
         $('#cpreview').html(value);
     })
+
+    function NameClick(uid) {
+        document.location.href = '/Home/UserPreview?inUserID=' + uid;
+    }
 </script>
 
 <div class="row">
@@ -41,11 +46,12 @@
                         </div>
                         <div class="bcontent">
                             <div>
-                                <h5 class="h5o">分类:<h class="h5i" style="padding-left: 10px;">@Model.CommodityInfo.Category</h></h5>
+                                <h5 class="h5o">分类:<h class="h5i" style="padding-left: 10px;">@catstr.ToString()</h></h5>
                             </div>
                             <div style="display: block;display: -webkit-box;">
                                 <h5 class="h5o">
-                                    同学名:<h class="h5i" style="padding-left: 10px;">@Model.CommodityInfo.UserName</h>
+                                    同学名:
+                                        <h onclick="NameClick('@Model.CommodityInfo.UserID')" class="h5i" style="padding-left: 10px;cursor:pointer;">@Model.CommodityInfo.UserName</h>
                                 </h5>
                                 <h5 class="h5o" style="margin-left: 5%;">班级:<h class="h5i" style="padding-left: 10px;">@Model.CommodityInfo.Class</h></h5>
                             </div>
@@ -67,7 +73,7 @@
             </div>
             @Html.HiddenFor(m => m.CommodityInfo.ComContent)
             <div id="cpreview" class="panel-body">
-                内容内容内容内容内容内容内容内容内容内容内容内容内容
+                内容
             </div>
         </div>
     </div>

@@ -24,6 +24,11 @@ namespace Model
         public string Password { get; set; } = string.Empty;
 
         /// <summary>
+        /// 公司名称
+        /// </summary>
+        public string CompanyName { get; set; } = string.Empty;
+
+        /// <summary>
         /// 班级
         /// </summary>
         public string Class { get; set; } = string.Empty;
@@ -67,10 +72,5 @@ namespace Model
         /// 是否管理员，0为普通用户，1为管理员，默认0
         /// </summary>
         public int IsAdmin { get; set; } = 0;
-
-        /// <summary>
-        /// 单位【Tx_CommodityList】
-        /// </summary>
-        public string Unit { get; set; } = string.Empty;
     }
 }
