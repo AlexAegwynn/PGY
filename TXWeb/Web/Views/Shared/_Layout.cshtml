@@ -24,7 +24,10 @@
 
     <script>
         var module = '@ViewBag.Module';
+        var interval
         $(function () {
+            interval = window.setInterval(GetSession, 1000*30);
+
             switch (module) {
                 case "info":
                     $('#info').addClass('active')
@@ -44,6 +47,21 @@
                 default: break;
             }
         })
+        var i = 0;
+        function GetSession() {
+            $.ajax({
+                url: '/Home/GetSession',
+                type: 'post',
+                success: function (data) {
+                    if (!data.result) {
+                        clearInterval(interval);
+                        if (confirm(data.msg)) {
+                            document.location.href = '/Login';
+                        }
+                    }
+                }
+            })
+        }
 
         function ModuleClick(state) {
             var str = '';
@@ -78,15 +96,15 @@
                     </a>
                     <ul class="dropdown-menu dropdown-user">
                         @*<li>
-                            <a href="/Home/UserInfo">
-                                <i class="glyphicon glyphicon-user"></i>个人信息
-                            </a>
-                        </li>
-                        <li>
-                            <a href="">
-                                <i class="glyphicon glyphicon-asterisk"></i>设置
-                            </a>
-                        </li>*@
+                                <a href="/Home/UserInfo">
+                                    <i class="glyphicon glyphicon-user"></i>个人信息
+                                </a>
+                            </li>
+                            <li>
+                                <a href="">
+                                    <i class="glyphicon glyphicon-asterisk"></i>设置
+                                </a>
+                            </li>*@
                         @*<li class="divider"></li>*@
                         <li>
                             <a href="/Login/Logout">

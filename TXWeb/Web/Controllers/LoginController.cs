@@ -58,6 +58,24 @@ namespace Web.Controllers
                     Logic.LogList.InsertLog(vModel.UserID, vModel.UserName, DateTime.Now, "成功登录");
 
                     HttpContext.Session["UserInfo"] = vModel;
+
+                    Model.UserSession session = Logic.UserSession.GetSession(vModel.UserID);
+                    if (session != null)
+                    {
+                        session.SessionID = HttpContext.Session.SessionID;
+                        Logic.UserSession.UpdateSession(session);
+                    }
+                    else
+                    {
+                        session = new Model.UserSession
+                        {
+                            SID = Guid.NewGuid(),
+                            UserID = vModel.UserID,
+                            SessionID = HttpContext.Session.SessionID
+                        };
+                        Logic.UserSession.CreateSession(session);
+                    }
+
                     json.Data = new { result = true, msg = "" };
                 }
                 else
@@ -155,6 +173,11 @@ namespace Web.Controllers
             try
             {
                 Logic.LogList.InsertLog(LoginUser.UserID, LoginUser.UserName, DateTime.Now, "退出登录");
+                Model.UserSession session = Logic.UserSession.GetSession(LoginUser.UserID);
+                if (session != null)
+                {
+                    Logic.UserSession.DeleteSession(session.UserID);
+                }
                 HttpContext.Session.Remove("UserInfo");
             }
             catch (Exception ex)

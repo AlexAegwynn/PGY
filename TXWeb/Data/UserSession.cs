@@ -14,13 +14,27 @@ namespace Data
         /// 获取Session记录
         /// </summary>
         /// <returns></returns>
-        public static Model.UserSession GetSession()
+        public static Model.UserSession GetSession(int inUserID)
         {
+            string sql = @" SELECT * FROM Tx_UserSessionList WHERE UserID = @inUserID ";
 
+            SqlParameter para = new SqlParameter("@inUserID", SqlDbType.Int, 32);
+            para.Value = inUserID;
 
-
+            DataTable dt = SqlHelper.ExecuteDataTable(CommandType.Text, sql, para);
             Model.UserSession model = new Model.UserSession();
 
+            if (dt.Rows.Count > 0)
+            {
+                model.SID = (Guid)(dt.Rows[0]["SID"]);
+                model.UserID = Convert.ToInt32(dt.Rows[0]["UserID"]);
+                model.SessionID = dt.Rows[0]["SessionID"].ToString();
+            }
+            else
+            {
+                model = null;
+            }
+            
             return model;
         }
 
@@ -54,7 +68,7 @@ namespace Data
 
             SqlParameter[] paras = new SqlParameter[]
             {
-                new SqlParameter("@inSessionID", SqlDbType.Int, 32),
+                new SqlParameter("@inSessionID", SqlDbType.NVarChar, 50),
                 new SqlParameter("@inUserID", SqlDbType.Int, 32)
             };
             paras[0].Value = inModel.SessionID;
@@ -82,6 +96,11 @@ namespace Data
             return result;
         }
 
+        /// <summary>
+        /// 私有方法，获取参数
+        /// </summary>
+        /// <param name="inModel"></param>
+        /// <returns></returns>
         private static SqlParameter[] GetParas(Model.UserSession inModel)
         {
             List<SqlParameter> list = new List<SqlParameter>();
@@ -94,7 +113,7 @@ namespace Data
             userID.Value = inModel.UserID;
             list.Add(userID);
 
-            SqlParameter sessionID = new SqlParameter("@inSessionID", SqlDbType.Int, 32);
+            SqlParameter sessionID = new SqlParameter("@inSessionID", SqlDbType.NVarChar, 50);
             sessionID.Value = inModel.SessionID;
             list.Add(sessionID);
 

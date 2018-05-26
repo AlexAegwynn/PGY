@@ -385,5 +385,35 @@ namespace Web.Controllers
 
             return json;
         }
+
+        [HttpPost]
+        public JsonResult GetSession()
+        {
+            JsonResult json = new JsonResult();
+
+            if (LoginUser == null)
+            {
+                json.Data = new { result = false, msg = "登录已失效，是否重新登录？" }; return json;
+            }
+
+            Model.UserSession session = Logic.UserSession.GetSession(LoginUser.UserID);
+            if (session != null)
+            {
+                if (session.SessionID != HttpContext.Session.SessionID)
+                {
+                    json.Data = new { result = false, msg = "账号在另一处地方被登陆，是否重新登录？" };
+                }
+                else
+                {
+                    json.Data = new { result = true };
+                }
+            }
+            else
+            {
+                json.Data = new { result = false, msg = "登录已失效，是否重新登录？" };
+            }
+
+            return json;
+        }
     }
 }

@@ -21,6 +21,6 @@ namespace Model
         /// <summary>
         /// SessionID
         /// </summary>
-        public int SessionID { get; set; } = 0;
+        public string SessionID { get; set; } = string.Empty;
     }
 }
