@@ -62,7 +62,6 @@
         <ul class="teaser-list module-group">
             <li style="cursor:default;">
                 <div class="text">
-                    <h4>文章</h4>
                     @foreach (var item in aModel.Article)
                     {
                         <p class="decoration" onclick="window.open('/Home/ArticleInfo?inArticleID=@item.ArticleID&&page=@ViewBag.PageCode')">@item.Title</p>
