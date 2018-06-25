@@ -20,6 +20,20 @@ namespace Web.Controllers
             DomainName = filterContext.RequestContext.HttpContext.Request.Url.Host;
             State = filterContext.RequestContext.HttpContext.Request.Browser.IsMobileDevice;
 
+            var port = filterContext.RequestContext.HttpContext.Request.Url.Port;
+            if (port == 8001)
+            {
+                ID = "7";
+            }
+            else if (port == 8002)
+            {
+                ID = "5";
+            }
+            else
+            {
+                ID = "5";
+            }
+
             //string isLocal = DomainName == "localhost" ? "Development" : "Release";
             //string isLocal = DomainName = "Release";
             string isLocal = DomainName = "Development";
@@ -35,9 +49,11 @@ namespace Web.Controllers
         {
             get
             {
-                if (ID == string.Empty) { GetWebSiteID(); }
+                //if (ID == string.Empty) { GetWebSiteID(); }
 
-                return ID = "5";
+
+                //return ID = "5";
+                return ID;
             }
         }
 
