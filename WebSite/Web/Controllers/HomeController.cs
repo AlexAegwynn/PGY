@@ -59,7 +59,8 @@ namespace Web.Controllers
 
             ViewData["WebSite"] = WebSiteInfo;
 
-            List<Model.ItemsInfo> list = Logic.Commodity.GetItemsInfos2(Convert.ToInt32(WebSiteID));
+            List<Model.ItemsInfo> list = Logic.Commodity.GetItemsInfos2(Convert.ToInt32(WebSiteID), 100);
+
             if (search != "")
             {
                 list = (from l in list where l.Title.ToUpper().IndexOf(search.ToUpper()) >= 0 select l).ToList();
@@ -90,6 +91,7 @@ namespace Web.Controllers
                         if (item.NumIID == zk.NumIid)
                         {
                             item.ZKPice = zk.ZkFinalPrice;
+                            item.ImgUrl = item.ImgUrl + "_220x220.jpg";
                             break;
                         }
                     }
@@ -245,7 +247,7 @@ namespace Web.Controllers
 
             vModel.Article = (from a in vModel.Article where a.ArticleID == inArticleID select a).ToList();
             vModel.Article[0].Conten = vModel.Article[0].Conten.Trim('\'');
-            
+
             return View(vModel.Article[0]);
         }
 
