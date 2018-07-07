@@ -385,7 +385,8 @@ select.selectpicker { visibility: hidden; display: none;}
 .footer-links { padding: 30px 0; background: #fff;}
 .footer-links .container { overflow: hidden;}
 .footer-links .left-col { float: left; width: 76%;}
-.footer-links .left-col .item { float: left; width: 22%;}
+.footer-links .left-col .item { float: left; width: 25%;}
+.footer-links .left-col .map{text-align: center;}
 .footer-links .left-col .top-row:after, .footer-links .left-col .bottom-row:after { content: " "; display: block; height: 0; clear: both; visibility: hidden;}
 .footer-links .left-col .top-row { padding-bottom: 70px;}
 .footer-links .right-col { float: right; width: 24%;}
