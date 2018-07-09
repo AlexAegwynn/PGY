@@ -382,15 +382,21 @@ select.selectpicker { visibility: hidden; display: none;}
 .no-touch .sticky-bar .btn-style:after { position: absolute; left: 0; top: 0; content: ""; width: 100%; height: 100%; background-position: -68px -288px;}
 
 /* Footer */
-.footer-links { padding: 30px 0; background: #fff;}
+.footer-links { color:#fff;padding: 30px 0; background: #000;}
 .footer-links .container { overflow: hidden;}
 .footer-links .left-col { float: left; width: 76%;}
-.footer-links .left-col .item { float: left; width: 25%;}
+.footer-links .left-col .item {  float: left; width: 25%;}
+.footer-links .left-col .item span{color:#fff;}
+.footer-links .left-col .item a{text-decoration:none;color:#fff;}
+.footer-links .left-col .item a:hover{text-decoration: underline;color: #E77476;}
 .footer-links .left-col .map{text-align: center;}
+.footer-links .left-col .map p{padding-top: 15px; padding-left: 200px;}
 .footer-links .left-col .top-row:after, .footer-links .left-col .bottom-row:after { content: " "; display: block; height: 0; clear: both; visibility: hidden;}
 .footer-links .left-col .top-row { padding-bottom: 70px;}
 .footer-links .right-col { float: right; width: 24%;}
 .footer-links .right-col .item { margin-bottom: 24px;}
+.footer-links .right-col .item h4{color:#fff;text-align: center;}
+.footer-links .right-col .item p{font-size:12px;text-align:center;}
 .footer-links .right-col .item.contact { margin-bottom: 0;}
 .footer-links h5 { margin-bottom: 3px; padding-top: 9px; background-position: 0 -438px;}
 .footer-links a { font-size: 14px; color: #666;}
