@@ -5,7 +5,7 @@ using System.Web;
 
 namespace Web.ViewModels
 {
-    public class CommodityViewModel
+    public class vm_Commodity
     {
         /// <summary>
         /// 页码

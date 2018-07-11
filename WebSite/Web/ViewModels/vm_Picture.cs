@@ -5,7 +5,7 @@ using System.Web;
 
 namespace Web.ViewModels
 {
-    public class PictureViewModel
+    public class vm_Picture
     {
         public string PictureID { get; set; }
 

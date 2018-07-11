@@ -5,7 +5,7 @@ using System.Web;
 
 namespace Web.ViewModels
 {
-    public class CategoryViewModel
+    public class vm_Category
     {
         /// <summary>
         /// 分类 ID

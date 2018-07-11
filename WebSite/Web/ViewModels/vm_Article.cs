@@ -5,7 +5,7 @@ using System.Web;
 
 namespace Web.ViewModels
 {
-    public class ArticleViewModel
+    public class vm_Article
     {
         /// <summary>
         /// 总页数

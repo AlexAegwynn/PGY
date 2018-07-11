@@ -5,9 +5,8 @@ using System.Web;
 
 namespace Web.ViewModels
 {
-    public class LoginUserViewModel
+    public class vm_WebSite : Model.WebSiteInfo
     {
-        public string Name { get; set; }
-        public string Password { get; set; }
+        public bool IsEdit { get; set; }
     }
 }

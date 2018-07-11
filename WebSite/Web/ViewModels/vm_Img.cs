@@ -5,7 +5,7 @@ using System.Web;
 
 namespace Web.ViewModels
 {
-    public class ImgViewModel
+    public class vm_Img
     {
         public Guid WebSiteKey { get; set; }
 

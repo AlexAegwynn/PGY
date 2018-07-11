@@ -5,7 +5,7 @@ using System.Web;
 
 namespace Web.ViewModels
 {
-    public class HomeViewModel
+    public class vm_Home
     {
         ///// <summary>
         ///// 商品列表
@@ -20,11 +20,11 @@ namespace Web.ViewModels
         /// <summary>
         /// 文章列表
         /// </summary>
-        public List<ArticleViewModel> ArticleList { get; set; }
+        public List<vm_Article> ArticleList { get; set; }
 
         /// <summary>
         /// 图集列表
         /// </summary>
-        public List<PictureViewModel> PictureList { get; set; }
+        public List<vm_Picture> PictureList { get; set; }
     }
 }
