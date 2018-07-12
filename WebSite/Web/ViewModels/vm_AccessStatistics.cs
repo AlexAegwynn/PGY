@@ -11,6 +11,6 @@ namespace Web.ViewModels
 
         public string WebSiteID { get; set; }
 
-        public DateTime DateTime { get; set; }
+        public long DateTime { get; set; }
     }
 }

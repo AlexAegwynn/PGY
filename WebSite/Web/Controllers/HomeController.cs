@@ -16,17 +16,19 @@ namespace Web.Controllers
     /// </summary>
     public class HomeController : BaseController
     {
-        #region 私有变量
-        /// <summary>
-        /// 站点信息
-        /// </summary>
-        private static Model.WebSiteInfo WebSiteInfo = null;
+        #region 全局变量
+        ///// <summary>
+        ///// 站点信息
+        ///// </summary>
+        //private static Model.WebSiteInfo WebSiteInfo = null;
+
+        public static List<vm_AccessStatistics> asList = new List<vm_AccessStatistics>();
         #endregion
 
-        /// <summary>
-        /// 首页
-        /// </summary>
-        /// <returns></returns>
+        ///// <summary>
+        ///// 首页
+        ///// </summary>
+        ///// <returns></returns>
         //public ActionResult Index()
         //{
         //    WebSiteInfo = Logic.WebSite.GetWebSite(WebSiteID);
@@ -51,15 +53,14 @@ namespace Web.Controllers
         //    return View(vModel);
         //}
 
-        private static string test = string.Empty;
-
         public ActionResult Index(int page = 1, string coupon = "", string search = "")
         {
-            WebSiteInfo = Logic.WebSite.GetWebSite(WebSiteID);
+            //WebSiteInfo = Logic.WebSite.GetWebSite(WebSiteID);
 
-            ViewData["WebSite"] = WebSiteInfo;
+            ViewData["WebSite"] = Logic.WebSite.GetWebSite(WebSiteID);
+            var msg = string.Empty;
 
-            List<Model.ItemsInfo> list = Logic.Commodity.GetItemsInfos2(Convert.ToInt32(WebSiteID), 100);
+            List<Model.ItemsInfo> list = Logic.Commodity.GetItemsInfos2(Convert.ToInt32(WebSiteID),0);
 
             if (search != "")
             {
@@ -82,7 +83,7 @@ namespace Web.Controllers
 
                 List<Top.Api.Domain.NTbkItem> zklist = Common.TBApi.GetZKPice(numIIDs);
 
-                test = "<p>" + zklist.Count.ToString() + "_" + list.Count + "</p><br /><br />" + numIIDs;
+                msg = "<p>" + zklist.Count.ToString() + "_" + list.Count + "</p><br /><br />" + numIIDs;
 
                 foreach (var item in list)
                 {
@@ -99,76 +100,78 @@ namespace Web.Controllers
             }
             catch (Exception e)
             {
-                return Content("<p>" + e.Message + "</p><br /><br />" + test);
+                return Content("<p>" + e.Message + "</p><br /><br />" + msg);
             }
 
-            CommodityViewModel vModel = new CommodityViewModel();
+            vm_Commodity vModel = new vm_Commodity();
             vModel.PageCount = pageCode;
             vModel.ItemsInfos = list;
             vModel.PageCode = page; //当前页数
             vModel.Search = search;
 
+            ViewBag.Total = ASList.ASCount;
+
             return View("~/Views/Home/Commodity.cshtml", vModel);
         }
 
-        /// <summary>
-        /// 商品列表
-        /// </summary>
-        /// <param name="inPageRows">行数</param>
-        /// <param name="page">页码</param>
-        /// <param name="coupon">分类条件</param>
-        /// <param name="search">搜索条件</param>
-        /// <returns></returns>
-        public ActionResult Commodity(/*int inPageRows, */int page = 1, string coupon = "", string search = "")
-        {
-            //if (WebSiteInfo == null)
-            //{
-            //    WebSiteInfo = Logic.WebSite.GetWebSite(WebSiteID);
-            //}
+        ///// <summary>
+        ///// 商品列表
+        ///// </summary>
+        ///// <param name="inPageRows">行数</param>
+        ///// <param name="page">页码</param>
+        ///// <param name="coupon">分类条件</param>
+        ///// <param name="search">搜索条件</param>
+        ///// <returns></returns>
+        //public ActionResult Commodity(/*int inPageRows, */int page = 1, string coupon = "", string search = "")
+        //{
+        //    //if (WebSiteInfo == null)
+        //    //{
+        //    //    WebSiteInfo = Logic.WebSite.GetWebSite(WebSiteID);
+        //    //}
 
-            WebSiteInfo = Logic.WebSite.GetWebSite(WebSiteID);
+        //    WebSiteInfo = Logic.WebSite.GetWebSite(WebSiteID);
 
-            ViewData["WebSite"] = WebSiteInfo;
+        //    ViewData["WebSite"] = WebSiteInfo;
 
-            List<Model.ItemsInfo> list = Logic.Commodity.GetItemsInfos2(Convert.ToInt32(WebSiteID));
-            if (search != "")
-            {
-                list = (from l in list where l.Title.ToUpper().IndexOf(search.ToUpper()) >= 0 select l).ToList();
-            }
+        //    List<Model.ItemsInfo> list = Logic.Commodity.GetItemsInfos2(Convert.ToInt32(WebSiteID));
+        //    if (search != "")
+        //    {
+        //        list = (from l in list where l.Title.ToUpper().IndexOf(search.ToUpper()) >= 0 select l).ToList();
+        //    }
 
-            decimal total = list.Count;
-            int pageCount = Convert.ToInt32(Math.Ceiling(total / 20));
+        //    decimal total = list.Count;
+        //    int pageCount = Convert.ToInt32(Math.Ceiling(total / 20));
 
-            list = list.Skip((page - 1) * 20).Take(20).ToList();
+        //    list = list.Skip((page - 1) * 20).Take(20).ToList();
 
-            CommodityViewModel vModel = new CommodityViewModel();
-            vModel.PageCount = pageCount;
-            vModel.ItemsInfos = list;
-            //vModel.ItemsInfos = Logic.Commodity.GetItemsInfos(Convert.ToInt32(WebSiteID), page, search);
+        //    CommodityViewModel vModel = new CommodityViewModel();
+        //    vModel.PageCount = pageCount;
+        //    vModel.ItemsInfos = list;
+        //    //vModel.ItemsInfos = Logic.Commodity.GetItemsInfos(Convert.ToInt32(WebSiteID), page, search);
 
-            //switch (coupon)
-            //{
-            //    case "coupon":
-            //        list = (from l in list where l.RemainCount > 0 select l).ToList(); break;
-            //    case "nocoupon":
-            //        list = (from l in list where l.RemainCount <= 0 select l).ToList(); break;
-            //    default: break;
-            //}
+        //    //switch (coupon)
+        //    //{
+        //    //    case "coupon":
+        //    //        list = (from l in list where l.RemainCount > 0 select l).ToList(); break;
+        //    //    case "nocoupon":
+        //    //        list = (from l in list where l.RemainCount <= 0 select l).ToList(); break;
+        //    //    default: break;
+        //    //}
 
-            //ViewBag.Count = vModel.PageCode; //总页数
-            vModel.PageCode = page; //当前页数
-            //ViewBag.Coupon = coupon;
-            vModel.Search = search;
+        //    //ViewBag.Count = vModel.PageCode; //总页数
+        //    vModel.PageCode = page; //当前页数
+        //    //ViewBag.Coupon = coupon;
+        //    vModel.Search = search;
 
-            //ViewData["ArticleList"] = GetArticleList().Take(6).ToList();
+        //    //ViewData["ArticleList"] = GetArticleList().Take(6).ToList();
 
-            //if (State)
-            //{
-            //    return View("/Views/Home/MobileView/Commodity.cshtml", vModel);
-            //}
+        //    //if (State)
+        //    //{
+        //    //    return View("/Views/Home/MobileView/Commodity.cshtml", vModel);
+        //    //}
 
-            return View(vModel);
-        }
+        //    return View(vModel);
+        //}
 
         ///// <summary>
         ///// 文章列表页
@@ -218,14 +221,14 @@ namespace Web.Controllers
 
         public PartialViewResult ArticlePartial(int page = 1)
         {
-            if (WebSiteInfo == null)
-            {
-                WebSiteInfo = Logic.WebSite.GetWebSite(WebSiteID);
-            }
+            //if (WebSiteInfo == null)
+            //{
+            //    WebSiteInfo = Logic.WebSite.GetWebSite(WebSiteID);
+            //}
 
-            ViewData["WebSite"] = WebSiteInfo;
+            ViewData["WebSite"] = Logic.WebSite.GetWebSite(WebSiteID);
 
-            ArticleViewModel vModel = GetArticleList(page);
+            vm_Article vModel = GetArticleList(page);
             ViewBag.PageCode = page;
             ViewBag.PageCount = vModel.ToPag;
 
@@ -243,7 +246,7 @@ namespace Web.Controllers
             {
                 return RedirectToAction("Index");
             }
-            ArticleViewModel vModel = GetArticleList(page);
+            vm_Article vModel = GetArticleList(page);
 
             vModel.Article = (from a in vModel.Article where a.ArticleID == inArticleID select a).ToList();
             vModel.Article[0].Conten = vModel.Article[0].Conten.Trim('\'');
@@ -252,81 +255,92 @@ namespace Web.Controllers
         }
 
         /// <summary>
-        /// 图集列表页
+        /// 添加访问IP
         /// </summary>
         /// <returns></returns>
-        public ActionResult Pictures()
+        public JsonResult ASAdd(string IP = "")
         {
-            if (WebSiteInfo == null)
+            vm_AccessStatistics model = new vm_AccessStatistics();
+
+            if (asList.Any(x => x.IP == IP && x.DateTime == GetTimeByDateTime(DateTime.Now)))
             {
-                WebSiteInfo = Logic.WebSite.GetWebSite(WebSiteID);
+                return null;
             }
 
-            ViewData["WebSite"] = WebSiteInfo;
+            model.IP = IP;
+            model.WebSiteID = WebSiteID;
+            model.DateTime = GetTimeByDateTime(DateTime.Now);
 
-            List<PictureViewModel> list = GetPictureList();
+            asList.Add(model);
 
-            //if (list.Count == 0)
-            //{
-            //    list = GetPictureList();
-            //}
-
-            if (State)
-            {
-                return View("/Views/Home/MobileView/Pictures.cshtml", list);
-            }
-
-            return View(list);
+            return null;
         }
 
-        /// <summary>
-        /// 图集
-        /// </summary>
-        /// <returns></returns>
-        public ActionResult PictureInfo(string inPicID)
-        {
-            if (string.IsNullOrEmpty(inPicID))
-            {
-                return RedirectToAction("Index");
-            }
+        ///// <summary>
+        ///// 图集列表页
+        ///// </summary>
+        ///// <returns></returns>
+        //public ActionResult Pictures()
+        //{
+        //    if (WebSiteInfo == null)
+        //    {
+        //        WebSiteInfo = Logic.WebSite.GetWebSite(WebSiteID);
+        //    }
 
-            List<PictureViewModel> list = (from p in GetPictureList() where p.PictureID == inPicID select p).ToList();
+        //    ViewData["WebSite"] = WebSiteInfo;
 
-            if (Request.Browser.IsMobileDevice)
-            {
-                return View("/Views/Home/MobileView/PictureInfo.cshtml", list[0]);
-            }
+        //    List<PictureViewModel> list = GetPictureList();
 
-            return View(list[0]);
-        }
+        //    //if (list.Count == 0)
+        //    //{
+        //    //    list = GetPictureList();
+        //    //}
 
-        public JsonResult Test(string numiid)
-        {
-            JsonResult json = new JsonResult();
+        //    if (State)
+        //    {
+        //        return View("/Views/Home/MobileView/Pictures.cshtml", list);
+        //    }
 
-            List<Top.Api.Domain.NTbkItem> zklist = Common.TBApi.GetZKPice(numiid);
+        //    return View(list);
+        //}
 
-            json.Data = new { result = zklist.Count };
+        ///// <summary>
+        ///// 图集
+        ///// </summary>
+        ///// <returns></returns>
+        //public ActionResult PictureInfo(string inPicID)
+        //{
+        //    if (string.IsNullOrEmpty(inPicID))
+        //    {
+        //        return RedirectToAction("Index");
+        //    }
 
-            return json;
-        }
+        //    List<PictureViewModel> list = (from p in GetPictureList() where p.PictureID == inPicID select p).ToList();
+
+        //    if (Request.Browser.IsMobileDevice)
+        //    {
+        //        return View("/Views/Home/MobileView/PictureInfo.cshtml", list[0]);
+        //    }
+
+        //    return View(list[0]);
+        //}
 
         /// <summary>
         /// 私有方法，获取文章列表
         /// </summary>
         /// <returns></returns>
-        private static ArticleViewModel GetArticleList(int page = 1, int rows = 6)
+        private static vm_Article GetArticleList(int page = 1, int rows = 6)
         {
             string url = string.Format("http://121.10.200.52:54321/GetArticleWeb.ashx?WID={0}&&pizetop={1}&&pizenum={2}", 5, page, rows);
 
             var data = new WebClient().DownloadData(url);
             var jsonData = Encoding.UTF8.GetString(data);
 
-            ArticleViewModel vModel = new ArticleViewModel();
+            vm_Article vModel = new vm_Article();
 
             if (jsonData != "{}")
             {
-                vModel = JsonConvert.DeserializeObject<ArticleViewModel>(jsonData);
+                vModel = JsonConvert.DeserializeObject<vm_Article>(jsonData);
                 foreach (var item in vModel.Article)
                 {
                     item.ArticleID = vModel.Article.IndexOf(item).ToString();
@@ -336,29 +350,29 @@ namespace Web.Controllers
             return vModel;
         }
 
-        /// <summary>
-        /// 私有方法，获取图片列表
-        /// </summary>
-        /// <returns></returns>
-        private static List<PictureViewModel> GetPictureList()
-        {
-            string url = string.Format("http://121.10.200.52:54321/GetAtlasWeb.ashx?WID={0}", WebSiteID);
+        ///// <summary>
+        ///// 私有方法，获取图片列表
+        ///// </summary>
+        ///// <returns></returns>
+        //private static List<PictureViewModel> GetPictureList()
+        //{
+        //    string url = string.Format("http://121.10.200.52:54321/GetAtlasWeb.ashx?WID={0}", WebSiteID);
 
-            var data = new WebClient().DownloadData(url);
-            var jsonData = Encoding.UTF8.GetString(data);
-            List<PictureViewModel> list = new List<PictureViewModel>();
+        //    var data = new WebClient().DownloadData(url);
+        //    var jsonData = Encoding.UTF8.GetString(data);
+        //    List<PictureViewModel> list = new List<PictureViewModel>();
 
-            if (jsonData != "{}")
-            {
-                list = JsonConvert.DeserializeObject<List<PictureViewModel>>(jsonData);
-                foreach (var item in list)
-                {
-                    item.PictureID = list.IndexOf(item).ToString();
-                }
-            }
+        //    if (jsonData != "{}")
+        //    {
+        //        list = JsonConvert.DeserializeObject<List<PictureViewModel>>(jsonData);
+        //        foreach (var item in list)
+        //        {
+        //            item.PictureID = list.IndexOf(item).ToString();
+        //        }
+        //    }
 
-            return list;
-        }
+        //    return list;
+        //}
 
         ///// <summary>
         ///// 私有方法，获取商品列表
@@ -386,5 +400,30 @@ namespace Web.Controllers
 
         //    return model;
         //}
+
+        /// <summary>
+        /// DateTime To Long
+        /// </summary>
+        /// <param name="dateTime"></param>
+        /// <returns></returns>
+        private static long GetTimeByDateTime(DateTime dateTime)
+        {
+            long lTime = 0;
+            dateTime = Convert.ToDateTime(dateTime.ToString("yyyy-MM-dd") + " 00:00:00");
+            return lTime = (dateTime.ToUniversalTime().Ticks - 621355968000000000) / 10000000;
+        }
+
+        /// <summary>
+        /// Long To DateTime
+        /// </summary>
+        /// <param name="longTime"></param>
+        /// <returns></returns>
+        private static DateTime GetDateTimeByTime(long longTime)
+        {
+            DateTime dateTime = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1970, 1, 1));
+            longTime = long.Parse(longTime.ToString().PadRight(17, '0'));
+            TimeSpan toNow = new TimeSpan(longTime);
+            return dateTime.Add(toNow);
+        }
     }
 }

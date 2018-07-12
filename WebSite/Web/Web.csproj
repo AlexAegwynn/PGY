@@ -150,6 +150,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Timer\TaskAction.cs" />
     <Compile Include="ViewModels\vm_AccessStatistics.cs" />
     <Compile Include="ViewModels\vm_Article.cs" />
     <Compile Include="ViewModels\vm_Category.cs" />
@@ -331,13 +332,11 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Commodity.cshtml" />
-    <Content Include="Views\Home\Pictures.cshtml" />
     <Content Include="Views\WebSite\WebSiteList.cshtml" />
     <Content Include="Views\Shared\_WebSiteLayout.cshtml" />
     <Content Include="Views\WebSite\WebSiteInfo.cshtml" />
     <Content Include="Views\Home\ArticleInfo.cshtml" />
     <Content Include="Views\Shared\_MobileLayout.cshtml" />
-    <Content Include="Views\Home\PictureInfo.cshtml" />
     <Content Include="Views\WebSite\Index.cshtml" />
     <Content Include="Views\Shared\Test\_Layout.cshtml" />
     <Content Include="Views\Home\ArticlePartial.cshtml" />

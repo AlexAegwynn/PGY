@@ -7,6 +7,7 @@ using System.Text;
 using System.Web.Mvc;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using Web.ViewModels;
 
 namespace Web.Controllers
 {
@@ -49,11 +50,28 @@ namespace Web.Controllers
         {
             get
             {
-                if (ID == string.Empty) { GetWebSiteID(); }
-
+                GetWebSiteID();
 
                 //return ID = "5";
                 return ID;
+            }
+        }
+
+        /// <summary>
+        /// 访问数量
+        /// </summary>
+        protected static Model.AccessStatistics ASList
+        {
+            get
+            {
+                Model.AccessStatistics model = Logic.AccessStatistics.GetAS(Convert.ToInt32(ID));
+
+                if (model == null)
+                {
+                    model = new Model.AccessStatistics();
+                }
+
+                return model;
             }
         }
 

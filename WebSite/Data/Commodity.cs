@@ -111,12 +111,13 @@ namespace Data
         /// <returns></returns>
         public static List<Model.ItemsInfo> GetItemsInfos2(int inWebID, int inTop)
         {
-            string str = @" b.NumIID,Title,TitleSub,UrlShort,PriceNow,SalesCount,ClickUrl,CommissionRate, " +
-                                                                " CouponMoney,ImgUrl,ImgSmall,RemainCount,TotalCount,CouponInfo,IsEnable, c.CommentStr ";
-            string top = inTop == 0 ? string.Empty : "TOP " + inTop;
+            //string str = @" b.NumIID,Title,TitleSub,UrlShort,PriceNow,SalesCount,ClickUrl,CommissionRate, " +
+            //                                                    " CouponMoney,ImgUrl,ImgSmall,RemainCount,TotalCount,CouponInfo,IsEnable, c.CommentStr ";
+            string str = @"b.NumIID, *, c.CommentStr ";
+            //string top = inTop == 0 ? string.Empty : "TOP " + inTop;
 
             StringBuilder sql = new StringBuilder();
-            sql.Append(" SELECT " + top + str + " FROM Web_ItemWeb a ");
+            sql.Append(" SELECT " + str + " FROM Web_ItemWeb a ");
             sql.Append(" LEFT JOIN rpt_ItemsInfo b ON a.IID = b.ID ");
             sql.Append(" LEFT JOIN Web_commentWeb c ON c.NumIID = b.NumIID ");
             sql.Append(" WHERE a.WID = @inWebID ORDER BY a.ID DESC ");

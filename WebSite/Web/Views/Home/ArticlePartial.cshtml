@@ -1,5 +1,5 @@
 ﻿@{
-    var aModel = Model as Web.ViewModels.ArticleViewModel;
+    var aModel = Model as Web.ViewModels.vm_Article;
 }
 <script>
     var apage = '@ViewBag.PageCode';
@@ -27,6 +27,20 @@
     })
 
     function APageClick(page, state) {
+        if (state == 'Home') {
+            $.ajax({
+                url: '/Home/ArticlePartial',
+                data: {
+                    page: 1
+                },
+                success: function (data) {
+                    $('#article').html(data);
+                }
+            })
+
+            return;
+        }
+
         if (state != '') {
             if (state == 'Next') { page++; } else { page--; }
             if (page > atotal) { return; }
@@ -75,12 +89,13 @@
 <div class="row" style="text-align: center;">
     <ul class="pagination">
         <li><span style="cursor:default;">共 @ViewBag.PageCount 页</span></li>
+        <li><a onclick="APageClick('', 'Home')" style="cursor:pointer;">首页</a></li>
         <li><a onclick="APageClick('@ViewBag.PageCode', 'Previous')" style="cursor:pointer;">&laquo;上一页</a></li>
         @for (int i = 1; i < 6; i++)
-        {
-            if (i > ViewBag.PageCount) { break; }
-            <li id="apg_@i"><a onclick="APageClick('@i','')" style="cursor:pointer;"></a></li>
-        }
+    {
+        if (i > ViewBag.PageCount) { break; }
+        <li id="apg_@i"><a onclick="APageClick('@i','')" style="cursor:pointer;"></a></li>
+}
         <li><a onclick="APageClick('@ViewBag.PageCode', 'Next')" style="cursor:pointer;">&raquo;下一页</a></li>
     </ul>
 </div>

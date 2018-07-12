@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccessStatistics.cs" />
     <Compile Include="ItemsInfo.cs" />
     <Compile Include="ItemWeb.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

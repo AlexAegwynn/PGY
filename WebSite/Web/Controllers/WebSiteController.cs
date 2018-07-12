@@ -18,7 +18,7 @@ namespace Web.Controllers
         }
 
         [HttpPost]
-        public JsonResult Login(ViewModels.LoginUserViewModel model)
+        public JsonResult Login(ViewModels.vm_LoginUser model)
         {
             JsonResult json = new JsonResult();
             if (model.Name == "stone" && model.Password == "pgy123")
@@ -42,7 +42,7 @@ namespace Web.Controllers
 
         public ActionResult WebSiteList()
         {
-            ViewModels.LoginUserViewModel vLogin = HttpContext.Session["LoginUser"] as ViewModels.LoginUserViewModel;
+            ViewModels.vm_LoginUser vLogin = HttpContext.Session["LoginUser"] as ViewModels.vm_LoginUser;
 
             if (vLogin == null) { return RedirectToAction("Index"); }
 
@@ -54,11 +54,11 @@ namespace Web.Controllers
 
         public ActionResult WebSiteInfo(string inKey)
         {
-            ViewModels.LoginUserViewModel vLogin = HttpContext.Session["LoginUser"] as ViewModels.LoginUserViewModel;
+            ViewModels.vm_LoginUser vLogin = HttpContext.Session["LoginUser"] as ViewModels.vm_LoginUser;
 
             if (vLogin == null) { return RedirectToAction("Index"); }
 
-            ViewModels.WebSiteViewModel vModel = new ViewModels.WebSiteViewModel();
+            ViewModels.vm_WebSite vModel = new ViewModels.vm_WebSite();
             vModel.IsEdit = false;
 
             if (!string.IsNullOrEmpty(inKey))
@@ -90,7 +90,7 @@ namespace Web.Controllers
         }
 
         [HttpPost]
-        public JsonResult SaveWebSite(ViewModels.WebSiteViewModel inModel)
+        public JsonResult SaveWebSite(ViewModels.vm_WebSite inModel)
         {
             JsonResult json = new JsonResult();
 
@@ -150,7 +150,7 @@ namespace Web.Controllers
         }
 
         [HttpPost]
-        public JsonResult SaveImg(ViewModels.ImgViewModel model)
+        public JsonResult SaveImg(ViewModels.vm_Img model)
         {
             JsonResult json = new JsonResult();
 
