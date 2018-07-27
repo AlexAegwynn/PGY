@@ -9,12 +9,14 @@ using Model;
 
 namespace Data
 {
+    /// <summary>
+    /// 用户数据处理类
+    /// </summary>
     public class DUsers
     {
         /// <summary>
         /// 根据用户名和密码获取用户
         /// </summary>
-        /// <returns></returns>
         public static MUsers GetUsers(string inUserName, string inPassword)
         {
             string sql = @" SELECT * FROM nw_Users WHERE UserName = @inUserName AND Password = @inPassword ";
@@ -47,8 +49,6 @@ namespace Data
         /// <summary>
         /// 创建用户
         /// </summary>
-        /// <param name="inModel"></param>
-        /// <returns></returns>
         public static int CreateUser(MUsers inModel)
         {
             StringBuilder sql = new StringBuilder();
