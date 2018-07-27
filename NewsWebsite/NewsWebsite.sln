@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logic", "Logic\Logic.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web", "Web\Web.csproj", "{71EEB014-4C17-42B3-B4F6-6207727302C3}"
 EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "PGY_CM", "PGY_CM\PGY_CM.sqlproj", "{72E4DFDA-D515-4AEE-BEF8-E97E28FEA42A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DB", "DB", "{B9866D67-2244-4068-980F-28A9A0875E76}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,9 +37,18 @@ Global
 		{71EEB014-4C17-42B3-B4F6-6207727302C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{71EEB014-4C17-42B3-B4F6-6207727302C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{71EEB014-4C17-42B3-B4F6-6207727302C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72E4DFDA-D515-4AEE-BEF8-E97E28FEA42A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72E4DFDA-D515-4AEE-BEF8-E97E28FEA42A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72E4DFDA-D515-4AEE-BEF8-E97E28FEA42A}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{72E4DFDA-D515-4AEE-BEF8-E97E28FEA42A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72E4DFDA-D515-4AEE-BEF8-E97E28FEA42A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72E4DFDA-D515-4AEE-BEF8-E97E28FEA42A}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{72E4DFDA-D515-4AEE-BEF8-E97E28FEA42A} = {B9866D67-2244-4068-980F-28A9A0875E76}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {176CB39C-DB20-4F65-8AA7-4E8003F2573B}
