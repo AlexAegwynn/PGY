@@ -41,6 +41,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DContent.cs" />
+    <Compile Include="DFavorites.cs" />
+    <Compile Include="DFootmarks.cs" />
     <Compile Include="DUsers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlHelper.cs" />

@@ -24,11 +24,11 @@ namespace Model
         /// <summary>
         /// 文章ID
         /// </summary>
-        public int ArticleID { get; set; } = 0;
+        public long ArticleID { get; set; } = 0;
 
         /// <summary>
         /// 足迹文章标题
         /// </summary>
-        public string FmTitel { get; set; } = string.Empty;
+        public string FmTitle { get; set; } = string.Empty;
     }
 }

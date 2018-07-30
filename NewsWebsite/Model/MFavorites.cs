@@ -29,6 +29,6 @@ namespace Model
         /// <summary>
         /// 收藏文章标题
         /// </summary>
-        public string FaTitel { get; set; } = string.Empty;
+        public string FaTitle { get; set; } = string.Empty;
     }
 }
