@@ -1,4 +1,5 @@
-﻿
+﻿@*<script src="http://pv.sohu.com/cityjson?ie=utf-8"></script>*@
+
 <script>
     var pcount = 1;
     var state = true;
@@ -12,25 +13,13 @@
                 $('#articles').html(data);
             }
         })
+        //returnCitySN['cname']
     });
 
     function Search() {
         var str = $('.searchText').val();
 
         window.location.href = '/Home/Index?search=' + str;
-
-        //$.ajax({
-        //    url: '/Home/ArticleList',
-        //    type: 'post',
-        //    data: {
-        //        page: 0,
-        //        search: str
-        //    },
-        //    success: function (data) {
-        //        $('#articles').html(data);
-        //        state = true;
-        //    }
-        //})
     }
 
     $(window).scroll(
