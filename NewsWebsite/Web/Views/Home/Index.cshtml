@@ -1,6 +1,5 @@
 ﻿
 <script>
-    var total = '@ViewBag.PageCount';
     var pcount = 1;
     var state = true;
 
@@ -13,7 +12,26 @@
                 $('#articles').html(data);
             }
         })
-    })
+    });
+
+    function Search() {
+        var str = $('.searchText').val();
+
+        window.location.href = '/Home/Index?search=' + str;
+
+        //$.ajax({
+        //    url: '/Home/ArticleList',
+        //    type: 'post',
+        //    data: {
+        //        page: 0,
+        //        search: str
+        //    },
+        //    success: function (data) {
+        //        $('#articles').html(data);
+        //        state = true;
+        //    }
+        //})
+    }
 
     $(window).scroll(
         function () {
@@ -21,12 +39,17 @@
             var scrollHeight = $(document).height();
             var windowHeight = $(this).height();
             if (scrollTop + windowHeight == scrollHeight) {
-                //parseInt(total)
-                if (pcount <= 2) {
+                var total = $('#PageCount').val();
+
+                if (pcount <= total) {
+                    var str = $('.searchText').val();
+
                     $.ajax({
                         url: '/Home/ArticleList',
                         type: 'post',
-                        data: { page: pcount },
+                        data: {
+                            page: pcount
+                        },
                         success: function (data) {
                             $(data).appendTo($("#articles"));
                             state = true;
@@ -41,9 +64,10 @@
                 }
             }
         });
+
 </script>
 <div class="topBar">
-    <div class="weatherInfo">汕头 多云 28°/33°<a href="#" style="color: white">∨</a></div>
+    <div class="weatherInfo"><span id="cw">天气</span></div>
 </div>
 <div id="typeInfo">
     <div class="typeTitle">
@@ -115,14 +139,16 @@
         <!--<div class="control subl"><img src="img/left.png"></div>
         <div class="control subr"><img src="img/right.png"></div>-->
     </div>
+    <input id="PageCount" hidden="hidden" value="@ViewBag.PageCount" />
+
     <div class="shopNews" id="articles">
 
     </div>
 </div>
 <div class="rightbar">
     <div class="searchBar">
-        <input type="text" class="searchText">
-        <div class="searchButton"><a type="button" class="searchButton1" href="#">搜索</a></div>
+        <input type="text" class="searchText" value="@ViewBag.Search" />
+        <div class="searchButton"><a type="button" class="searchButton1" onclick="Search()">搜索</a></div>
     </div>
     <div class="loginBar">
         <div class="loginInner">

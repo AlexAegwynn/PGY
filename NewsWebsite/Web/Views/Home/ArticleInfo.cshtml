@@ -1,0 +1,24 @@
+﻿@{
+    Layout = null;
+    var vModel = Model as Web.ViewModels.VMArticle;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script>
+        $(function () {
+            var str = $('#hinfo').val();
+            $('#info').html(str);
+        })
+    </script>
+    <title>@vModel.Title</title>
+</head>
+<body>
+    <div id="info"></div>
+    @Html.Hidden("hinfo", vModel.Conten)
+</body>
+</html>

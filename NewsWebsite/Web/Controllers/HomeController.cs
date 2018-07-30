@@ -15,36 +15,35 @@ namespace Web.Controllers
 
         private static List<Model.MContent> articleList = new List<Model.MContent>();
 
-        public ActionResult Index()
+        public ActionResult Index(string search = "")
         {
-            //List<Model.MContent> list = Logic.LContent.GetArticles();
-
             articleList = Logic.LContent.GetArticles();
 
+            if (!string.IsNullOrEmpty(search))
+            {
+                articleList = articleList.Where(m => m.Title.Contains(search)).ToList();
+            }
+
             decimal total = articleList.Count;
-            int page = Convert.ToInt32(Math.Ceiling(total / 10));
+            int pcount = Convert.ToInt32(Math.Ceiling(total / 10));
 
-            //foreach (var item in list)
-            //{
-            //    ViewModels.VMArticle vModel = new ViewModels.VMArticle
-            //    {
-            //        ArticleID = item.ArticleID,
-            //        Title = item.Title,
-            //        DomainID = item.DomainID,
-            //        ReleaseTime = item.ReleaseTime,
-            //        Conten = item.Conten
-            //    };
-            //    articleList.Add(vModel);
-            //}
-
-            ViewBag.PageCount = page;
+            ViewBag.PageCount = pcount;
+            ViewBag.Search = search;
 
             return View();
         }
 
         public PartialViewResult ArticleList(int page = 0)
         {
-            List<Model.MContent> list = articleList.Skip(10 * page).Take(10).ToList();
+            if (articleList == null)
+            {
+                articleList = Logic.LContent.GetArticles();
+            }
+
+            List<Model.MContent> list = articleList;
+
+            list = list.Skip(10 * page).Take(10).ToList();
+
             List<ViewModels.VMArticle> vList = new List<ViewModels.VMArticle>();
 
             foreach (var item in list)
@@ -57,13 +56,31 @@ namespace Web.Controllers
                     ReleaseTime = ConvertLongToDateTime(item.ReleaseTime).ToShortDateString(),
                     Conten = item.Conten
                 };
-
                 vList.Add(vModel);
             }
 
             return PartialView(vList);
         }
 
+        public ActionResult ArticleInfo(long inArticleID)
+        {
+            ViewModels.VMArticle vModel = new ViewModels.VMArticle();
+
+            if (articleList.Count > 0)
+            {
+                var vList = (from l in articleList where l.ArticleID == inArticleID select l).ToList();
+                if (vList.Count > 0)
+                {
+                    vModel.ArticleID = vList[0].ArticleID;
+                    vModel.Title = vList[0].Title;
+                    vModel.DomainID = vList[0].DomainID;
+                    vModel.ReleaseTime = ConvertLongToDateTime(vList[0].ReleaseTime).ToShortDateString();
+                    vModel.Conten = vList[0].Conten;
+                }
+            }
+
+            return View(vModel);
+        }
 
         // DateTime --> long
         private static long ConvertDataTimeToLong(DateTime dt)
@@ -74,7 +91,6 @@ namespace Web.Controllers
             timeStamp = long.Parse(timeStamp.ToString().Substring(0, timeStamp.ToString().Length - 4));
             return timeStamp;
         }
-
 
         // long --> DateTime
         private static DateTime ConvertLongToDateTime(long d)
