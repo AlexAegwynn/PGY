@@ -8,6 +8,9 @@ using Data;
 
 namespace Logic
 {
+    /// <summary>
+    /// 用户逻辑处理类
+    /// </summary>
     public class LUsers
     {
         /// <summary>
