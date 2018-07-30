@@ -1,0 +1,20 @@
+﻿@{
+    var vList = Model as List<Web.ViewModels.VMArticle>;
+}
+
+@foreach (var item in vList)
+{
+    <div class="cBox single-mode">
+        <div class="cLeft single-mode-lbox">
+            <a href="#" target="_blank" class="imgwrap">
+                <img src="~/Content/img/小米8——120x120.jpg" />
+            </a>
+        </div>
+        <div class="single-mode-rbox">
+            <div class="single-mode-rbox-inner">
+                <div class="titlelink"><a href="#">@item.Title</a></div>
+                <div class="fromshop">来自<a href="#">晒码君</a></div>
+            </div>
+        </div>
+    </div>
+}

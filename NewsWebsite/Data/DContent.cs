@@ -29,6 +29,7 @@ namespace Data
                     ArticleID = Convert.ToInt32(item["ArticleID"]),
                     Title = item["Title"].ToString(),
                     ReleaseTime = Convert.ToInt64(item["ReleaseTime"]),
+                    DomainID = Convert.ToInt32(item["DomainID"]),
                     Conten = item["Conten"].ToString()
                 };
                 list.Add(model);

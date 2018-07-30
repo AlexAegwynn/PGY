@@ -1,0 +1,419 @@
+@charset "utf-8";
+/* CSS Document */
+body,ul,ol,li,p,h1,h2,h3,h4,h5,h6,form,fieldset,table,td,img,div,dl,dt,dd,input{margin:0;padding:0;}
+body{font-size:12px;}
+img{border:none;}
+li{list-style:none;}
+input,select,textarea{outline:none;border:none;}
+textarea{resize:none;}
+a{text-decoration:none;}
+/*清浮动*/
+.clearfix:after{content:"";display:block;clear:both;}
+.clearfix{zoom:1;}
+/*公用*/
+.comWidth{width: 1000px;margin-left: auto;margin-right: auto;}
+.leftpart{float:left;}
+.rightpart{float:right;}
+.hide{display: none;}
+.show{display:block;}
+.fl{float:left;}
+.fr{float:right;}
+body{
+	height:2000px;
+}
+.cBox{
+    display: block;
+    zoom: 1;
+}
+.cLeft{
+	float: left;
+}
+
+.topBar{
+	position: relative;
+	height: 30px;
+	color:#ffffff;
+	background-color: #000000;
+}
+.weatherInfo{
+	line-height: 30px;
+	float: left;
+	padding-left: 20px;
+}
+
+#typeInfo{
+	float: left;
+	padding-left: 40px;
+	height: auto;
+	width: 200px;
+}
+#typeInfo .typeTitle{
+	float: right;
+	width:320px;
+	text-align: center;
+	font-size: 40px;
+}
+#typeInfo .typeTop{
+	position: relative;
+	font-family: "微软雅黑";
+	padding-top: 60px;
+	width: 100px;
+}
+#typeInfo .typeTop a{
+	display:block;
+}
+#typeInfo .typeTop li{
+	height: 10px;
+	margin-top: 10px;
+	border-radius: 10px;
+	text-align: center;
+	width: 80px;
+	padding-top: 50px;
+}
+#typeInfo .typeTop li span{
+	display:block;
+	position: relative;
+	bottom: 33px;
+	font-size: 20px;
+	color: black;
+}
+#typeInfo .typeTop li:hover{
+	cursor:pointer;
+	background-color: red;
+	
+}
+#typeInfo .typeTop li span{
+	display: inline-block;
+}
+#typeInfo .typeTop a li span:hover{
+	color: white;
+	
+}
+#typeInfo .typeTop .focusOn{
+	background-color: red;
+	
+}
+#typeInfo .typeTop .focusOn span{
+	color: white;
+}
+#typeInfo .typeTop .more{
+	position:relative;
+}
+#inform{
+	border: 1px solid orange;
+	z-index: 999;
+	position: fixed;
+	top: 200px;
+	left:160px;
+	background-color:white;
+	font-family: "微软雅黑";
+	width: 100px;
+}
+#inform a{
+	display:block;
+}
+#inform ul{
+	padding-left: 10px;
+	background-color:white;
+	display: block;
+	zoom: 1;
+}
+#inform ul li{
+	height: 10px;
+	margin-top: 10px;
+	border-radius: 10px;
+	text-align: center;
+	width: 80px;
+	padding-top: 50px;
+}
+#inform ul li:hover{
+	cursor:pointer;
+	background-color: red;
+}
+#inform ul li span{
+	display:block;
+	position: relative;
+	bottom: 33px;
+	font-size: 20px;
+	color: black;
+}
+#inform ul li span:hover{
+	color:white;
+}
+.newWrapper{
+	z-index: 1;
+	position: absolute;
+	top: 30px;
+	left: 200px;
+	width:700px;
+}
+.newWrapper .newPhoto{
+	display: block;
+    zoom: 1;
+	height: 250px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	height: 300px;
+	width: 700px;
+}
+#scroll{
+	position:relative
+	z-index: 1;
+	height: 300px;
+	width: 700px;
+}
+#scroll li{
+	display:none;
+	
+	
+}
+#scroll li a span{
+	color: #CCCCCC;
+	background-color: #000000;
+	opacity: 0.5;
+	position: absolute;
+	top: 297px;
+	left: 0px;
+	font-size: 20px;
+	width: 650px;
+	padding-left: 50px;
+}
+#scroll li img{
+	z-index: 1;
+	cursor:pointer;
+	height: 300px;
+	width:700px;
+}
+.newPhoto a.control {position:absolute;display: block;top: 50%;margin-top: -78px;width: 76px;height: 112px;cursor: pointer;z-index: 2;background: url( ../img/buttons.png) no-repeat}
+.newPhoto a.prev {left: 0;background-position: 0 0}
+.newPhoto a.next {right: 0;background-position: -76px 0}
+.newPhoto a.prev:hover {background-position: 0 -112px}
+.newPhoto a.next:hover {background-position: -76px -112px}
+.newWrapper .updateNews{
+	line-height: 30px;
+	text-align: center;
+	display: block;
+	opacity:0.4;
+	margin-top: 20px;
+	background-color:aqua;
+	position: absolute;
+	top: 0px;
+	width: 700px;
+	height: 30px;
+}
+
+.newWrapper .updateNews:hover{
+	cursor: pointer;
+	text-decoration: underline;
+}
+
+.newWrapper .shopNews{
+	position: absolute;
+	top:320px;
+	height: auto;
+	
+}
+.newWrapper .shopNews ul{
+	margin-top: 60px;
+}
+.newWrapper .shopNews .single-mode {
+	width: 300px;
+	float: left;
+    height: 123px;
+    position: relative;
+    padding: 20px 180px;
+    border-bottom: 1px solid #e8e8e8;
+}
+.newWrapper .single-mode .single-mode-lbox {
+	position: absolute;
+	top: 10px;
+	left: 30px;
+    width: 158px;
+    height: 102px;
+    margin-right: 16px;
+}
+.newWrapper .single-mode .single-mode-lbox .imgwrap{
+	display: inline-block;
+    height: 100%;
+}
+.newWrapper .single-mode .single-mode-lbox .imgwrap img:hover{
+	transform: scale(1.1);
+	transition: all 0.5s ease 0s;
+	-webkit-transform: scale(1.1);
+	-webkit-transform: all 1s ease 0s;
+}
+.newWrapper .single-mode-rbox{
+	width: 100px;
+	float: left;
+	padding: 20px 5px;
+}
+.single-mode-rbox .single-mode-rbox-inner .titlelink{
+	width:500px;
+	font-size: 20px;
+}
+.single-mode-rbox .single-mode-rbox-inner .titlelink a{
+	font-family: "微软雅黑";
+	font-weight: bold;
+	color: black;
+}
+.single-mode-rbox .single-mode-rbox-inner .titlelink a:hover{
+	color:#0000EE;
+}
+.single-mode-rbox .single-mode-rbox-inner .fromshop{
+	padding: 10px 0;
+}
+.single-mode-rbox .single-mode-rbox-inner .fromshop a{
+	color: #CCCCCC;
+}
+.single-mode-rbox .single-mode-rbox-inner .fromshop a:hover{
+	color:#0000EE;
+}
+.rightbar{
+	height: auto;
+	width: 300px;
+	position: absolute;
+	top: 20px;
+	left: 100px;
+}
+.rightbar .searchBar{
+	position: absolute;
+	top:80px;
+	left: 930px;
+	width: 200px;
+}
+.rightbar .searchBar .searchText{
+	width: 130px;
+	float: left;
+	color: white;
+	background-color: #cccccc;
+	padding-left: 10px;
+	border-radius: 10px;
+	height: 30px;
+	border: 1px solid #cccccc;
+}
+.rightbar .searchBar .searchButton{
+	float: left;
+	line-height: 30px;
+	border-radius: 10px;
+	margin-left: 5px;
+	border: 1px solid orange;
+	cursor:pointer;
+	height: 30px;
+	width: 50px;
+	background-color: orange;
+}
+.rightbar .searchBar .searchButton .searchButton1{
+	display:block;
+	color: white;
+	padding-left: 13px;
+}
+.loginBar{
+	position: absolute;
+	top:200px;
+	left: 880px;
+	height: 300px;
+	width: 300px;
+	background-color: #cccccc;
+}
+.loginBar .loginInner{
+	height: 250px;
+	width: 250px;
+	background-color: white;
+	margin: 25px;
+}
+.loginBar .loginInner .loginConduce{
+	padding-top: 20px;
+	text-align: center;
+	color: #C0C0C0;
+}
+.loginBar .loginInner .loginMode{
+	text-align: center;
+	margin-top: 20px;
+	margin-left: 25px;
+	width: 200px;
+	height: 50px;
+	color:white;
+	background-color: orange;
+	border: none;
+	border-radius: 10px;
+	cursor: pointer;
+}
+.loginBar .loginInner .registerMode{
+	text-align: center;
+	margin-top: 20px;
+	margin-left: 25px;
+	width: 200px;
+	height: 50px;
+	color:white;
+	background-color: orange;
+	border: none;
+	border-radius: 10px;
+	cursor: pointer;
+}
+.loginBar .loginInner .registerMode .registerButton{
+	display:block;
+	line-height: 50px;
+	color:white;
+}
+.loginBar .loginInner .loginMode .loginButton {
+	display:block;
+	line-height: 50px;
+	color:white;
+}
+.loginBar .loginInner .otherLogin{
+	text-align: center;
+	padding-top: 100px;
+}
+.loginBar .loginInner .otherLogin a{
+	color: #C0C0C0;
+}
+.loginBar .loginInner .otherLogin a:hover{
+	color: #0000EE;
+}
+.rightbar .hoursNews{
+	
+	position: absolute;
+	top:550px;
+	left: 880px;
+	width: 300px;
+	height: auto;
+	background-color: #c0c0c0;
+	border-top: 2px solid #FF7E00;
+}
+.rightbar .hoursNews .hoursNewsTitle{
+	padding: 5px 10px;
+	font-family: "微软雅黑";
+	font-weight: bold;
+	font-size: 20px;
+}
+.rightbar .hoursNews .Newslist .NewslistOne{
+	
+    border-top: 1px solid #e8e8e8;
+}
+.rightbar .hoursNews .Newslist li{
+	height: 60px;
+	padding-top: 10px;
+}
+.rightbar .hoursNews .Newslist .NewslistImg{
+	float: left;
+	padding-left: 15px;
+	padding-top: 10px;
+}
+.rightbar .hoursNews .Newslist .NewslistImg:hover{
+	transform: scale(1.1);
+	transition: all 0.5s ease 0s;
+	-webkit-transform: scale(1.1);
+	-webkit-transform: all 1s ease 0s;
+}
+.rightbar .hoursNews .Newslist .NewslistContent{
+	padding-top: 30px;
+	margin-left: 80px;
+	height: 40px;
+	width: 200px;
+}
+.rightbar .hoursNews .Newslist .NewslistContent a{
+	color: black;
+}
+.rightbar .hoursNews .Newslist .NewslistContent a:hover{
+	color:#0000EE;
+}

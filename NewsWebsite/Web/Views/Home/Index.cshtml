@@ -1,31 +1,190 @@
-﻿@{
-    ViewBag.Title = "Home Page";
-}
+﻿
+<script>
+    var total = '@ViewBag.PageCount';
+    var pcount = 1;
+    var state = true;
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+    $(function () {
+        $.ajax({
+            url: '/Home/ArticleList',
+            type: 'post',
+            data: { page: 0 },
+            success: function (data) {
+                $('#articles').html(data);
+            }
+        })
+    })
+
+    $(window).scroll(
+        function () {
+            var scrollTop = $(this).scrollTop();
+            var scrollHeight = $(document).height();
+            var windowHeight = $(this).height();
+            if (scrollTop + windowHeight == scrollHeight) {
+                //parseInt(total)
+                if (pcount <= 2) {
+                    $.ajax({
+                        url: '/Home/ArticleList',
+                        type: 'post',
+                        data: { page: pcount },
+                        success: function (data) {
+                            $(data).appendTo($("#articles"));
+                            state = true;
+                        }
+                    })
+                    pcount++;
+                } else {
+                    if (state == true) {
+                        alert('到底了');
+                        state = false;
+                    }
+                }
+            }
+        });
+</script>
+<div class="topBar">
+    <div class="weatherInfo">汕头 多云 28°/33°<a href="#" style="color: white">∨</a></div>
+</div>
+<div id="typeInfo">
+    <div class="typeTitle">
+        <a href="#">
+            <img src="~/Content/img/toptitle.png" />
+        </a>
+    </div>
+    <ul class="typeTop">
+        <a href="#"><li class="focusOn"><span>推荐</span></li></a>
+        <a href="#"><li><span>数码</span></li></a>
+        <a href="#"><li><span>衣服</span></li></a>
+        <a href="#"><li><span>家电</span></li></a>
+        <a href="#"><li><span>美妆</span></li></a>
+        <a href="#"><li><span>美食</span></li></a>
+        <a href="#" id="btn" onMouseOver="javascript:showInform();">
+            <li class="more">
+                <span>更多</span>
+            </li>
+        </a>
+</div>
+<div id="inform" onMouseOver="javascript:showInform();" onMouseOut="hiddenInform(event)" style="display: none;">
+    <ul>
+        <a href="#"><li><span>美妆</span></li></a>
+        <a href="#"><li><span>家居</span></li></a>
+        <a href="#"><li><span>汽车</span></li></a>
+        <a href="#"><li><span>乐器</span></li></a>
+        <a href="#"><li><span>运动</span></li></a>
+    </ul>
+    </ul>
+</div>
+<div class="newWrapper">
+    <div class="newPhoto">
+        <a class="control prev"></a><a class="control next abs"></a>
+        <div id="scroll">
+            <ul>
+                <li style="display:block;">
+                    <a href="#">
+                        <img src="~/Content/img/gallery_list1_1.jpg" /><span>小米6X红色版</span>
+                    </a>
+                </li>
+                <li style="">
+                    <a href="#">
+                        <img src="~/Content/img/gallery_list1_2.jpg" /><span>小米6X红色版</span>
+                    </a>
+                </li>
+                <li style="">
+                    <a href="#">
+                        <img src="~/Content/img/gallery_list1_3.jpg" /><span>小米6X金色版</span>
+                    </a>
+                </li>
+                <li style="">
+                    <a href="#">
+                        <img src="~/Content/img/gallery_list1_4.jpg" /><span>小米6X蓝色版</span>
+                    </a>
+                </li>
+                <li style="">
+                    <a href="#">
+                        <img src="~/Content/img/gallery_list1_5.jpg" /><span>小米6X粉色版</span>
+                    </a>
+                </li>
+                <li style="">
+                    <a href="#">
+                        <img src="~/Content/img/gallery_list1_6.jpg" /><span>小米6X黑色版</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!--<div class="control subl"><img src="img/left.png"></div>
+        <div class="control subr"><img src="img/right.png"></div>-->
+    </div>
+    <div class="shopNews" id="articles">
+
+    </div>
+</div>
+<div class="rightbar">
+    <div class="searchBar">
+        <input type="text" class="searchText">
+        <div class="searchButton"><a type="button" class="searchButton1" href="#">搜索</a></div>
+    </div>
+    <div class="loginBar">
+        <div class="loginInner">
+            <div class="loginConduce">登录后可以保存您的浏览足迹、收藏。</div>
+            <div class="loginMode"><a type="button" class="loginButton" href="#">登录</a></div>
+            <div class="registerMode"><a type="button" class="registerButton" href="#">注册</a></div>
+        </div>
+    </div>
+    <div class="hoursNews">
+        <div class="hoursNewsTitle"><span>最近要闻</span></div>
+        <div class="Newslist">
+            <ul>
+                @for (int i = 0; i < 6; i++)
+                {
+                    <li>
+                        <div class="NewslistOne">
+                            <div class="NewslistImg">
+                                <a href="#">
+                                    <img src="~/Content/img/小米8——120x120.jpg" style="width: 50px;height: 50px;" />
+                                </a>
+                            </div>
+                            <div class="NewslistContent">
+                                <a href="#">小米全新旗舰曝光，8月首发骁龙850</a>
+                            </div>
+                        </div>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
 </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>
+<script type="text/javascript">
+    //显示悬浮层
+    function showInform() {
+        document.getElementById("inform").style.display = 'block';
+        // document.getElementById("inform").css("display","block");
+    }
+    //隐藏悬浮层
+    function hiddenInform(event) {
+        var informDiv = document.getElementById('inform');
+        var x = event.clientX;
+        var y = event.clientY;
+        var divx1 = informDiv.offsetLeft;
+        var divy1 = informDiv.offsetTop;
+        var divx2 = informDiv.offsetLeft + informDiv.offsetWidth;
+        var divy2 = informDiv.offsetTop + informDiv.offsetHeight;
+        if (x < divx1 || x > divx2 || y < divy1 || y > divy2) {
+            document.getElementById('inform').style.display = 'none';
+        }
+
+    }
+</script>
+<script src="~/Scripts/YuxiSlider.jQuery.min.js"></script>
+<script>
+    $("#scroll").YuxiSlider({
+        width: 700, //容器宽度
+        height: 250, //容器高度
+        control: $('.control'), //绑定控制按钮
+        during: 4000, //间隔4秒自动滑动
+        speed: 1000, //移动速度1秒
+        mousewheel: false, //是否开启鼠标滚轮控制
+        direkey: true //是否开启左右箭头方向控制
+    });
+</script>

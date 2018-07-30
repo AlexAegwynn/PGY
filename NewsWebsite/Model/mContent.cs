@@ -22,6 +22,11 @@ namespace Model
         public long ReleaseTime { get; set; } = 0;
 
         /// <summary>
+        /// 分类ID
+        /// </summary>
+        public int DomainID { get; set; } = 1;
+
+        /// <summary>
         /// 文章标题
         /// </summary>
         public string Title { get; set; } = string.Empty;
