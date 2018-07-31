@@ -11,17 +11,43 @@ namespace Web.Controllers
         /// <summary>
         /// 页面文章列表
         /// </summary>
-        //private static List<ViewModels.VMArticle> articleList = new List<ViewModels.VMArticle>();
-
         private static List<Model.MContent> articleList = new List<Model.MContent>();
 
-        public ActionResult Index(string search = "")
+        public ActionResult Index(string search = "", int catid = 0)
         {
             articleList = Logic.LContent.GetArticles();
+            var a = articleList.Where(m => m.ArticleID == 5822665).ToList();
+
+            var text = GetSrc(a[0].Conten);
+
+            var list = (from l in articleList where l.Conten.Contains("<img src=") orderby Guid.NewGuid() select l).Take(6).ToList();
+            List<ViewModels.VMArticle> vList = new List<ViewModels.VMArticle>();
+
+            foreach (var item in list)
+            {
+                ViewModels.VMArticle vModel = new ViewModels.VMArticle
+                {
+                    ArticleID = item.ArticleID,
+                    DomainID = item.DomainID,
+                    Title = item.Title,
+                    ReleaseTime = ConvertLongToDateTime(item.ReleaseTime).ToShortDateString(),
+                    Conten = item.Conten,
+                    ImgSrc = GetSrc(item.Conten)
+                };
+
+                vList.Add(vModel);
+            }
+
+            ViewData["ShowList"] = vList;
 
             if (!string.IsNullOrEmpty(search))
             {
                 articleList = articleList.Where(m => m.Title.Contains(search)).ToList();
+            }
+
+            if (catid != 0)
+            {
+                articleList = articleList.Where(m => m.DomainID == catid).ToList();
             }
 
             decimal total = articleList.Count;
@@ -29,6 +55,7 @@ namespace Web.Controllers
 
             ViewBag.PageCount = pcount;
             ViewBag.Search = search;
+            ViewBag.CatID = catid;
 
             return View();
         }
@@ -51,11 +78,13 @@ namespace Web.Controllers
                 ViewModels.VMArticle vModel = new ViewModels.VMArticle
                 {
                     ArticleID = item.ArticleID,
-                    Title = item.Title,
                     DomainID = item.DomainID,
+                    Title = item.Title,
                     ReleaseTime = ConvertLongToDateTime(item.ReleaseTime).ToShortDateString(),
-                    Conten = item.Conten
+                    Conten = item.Conten,
+                    ImgSrc = GetSrc(item.Conten)
                 };
+
                 vList.Add(vModel);
             }
 
@@ -66,23 +95,24 @@ namespace Web.Controllers
         {
             ViewModels.VMArticle vModel = new ViewModels.VMArticle();
 
-            if (articleList.Count > 0)
+            var list = Logic.LContent.GetArticles();
+
+            var vList = (from l in list where l.ArticleID == inArticleID select l).ToList();
+            if (vList.Count > 0)
             {
-                var vList = (from l in articleList where l.ArticleID == inArticleID select l).ToList();
-                if (vList.Count > 0)
-                {
-                    vModel.ArticleID = vList[0].ArticleID;
-                    vModel.Title = vList[0].Title;
-                    vModel.DomainID = vList[0].DomainID;
-                    vModel.ReleaseTime = ConvertLongToDateTime(vList[0].ReleaseTime).ToShortDateString();
-                    vModel.Conten = vList[0].Conten;
-                }
+                vModel.ArticleID = vList[0].ArticleID;
+                vModel.Title = vList[0].Title;
+                vModel.DomainID = vList[0].DomainID;
+                vModel.ReleaseTime = ConvertLongToDateTime(vList[0].ReleaseTime).ToShortDateString();
+                vModel.Conten = vList[0].Conten;
             }
 
             return View(vModel);
         }
 
-        // DateTime --> long
+        /// <summary>
+        /// DateTime To long
+        /// </summary>
         private static long ConvertDataTimeToLong(DateTime dt)
         {
             DateTime dtStart = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1970, 1, 1));
@@ -92,7 +122,9 @@ namespace Web.Controllers
             return timeStamp;
         }
 
-        // long --> DateTime
+        /// <summary>
+        /// long To DateTime
+        /// </summary>
         private static DateTime ConvertLongToDateTime(long d)
         {
             DateTime dtStart = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1970, 1, 1));
@@ -100,6 +132,29 @@ namespace Web.Controllers
             TimeSpan toNow = new TimeSpan(lTime);
             DateTime dtResult = dtStart.Add(toNow);
             return dtResult;
+        }
+
+        /// <summary>
+        /// 获取图片地址
+        /// </summary>
+        /// <param name="content"></param>
+        /// <returns></returns>
+        private static string GetSrc(string str)
+        {
+            string src = string.Empty;
+
+            int fstr = str.IndexOf("<img src=");
+            if (fstr >= 0)
+            {
+                string content = str.Substring(fstr + 10);
+                int lstr = content.IndexOf('"');
+                if (lstr >= 0)
+                {
+                    src = content.Substring(0, lstr);
+                }
+            }
+
+            return src;
         }
     }
 }

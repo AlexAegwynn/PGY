@@ -1,4 +1,10 @@
 ﻿@*<script src="http://pv.sohu.com/cityjson?ie=utf-8"></script>*@
+@{
+    var sList = ViewData["ShowList"] as List<Web.ViewModels.VMArticle>;
+}
+<script>
+    var catid = 'li_'+'@ViewBag.CatID';
+</script>
 
 <script>
     var pcount = 1;
@@ -13,7 +19,22 @@
                 $('#articles').html(data);
             }
         })
-        //returnCitySN['cname']
+
+        var menu1 = $('#ul1').children();
+        for (var i = 0; i < menu1.length; i++) {
+            if (menu1[i].id == catid) {
+                menu1[i].className = 'focusOn';
+                return;
+            }
+        }
+
+        var menu2 = $('#ul2').children();
+        for (var i = 0; i < menu2.length; i++) {
+            if (menu2[i].id == catid) {
+                menu2[i].className = 'menu';
+                return;
+            }
+        }
     });
 
     function Search() {
@@ -53,8 +74,13 @@
                 }
             }
         });
-
 </script>
+
+<style>
+    .menu {
+        background-color: red
+    }
+</style>
 <div class="topBar">
     <div class="weatherInfo"><span id="cw">天气</span></div>
 </div>
@@ -64,27 +90,27 @@
             <img src="~/Content/img/toptitle.png" />
         </a>
     </div>
-    <ul class="typeTop">
-        <a href="#"><li class="focusOn"><span>推荐</span></li></a>
-        <a href="#"><li><span>数码</span></li></a>
-        <a href="#"><li><span>衣服</span></li></a>
-        <a href="#"><li><span>家电</span></li></a>
-        <a href="#"><li><span>美妆</span></li></a>
-        <a href="#"><li><span>美食</span></li></a>
-        <a href="#" id="btn" onMouseOver="javascript:showInform();">
-            <li class="more">
+    <ul id="ul1" class="typeTop">
+        <li id="li_0"><a href="/Home/Index?catid=0"><span>综合</span></a></li>
+        <li id="li_8"><a href="/Home/Index?catid=8"><span>科技</span></a></li>
+        <li id="li_12"><a href="/Home/Index?catid=12"><span>时尚</span></a></li>
+        <li id="li_16"><a href="/Home/Index?catid=16"><span>生活</span></a></li>
+        <li id="li_21"><a href="/Home/Index?catid=21"><span>女人</span></a></li>
+        <li id="li_6"><a href="/Home/Index?catid=6"><span>财经</span></a></li>
+        <li class="more">
+            <a id="btn" onMouseOver="javascript:showInform();">
                 <span>更多</span>
-            </li>
-        </a>
+            </a>
+        </li>
+    </ul>
 </div>
 <div id="inform" onMouseOver="javascript:showInform();" onMouseOut="hiddenInform(event)" style="display: none;">
-    <ul>
-        <a href="#"><li><span>美妆</span></li></a>
-        <a href="#"><li><span>家居</span></li></a>
-        <a href="#"><li><span>汽车</span></li></a>
-        <a href="#"><li><span>乐器</span></li></a>
-        <a href="#"><li><span>运动</span></li></a>
-    </ul>
+    <ul id="ul2">
+        <li id="li_4"><a href="/Home/Index?catid=4"><span>娱乐</span></a></li>
+        <li id="li_13"><a href="/Home/Index?catid=13"><span>游戏</span></a></li>
+        <li id="li_15"><a href="/Home/Index?catid=15"><span>旅游</span></a></li>
+        <li id="li_14"><a href="/Home/Index?catid=14"><span>军事</span></a></li>
+        <li id="li_19"><a href="/Home/Index?catid=19"><span>搞笑</span></a></li>
     </ul>
 </div>
 <div class="newWrapper">
@@ -92,47 +118,22 @@
         <a class="control prev"></a><a class="control next abs"></a>
         <div id="scroll">
             <ul>
-                <li style="display:block;">
-                    <a href="#">
-                        <img src="~/Content/img/gallery_list1_1.jpg" /><span>小米6X红色版</span>
-                    </a>
-                </li>
-                <li style="">
-                    <a href="#">
-                        <img src="~/Content/img/gallery_list1_2.jpg" /><span>小米6X红色版</span>
-                    </a>
-                </li>
-                <li style="">
-                    <a href="#">
-                        <img src="~/Content/img/gallery_list1_3.jpg" /><span>小米6X金色版</span>
-                    </a>
-                </li>
-                <li style="">
-                    <a href="#">
-                        <img src="~/Content/img/gallery_list1_4.jpg" /><span>小米6X蓝色版</span>
-                    </a>
-                </li>
-                <li style="">
-                    <a href="#">
-                        <img src="~/Content/img/gallery_list1_5.jpg" /><span>小米6X粉色版</span>
-                    </a>
-                </li>
-                <li style="">
-                    <a href="#">
-                        <img src="~/Content/img/gallery_list1_6.jpg" /><span>小米6X黑色版</span>
-                    </a>
-                </li>
+                @foreach (var item in sList)
+                {
+                    <li style="display:block;">
+                        <a target="_blank" href="/Home/ArticleInfo?inArticleID=@item.ArticleID">
+                            <img alt="@item.Title" src="@item.ImgSrc" />
+                        </a>
+                    </li>
+                }
             </ul>
         </div>
-
         <!--<div class="control subl"><img src="img/left.png"></div>
         <div class="control subr"><img src="img/right.png"></div>-->
     </div>
     <input id="PageCount" hidden="hidden" value="@ViewBag.PageCount" />
 
-    <div class="shopNews" id="articles">
-
-    </div>
+    <div class="shopNews" id="articles"></div>
 </div>
 <div class="rightbar">
     <div class="searchBar">
@@ -188,7 +189,6 @@
         if (x < divx1 || x > divx2 || y < divy1 || y > divy2) {
             document.getElementById('inform').style.display = 'none';
         }
-
     }
 </script>
 <script src="~/Scripts/YuxiSlider.jQuery.min.js"></script>
