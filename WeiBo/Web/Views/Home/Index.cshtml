@@ -2,30 +2,47 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
-
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+<div class="Content">
+    <div id="classification">
+        <ul>
+            <li class="checkedType">全部</li>
+            <li>宠物</li>
+            <li>搞笑</li>
+            <li>家居设计</li>
+            <li>健身</li>
+            <li>美食</li>
+            <li>情感</li>
+            <li>时尚</li>
+            <li>污</li>
+            <li>育儿</li>
+        </ul>
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+    <div class="MessageBoard">
+        <ul class="dropdown-menu">
+            @for (int i = 0; i < 6; i++)
+            {
+                <li class="Board">
+                    <div class="textArea"><textarea maxlength="300"></textarea></div>
+                    <div class="photoArea"></div>
+                    <div class="AllLink fl">
+                        @*<a href="#">
+                                <img src="~/Content/img/topic.png" /> 话题
+                            </a>
+                            <a href="#">
+                                <img src="~/Content/img/pic.png" />图片↓
+                            </a>
+                            <a href="#">
+                                <img src="~/Content/img/expre.png" />表情
+                            </a>
+                            <span>还能输入300个字</span>*@
+                        <a href="#" class="fr" style="margin-right: 100px;">上传图片</a>
+                    </div>
+                    @*<div class="boardFunction">
+                            <input id="buttonOne" type="submit" value="立即发送">
+                            <input id="buttonTwo" type="submit" value="定时发送">
+                        </div>*@
+                </li>
+            }
+        </ul>
     </div>
 </div>

@@ -1,0 +1,189 @@
+﻿@charset "utf-8";
+/* CSS Document */
+body, ul, ol, li, p, h1, h2, h3, h4, h5, h6, form, fieldset, table, td, img, div, dl, dt, dd, input {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-size: 12px;
+}
+
+img {
+    border: none;
+}
+
+li {
+    list-style: none;
+}
+
+input, select, textarea {
+    outline: none;
+    border: none;
+}
+
+textarea {
+    resize: none;
+}
+
+a {
+    text-decoration: none;
+}
+/*清浮动*/
+.clearfix:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.clearfix {
+    zoom: 1;
+}
+/*公用*/
+.comWidth {
+    width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.leftpart {
+    float: left;
+}
+
+.rightpart {
+    float: right;
+}
+
+.hide {
+    display: none;
+}
+
+.show {
+    display: block;
+}
+
+.fl {
+    float: left;
+}
+
+.fr {
+    float: right;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    background-color: #ededed;
+}
+
+.Content {
+    margin: 50px;
+    width: 800px;
+    height: 800px;
+}
+
+    .Content #classification {
+        display: block;
+        width: 100px;
+        height: auto;
+        margin-bottom: 10px;
+    }
+
+        .Content #classification ul li {
+            font-family: "微软雅黑";
+            font-size: 15px;
+            line-height: 30px;
+            text-align: center;
+            background-color: #9a9a9a;
+            width: 100px;
+            height: 30px;
+            border-bottom: 1px solid #4d4d4d;
+        }
+
+            .Content #classification ul li:hover {
+                cursor: pointer;
+                background-color: #E5E0E0;
+            }
+
+            .Content #classification ul li.checkedType {
+                background-color: #E5E0E0;
+            }
+
+    .Content .MessageBoard {
+        z-index: 1;
+        position: absolute;
+        top: 50px;
+        left: 150px;
+        background-color: #DCD6D7;
+        width: 700px;
+        height: auto;
+        margin-bottom: 10px;
+    }
+
+        .Content .MessageBoard .Board {
+            padding-top: 5px;
+            padding-left: 5px;
+            padding-right: 5px;
+            width: 690px;
+            height: 250px;
+            border-bottom: 1px dashed #4d4d4d;
+        }
+
+            .Content .MessageBoard .Board .textArea {
+                width: 395px;
+                height: 150px;
+            }
+
+                .Content .MessageBoard .Board .textArea textArea {
+                    border: 1px solid #cccccc;
+                    width: 393px;
+                    height: 148px;
+                    padding: 5px;
+                    font-family: "微软雅黑";
+                }
+
+            .Content .MessageBoard .Board .photoArea {
+                margin-top: -150px;
+                background-color: white;
+                float: right;
+                height: 158px;
+                width: 250px;
+                border: 1px dotted #4d4d4d;
+            }
+
+            .Content .MessageBoard .Board .AllLink {
+                width: 690px;
+                height: 50px;
+                margin-top: 10px;
+            }
+
+                .Content .MessageBoard .Board .AllLink a img {
+                    margin-top: 5px;
+                }
+
+            .Content .MessageBoard .Board .boardFunction {
+                width: 500px;
+                height: 50px;
+                margin-top: 40px;
+                margin-left: 50px;
+            }
+
+                .Content .MessageBoard .Board .boardFunction #buttonOne {
+                    cursor: pointer;
+                    margin-left: 30px;
+                    width: 100px;
+                    height: 30px;
+                    background-color: orange;
+                    border-radius: 5px;
+                }
+
+                .Content .MessageBoard .Board .boardFunction #buttonTwo {
+                    cursor: pointer;
+                    margin-left: 30px;
+                    width: 100px;
+                    height: 30px;
+                    background-color: orange;
+                    border-radius: 5px;
+                }
+
+            .Content .MessageBoard .Board .boardFunction
