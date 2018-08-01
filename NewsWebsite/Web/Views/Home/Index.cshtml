@@ -83,7 +83,9 @@
     }
 </style>
 <div class="topBar">
-    <div class="weatherInfo"><span id="cw">天气</span></div>
+    <div class="weatherInfo" style="height:30px;">
+        <iframe width="450" scrolling="no" height="30" frameborder="0" allowtransparency="true" src="http://i.tianqi.com/index.php?c=code&id=1&color=%23FFFFFF&icon=4&wind=1&num=1&site=12"></iframe>
+    </div>
 </div>
 <div id="typeInfo">
     <div class="typeTitle">
@@ -92,7 +94,7 @@
         </a>
     </div>
     <ul id="ul1" class="typeTop">
-        <li id="li_0"><a href="/Home/Index?catid=0"><span>综合</span></a></li>
+        <li id="li_0"><a href="/Home/Index"><span>综合</span></a></li>
         <li id="li_8"><a href="/Home/Index?catid=8"><span>科技</span></a></li>
         <li id="li_12"><a href="/Home/Index?catid=12"><span>时尚</span></a></li>
         <li id="li_16"><a href="/Home/Index?catid=16"><span>生活</span></a></li>
@@ -157,12 +159,12 @@
                     <li>
                         <div class="NewslistOne">
                             <div class="NewslistImg">
-                                <a href="/Home/ArticleInfo?inArticleID=@item.ArticleID">
+                                <a target="_blank" href="/Home/ArticleInfo?inArticleID=@item.ArticleID">
                                     <img src="@item.ImgSrc" style="width: 50px;height: 50px;" />
                                 </a>
                             </div>
                             <div class="NewslistContent">
-                                <a href="/Home/ArticleInfo?inArticleID=@item.ArticleID">@item.Title</a>
+                                <a target="_blank" href="/Home/ArticleInfo?inArticleID=@item.ArticleID">@item.Title</a>
                             </div>
                         </div>
                     </li>

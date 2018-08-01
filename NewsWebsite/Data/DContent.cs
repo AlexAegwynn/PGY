@@ -17,7 +17,7 @@ namespace Data
         /// <returns></returns>
         public static List<MContent> GetArticles()
         {
-            string sql = @" SELECT * FROM wz_Content WHERE Origin = '今日头条' ";
+            string sql = @" SELECT * FROM wz_Content WHERE Origin = '今日头条' ORDER BY ReleaseTime DESC ";
 
             DataTable dt = SqlHelper.ExecuteDataTable(CommandType.Text, sql);
             List<MContent> list = new List<MContent>();
