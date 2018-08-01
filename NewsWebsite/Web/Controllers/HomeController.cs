@@ -16,29 +16,19 @@ namespace Web.Controllers
         public ActionResult Index(string search = "", int catid = 0)
         {
             articleList = Logic.LContent.GetArticles();
-            var a = articleList.Where(m => m.ArticleID == 5822665).ToList();
 
-            var text = GetSrc(a[0].Conten);
+            //var a = articleList.Where(m => m.ArticleID == 5822665).ToList();
+            //var text = GetSrc(a[0].Conten);
 
             var list = (from l in articleList where l.Conten.Contains("<img src=") orderby Guid.NewGuid() select l).Take(6).ToList();
-            List<ViewModels.VMArticle> vList = new List<ViewModels.VMArticle>();
-
-            foreach (var item in list)
-            {
-                ViewModels.VMArticle vModel = new ViewModels.VMArticle
-                {
-                    ArticleID = item.ArticleID,
-                    DomainID = item.DomainID,
-                    Title = item.Title,
-                    ReleaseTime = ConvertLongToDateTime(item.ReleaseTime).ToShortDateString(),
-                    Conten = item.Conten,
-                    ImgSrc = GetSrc(item.Conten)
-                };
-
-                vList.Add(vModel);
-            }
+            List<ViewModels.VMArticle> vList = GetVmList(list);
 
             ViewData["ShowList"] = vList;
+
+            var ywList = (from l in articleList where l.Conten.Contains("<img src=") orderby l.ReleaseTime descending select l).Take(6).ToList();
+            List<ViewModels.VMArticle> vywList = GetVmList(ywList);
+
+            ViewData["NewList"] = vywList;
 
             if (!string.IsNullOrEmpty(search))
             {
@@ -71,22 +61,7 @@ namespace Web.Controllers
 
             list = list.Skip(10 * page).Take(10).ToList();
 
-            List<ViewModels.VMArticle> vList = new List<ViewModels.VMArticle>();
-
-            foreach (var item in list)
-            {
-                ViewModels.VMArticle vModel = new ViewModels.VMArticle
-                {
-                    ArticleID = item.ArticleID,
-                    DomainID = item.DomainID,
-                    Title = item.Title,
-                    ReleaseTime = ConvertLongToDateTime(item.ReleaseTime).ToShortDateString(),
-                    Conten = item.Conten,
-                    ImgSrc = GetSrc(item.Conten)
-                };
-
-                vList.Add(vModel);
-            }
+            List<ViewModels.VMArticle> vList = GetVmList(list);
 
             return PartialView(vList);
         }
@@ -132,6 +107,33 @@ namespace Web.Controllers
             TimeSpan toNow = new TimeSpan(lTime);
             DateTime dtResult = dtStart.Add(toNow);
             return dtResult;
+        }
+
+        /// <summary>
+        /// 获取文章ViewModel列表
+        /// </summary>
+        /// <param name="inList"></param>
+        /// <returns></returns>
+        private static List<ViewModels.VMArticle> GetVmList(List<Model.MContent> inList)
+        {
+            List<ViewModels.VMArticle> vList = new List<ViewModels.VMArticle>();
+
+            foreach (var item in inList)
+            {
+                ViewModels.VMArticle vModel = new ViewModels.VMArticle
+                {
+                    ArticleID = item.ArticleID,
+                    DomainID = item.DomainID,
+                    Title = item.Title,
+                    ReleaseTime = ConvertLongToDateTime(item.ReleaseTime).ToShortDateString(),
+                    Conten = item.Conten,
+                    ImgSrc = GetSrc(item.Conten)
+                };
+
+                vList.Add(vModel);
+            }
+
+            return vList;
         }
 
         /// <summary>

@@ -1,6 +1,7 @@
 ﻿@*<script src="http://pv.sohu.com/cityjson?ie=utf-8"></script>*@
 @{
     var sList = ViewData["ShowList"] as List<Web.ViewModels.VMArticle>;
+    var nList = ViewData["NewList"] as List<Web.ViewModels.VMArticle>;
 }
 <script>
     var catid = 'li_'+'@ViewBag.CatID';
@@ -151,17 +152,17 @@
         <div class="hoursNewsTitle"><span>最近要闻</span></div>
         <div class="Newslist">
             <ul>
-                @for (int i = 0; i < 6; i++)
+                @foreach (var item in nList)
                 {
                     <li>
                         <div class="NewslistOne">
                             <div class="NewslistImg">
-                                <a href="#">
-                                    <img src="~/Content/img/小米8——120x120.jpg" style="width: 50px;height: 50px;" />
+                                <a href="/Home/ArticleInfo?inArticleID=@item.ArticleID">
+                                    <img src="@item.ImgSrc" style="width: 50px;height: 50px;" />
                                 </a>
                             </div>
                             <div class="NewslistContent">
-                                <a href="#">小米全新旗舰曝光，8月首发骁龙850</a>
+                                <a href="/Home/ArticleInfo?inArticleID=@item.ArticleID">@item.Title</a>
                             </div>
                         </div>
                     </li>
