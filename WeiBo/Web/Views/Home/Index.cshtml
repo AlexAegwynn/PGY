@@ -41,7 +41,7 @@
             @for (int i = 0; i < 6; i++)
             {
                 <li class="Board">
-                    <div class="textArea"><textarea maxlength="300"></textarea></div>
+                    <div class="textArea"><textarea maxlength="300">@ViewBag.CatID</textarea></div>
                     <div class="photoArea"></div>
                     <div class="AllLink fl">
                         @*<a href="#">
@@ -56,10 +56,9 @@
                             <span>还能输入300个字</span>*@
                         <a href="#" class="fr" style="margin-right: 100px;">上传图片</a>
                     </div>
-                    @*<div class="boardFunction">
-                            <input id="buttonOne" type="submit" value="立即发送">
-                            <input id="buttonTwo" type="submit" value="定时发送">
-                        </div>*@
+                    <div class="boardFunction">
+                        <input id="buttonOne" type="submit" value="保存">
+                    </div>
                 </li>
             }
         </ul>
