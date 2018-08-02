@@ -8,6 +8,13 @@ namespace Logic
 {
     public class LContent
     {
-
+        /// <summary>
+        /// 获取内容列表
+        /// </summary>
+        /// <returns></returns>
+        public static List<Model.MContent> GetContents()
+        {
+            return Data.DContent.GetContents();
+        }
     }
 }

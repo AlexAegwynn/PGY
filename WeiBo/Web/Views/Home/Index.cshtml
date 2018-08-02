@@ -2,19 +2,38 @@
     ViewBag.Title = "Home Page";
 }
 
+<script>
+    var lid = 'li_' + '@ViewBag.CatID';
+</script>
+
+<script>
+    function SelectCat(index) {
+        window.location.href = '/Home/Index?catid=' + index;
+    }
+
+    $(function () {
+        var ul = $('#ulcat').children();
+        for (var i = 0; i < ul.length; i++) {
+            if (ul[i].id == lid) {
+                ul[i].className = 'checkedType';
+            }
+        }
+    })
+</script>
+
 <div class="Content">
     <div id="classification">
-        <ul>
-            <li class="checkedType">全部</li>
-            <li>宠物</li>
-            <li>搞笑</li>
-            <li>家居设计</li>
-            <li>健身</li>
-            <li>美食</li>
-            <li>情感</li>
-            <li>时尚</li>
-            <li>污</li>
-            <li>育儿</li>
+        <ul id="ulcat">
+            <li id="li_0" onclick="window.location.href = '/Home/Index';">全部</li>
+            <li id="li_22" onclick="SelectCat('22')">宠物</li>
+            <li id="li_19" onclick="SelectCat('19')">搞笑</li>
+            <li id="li_25" onclick="SelectCat('25')">家居设计</li>
+            <li id="li_23" onclick="SelectCat('23')">健身</li>
+            <li id="li_28" onclick="SelectCat('28')">美食</li>
+            <li id="li_26" onclick="SelectCat('26')">情感</li>
+            <li id="li_12" onclick="SelectCat('12')">时尚</li>
+            <li id="li_24" onclick="SelectCat('24')">污</li>
+            <li id="li_27" onclick="SelectCat('27')">育儿</li>
         </ul>
     </div>
     <div class="MessageBoard">

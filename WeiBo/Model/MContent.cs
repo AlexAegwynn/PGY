@@ -8,6 +8,24 @@ namespace Model
 {
     public class MContent
     {
+        /// <summary>
+        /// 文章ID
+        /// </summary>
+        public long ArticleID { get; set; } = 0;
 
+        /// <summary>
+        /// 分类ID
+        /// </summary>
+        public int DomainID { get; set; } = 1;
+
+        /// <summary>
+        /// 内容
+        /// </summary>
+        public string Conten { get; set; } = string.Empty;
+
+        /// <summary>
+        /// 图片地址
+        /// </summary>
+        public string ImgUrl { get; set; } = string.Empty;
     }
 }
