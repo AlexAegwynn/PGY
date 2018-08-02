@@ -144,11 +144,25 @@
         <div class="searchButton"><a type="button" class="searchButton1" onclick="Search()">搜索</a></div>
     </div>
     <div class="loginBar">
-        <div class="loginInner">
-            <div class="loginConduce">登录后可以保存您的浏览足迹、收藏。</div>
-            <div class="loginMode"><a type="button" class="loginButton" href="#">登录</a></div>
-            <div class="registerMode"><a type="button" class="registerButton" href="#">注册</a></div>
-        </div>
+        @{
+            if (false)
+            {
+                <div class="loginInner">
+                    <div class="loginConduce">登录后可以保存您的浏览足迹、收藏。</div>
+                    <div class="loginMode"><a type="button" class="loginButton" href="#">登录</a></div>
+                    <div class="registerMode"><a type="button" class="registerButton" href="#">注册</a></div>
+                </div>
+            }
+            else
+            {
+                <div id="loginInnerTwo">
+                    <div class="welcomeToLogin"><span>欢迎，abc</span></div>
+                    <div class="myfoot"><a type="button" class="footButton" href="myfoot.html">我的足迹</a></div>
+                    <div class="myCollection"><a type="button" class="collectionButton" href="mycollection.html">我的收藏</a></div>
+                    <div class="exitUser"><a type="button" class="exitButton" href="login.html" onClick="">退出当前账号</a></div>
+                </div>
+            }
+        }
     </div>
     <div class="hoursNews">
         <div class="hoursNewsTitle"><span>最近要闻</span></div>

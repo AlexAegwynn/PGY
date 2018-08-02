@@ -1,4 +1,4 @@
-@charset "utf-8";
+﻿@charset "utf-8";
 /* CSS Document */
 body,ul,ol,li,p,h1,h2,h3,h4,h5,h6,form,fieldset,table,td,img,div,dl,dt,dd,input{margin:0;padding:0;}
 body{font-size:12px;}
@@ -40,8 +40,25 @@ body{
 	float: left;
 	padding-left: 20px;
 }
-
+.weatherInfo #Date{
+	float: left;
+}
+.weatherInfo a:hover{
+	text-decoration:underline;
+}
+.personal{
+	line-height: 30px;
+	float: right;
+	padding-right: 20px;
+}
+.personal a{
+	color:white;
+}
+.personal a:hover{
+	text-decoration: underline;
+}
 #typeInfo{
+	position: relative;
 	float: left;
 	padding-left: 40px;
 	height: auto;
@@ -100,6 +117,7 @@ body{
 	position:relative;
 }
 #inform{
+	padding-bottom: 10px;
 	border: 1px solid orange;
 	z-index: 999;
 	position: fixed;
@@ -211,11 +229,16 @@ body{
 	position: absolute;
 	top:320px;
 	height: auto;
-	
+	width:700px;
+}
+.newWrapper .shopNews img{
+	width:120px;
+	height: 120px;
 }
 .newWrapper .shopNews ul{
 	margin-top: 60px;
 }
+
 .newWrapper .shopNews .single-mode {
 	width: 300px;
 	float: left;
@@ -226,7 +249,7 @@ body{
 }
 .newWrapper .single-mode .single-mode-lbox {
 	position: absolute;
-	top: 10px;
+	top: 20px;
 	left: 30px;
     width: 158px;
     height: 102px;
@@ -245,10 +268,10 @@ body{
 .newWrapper .single-mode-rbox{
 	width: 100px;
 	float: left;
-	padding: 20px 5px;
+	padding: 10px 5px;
 }
 .single-mode-rbox .single-mode-rbox-inner .titlelink{
-	width:500px;
+	width:450px;
 	font-size: 20px;
 }
 .single-mode-rbox .single-mode-rbox-inner .titlelink a{
@@ -278,11 +301,12 @@ body{
 .rightbar .searchBar{
 	position: absolute;
 	top:80px;
-	left: 930px;
-	width: 200px;
+	left: 900px;
+	width: 300px;
 }
 .rightbar .searchBar .searchText{
-	width: 130px;
+	font-family: "微软雅黑";
+	width: 200px;
 	float: left;
 	color: white;
 	background-color: #cccccc;
@@ -369,6 +393,78 @@ body{
 }
 .loginBar .loginInner .otherLogin a:hover{
 	color: #0000EE;
+}
+.loginBar #loginInnerTwo{
+	position: absolute;
+	top: 0;
+	/*display: none;*/
+	height: 250px;
+	width: 250px;
+	background-color: white;
+	margin: 25px;
+}
+.loginBar #loginInnerTwo .welcomeToLogin{
+	font-family: "微软雅黑";
+	font-size: 20px;
+	text-align: center;
+	padding-top: 10px;
+}
+.loginBar #loginInnerTwo .welcomeToLogin a{
+	color:orange;
+}
+.loginBar #loginInnerTwo .welcomeToLogin a:hover{
+	text-decoration: underline;
+}
+.loginBar #loginInnerTwo .myfoot{
+	text-align: center;
+	margin-top: 10px;
+	margin-left: 25px;
+	width: 200px;
+	height: 50px;
+	color:white;
+	background-color: orange;
+	border: none;
+	border-radius: 10px;
+	cursor: pointer;
+}
+.loginBar #loginInnerTwo .myfoot a{
+	display:block;
+	line-height: 50px;
+	color:white;
+}
+.loginBar #loginInnerTwo .myCollection{
+	text-align: center;
+	margin-top: 10px;
+	margin-left: 25px;
+	width: 200px;
+	height: 50px;
+	color:white;
+	background-color: orange;
+	border: none;
+	border-radius: 10px;
+	cursor: pointer;
+}
+.loginBar #loginInnerTwo .myCollection a{
+	display:block;
+	line-height: 50px;
+	color:white;
+}
+.loginBar #loginInnerTwo .exitUser{
+	text-align: center;
+	margin-top: 10px;
+	margin-left: 25px;
+	width: 200px;
+	height: 50px;
+	color:white;
+	background-color: orange;
+	border: none;
+	border-radius: 10px;
+	cursor: pointer;
+}
+.loginBar #loginInnerTwo .exitUser .exitButton{
+	display:block;
+	line-height: 50px;
+	color:white;
 }
 .rightbar .hoursNews{
 	

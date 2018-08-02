@@ -1,0 +1,100 @@
+@charset "utf-8";
+/* CSS Document */
+
+.myFootContent{
+	position: absolute;
+	top: 40px;
+	left: 200px;
+	z-index: 1;
+	width:700px;
+	height: auto;
+	
+}
+.myFootContent .footTitle{
+	padding-left: 30px;
+	opacity: 0.5;
+	background-color: orange;
+	width: 670px;
+	height: 50px;
+}
+.myFootContent .footTitle span{
+	float: left;
+	font-family: "微软雅黑";
+	font-weight: bold;
+	font-size: 30px;
+	line-height: 45px;
+}
+.myFootContent .footContent{
+	
+	opacity: 0.8;
+	margin-top: 10px;
+	width: 700px;
+	height: auto;
+	background-color: orange;
+}
+.myFootContent .footContent img{
+	width: 120px;
+	height: 120px;	
+}
+.myFootContent .footContent ul li{
+	display: block;
+	padding-left: 30px;
+	width: 670px;
+	height: 200px;
+	border-bottom: 1px solid #4d4d4d;
+}
+.myFootContent .footContent ul li .lContent{
+	position: relative;
+	width: 150px;
+	height: 170px;
+	padding-top: 30px;
+}
+.myFootContent .footContent ul li .lContent a img:hover{
+	transform: scale(1.1);
+	transition: all 0.5s ease 0s;
+	-webkit-transform: scale(1.1);
+	-webkit-transform: all 1s ease 0s;
+}
+.myFootContent .footContent ul li .rContent{
+	margin-top: -150px;
+	margin-left: 150px;
+	float: left;
+	width: 450px;
+	height:100px;
+}
+.myFootContent .footContent ul li .rContent .newsTitle{
+	font-weight: bold;
+	font-family: "微软雅黑";
+	font-size: 20px;
+}
+.myFootContent .footContent ul li .rContent .newsTitle a{
+	color: black;
+}
+.myFootContent .footContent ul li .rContent .newsTitle a:hover{
+	color:blue;
+}
+.myFootContent .footContent ul li .rContent .contentFrom{
+	padding-top: 10px;
+}
+.myFootContent .footContent ul li .rContent .contentFrom a{
+	color: #4d4d4d;
+}
+.myFootContent .footContent ul li .rContent .contentFrom a:hover{
+	text-decoration: underline;
+}
+.myFootContent .footContent ul li .rContent .footTime{
+	padding-top: 10px;
+}
+.myFootContent .footContent ul li .rContent .delNews{
+	padding-top: 10px;
+	float: right;
+}
+.myFootContent .footContent ul li .rContent .delNews a{
+	color: black;
+}
+.myFootContent .footContent ul li .rContent .delNews a:hover{
+	text-decoration: underline;
+}
+.loginBar #loginInnerTwo .myfoot{
+	background-color: #4d4d4d;
+}

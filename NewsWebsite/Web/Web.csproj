@@ -154,7 +154,16 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\css\box_style.css" />
+    <Content Include="Content\css\hover_htc.htc" />
+    <Content Include="Content\css\ico.png" />
+    <Content Include="Content\css\loading.gif" />
+    <Content Include="Content\css\login.css" />
     <Content Include="Content\css\main.css" />
+    <Content Include="Content\css\mycollection.css" />
+    <Content Include="Content\css\myfoot.css" />
+    <Content Include="Content\css\news.css" />
+    <Content Include="Content\css\register.css" />
     <Content Include="Content\img\0bd79e9e781823000001.jpg" />
     <Content Include="Content\img\buttons.png" />
     <Content Include="Content\img\gallery_list1_1.jpg" />

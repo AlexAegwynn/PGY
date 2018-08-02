@@ -15,6 +15,8 @@ namespace Web.Controllers
 
         public ActionResult Index(string search = "", int catid = 0)
         {
+
+
             articleList = Logic.LContent.GetArticles();
 
             //var a = articleList.Where(m => m.ArticleID == 5822665).ToList();

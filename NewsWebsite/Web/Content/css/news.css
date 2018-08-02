@@ -1,0 +1,87 @@
+@charset "utf-8";
+/* CSS Document */
+.newContent{
+	margin-bottom: 10px;
+	z-index: 1;
+	position: absolute;
+	top: 40px;
+	left: 200px;
+	width:700px;
+	background-color: orange;
+	height: auto;
+}
+.newContent .newContentArea{
+	font-family: "微软雅黑";
+	margin: 25px;
+	width: 650px;
+	height: auto;
+}
+.newContent .newContentArea .bigtitle{
+	
+}
+.newContent .newContentArea .bigtitle span{
+	font-family: "微软雅黑";
+	font-weight: bold;
+	font-size: 40px;
+}
+
+.newContent .newContentArea .fromwrite{
+	color: #4D4D4D;
+	text-decoration: underline;
+	padding: 10px 0;
+}
+.newContent .newContentArea .fromwrite a{
+	color:#4d4d4d;
+}
+.newContent .newContentArea .fromwrite a:hover{
+	color: black;
+}
+.newContent .newContentArea .fromwrite .visit{
+	text-decoration: underline;
+	float: right;
+	padding-right: 10px;
+}
+.newContent .newContentArea .fromwrite .visit .visitNum:hover{
+	cursor: pointer;
+}
+.newContent .newContentArea p{
+	font-size:15px;
+}
+.newContent .newContentArea h1{
+	padding-top:20px;
+}
+.newContent .newContentArea p,img{
+	padding-top: 10px;
+}
+.newContent .newContentArea .aboutLink{
+	padding-top: 30px;
+	font-size: 15px;
+}
+.newContent .newContentArea .aboutLink a{
+	color: #4d4d4d;
+}
+.newContent .newContentArea .aboutLink a:hover{
+	text-decoration:underline;
+}
+.newContent .newContentArea .aboutLink .collectionButton{
+	float: right;
+	padding-right: 10px;
+	color: #4d4d4d;
+}
+.newContent .newContentArea .aboutLink .collectionButton:hover{
+	text-decoration: underline;
+}
+.newContent .moreNews{
+	padding-top: 10px;
+}
+#share{
+position:fixed;_position:absolute;_top:expression(eval(document.documentElement.scrollTop+document.documentElement.clientHeight)-34+"px");bottom:5%;left:90%;width:30px;zoom:1;}
+
+#share a{background-image:url( ../img/totop.png); background-repeat:no-repeat; display:block; width:30px; height:30px; margin-bottom:2px; overflow:hidden; text-indent:-999px;-webkit-transition: all 0.2s ease-in-out;-moz-transition: all 0.2s ease-in-out;-o-transition: all 0.2s ease-in-out;-ms-transition: all 0.2s ease-in-out;transition: all 0.2s ease-in-out;}
+
+#share a#totop{
+	background-position:0 -120px;position:absolute;bottom:5%;cursor:pointer;
+}
+#totop a#totop:hover {
+	background-position:-30px -120px;
+}
