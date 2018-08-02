@@ -150,10 +150,12 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\VMArticle.cs" />
+    <Compile Include="ViewModels\VMUser.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\css\Authentication.css" />
     <Content Include="Content\css\box_style.css" />
     <Content Include="Content\css\hover_htc.htc" />
     <Content Include="Content\css\ico.png" />
@@ -166,18 +168,25 @@
     <Content Include="Content\css\register.css" />
     <Content Include="Content\img\0bd79e9e781823000001.jpg" />
     <Content Include="Content\img\buttons.png" />
+    <Content Include="Content\img\eee.jpg" />
     <Content Include="Content\img\gallery_list1_1.jpg" />
     <Content Include="Content\img\gallery_list1_2.jpg" />
     <Content Include="Content\img\gallery_list1_3.jpg" />
     <Content Include="Content\img\gallery_list1_4.jpg" />
     <Content Include="Content\img\gallery_list1_5.jpg" />
     <Content Include="Content\img\gallery_list1_6.jpg" />
+    <Content Include="Content\img\ico.png" />
     <Content Include="Content\img\left.png" />
+    <Content Include="Content\img\loading.gif" />
+    <Content Include="Content\img\login_button.png" />
     <Content Include="Content\img\logo.png" />
     <Content Include="Content\img\mi8.jpg" />
     <Content Include="Content\img\mi8se_red.jpg" />
+    <Content Include="Content\img\pc-320-220-mi8.png" />
+    <Content Include="Content\img\reg_bg.png" />
     <Content Include="Content\img\right.png" />
     <Content Include="Content\img\toptitle.png" />
+    <Content Include="Content\img\totop.png" />
     <Content Include="Content\img\小米8——120x120.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -189,6 +198,8 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\formValidatorRegex.js" />
+    <Content Include="Scripts\formValidator_min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -213,10 +224,11 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\ArticleList.cshtml" />
     <Content Include="Views\Home\ArticleInfo.cshtml" />
+    <Content Include="Views\Authentication\Index.cshtml" />
+    <Content Include="Views\Authentication\Register.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Authentication\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

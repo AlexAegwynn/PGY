@@ -15,8 +15,6 @@ namespace Web.Controllers
 
         public ActionResult Index(string search = "", int catid = 0)
         {
-
-
             articleList = Logic.LContent.GetArticles();
 
             //var a = articleList.Where(m => m.ArticleID == 5822665).ToList();
@@ -25,12 +23,12 @@ namespace Web.Controllers
             var list = (from l in articleList where l.Conten.Contains("<img src=") orderby Guid.NewGuid() select l).Take(6).ToList();
             List<ViewModels.VMArticle> vList = GetVmList(list);
 
-            ViewData["ShowList"] = vList;
+            ViewData["ShowList"] = vList;  //首页图片轮播
 
             var ywList = (from l in articleList where l.Conten.Contains("<img src=") orderby l.ReleaseTime descending select l).Take(6).ToList();
             List<ViewModels.VMArticle> vywList = GetVmList(ywList);
 
-            ViewData["NewList"] = vywList;
+            ViewData["NewList"] = vywList;  //最新要闻
 
             if (!string.IsNullOrEmpty(search))
             {
@@ -43,11 +41,17 @@ namespace Web.Controllers
             }
 
             decimal total = articleList.Count;
-            int pcount = Convert.ToInt32(Math.Ceiling(total / 10));
+            int pcount = Convert.ToInt32(Math.Ceiling(total / 10));  //页数
 
             ViewBag.PageCount = pcount;
+
             ViewBag.Search = search;
             ViewBag.CatID = catid;
+
+            ViewModels.VMUser vUser = Session["LoginUser"] as ViewModels.VMUser;  //获取session
+
+            ViewBag.IsLogin = vUser == null;
+            ViewBag.Name = vUser == null ? "" : vUser.UserName;
 
             return View();
         }

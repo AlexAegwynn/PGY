@@ -8,10 +8,27 @@ namespace Web.Controllers
 {
     public class AuthenticationController : Controller
     {
-        // GET: Authentication
         public ActionResult Index()
         {
             return View();
+        }
+
+        public ActionResult Register()
+        {
+            return View();
+        }
+
+        public JsonResult Login(ViewModels.VMUser inModel)
+        {
+            JsonResult json = new JsonResult();
+
+            Model.MUsers model = Logic.LUsers.GetUsers(inModel.UserName, inModel.Password);
+
+            
+
+            json.Data = true;
+
+            return json;
         }
     }
 }
