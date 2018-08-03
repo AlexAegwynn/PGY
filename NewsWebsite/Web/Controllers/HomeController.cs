@@ -86,9 +86,31 @@ namespace Web.Controllers
                 vModel.DomainID = vList[0].DomainID;
                 vModel.ReleaseTime = ConvertLongToDateTime(vList[0].ReleaseTime).ToShortDateString();
                 vModel.Conten = vList[0].Conten;
+
+                ViewModels.VMUser vUser = Session["LoginUser"] as ViewModels.VMUser;  //获取session
+                if (vModel != null)
+                {
+                    Model.MFootmarks footmarks = new Model.MFootmarks
+                    {
+                        UID = vUser.UID,
+                        ArticleID = vModel.ArticleID,
+                        FmTitle = vModel.Title
+                    };
+
+                    int result = Logic.LFootmarks.CreateFootmark(footmarks);
+                }
             }
 
             return View(vModel);
+        }
+
+        public JsonResult DeleteFootmark(int fmid)
+        {
+            JsonResult json = new JsonResult();
+
+            bool result = Logic.LFootmarks.DeleteFootmark(fmid) > 0;
+
+            return json;
         }
 
         /// <summary>
