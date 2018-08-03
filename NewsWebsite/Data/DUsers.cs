@@ -63,8 +63,8 @@ namespace Data
                 new SqlParameter("@inEmail", SqlDbType.VarChar, 50)
             };
             paras[0].Value = inModel.UserName;
-            paras[0].Value = inModel.Password;
-            paras[0].Value = inModel.Email;
+            paras[1].Value = inModel.Password;
+            paras[2].Value = inModel.Email;
 
             int result = SqlHelper.ExecuteNonQuery(CommandType.Text, sql.ToString(), paras);
 

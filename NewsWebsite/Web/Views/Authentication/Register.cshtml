@@ -13,72 +13,89 @@
     <script src="~/Scripts/formValidator_min.js"></script>
     <script src="~/Scripts/formValidatorRegex.js"></script>
     <script type="text/javascript">
-        $(document).ready(function () {
-            $.formValidator.initConfig({
-                formid: "form1", debug: false, submitonce: true,
-                onerror: function (msg, obj, errorlist) {
-                    //$.map(errorlist,function(msg1){alert(msg1)});
-                    alert(msg);
-                }
-            });
-            $("#t_UserName").formValidator({ onshow: "5-10个字符", onfocus: "5-10个字符", oncorrect: "该用户名可以注册" }).inputValidator({ min: 5, max: 10, onerror: "输入有误" }).regexValidator({ regexp: "username", datatype: "enum", onerror: "格式有误" });
-            $("#iptNickName").formValidator({ onshow: "至少4个字符", onfocus: "至少4个字符", oncorrect: "通过" }).inputValidator({ min: 4, empty: { leftempty: false, rightempty: false, emptyerror: "输入有误" }, onerror: "输入有误" });
-            $("#t_UserPass").formValidator({ onshow: "至少6个字符", onfocus: "至少6个字符", oncorrect: "密码合法" }).inputValidator({ min: 6, empty: { leftempty: false, rightempty: false, emptyerror: "输入有误" }, onerror: "输入有误" });
-            $("#t_RePass").formValidator({ onshow: "请再次输入密码", onfocus: "请再次输入密码", oncorrect: "密码一致" }).inputValidator({ min: 6, empty: { leftempty: false, rightempty: false, emptyerror: "输入有误" }, onerror: "输入有误" }).compareValidator({ desid: "t_UserPass", operateor: "=", onerror: "密码不一致" });
-            $("#iptName").formValidator({ onshow: "至少4个字符", onfocus: "至少4个字符", oncorrect: "通过" }).inputValidator({ min: 4, empty: { leftempty: false, rightempty: false, emptyerror: "输入有误" }, onerror: "输入有误" });
-            $("#iptCard").formValidator({ onshow: "15或18位的身份证", onfocus: "15或18位的身份证", oncorrect: "输入正确" }).functionValidator({ fun: isCardID });
-            $("#t_Email").formValidator({ onshow: "6-100个字符", onfocus: "6-100个字符", oncorrect: "恭喜你,你输对了", defaultvalue: "" }).inputValidator({ min: 6, max: 100, onerror: "长度非法" }).regexValidator({ regexp: "^([\\w-.]+)@@(([[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.)|(([\\w-]+.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(]?)$", onerror: "格式不正确" });
-        });
-
-        function test1(obj) {
-            if (obj.value == "全角字符当做1个长度") {
-                $.formValidator.getInitConfig("1").wideword = false;
-                obj.value = "全角字符当做2个长度";
-            }
-            else {
-                $.formValidator.getInitConfig("1").wideword = true;
-                obj.value = "全角字符当做1个长度";
-            }
-        }
-
         function Register() {
-
             var t_UserName = $('#t_UserName').val();
             var t_UserPass = $('#t_UserPass').val();
             var t_RePass = $('#t_RePass').val();
             var t_Email = $('#t_Email').val();
 
-            if (t_UserName == '' || t_UserPass == '' || t_RePass == '' || HTMLTemplateElement == '') {
-                return;
+            $('#t_UserNameTip').html('');
+            $('#t_UserPassTip').html('');
+            $('#t_RePassTip').html('');
+            $('#t_EmailTip').html('');
+
+            var state = true;
+
+            if (t_UserName == '') {
+                $('#t_UserNameTip').html('不能为空');
+                state = false;
             }
 
-            $.ajax({
-                url: '/Authentication/Login',
-                type: 'post',
-                data: $('#form1').serialize(),
-                success: function (data) {
-                    alert(data);
+            if (t_UserPass == '') {
+                $('#t_UserPassTip').html('不能为空');
+                state = false;
+            }
+
+            if (t_RePass == '') {
+                $('#t_RePassTip').html('不能为空');
+                state = false;
+            }
+
+            if (t_UserPass != t_RePass) {
+                $('#t_RePassTip').html('密码不一致');
+                state = false;
+            }
+
+            if (t_Email != '') {
+                var reg = /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/;
+
+                if (!reg.test(t_Email)) {
+                    $('#t_EmailTip').html('邮箱格式不正确');
+                    state = false;
                 }
-            })
-        }
+            } else {
+                $('#t_EmailTip').html('不能为空');
+                state = false;
+            }
 
-        function checkdoublepassword() {
-
+            if (state) {
+                $.ajax({
+                    url: '/Authentication/Login',
+                    type: 'post',
+                    data: $('#form1').serialize(),
+                    success: function (data) {
+                        if (!data.result) {
+                            $('#error').html(data.msg);
+                        } else {
+                            window.location.href = '/Home/Index';
+                        }
+                    }
+                })
+            }
         }
     </script>
+
+    <style>
+        .onshow {
+            color: red;
+        }
+    </style>
 </head>
 <body>
     <!--注册开始-->
     <div class="reg">
         <form name="form1" id="form1">
-            @Html.Hidden("UID", 10);
+            @Html.Hidden("UID", 0)
             <dl>
                 <dt class="f14 b">帐户信息</dt>
-                <dd><span class="title">用户名：</span><input class="reg_input" name="UserName" id="t_UserName" type="text" /><span id="t_UserNameTip" class="onshow"></span></dd>
-                <dd><span class="title">密　码：</span><input class="reg_input" name="Password" id="t_UserPass" type="password" /><span id="t_UserPassTip" class="onshow"></span></dd>
-                <dd><span class="title">确认密码：</span><input class="reg_input" name="t_RePass" id="t_RePass" onblur="checkdoublepassword();" type="password" /><span id="t_RePassTip" class="onshow"></span></dd>
-                <dd><span class="title">邮箱地址：</span><input class="reg_input" name="Email" id="t_Email" type="text" /><span id="t_EmailTip" class="onshow"></span></dd>
+                <dd><span class="title">用户名：</span><input class="reg_input" name="UserName" id="t_UserName" type="text" /> <span id="t_UserNameTip" class="onshow"></span></dd>
+                <dd><span class="title">密　码：</span><input class="reg_input" name="Password" id="t_UserPass" type="password" /> <span id="t_UserPassTip" class="onshow"></span></dd>
+                <dd><span class="title">确认密码：</span><input class="reg_input" name="t_RePass" id="t_RePass" type="password" /> <span id="t_RePassTip" class="onshow"></span></dd>
+                <dd><span class="title">邮箱地址：</span><input class="reg_input" name="Email" id="t_Email" type="text" /> <span id="t_EmailTip" class="onshow"></span></dd>
             </dl>
+            <div style="height:20px;">
+                <span style="color:red;font-size:12px;" id="error"></span>
+            </div>
             <div class="f_reg_but">
                 <input id="button" name="button" onclick="Register()" value="免费注册" class="r_button" />
                 <span class="clew_txt">如果您已有帐号，可<a href="/Authentication/Index">直接登录</a></span>
