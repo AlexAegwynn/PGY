@@ -1,9 +1,13 @@
 ﻿@{
-    var vList = Model as List<Web.ViewModels.VMContent>;
+
 }
 
 <script>
-    var lid = 'li_' + '@ViewBag.CatID';
+    var catid = '@ViewBag.CatID';
+    var lid = 'li_' + catid;
+
+    var pagecount = 1; //当前页码
+    var tatal = '@ViewBag.Count'; //总页数
 </script>
 
 <script>
@@ -18,9 +22,91 @@
                 ul[i].className = 'checkedType';
             }
         }
+
+        $('#index').html(' 第 ' + pagecount + ' 页 ');
+
+        $.ajax({
+            url: '/Home/ContentList',
+            type: 'post',
+            data: {
+                catid: catid
+            },
+            success: function (data) {
+                $('#cont').html(data);
+            }
+        })
     })
+
+    function Paging(state) {
+        if (state == 'Previous') {
+            var c = pagecount - 1;
+            if (c <= 0) {
+                $('#error').html('已经是第1页了');
+                return;
+            } else {
+                pagecount = c;
+            }
+        } else {
+            var c = pagecount + 1;
+            if (c > tatal) {
+                $('#error').html('已经是最后一页了');
+                return;
+            } else {
+                pagecount = c;
+            }
+        }
+
+        $('#error').html('');
+        $('#pcount').val('');
+
+        $.ajax({
+            url: '/Home/ContentList',
+            type: 'post',
+            data: {
+                index: parseInt(pagecount - 1),
+                catid: catid
+            },
+            success: function (data) {
+                $('#cont').html(data);
+                $('#index').html(' 第 ' + pagecount + ' 页 ');
+            }
+        })
+    }
+
+    function Jump() {
+        var count = $('#pcount').val();
+
+        if (count != '' && count > 0 && count <= parseInt(tatal)) {
+            $('#error').html('');
+            $.ajax({
+                url: '/Home/ContentList',
+                type: 'post',
+                data: {
+                    index: parseInt(count) - 1,
+                    catid: catid
+                },
+                success: function (data) {
+                    $('#cont').html(data);
+                    $('#index').html(' 第 ' + count + ' 页 ');
+                    pagecount = parseInt(count);
+                }
+            })
+        } else {
+            $('#error').html('请输入正确的值');
+        }
+    }
 </script>
 
+<div>
+    <button>首　页</button>
+    <button onclick="Paging('Previous')">上一页</button>
+    <span id="index"></span>
+    <button onclick="Paging('Next')">下一页</button>
+    <span>共 @ViewBag.Count 页</span>
+    <input id="pcount" type="text" style="width:50px;height:23px;text-align:center;" />
+    <button onclick="Jump()">跳转</button>
+    <span id="error" style="color:red"></span>
+</div>
 <div class="Content">
     <div id="classification">
         <ul id="ulcat">
@@ -36,31 +122,5 @@
             <li id="li_27" onclick="SelectCat('27')">育儿</li>
         </ul>
     </div>
-    <div class="MessageBoard">
-        <ul class="dropdown-menu">
-            @for (int i = 0; i < 6; i++)
-            {
-                <li class="Board">
-                    <div class="textArea"><textarea maxlength="300"></textarea></div>
-                    <div class="photoArea"></div>
-                    <div class="AllLink fl">
-                        @*<a href="#">
-                                <img src="~/Content/img/topic.png" /> 话题
-                            </a>
-                            <a href="#">
-                                <img src="~/Content/img/pic.png" />图片↓
-                            </a>
-                            <a href="#">
-                                <img src="~/Content/img/expre.png" />表情
-                            </a>
-                            <span>还能输入300个字</span>*@
-                        <a href="#" class="fr" style="margin-right: 100px;">上传图片</a>
-                    </div>
-                    <div class="boardFunction">
-                        <input id="buttonOne" type="submit" value="保存">
-                    </div>
-                </li>
-            }
-        </ul>
-    </div>
+    <div id="cont" class="MessageBoard"></div>
 </div>

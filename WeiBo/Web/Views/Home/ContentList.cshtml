@@ -1,0 +1,20 @@
+﻿@{
+    Layout = null;
+    var vList = Model as List<Web.ViewModels.VMContent>;
+}
+
+<ul class="dropdown-menu">
+    @foreach (var item in vList)
+    {
+        <li class="Board">
+            <div class="textArea"><textarea maxlength="300">@item.ArticleID</textarea></div>
+            <div class="photoArea"></div>
+            <div class="AllLink fl">
+                <a href="#" class="fr" style="margin-right: 100px;">上传图片</a>
+            </div>
+            <div class="boardFunction">
+                <input id="buttonOne" type="submit" value="保存">
+            </div>
+        </li>
+    }
+</ul>

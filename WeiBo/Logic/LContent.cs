@@ -12,9 +12,9 @@ namespace Logic
         /// 获取内容列表
         /// </summary>
         /// <returns></returns>
-        public static List<Model.MContent> GetContents()
+        public static List<Model.MContent> GetContents(int domainid)
         {
-            return Data.DContent.GetContents();
+            return Data.DContent.GetContents(domainid);
         }
     }
 }
