@@ -38,6 +38,15 @@ namespace Web.Controllers
             return PartialView(vList);
         }
 
+        public JsonResult SaveContents(VMContent inModel)
+        {
+            JsonResult json = new JsonResult();
+
+            inModel.Conten = inModel.Conten.Replace("&lt;", "<").Replace("&gt;", ">").Replace("&amp;", "&").Replace("&quot;", "\"").Replace("&apos;", "'");
+
+            return json;
+        }
+
         private void GetvList(int catid)
         {
             vmContents = new List<VMContent>();
@@ -46,13 +55,26 @@ namespace Web.Controllers
             foreach (var item in list)
             {
                 List<string> strList = GetContentOrImgUrl(item.Conten);
+                List<string> imgList = GetImgList(strList[1]);
+                var imgStr = string.Empty;
+
+                foreach (var img in imgList)
+                {
+                    if (img.Contains("video") || img.Contains("m3u8"))
+                    {
+                        imgStr += "<video controls style=\"width: 430px;\" preload=\"auto\" autoplay=\"autoplay\" src=\"" + img + "\" ></ video >";
+                    }
+                    else
+                    {
+                        imgStr += "<img src=\"" + img + "\" />";
+                    }
+                }
 
                 VMContent vModel = new VMContent
                 {
                     ArticleID = item.ArticleID,
                     DomainID = item.DomainID,
-                    Conten = strList[0],
-                    ImgUrl = strList[1]
+                    Conten = strList[0] + "<br />" + imgStr
                 };
 
                 vmContents.Add(vModel);
@@ -66,6 +88,16 @@ namespace Web.Controllers
             strList = Regex.Split(content, "#Split#", RegexOptions.None).ToList();
 
             return strList;
+        }
+
+        private List<string> GetImgList(string imgStr)
+        {
+            List<string> imgList = new List<string>();
+
+            imgList = Regex.Split(imgStr, "&&", RegexOptions.None).ToList();
+            imgList.Remove("");
+
+            return imgList;
         }
     }
 }
