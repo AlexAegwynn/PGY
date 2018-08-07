@@ -38,11 +38,14 @@ namespace Web.Controllers
             return PartialView(vList);
         }
 
+        [HttpPost]
         public JsonResult SaveContents(VMContent inModel)
         {
             JsonResult json = new JsonResult();
 
             inModel.Conten = inModel.Conten.Replace("&lt;", "<").Replace("&gt;", ">").Replace("&amp;", "&").Replace("&quot;", "\"").Replace("&apos;", "'");
+
+            json.Data = true;
 
             return json;
         }

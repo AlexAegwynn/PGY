@@ -11,7 +11,7 @@
     var lid = 'li_' + catid;
 
     var pagecount = 1; //当前页码
-    var tatal = '@ViewBag.Count'; //总页数
+    var total = '@ViewBag.Count'; //总页数
 </script>
 
 <script>
@@ -27,8 +27,6 @@
             }
         }
 
-        $('#index').html(' 第 ' + pagecount + ' 页 ');
-
         $.ajax({
             url: '/Home/ContentList',
             type: 'post',
@@ -37,8 +35,11 @@
             },
             success: function (data) {
                 $('#cont').html(data);
+                $('#index').html(' 第 ' + pagecount + ' 页 ');
+                $('#total').html('共 ' + total + ' 页');
             }
         })
+
     })
 
     function Paging(state) {
@@ -52,7 +53,7 @@
             }
         } else {
             var c = pagecount + 1;
-            if (c > tatal) {
+            if (c > total) {
                 $('#error').html('已经是最后一页了');
                 return;
             } else {
@@ -73,6 +74,7 @@
             success: function (data) {
                 $('#cont').html(data);
                 $('#index').html(' 第 ' + pagecount + ' 页 ');
+                $('#total').html('共 ' + total + ' 页');
             }
         })
     }
@@ -80,7 +82,7 @@
     function Jump() {
         var count = $('#pcount').val();
 
-        if (count != '' && count > 0 && count <= parseInt(tatal)) {
+        if (count != '' && count > 0 && count <= parseInt(total)) {
             $('#error').html('');
             $.ajax({
                 url: '/Home/ContentList',
@@ -92,6 +94,7 @@
                 success: function (data) {
                     $('#cont').html(data);
                     $('#index').html(' 第 ' + count + ' 页 ');
+                    $('#total').html('共 ' + total + ' 页');
                     pagecount = parseInt(count);
                 }
             })
@@ -101,16 +104,6 @@
     }
 </script>
 
-<div>
-    <button>首　页</button>
-    <button onclick="Paging('Previous')">上一页</button>
-    <span id="index"></span>
-    <button onclick="Paging('Next')">下一页</button>
-    <span>共 @ViewBag.Count 页</span>
-    <input id="pcount" type="text" style="width:50px;height:23px;text-align:center;" />
-    <button onclick="Jump()">跳转</button>
-    <span id="error" style="color:red"></span>
-</div>
 <div class="Content">
     <div id="classification">
         <ul id="ulcat">
@@ -128,3 +121,4 @@
     </div>
     <div id="cont" class="MessageBoard"></div>
 </div>
+
