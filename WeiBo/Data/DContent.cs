@@ -23,8 +23,8 @@ namespace Data
             }
             else
             {
-                //sql = " SELECT TOP 200 * FROM wz_Content TABLESAMPLE(1 PERCENT) WHERE Origin = '微博博主' ";
-                sql = @" SELECT TOP 100 * FROM wz_Content WHERE Origin = '微博博主' ORDER BY NEWID() ";
+                sql = " SELECT TOP 100 * FROM wz_Content TABLESAMPLE(1 PERCENT) WHERE Origin = '微博博主' ";
+                //sql = @" SELECT TOP 100 * FROM wz_Content WHERE Origin = '微博博主' ORDER BY NEWID() ";
             }
 
             DataTable dt = SqlHelper.ExecuteDataTable(CommandType.Text, sql);

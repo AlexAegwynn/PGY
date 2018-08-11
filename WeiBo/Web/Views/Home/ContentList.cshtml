@@ -62,6 +62,7 @@
         })
     }
 </script>
+
 <script>
     var state = 0;
     var vstate = 0;
@@ -85,8 +86,23 @@
         }
     });
 
-    function UploadVideo(index) {
-        $('#videofile').click();
+    function GetVideo(index) {
+        //$('#videofile').click();
+        //$.ajax({
+        //    url: 'https://weibo.com/1634391600/BdzSMwSvb?mod=weibotime&type=comment#_rnd1533965668637',
+        //    success: function (data) {
+        //        alert(data);
+        //    }
+        //})
+
+        $.ajax({
+            url: '/Home/DownLoadVideo',
+            type: "post",
+            success: function (data) {
+                alert(data);
+            }
+        })
+
         vstate = index;
     }
 
@@ -148,7 +164,7 @@
             <textarea name="content_@i" style="width:700px;height:200px;visibility:hidden;">@vList[i].Conten</textarea>
             <div style="padding:5px 0 5px 0;">
                 @*<button onclick="UploadFile(@i)">上传图片</button>*@
-                @*<button onclick="UploadVideo(@i)">上传视频</button>*@
+                <button onclick="GetVideo()">视频</button>
                 <button onclick="Clear(@i)" name="clear">清空内容</button>
                 <button onclick="Save(@i)" style="position:absolute;right:5px;width:68px;">保存</button>
             </div>
