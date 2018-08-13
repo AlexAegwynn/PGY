@@ -10,6 +10,7 @@ using System.Web.Mvc;
 using Web.ViewModels;
 
 using Common;
+using System.Text;
 
 namespace Web.Controllers
 {
@@ -55,40 +56,61 @@ namespace Web.Controllers
             return json;
         }
 
-        public JsonResult DownLoadVideo()
+        public PartialViewResult ShowVideo(int articleID)
+        {
+
+            return PartialView();
+        }
+
+        public JsonResult SaveVideo()
         {
             JsonResult json = new JsonResult();
 
-            System.Uri uri = new System.Uri("https://weibo.com/tv/v/Gu7ghANCE?fid=1034:4271745746560517");
+            HttpPostedFileBase file = Request.Files["file"];
 
-            string cookies = string.Empty;
+            string path = @"\\STONE20\LuCao\";
 
-            Common.Cookies c = new Cookies();
-            c.GetCookies(uri, "", ref cookies);
+            if (file.ContentLength != 0)
+            {
+                string filePath = path + file.FileName;
 
-            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create("https://weibo.com/tv/v/Gu7ghANCE?fid=1034:4271745746560517");
+                file.SaveAs(filePath);   //保存文件
+            }
 
-            if (cookies != "")
-                request.Headers[HttpRequestHeader.Cookie] = cookies;
-
-            //request.CookieContainer = new CookieContainer();
-            request.Method = "Get";
-            request.ContentType = "text/html;charset=UTF-8";
-            //request.Host = "www.360doc.com";
-            request.Host = "www.weibo.com";
-            request.Referer = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36";
-
-            HttpWebResponse response = (HttpWebResponse)request.GetResponse();//执行请求，获取响应对象
-
-            Stream stream = response.GetResponseStream();       //获取响应流
-            StreamReader sr = new StreamReader(stream);         //创建流读取对象
-            string responseHTML = sr.ReadToEnd();                   //读取响应流
-
-            response.Close();//关闭响应流
-
-            json.Data = false;
+            json.Data = true;
 
             return json;
+        }
+
+        public ActionResult DLVideo()
+        {
+            string url = "https://weibo.com/tv/v/Gugv0y2E7?fid=1034:4271877846162243";
+
+            CookieContainer ccookies = new CookieContainer();
+            HttpWebRequest myHttpWebRequest = (HttpWebRequest)WebRequest.Create(url);
+            myHttpWebRequest.Timeout = 20 * 1000; //连接超时  
+            myHttpWebRequest.Accept = "*/*";
+            myHttpWebRequest.Host = "weibo.com";
+            myHttpWebRequest.UserAgent = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36";
+            myHttpWebRequest.CookieContainer = new CookieContainer(); //暂存到新实例
+            myHttpWebRequest.GetResponse().Close();
+
+            ccookies = myHttpWebRequest.CookieContainer; //保存cookies
+            string cookiesstr = myHttpWebRequest.CookieContainer.GetCookieHeader(myHttpWebRequest.RequestUri); //把cookies转换成字符串  
+
+            myHttpWebRequest = (HttpWebRequest)WebRequest.Create(url);
+            myHttpWebRequest.Timeout = 20 * 1000; //连接超时  
+            myHttpWebRequest.Accept = "*/*";
+            myHttpWebRequest.UserAgent = "Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 5.1; Trident/4.0;)";
+            //myHttpWebRequest.CookieContainer = ccookies; //使用已经保存的cookies 方法一
+            myHttpWebRequest.Headers.Add("Cookie", cookiesstr); //使用已经保存的cookies 方法二  
+            HttpWebResponse myHttpWebResponse = (HttpWebResponse)myHttpWebRequest.GetResponse();
+            Stream stream = myHttpWebResponse.GetResponseStream();
+            stream.ReadTimeout = 15 * 1000; //读取超时  
+            StreamReader sr = new StreamReader(stream, Encoding.GetEncoding("utf-8"));
+            string strWebData = sr.ReadToEnd();
+
+            return RedirectToAction("Index");
         }
 
         private void GetvList(int catid)
@@ -142,45 +164,6 @@ namespace Web.Controllers
             imgList.Remove("");
 
             return imgList;
-        }
-        
-        /// <summary>
-		/// 视频下载
-		/// </summary>
-		public bool GetDown(string url, string filename)
-        {
-            bool isenable = true;
-            try
-            {
-                int size = 0;
-                string edocUrl = System.Configuration.ConfigurationManager.AppSettings["ApiServiceUrl"];
-                using (WebClient webClient = new WebClient())
-                {
-                    webClient.Headers.Add("User-Agent", "Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.1; WOW64; Trident/6.0)");
-                    using (Stream stream = webClient.OpenRead(url))
-                    {
-                        using (FileStream fs = System.IO.File.Create(filename))
-                        {
-                            int i = 0;
-                            do
-                            {
-                                byte[] buffer = new byte[1024];
-                                i = stream.Read(buffer, 0, 1024);
-                                fs.Write(buffer, 0, i);
-                            } while (i > 0);
-                        }
-                    }
-                }  
-            }
-            catch (Exception ex)
-            {
-                isenable = false;
-            }
-            finally
-            {
-                GC.Collect();
-            }
-            return isenable;
         }
     }
 }

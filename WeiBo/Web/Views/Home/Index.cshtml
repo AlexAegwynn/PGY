@@ -104,6 +104,32 @@
     }
 </script>
 
+<style>
+    .upvideo {
+        display:none;
+        width: 800px;
+        height: 500px;
+        position: fixed;
+        background-color: aliceblue;
+        z-index: 999;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%,-50%);
+    }
+</style>
+
+<script>
+    function Close() {
+        $('#upv').hide();
+        $('#vcontent').html('');
+    }
+</script>
+
+<div class="upvideo" id="upv">
+    <div style="float:right;"><button onclick="Close();">关闭</button></div>
+    <div id="vcontent" style="height: 500px;"></div>
+</div>
+
 <div class="Content">
     <div id="classification">
         <ul id="ulcat">
