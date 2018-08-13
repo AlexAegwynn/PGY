@@ -86,7 +86,7 @@
         }
     });
 
-    function GetVideo(index) {
+    function GetVideo(articleid, index) {
         //$.ajax({
         //    url: '/Home/DownLoadVideo',
         //    type: "post",
@@ -98,12 +98,13 @@
         //vstate = index;
 
         $('#upv').show();
+        $('#videoid').val(index);
 
         $.ajax({
             url: '/Home/ShowVideo',
             type: "post",
             data: {
-                articleID: index
+                articleID: articleid
             },
             success: function (data) {
                 $('#vcontent').html(data);
@@ -170,7 +171,7 @@
             <textarea name="content_@i" style="width:700px;height:200px;visibility:hidden;">@vList[i].Conten</textarea>
             <div style="padding:5px 0 5px 0;">
                 @*<button onclick="window.location.href='/Home/DLVideo'">Test</button>*@
-                <button onclick="GetVideo('@vList[i].ArticleID')">视频</button>
+                <button onclick="GetVideo('@vList[i].ArticleID', '@i')">视频</button>
                 <button onclick="Clear(@i)" name="clear">清空内容</button>
                 <button onclick="Save(@i)" style="position:absolute;right:5px;width:68px;">保存</button>
             </div>
