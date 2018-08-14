@@ -37,6 +37,7 @@ namespace Data
                     ArticleID = Convert.ToInt64(item["ArticleID"]),
                     DomainID = Convert.ToInt32(item["DomainID"]),
                     Conten = item["Conten"].ToString(),
+                    Abstract = item["Abstract"].ToString(),
                     ImgUrl = item["ImgUrl"].ToString()
                 };
                 list.Add(model);

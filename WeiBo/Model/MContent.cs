@@ -22,6 +22,11 @@ namespace Model
         /// 内容
         /// </summary>
         public string Conten { get; set; } = string.Empty;
+        
+        /// <summary>
+        /// 修饰符
+        /// </summary>
+        public string Abstract { get; set; } = string.Empty;
 
         /// <summary>
         /// 图片地址

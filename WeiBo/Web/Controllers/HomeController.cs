@@ -68,7 +68,7 @@ namespace Web.Controllers
 
             HttpPostedFileBase file = Request.Files["file"];
 
-            string path = @"\\STONE20\LuCao\";
+            string path = @"\\192.168.3.153\Videos";
 
             if (file.ContentLength != 0)
             {
@@ -126,21 +126,26 @@ namespace Web.Controllers
 
                 foreach (var img in imgList)
                 {
-                    if (img.Contains("video") || img.Contains("m3u8"))
-                    {
-                        imgStr += "<video controls style=\"width: 430px;\" preload=\"auto\" autoplay=\"autoplay\" src=\"" + img + "\" ></ video >";
-                    }
-                    else
-                    {
-                        imgStr += "<img src=\"" + img + "\" />";
-                    }
+                    //if (img.Contains("video") || img.Contains("m3u8"))
+                    //{
+                    //    imgStr += "<video controls style=\"width: 430px;\" preload=\"auto\" autoplay=\"autoplay\" src=\"" + img + "\" ></ video >";
+                    //}
+                    //else
+                    //{
+                    //    imgStr += "<img src=\"" + img + "\" />";
+                    //}
+                    imgStr += "<img src=\"" + img + "\" />";
                 }
+
+                imgStr += item.ImgUrl == "" ? "" : "<video controls style=\"width: 430px;\" preload=\"auto\" src=\"" + "http://192.168.3.153:8001/" + item.Abstract + ".mp4" + "\" ></ video >";
 
                 VMContent vModel = new VMContent
                 {
                     ArticleID = item.ArticleID,
                     DomainID = item.DomainID,
-                    Conten = strList[0] + "<br />" + imgStr
+                    Conten = strList[0] + "<br />" + imgStr,
+                    Abstract = item.Abstract,
+                    ImgUrl = item.ImgUrl
                 };
 
                 vmContents.Add(vModel);
