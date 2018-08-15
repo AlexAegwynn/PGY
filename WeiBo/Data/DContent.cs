@@ -15,7 +15,7 @@ namespace Data
         /// <returns></returns>
         public static List<Model.MContent> GetContents(int domainid)
         {
-            string sql = @" SELECT TOP 100 * FROM wz_Content WHERE Origin = '微博博主' ";
+            string sql = @" SELECT TOP 500 * FROM wz_Content WHERE Origin = '微博博主' ";
 
             if (domainid != 0)
             {
@@ -23,7 +23,7 @@ namespace Data
             }
             else
             {
-                sql = " SELECT TOP 100 * FROM wz_Content TABLESAMPLE(1 PERCENT) WHERE Origin = '微博博主' ";
+                sql = " SELECT TOP 500 * FROM wz_Content TABLESAMPLE(1 PERCENT) WHERE Origin = '微博博主' ";
                 //sql = @" SELECT TOP 100 * FROM wz_Content WHERE Origin = '微博博主' ORDER BY NEWID() ";
             }
 
