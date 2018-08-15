@@ -102,6 +102,23 @@
             $('#error').html('请输入正确的值');
         }
     }
+
+    function First() {
+        $.ajax({
+            url: '/Home/ContentList',
+            type: 'post',
+            data: {
+                index: 0,
+                catid: catid
+            },
+            success: function (data) {
+                $('#cont').html(data);
+                $('#index').html(' 第 ' + 1 + ' 页 ');
+                $('#total').html('共 ' + total + ' 页');
+                pagecount = 1;
+            }
+        })
+    }
 </script>
 
 <style>
