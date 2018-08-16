@@ -5,6 +5,13 @@
 
 <script>
     var count = '@vList.Count';
+
+    for (var i = 0; i < count; i++) {
+        $('#editor_' + i).html($('#heditor_' + i).val());
+    }
+</script>
+
+<script>
     $('#editor_0').trumbowyg({
         lang: 'zh_cn',
         btnsDef: {
@@ -15,7 +22,6 @@
         },
         btns: ['image']
     });
-
     $('#editor_1').trumbowyg({
         lang: 'zh_cn',
         btnsDef: {
@@ -26,10 +32,92 @@
         },
         btns: ['image']
     });
+    $('#editor_2').trumbowyg({
+        lang: 'zh_cn',
+        btnsDef: {
+            image: {
+                dropdown: ['insertImage', 'base64'],
+                ico: 'insertImage'
+            }
+        },
+        btns: ['image']
+    });
+    $('#editor_3').trumbowyg({
+        lang: 'zh_cn',
+        btnsDef: {
+            image: {
+                dropdown: ['insertImage', 'base64'],
+                ico: 'insertImage'
+            }
+        },
+        btns: ['image']
+    });
+    $('#editor_4').trumbowyg({
+        lang: 'zh_cn',
+        btnsDef: {
+            image: {
+                dropdown: ['insertImage', 'base64'],
+                ico: 'insertImage'
+            }
+        },
+        btns: ['image']
+    });
+    $('#editor_5').trumbowyg({
+        lang: 'zh_cn',
+        btnsDef: {
+            image: {
+                dropdown: ['insertImage', 'base64'],
+                ico: 'insertImage'
+            }
+        },
+        btns: ['image']
+    });
+    $('#editor_6').trumbowyg({
+        lang: 'zh_cn',
+        btnsDef: {
+            image: {
+                dropdown: ['insertImage', 'base64'],
+                ico: 'insertImage'
+            }
+        },
+        btns: ['image']
+    });
+    $('#editor_7').trumbowyg({
+        lang: 'zh_cn',
+        btnsDef: {
+            image: {
+                dropdown: ['insertImage', 'base64'],
+                ico: 'insertImage'
+            }
+        },
+        btns: ['image']
+    });
+    $('#editor_8').trumbowyg({
+        lang: 'zh_cn',
+        btnsDef: {
+            image: {
+                dropdown: ['insertImage', 'base64'],
+                ico: 'insertImage'
+            }
+        },
+        btns: ['image']
+    });
+    $('#editor_9').trumbowyg({
+        lang: 'zh_cn',
+        btnsDef: {
+            image: {
+                dropdown: ['insertImage', 'base64'],
+                ico: 'insertImage'
+            }
+        },
+        btns: ['image']
+    });
+</script>
 
+<script>
     function Clear(index) {
         if (confirm('确定清空内容吗？')) {
-            //editor[index].html('')
+            $('#editor_' + index).html('');
             $('#picfile').val('');
         }
     }
@@ -38,30 +126,30 @@
         //var str = editor[index].text();
         //var str = editor[index].html();
 
-        str = str.replace(/[<>&"']/g, function (c) {
-            return { '<': '&lt;', '>': '&gt;', '&': '&amp;', '"': '&quot;', "'": '&apos;' }[c];
-        });
+        //str = str.replace(/[<>&"']/g, function (c) {
+        //    return { '<': '&lt;', '>': '&gt;', '&': '&amp;', '"': '&quot;', "'": '&apos;' }[c];
+        //});
 
-        $('#Conten_' + index).val(str);
+        //$('#Conten_' + index).val(str);
 
-        var formData = new FormData();
-        formData.append("ArticleID", $('#ArticleID_' + index).val());
-        formData.append("DomainID", $('#DomainID_' + index).val());
-        formData.append("Conten", $('#Conten_' + index).val());
+        //var formData = new FormData();
+        //formData.append("ArticleID", $('#ArticleID_' + index).val());
+        //formData.append("DomainID", $('#DomainID_' + index).val());
+        //formData.append("Conten", $('#Conten_' + index).val());
 
-        $.ajax({
-            url: '/Home/SaveContents',
-            type: 'post',
-            data: formData,
-            contentType: false,
-            processData: false,
-            success: function (data) {
+        //$.ajax({
+        //    url: '/Home/SaveContents',
+        //    type: 'post',
+        //    data: formData,
+        //    contentType: false,
+        //    processData: false,
+        //    success: function (data) {
 
-            },
-            error: function () {
-                alert();
-            }
-        })
+        //    },
+        //    error: function () {
+        //        alert();
+        //    }
+        //})
     }
 </script>
 
@@ -164,7 +252,9 @@
                 <input id="DomainID_@i" name="DomainID" type="hidden" value="@vList[i].DomainID" />
                 <input id="Conten_@i" name="Conten" type="hidden" value="" />
             </form>
-            <div id="editor_@i" class="editor"></div>
+            <div id="editor_@i" class="editor">
+                <input type="hidden" id="heditor_@i" value="@vList[i].Conten" />
+            </div>
             <div style="padding:5px 0 5px 0;">
                 @*<button onclick="window.location.href='/Home/DLVideo'">Test</button>*@
                 @*<button onclick="GetVideo('@vList[i].ArticleID', '@i')">视频</button>*@
