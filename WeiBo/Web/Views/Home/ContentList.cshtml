@@ -3,37 +3,17 @@
     var vList = Model as List<Web.ViewModels.VMContent>;
 }
 <script>
-    var editor = new Array();
     var count = '@vList.Count';
-
-    KindEditor.ready(function (K) {
-        if (count != '') {
-            for (var i = 0; i < count; i++) {
-                editor[i] = K.create('textarea[name="content_' + i +'"]', {
-                    resizeType: 1,
-                    allowPreviewEmoticons: false,
-                    allowImageUpload: false,
-                    filterMode: false,
-                    width: '690px',
-                    height: '300px',
-                    items: [
-                        //'emoticons',
-                        //'fullscreen'
-                    ]
-                });
-            }
-        }
-    });
 
     function Clear(index) {
         if (confirm('确定清空内容吗？')) {
-            editor[index].html('')
+            //editor[index].html('')
             $('#picfile').val('');
         }
     }
 
     function Save(index) {
-        var str = editor[index].text();
+        //var str = editor[index].text();
         //var str = editor[index].html();
 
         str = str.replace(/[<>&"']/g, function (c) {
@@ -148,9 +128,9 @@
     }
 </script>
 
-<script type="text/javascript">
+@*<script type="text/javascript">
 <!--    google_ad_client = "ca-pub-7116729301372758"; google_ad_slot = "5052271949"; google_ad_width = 728; google_ad_height = 10; //-->
-</script>
+</script>*@
 
 @*<script type="text/javascript"
             src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
@@ -168,7 +148,8 @@
                 <input id="DomainID_@i" name="DomainID" type="hidden" value="@vList[i].DomainID" />
                 <input id="Conten_@i" name="Conten" type="hidden" value="" />
             </form>
-            <textarea name="content_@i" style="width:700px;height:200px;visibility:hidden;">@vList[i].Conten</textarea>
+            @*<textarea name="content_@i" style="width:700px;height:200px;visibility:hidden;">@vList[i].Conten</textarea>*@
+
             <div style="padding:5px 0 5px 0;">
                 @*<button onclick="window.location.href='/Home/DLVideo'">Test</button>*@
                 @*<button onclick="GetVideo('@vList[i].ArticleID', '@i')">视频</button>*@
