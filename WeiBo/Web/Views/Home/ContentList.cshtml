@@ -2,8 +2,30 @@
     Layout = null;
     var vList = Model as List<Web.ViewModels.VMContent>;
 }
+
 <script>
     var count = '@vList.Count';
+    $('#editor_0').trumbowyg({
+        lang: 'zh_cn',
+        btnsDef: {
+            image: {
+                dropdown: ['insertImage', 'base64'],
+                ico: 'insertImage'
+            }
+        },
+        btns: ['image']
+    });
+
+    $('#editor_1').trumbowyg({
+        lang: 'zh_cn',
+        btnsDef: {
+            image: {
+                dropdown: ['insertImage', 'base64'],
+                ico: 'insertImage'
+            }
+        },
+        btns: ['image']
+    });
 
     function Clear(index) {
         if (confirm('确定清空内容吗？')) {
@@ -128,13 +150,7 @@
     }
 </script>
 
-@*<script type="text/javascript">
-<!--    google_ad_client = "ca-pub-7116729301372758"; google_ad_slot = "5052271949"; google_ad_width = 728; google_ad_height = 10; //-->
-</script>*@
-
-@*<script type="text/javascript"
-            src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-    </script>*@
+<link href="~/Content/trumbowyg/design/css/trumbowyg.css" rel="stylesheet" />
 
 <input hidden="hidden" id="picfile" type="file" />
 <input hidden="hidden" id="videofile" type="file" />
@@ -148,8 +164,7 @@
                 <input id="DomainID_@i" name="DomainID" type="hidden" value="@vList[i].DomainID" />
                 <input id="Conten_@i" name="Conten" type="hidden" value="" />
             </form>
-            @*<textarea name="content_@i" style="width:700px;height:200px;visibility:hidden;">@vList[i].Conten</textarea>*@
-
+            <div id="editor_@i" class="editor"></div>
             <div style="padding:5px 0 5px 0;">
                 @*<button onclick="window.location.href='/Home/DLVideo'">Test</button>*@
                 @*<button onclick="GetVideo('@vList[i].ArticleID', '@i')">视频</button>*@
@@ -170,8 +185,5 @@
         <span id="error" style="color:red"></span>
     </div>
 </ul>
-
-
-
 
 

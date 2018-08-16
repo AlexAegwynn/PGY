@@ -219,10 +219,17 @@
     <Content Include="Content\trumbowyg\design\images\icons\unordered-list.png" />
     <Content Include="Content\trumbowyg\design\images\icons\video.png" />
     <Content Include="Content\trumbowyg\design\images\icons\view-html.png" />
+    <Content Include="Content\trumbowyg\langs\ca.js" />
+    <Content Include="Content\trumbowyg\langs\de.js" />
     <Content Include="Content\trumbowyg\langs\en.js" />
+    <Content Include="Content\trumbowyg\langs\es_ar.js" />
+    <Content Include="Content\trumbowyg\langs\fa.js" />
     <Content Include="Content\trumbowyg\langs\fi.js" />
     <Content Include="Content\trumbowyg\langs\fr.js" />
+    <Content Include="Content\trumbowyg\langs\ko.js" />
+    <Content Include="Content\trumbowyg\langs\pt.js" />
     <Content Include="Content\trumbowyg\langs\ru.js" />
+    <Content Include="Content\trumbowyg\langs\zh_cn.js" />
     <Content Include="Content\trumbowyg\plugins\base64\trumbowyg.base64.js" />
     <Content Include="Content\trumbowyg\plugins\base64\trumbowyg.base64.min.js" />
     <Content Include="Content\trumbowyg\plugins\upload\trumbowyg.upload.js" />

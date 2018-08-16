@@ -1,5 +1,10 @@
 ﻿
 
+<script src="~/Content/trumbowyg/trumbowyg.min.js"></script>
+<script src="~/Content/trumbowyg/langs/zh_cn.js"></script>
+<script src="~/Content/trumbowyg/plugins/upload/trumbowyg.upload.min.js"></script>
+<script src="~/Content/trumbowyg/plugins/base64/trumbowyg.base64.min.js"></script>
+
 <script>
     var catid = '@ViewBag.CatID';
     var lid = 'li_' + catid;
@@ -117,7 +122,7 @@
 
 <style>
     .upvideo {
-        display:none;
+        display: none;
         width: 800px;
         height: 500px;
         position: fixed;
