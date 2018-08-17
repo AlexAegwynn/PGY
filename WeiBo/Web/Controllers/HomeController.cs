@@ -165,7 +165,7 @@ namespace Web.Controllers
                     imgStr += "<img src=\"" + img + "\" />";
                 }
 
-                imgStr += item.ImgUrl == "" ? "" : "<video controls style=\"width: 430px;\" preload=\"auto\" ><source src=\"" + "http://192.168.3.153:8001/" + item.Abstract + ".mp4\" type=\"video/mp4\" ></ video >";
+                imgStr += item.ImgUrl == "" ? "" : "<video controls style=\"width: 430px;\" preload=\"auto\" ><source src=\"" + "http://192.168.3.153:8001/" + item.Abstract + ".mp4\" type=\"video/mp4\" ></video >";
 
                 VMContent vModel = new VMContent
                 {

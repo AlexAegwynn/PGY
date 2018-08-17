@@ -5,6 +5,8 @@
 <script src="~/Content/trumbowyg/plugins/upload/trumbowyg.upload.min.js"></script>
 <script src="~/Content/trumbowyg/plugins/base64/trumbowyg.base64.min.js"></script>
 
+<script src="~/Scripts/html5media.min.js"></script>
+
 <script>
     var catid = '@ViewBag.CatID';
     var lid = 'li_' + catid;
@@ -161,6 +163,9 @@
             <li id="li_27" onclick="SelectCat('27')">育儿</li>
         </ul>
     </div>
+
+    @*<video src="http://www.zhangxinxu.com/study/media/cat.mp4" width="352" height="264" controls autobuffer></video>*@
+    @*<video src="http://192.168.3.153:8001/Frg0Jawzk.mp4" preload="auto" controls></video>*@
     <div id="cont" class="MessageBoard"></div>
 </div>
 
