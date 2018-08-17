@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -44,6 +45,28 @@ namespace Data
             }
 
             return list;
+        }
+
+        /// <summary>
+        /// 更新内容
+        /// </summary>
+        /// <param name="inModel"></param>
+        /// <returns></returns>
+        public static int UpdateContent(Model.MContent inModel)
+        {
+            string sql = @" UPDATE wz_Content SET ImgUrl = @inImgUrl WHERE ArticleID = @inArticleID ";
+
+            SqlParameter[] paras = new SqlParameter[]
+            {
+                new SqlParameter("@inImgUrl", SqlDbType.VarChar, 1000),
+                new SqlParameter("@inArticleID", SqlDbType.BigInt)
+            };
+            paras[0].Value = inModel.ImgUrl;
+            paras[1].Value = inModel.ArticleID;
+            
+            int result = SqlHelper.ExecuteNonQuery(CommandType.Text, sql, paras);
+
+            return result;
         }
     }
 }

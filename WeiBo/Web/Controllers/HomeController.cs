@@ -16,6 +16,7 @@ namespace Web.Controllers
 {
     public class HomeController : Controller
     {
+        private static string articleId = string.Empty;
         private static List<VMContent> vmContents = new List<VMContent>();
 
         public ActionResult Index(int catid = 0)
@@ -56,28 +57,55 @@ namespace Web.Controllers
             return json;
         }
 
-        public PartialViewResult ShowVideo(int articleID)
+        public PartialViewResult ShowVideo(long articleID)
         {
-
+            articleId = articleID.ToString();
             return PartialView();
         }
 
-        public JsonResult SaveVideo()
+        public JsonResult SaveVideo(string vname = "")
         {
             JsonResult json = new JsonResult();
 
             HttpPostedFileBase file = Request.Files["file"];
+            string path = @"\\192.168.3.153\Videos\";
 
-            string path = @"\\192.168.3.153\Videos";
-
-            if (file.ContentLength != 0)
+            try
             {
-                string filePath = path + file.FileName;
+                string ex = ".mp4";
+                bool result = true;
 
-                file.SaveAs(filePath);   //保存文件
+                if (file.ContentLength != 0)
+                {
+                    ex = Path.GetExtension(file.FileName);
+                    if (vname == "" || vname == "undefined") { vname = Guid.NewGuid().ToString(); }
+                    string filePath = path + vname + ex;
+
+                    if (string.IsNullOrEmpty(articleId))
+                    {
+                        json.Data = new { result = false };
+                        return json;
+                    }
+
+                    MContent model = new MContent
+                    {
+                        ArticleID = Convert.ToInt64(articleId),
+                        ImgUrl = "http://192.168.3.153:8001/" + vname + ex
+                    };
+                    result = Logic.LContent.UpdateContent(model) > 0;
+
+                    if (result)
+                    {
+                        file.SaveAs(filePath);   //保存文件
+                    }
+                }
+
+                json.Data = new { result, vurl = "http://192.168.3.153:8001/" + vname + ex };
             }
-
-            json.Data = true;
+            catch (Exception e)
+            {
+                json.Data = new { result = false };
+            }
 
             return json;
         }
@@ -137,7 +165,7 @@ namespace Web.Controllers
                     imgStr += "<img src=\"" + img + "\" />";
                 }
 
-                imgStr += item.ImgUrl == "" ? "" : "<video controls style=\"width: 430px;\" preload=\"auto\" src=\"" + "http://192.168.3.153:8001/" + item.Abstract + ".mp4" + "\" ></ video >";
+                imgStr += item.ImgUrl == "" ? "" : "<video controls style=\"width: 430px;\" preload=\"auto\" ><source src=\"" + "http://192.168.3.153:8001/" + item.Abstract + ".mp4\" type=\"video/mp4\" ></ video >";
 
                 VMContent vModel = new VMContent
                 {

@@ -16,5 +16,15 @@ namespace Logic
         {
             return Data.DContent.GetContents(domainid);
         }
+
+        /// <summary>
+        /// 更新内容
+        /// </summary>
+        /// <param name="inModel"></param>
+        /// <returns></returns>
+        public static int UpdateContent(Model.MContent inModel)
+        {
+            return Data.DContent.UpdateContent(inModel);
+        }
     }
 }

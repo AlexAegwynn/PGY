@@ -123,33 +123,33 @@
     }
 
     function Save(index) {
-        //var str = editor[index].text();
-        //var str = editor[index].html();
+        var str = $('#editor_' + index).html();
+        str = str.replace(/<div>/g, '').replace(/<\/div>/g, '<br>');
 
-        //str = str.replace(/[<>&"']/g, function (c) {
-        //    return { '<': '&lt;', '>': '&gt;', '&': '&amp;', '"': '&quot;', "'": '&apos;' }[c];
-        //});
+        str = str.replace(/[<>&"']/g, function (c) {
+            return { '<': '&lt;', '>': '&gt;', '&': '&amp;', '"': '&quot;', "'": '&apos;' }[c];
+        });
 
-        //$('#Conten_' + index).val(str);
+        $('#Conten_' + index).val(str);
 
-        //var formData = new FormData();
-        //formData.append("ArticleID", $('#ArticleID_' + index).val());
-        //formData.append("DomainID", $('#DomainID_' + index).val());
-        //formData.append("Conten", $('#Conten_' + index).val());
+        var formData = new FormData();
+        formData.append("ArticleID", $('#ArticleID_' + index).val());
+        formData.append("DomainID", $('#DomainID_' + index).val());
+        formData.append("Conten", $('#Conten_' + index).val());
 
-        //$.ajax({
-        //    url: '/Home/SaveContents',
-        //    type: 'post',
-        //    data: formData,
-        //    contentType: false,
-        //    processData: false,
-        //    success: function (data) {
+        $.ajax({
+            url: '/Home/SaveContents',
+            type: 'post',
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function (data) {
 
-        //    },
-        //    error: function () {
-        //        alert();
-        //    }
-        //})
+            },
+            error: function () {
+                alert();
+            }
+        })
     }
 </script>
 
@@ -242,7 +242,7 @@
 
 <input hidden="hidden" id="picfile" type="file" />
 <input hidden="hidden" id="videofile" type="file" />
-
+<br>
 <ul class="dropdown-menu">
     @for (int i = 0; i < vList.Count; i++)
     {
@@ -251,13 +251,14 @@
                 <input id="ArticleID_@i" name="ArticleID" type="hidden" value="@vList[i].ArticleID" />
                 <input id="DomainID_@i" name="DomainID" type="hidden" value="@vList[i].DomainID" />
                 <input id="Conten_@i" name="Conten" type="hidden" value="" />
+                <input id="Abstract_@i" name="Abstract" type="hidden" value="@vList[i].Abstract" />
             </form>
             <div id="editor_@i" class="editor">
                 <input type="hidden" id="heditor_@i" value="@vList[i].Conten" />
             </div>
             <div style="padding:5px 0 5px 0;">
                 @*<button onclick="window.location.href='/Home/DLVideo'">Test</button>*@
-                @*<button onclick="GetVideo('@vList[i].ArticleID', '@i')">视频</button>*@
+                <button onclick="GetVideo('@vList[i].ArticleID', '@i')">视频</button>
                 <button onclick="Clear(@i)" name="clear">清空内容</button>
                 <button onclick="Save(@i)" style="position:absolute;right:5px;width:68px;">保存</button>
             </div>
