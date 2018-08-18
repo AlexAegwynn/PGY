@@ -48,6 +48,12 @@
             }
         }
     </script>
+
+    <style>
+        .onshow {
+            color: red;
+        }
+    </style>
 </head>
 <body>
     <!--登录开始-->
@@ -69,6 +75,9 @@
                 </dd>
             </dl>
             <div class="f_reg_but">
+                <div style="height:20px;">
+                    <span style="color:red;font-size:12px;" id="error"></span>
+                </div>
                 <input id="button" name="button" onclick="Login()" value="登录" class="l_button" />
                 <span class="clew_txt">还没账号？<a href="/Authentication/Register">立即注册</a></span>
             </div>

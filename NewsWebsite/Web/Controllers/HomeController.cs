@@ -87,8 +87,8 @@ namespace Web.Controllers
                 vModel.ReleaseTime = ConvertLongToDateTime(vList[0].ReleaseTime).ToShortDateString();
                 vModel.Conten = vList[0].Conten;
 
-                ViewModels.VMUser vUser = Session["LoginUser"] as ViewModels.VMUser;  //获取session
-                if (vModel != null)
+                //获取session
+                if (Session["LoginUser"] is ViewModels.VMUser vUser)
                 {
                     Model.MFootmarks footmarks = new Model.MFootmarks
                     {
