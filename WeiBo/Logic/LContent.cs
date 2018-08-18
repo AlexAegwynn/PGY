@@ -22,9 +22,19 @@ namespace Logic
         /// </summary>
         /// <param name="inModel"></param>
         /// <returns></returns>
-        public static int UpdateContent(Model.MContent inModel)
+        public static int UpdateVideo(Model.MContent inModel)
         {
-            return Data.DContent.UpdateContent(inModel);
+            return Data.DContent.UpdateVideo(inModel);
+        }
+
+        /// <summary>
+        /// 删除视频
+        /// </summary>
+        /// <param name="articleID"></param>
+        /// <returns></returns>
+        public static int DeleteVideo(int articleID)
+        {
+            return Data.DContent.DeleteVideo(articleID);
         }
     }
 }

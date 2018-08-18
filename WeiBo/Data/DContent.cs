@@ -52,7 +52,7 @@ namespace Data
         /// </summary>
         /// <param name="inModel"></param>
         /// <returns></returns>
-        public static int UpdateContent(Model.MContent inModel)
+        public static int UpdateVideo(Model.MContent inModel)
         {
             string sql = @" UPDATE wz_Content SET ImgUrl = @inImgUrl WHERE ArticleID = @inArticleID ";
 
@@ -63,8 +63,25 @@ namespace Data
             };
             paras[0].Value = inModel.ImgUrl;
             paras[1].Value = inModel.ArticleID;
-            
+
             int result = SqlHelper.ExecuteNonQuery(CommandType.Text, sql, paras);
+
+            return result;
+        }
+
+        /// <summary>
+        /// 删除视频
+        /// </summary>
+        /// <param name="articleID"></param>
+        /// <returns></returns>
+        public static int DeleteVideo(int articleID)
+        {
+            string sql = @" UPDATE wz_Content SET ImgUrl = '' WHERE ArticleID = @inArticleID ";
+
+            SqlParameter para = new SqlParameter("@inArticleID", SqlDbType.BigInt);
+            para.Value = articleID;
+
+            int result = SqlHelper.ExecuteNonQuery(CommandType.Text, sql, para);
 
             return result;
         }

@@ -92,7 +92,7 @@ namespace Web.Controllers
                         ArticleID = Convert.ToInt64(articleId),
                         ImgUrl = "http://192.168.3.153:8001/" + vname + ex
                     };
-                    result = Logic.LContent.UpdateContent(model) > 0;
+                    result = Logic.LContent.UpdateVideo(model) > 0;
 
                     if (result)
                     {
