@@ -176,6 +176,11 @@ namespace Web.Controllers
                     ImgUrl = item.ImgUrl
                 };
 
+                if (item.ImgUrl == "" && item.Conten.Contains("视频"))
+                {
+                    continue;
+                }
+
                 vmContents.Add(vModel);
             }
         }
