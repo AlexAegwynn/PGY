@@ -1,34 +1,11 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var vModel = Model as Web.ViewModels.VMArticle;
+    var list = Model as List<Web.ViewModels.VMFootmark>;
 }
 
-@*<script>
-    var catid = 'li_'+'@ViewBag.CatID';
-</script>*@
+<link href="~/Content/css/myfoot.css" rel="stylesheet" />
 
 <script>
-    var pcount = 1;
-    var state = true;
-
-    //$(function () {
-    //    var menu1 = $('#ul1').children();
-    //    for (var i = 0; i < menu1.length; i++) {
-    //        if (menu1[i].id == catid) {
-    //            menu1[i].className = 'focusOn';
-    //            return;
-    //        }
-    //    }
-
-    //    var menu2 = $('#ul2').children();
-    //    for (var i = 0; i < menu2.length; i++) {
-    //        if (menu2[i].id == catid) {
-    //            menu2[i].className = 'menu';
-    //            return;
-    //        }
-    //    }
-    //});
-
     function Search() {
         var str = $('.searchText').val();
 
@@ -36,14 +13,6 @@
     }
 </script>
 
-<script>
-    $(function () {
-        var str = $('#hinfo').val();
-        $('#info').html(str);
-    })
-</script>
-
-<link href="~/Content/css/news.css" rel="stylesheet" />
 <style>
     .menu {
         background-color: red
@@ -84,9 +53,23 @@
         <li id="li_19"><a href="/Home/Index?catid=19"><span>搞笑</span></a></li>
     </ul>
 </div>
-<div class="newContent">
-    <div class="newContentArea" id="info">
-        @Html.Hidden("hinfo", vModel.Conten)
+<div class="myFootContent">
+    <div class="footTitle"><span>我的足迹</span></div>
+    <div class="footContent">
+        <ul>
+            @{
+                for (int i = 0; i < list.Count; i++)
+                {
+                    <li>
+                        <div class="rContent">
+                            <div class="newsTitle"><span><a href="news.html" target="_blank">@list[i].FmTitle</a></span></div>
+                            <div class="footTime"><span>访问时间:2018年8月1号</span></div>
+                            <div class="delNews"><a href="javascript:del()">删除</a></div>
+                        </div>
+                    </li>
+                }
+            }
+        </ul>
     </div>
 </div>
 <div class="rightbar">

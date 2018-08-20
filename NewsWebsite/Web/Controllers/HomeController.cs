@@ -108,6 +108,30 @@ namespace Web.Controllers
             return View(vModel);
         }
 
+        public ActionResult FootmarkList()
+        {
+            List<ViewModels.VMFootmark> vList = new List<ViewModels.VMFootmark>();
+
+            if (Session["LoginUser"] is ViewModels.VMUser vUser)
+            {
+                List<Model.MFootmarks> list = Logic.LFootmarks.GetFootmarks(vUser.UID);
+
+                foreach (var item in list)
+                {
+                    ViewModels.VMFootmark vModel = new ViewModels.VMFootmark
+                    {
+                        FmID = item.FmID,
+                        ArticleID = item.ArticleID,
+                        FmTitle = item.FmTitle
+                    };
+
+                    vList.Add(vModel);
+                }
+            }
+
+            return View(vList);
+        }
+
         public JsonResult DeleteFootmark(int fmid)
         {
             JsonResult json = new JsonResult();

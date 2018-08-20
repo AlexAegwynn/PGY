@@ -150,6 +150,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\VMArticle.cs" />
+    <Compile Include="ViewModels\VMFootmark.cs" />
     <Compile Include="ViewModels\VMUser.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -226,6 +227,7 @@
     <Content Include="Views\Home\ArticleInfo.cshtml" />
     <Content Include="Views\Authentication\Index.cshtml" />
     <Content Include="Views\Authentication\Register.cshtml" />
+    <Content Include="Views\Home\FootmarkList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
