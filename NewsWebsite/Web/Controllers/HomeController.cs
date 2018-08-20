@@ -87,8 +87,10 @@ namespace Web.Controllers
                 vModel.ReleaseTime = ConvertLongToDateTime(vList[0].ReleaseTime).ToShortDateString();
                 vModel.Conten = vList[0].Conten;
 
+                ViewModels.VMUser vUser = Session["LoginUser"] as ViewModels.VMUser;
+
                 //获取session
-                if (Session["LoginUser"] is ViewModels.VMUser vUser)
+                if (vUser != null)
                 {
                     Model.MFootmarks footmarks = new Model.MFootmarks
                     {
@@ -96,9 +98,11 @@ namespace Web.Controllers
                         ArticleID = vModel.ArticleID,
                         FmTitle = vModel.Title
                     };
-
                     int result = Logic.LFootmarks.CreateFootmark(footmarks);
                 }
+
+                ViewBag.IsLogin = vUser == null;
+                ViewBag.Name = vUser == null ? "" : vUser.UserName;
             }
 
             return View(vModel);
