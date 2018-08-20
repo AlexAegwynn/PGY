@@ -1,8 +1,8 @@
-﻿@*<script src="http://pv.sohu.com/cityjson?ie=utf-8"></script>*@
-@{
+﻿@{
     var sList = ViewData["ShowList"] as List<Web.ViewModels.VMArticle>;
     var nList = ViewData["NewList"] as List<Web.ViewModels.VMArticle>;
 }
+
 <script>
     var catid = 'li_'+'@ViewBag.CatID';
 </script>
@@ -48,13 +48,12 @@
         function () {
             var scrollTop = $(this).scrollTop();
             var scrollHeight = $(document).height();
-            var windowHeight = $(this).height();
-            if (scrollTop + windowHeight == scrollHeight) {
+            var windowHeight = $(this).height() + 5;
+            if (scrollTop + windowHeight >= scrollHeight) {
                 var total = $('#PageCount').val();
 
                 if (pcount <= total) {
                     var str = $('.searchText').val();
-
                     $.ajax({
                         url: '/Home/ArticleList',
                         type: 'post',
@@ -69,7 +68,9 @@
                     pcount++;
                 } else {
                     if (state == true) {
-                        alert('到底了');
+                        //alert('到底了');
+                        var str = '<div class="cBox single-mode" style="height:10px;;background-color:#d8f7ff;text-align:center"><span>到底了</span></div>';
+                        $(str).appendTo($("#articles"));
                         state = false;
                     }
                 }
@@ -192,7 +193,6 @@
     //显示悬浮层
     function showInform() {
         document.getElementById("inform").style.display = 'block';
-        // document.getElementById("inform").css("display","block");
     }
     //隐藏悬浮层
     function hiddenInform(event) {
