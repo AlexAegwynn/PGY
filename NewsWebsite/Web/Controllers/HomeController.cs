@@ -58,7 +58,7 @@ namespace Web.Controllers
 
         public PartialViewResult ArticleList(int page = 0)
         {
-            if (articleList == null)
+            if (articleList == null || articleList.Count <= 0)
             {
                 articleList = Logic.LContent.GetArticles();
             }
@@ -75,46 +75,68 @@ namespace Web.Controllers
         public ActionResult ArticleInfo(long inArticleID)
         {
             ViewModels.VMArticle vModel = new ViewModels.VMArticle();
+            List<Model.MContent> list = Logic.LContent.GetArticles();
+            list = (from l in list where l.ArticleID == inArticleID select l).ToList();
 
-            var list = Logic.LContent.GetArticles();
-
-            var vList = (from l in list where l.ArticleID == inArticleID select l).ToList();
-            if (vList.Count > 0)
+            if (list.Count > 0)
             {
-                vModel.ArticleID = vList[0].ArticleID;
-                vModel.Title = vList[0].Title;
-                vModel.DomainID = vList[0].DomainID;
-                vModel.ReleaseTime = ConvertLongToDateTime(vList[0].ReleaseTime).ToShortDateString();
-                vModel.Conten = vList[0].Conten;
+                vModel.ArticleID = list[0].ArticleID;
+                vModel.Title = list[0].Title;
+                vModel.DomainID = list[0].DomainID;
+                vModel.ReleaseTime = ConvertLongToDateTime(list[0].ReleaseTime).ToShortDateString();
+                vModel.Conten = list[0].Conten;
 
-                ViewModels.VMUser vUser = Session["LoginUser"] as ViewModels.VMUser;
+                ViewBag.IsLogin = false;
+                ViewBag.Name = string.Empty;
 
                 //获取session
-                if (vUser != null)
+                if (Session["LoginUser"] is ViewModels.VMUser vUser)
                 {
                     Model.MFootmarks footmarks = new Model.MFootmarks
                     {
                         UID = vUser.UID,
                         ArticleID = vModel.ArticleID,
+                        MarkTime = DateTime.Now,
                         FmTitle = vModel.Title
                     };
-                    int result = Logic.LFootmarks.CreateFootmark(footmarks);
-                }
 
-                ViewBag.IsLogin = vUser == null;
-                ViewBag.Name = vUser == null ? "" : vUser.UserName;
+                    string fmID = Logic.LFootmarks.ExistFootmark(vUser.UID, vModel.ArticleID);
+                    if (string.IsNullOrEmpty(fmID))
+                    {
+                        Logic.LFootmarks.CreateFootmark(footmarks);
+                    }
+                    else
+                    {
+                        footmarks.FmID = Convert.ToInt32(fmID);
+                        Logic.LFootmarks.UpdateFootmark(footmarks);
+                    }
+
+                    ViewBag.IsLogin = true;
+                    ViewBag.Name = vUser.UserName;
+                }
             }
 
             return View(vModel);
         }
 
-        public ActionResult FootmarkList()
+        public ActionResult FootmarkList(string search = "")
         {
             List<ViewModels.VMFootmark> vList = new List<ViewModels.VMFootmark>();
+            ViewBag.Name = string.Empty;
+            ViewBag.IsLogin = false;
+            ViewBag.Search = search;
 
             if (Session["LoginUser"] is ViewModels.VMUser vUser)
             {
-                List<Model.MFootmarks> list = Logic.LFootmarks.GetFootmarks(vUser.UID);
+                List<Model.MFootmarks> list = new List<Model.MFootmarks>();
+                if (string.IsNullOrEmpty(search))
+                {
+                    list = Logic.LFootmarks.GetFootmarks(vUser.UID);
+                }
+                else
+                {
+                    list = Logic.LFootmarks.SearchMarks(search, vUser.UID);
+                }
 
                 foreach (var item in list)
                 {
@@ -122,11 +144,14 @@ namespace Web.Controllers
                     {
                         FmID = item.FmID,
                         ArticleID = item.ArticleID,
+                        MarkTime = item.MarkTime.ToShortDateString(),
                         FmTitle = item.FmTitle
                     };
-
                     vList.Add(vModel);
                 }
+
+                ViewBag.Name = vUser.UserName;
+                ViewBag.IsLogin = true;
             }
 
             return View(vList);
@@ -137,6 +162,8 @@ namespace Web.Controllers
             JsonResult json = new JsonResult();
 
             bool result = Logic.LFootmarks.DeleteFootmark(fmid) > 0;
+
+            json.Data = new { result };
 
             return json;
         }

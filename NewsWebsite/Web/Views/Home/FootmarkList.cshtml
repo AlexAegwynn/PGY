@@ -9,7 +9,24 @@
     function Search() {
         var str = $('.searchText').val();
 
-        window.location.href = '/Home/Index?search=' + str;
+        window.location.href = '/Home/FootmarkList?search=' + str;
+    }
+
+    function DeleteMark(id) {
+        if (confirm('确认删除？')) {
+            $.ajax({
+                url: '/Home/DeleteFootmark',
+                type: 'post',
+                data: { fmid: id },
+                success: function (data) {
+                    if (data.result) {
+                        window.location.reload();
+                    } else {
+                        alert('删除失败');
+                    }
+                }
+            })
+        }
     }
 </script>
 
@@ -62,9 +79,9 @@
                 {
                     <li>
                         <div class="rContent">
-                            <div class="newsTitle"><span><a href="news.html" target="_blank">@list[i].FmTitle</a></span></div>
-                            <div class="footTime"><span>访问时间:2018年8月1号</span></div>
-                            <div class="delNews"><a href="javascript:del()">删除</a></div>
+                            <div class="newsTitle"><span><a href="/Home/ArticleInfo?inArticleID=@list[i].ArticleID" target="_blank">@list[i].FmTitle</a></span></div>
+                            <div class="footTime"><span>访问时间: @list[i].MarkTime</span></div>
+                            <div class="delNews"><a href="javascript:DeleteMark('@list[i].FmID')">删除</a></div>
                         </div>
                     </li>
                 }
@@ -74,26 +91,26 @@
 </div>
 <div class="rightbar">
     <div class="searchBar">
-        <input type="text" class="searchText" value="@ViewBag.Search" placeholder="这里输入你要搜索的内容" />
-        <div class="searchButton"><a type="button" class="searchButton1" onclick="Search()">搜索</a></div>
+        <input type="text" class="searchText" value="@ViewBag.Search" placeholder="搜索足迹" />
+        <div class="searchButton"><a type="button" class="searchButton1" href="javascript:Search()">搜索</a></div>
     </div>
     <div class="loginBar">
         @{
             if (Convert.ToBoolean(ViewBag.IsLogin))
             {
-                <div class="loginInner">
-                    <div class="loginConduce">登录后可以保存您的浏览足迹、收藏。</div>
-                    <div class="loginMode"><a type="button" class="loginButton" href="/Authentication/Index">登录</a></div>
-                    <div class="registerMode"><a type="button" class="registerButton" href="/Authentication/Register">注册</a></div>
+                <div id="loginInnerTwo">
+                    <div class="welcomeToLogin"><span>欢迎，@ViewBag.Name</span></div>
+                    <div class="myfoot"><a type="button" class="footButton" href="/Home/FootmarkList">我的足迹</a></div>
+                    <div class="myCollection"><a type="button" class="collectionButton" href="mycollection.html">我的收藏</a></div>
+                    <div class="exitUser"><a type="button" class="exitButton" href="/Authentication/Logout">退出当前账号</a></div>
                 </div>
             }
             else
             {
-                <div id="loginInnerTwo">
-                    <div class="welcomeToLogin"><span>欢迎，@ViewBag.Name</span></div>
-                    <div class="myfoot"><a type="button" class="footButton" href="myfoot.html">我的足迹</a></div>
-                    <div class="myCollection"><a type="button" class="collectionButton" href="mycollection.html">我的收藏</a></div>
-                    <div class="exitUser"><a type="button" class="exitButton" href="/Authentication/Logout">退出当前账号</a></div>
+                <div class="loginInner">
+                    <div class="loginConduce">登录后可以保存您的浏览足迹、收藏。</div>
+                    <div class="loginMode"><a type="button" class="loginButton" href="/Authentication/Index">登录</a></div>
+                    <div class="registerMode"><a type="button" class="registerButton" href="/Authentication/Register">注册</a></div>
                 </div>
             }
         }

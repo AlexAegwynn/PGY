@@ -18,6 +18,11 @@ namespace Web.ViewModels
         public long ArticleID { get; set; }
 
         /// <summary>
+        /// 访问时间
+        /// </summary>
+        public string MarkTime { get; set; }
+
+        /// <summary>
         /// 足迹文章标题
         /// </summary>
         public string FmTitle { get; set; }

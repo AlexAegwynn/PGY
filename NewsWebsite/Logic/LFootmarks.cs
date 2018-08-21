@@ -23,6 +23,27 @@ namespace Logic
         }
 
         /// <summary>
+        /// 根据用户ID和文章ID确认足迹是否存在
+        /// </summary>
+        /// <param name="inUID"></param>
+        /// <param name="inArticleID"></param>
+        /// <returns></returns>
+        public static string ExistFootmark(int inUID, long inArticleID)
+        {
+            return Data.DFootmarks.ExistFootmark(inUID, inArticleID);
+        }
+
+        /// <summary>
+        /// 搜索足迹
+        /// </summary>
+        /// <param name="search"></param>
+        /// <returns></returns>
+        public static List<MFootmarks> SearchMarks(string search, int inUID)
+        {
+            return Data.DFootmarks.SearchMarks(search, inUID);
+        }
+
+        /// <summary>
         /// 创建足迹记录
         /// </summary>
         /// <param name="inModel"></param>
@@ -30,6 +51,16 @@ namespace Logic
         public static int CreateFootmark(MFootmarks inModel)
         {
             return Data.DFootmarks.CreateFootmark(inModel);
+        }
+
+        /// <summary>
+        /// 更新足迹记录
+        /// </summary>
+        /// <param name="inModel"></param>
+        /// <returns></returns>
+        public static int UpdateFootmark(MFootmarks inModel)
+        {
+            return Data.DFootmarks.UpdateFootmark(inModel);
         }
 
         /// <summary>

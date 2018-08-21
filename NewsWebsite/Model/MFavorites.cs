@@ -27,6 +27,11 @@ namespace Model
         public long ArticleID { get; set; } = 0;
 
         /// <summary>
+        /// 收藏时间
+        /// </summary>
+        public DateTime FavoritesTime { get; set; } = Convert.ToDateTime("1900-1-1");
+
+        /// <summary>
         /// 收藏文章标题
         /// </summary>
         public string FaTitle { get; set; } = string.Empty;
