@@ -29,6 +29,14 @@ namespace Web.Controllers
 
             if (inModel.UID == 0)
             {
+                bool exist = Logic.LUsers.ExistUser(inModel.UserName);
+
+                if (exist)
+                {
+                    json.Data = new { result = false, msg = "用户名已存在" };
+                    return json;
+                }
+
                 Model.MUsers model = new Model.MUsers
                 {
                     UserName = inModel.UserName,

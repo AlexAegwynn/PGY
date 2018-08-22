@@ -4,18 +4,24 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
+using Logic;
+
 namespace Web.Controllers
 {
     public class HomeController : BaseController
     {
         /// <summary>
-        /// 页面文章列表
+        /// 所有文章列表
         /// </summary>
         private static List<Model.MContent> articleList = new List<Model.MContent>();
+        /// <summary>
+        /// 页面文章列表
+        /// </summary>
+        private static List<Model.MContent> aList = new List<Model.MContent>();
 
         public ActionResult Index(string search = "", int catid = 0)
         {
-            articleList = Logic.LContent.GetArticles();
+            articleList = LContent.GetArticles();
 
             //var a = articleList.Where(m => m.ArticleID == 5822665).ToList();
             //var text = GetSrc(a[0].Conten);
@@ -30,17 +36,19 @@ namespace Web.Controllers
 
             ViewData["NewList"] = vywList;  //最新要闻
 
+            aList = articleList;
+
             if (!string.IsNullOrEmpty(search))
             {
-                articleList = articleList.Where(m => m.Title.Contains(search)).ToList();
+                aList = aList.Where(m => m.Title.Contains(search)).ToList();
             }
 
             if (catid != 0)
             {
-                articleList = articleList.Where(m => m.DomainID == catid).ToList();
+                aList = aList.Where(m => m.DomainID == catid).ToList();
             }
 
-            decimal total = articleList.Count;
+            decimal total = aList.Count;
             int pcount = Convert.ToInt32(Math.Ceiling(total / 10));  //页数
 
             ViewBag.PageCount = pcount;
@@ -58,12 +66,12 @@ namespace Web.Controllers
 
         public PartialViewResult ArticleList(int page = 0)
         {
-            if (articleList == null || articleList.Count <= 0)
+            if (aList == null || aList.Count <= 0)
             {
-                articleList = Logic.LContent.GetArticles();
+                aList = LContent.GetArticles();
             }
 
-            List<Model.MContent> list = articleList;
+            List<Model.MContent> list = aList;
 
             list = list.Skip(10 * page).Take(10).ToList();
 
@@ -74,8 +82,14 @@ namespace Web.Controllers
 
         public ActionResult ArticleInfo(long inArticleID)
         {
+            //List<Model.MContent> list = Logic.LContent.GetArticles();
+            if (articleList == null || articleList.Count <= 0)
+            {
+                articleList = LContent.GetArticles();
+            }
+
+            List<Model.MContent> list = articleList;
             ViewModels.VMArticle vModel = new ViewModels.VMArticle();
-            List<Model.MContent> list = Logic.LContent.GetArticles();
             list = (from l in list where l.ArticleID == inArticleID select l).ToList();
 
             if (list.Count > 0)
@@ -89,9 +103,11 @@ namespace Web.Controllers
                 ViewBag.IsLogin = false;
                 ViewBag.Name = string.Empty;
 
-                //获取session
+                //获取session,判断是否为空
                 if (Session["LoginUser"] is ViewModels.VMUser vUser)
                 {
+                    vModel.IsFavorites = LFavorites.ExistFavorites(vModel.ArticleID, vUser.UID);
+
                     Model.MFootmarks footmarks = new Model.MFootmarks
                     {
                         UID = vUser.UID,
@@ -100,15 +116,15 @@ namespace Web.Controllers
                         FmTitle = vModel.Title
                     };
 
-                    string fmID = Logic.LFootmarks.ExistFootmark(vUser.UID, vModel.ArticleID);
+                    string fmID = LFootmarks.ExistFootmark(vUser.UID, vModel.ArticleID);
                     if (string.IsNullOrEmpty(fmID))
                     {
-                        Logic.LFootmarks.CreateFootmark(footmarks);
+                        LFootmarks.CreateFootmark(footmarks);
                     }
                     else
                     {
                         footmarks.FmID = Convert.ToInt32(fmID);
-                        Logic.LFootmarks.UpdateFootmark(footmarks);
+                        LFootmarks.UpdateFootmark(footmarks);
                     }
 
                     ViewBag.IsLogin = true;
@@ -128,15 +144,7 @@ namespace Web.Controllers
 
             if (Session["LoginUser"] is ViewModels.VMUser vUser)
             {
-                List<Model.MFootmarks> list = new List<Model.MFootmarks>();
-                if (string.IsNullOrEmpty(search))
-                {
-                    list = Logic.LFootmarks.GetFootmarks(vUser.UID);
-                }
-                else
-                {
-                    list = Logic.LFootmarks.SearchMarks(search, vUser.UID);
-                }
+                var list = string.IsNullOrEmpty(search) ? LFootmarks.GetFootmarks(vUser.UID) : LFootmarks.SearchMarks(search, vUser.UID);
 
                 foreach (var item in list)
                 {
@@ -161,9 +169,107 @@ namespace Web.Controllers
         {
             JsonResult json = new JsonResult();
 
-            bool result = Logic.LFootmarks.DeleteFootmark(fmid) > 0;
+            bool result = LFootmarks.DeleteFootmark(fmid) > 0;
 
             json.Data = new { result };
+
+            return json;
+        }
+
+        public ActionResult FavoritesList(string search = "")
+        {
+            List<ViewModels.VMFavorites> vList = new List<ViewModels.VMFavorites>();
+            ViewBag.Name = string.Empty;
+            ViewBag.IsLogin = false;
+            ViewBag.Search = search;
+
+            if (Session["LoginUser"] is ViewModels.VMUser vUser)
+            {
+                var list = string.IsNullOrEmpty(search) ? LFavorites.GetFavorites(vUser.UID) : LFavorites.SearchFav(search, vUser.UID);
+
+                foreach (var item in list)
+                {
+                    ViewModels.VMFavorites vModel = new ViewModels.VMFavorites
+                    {
+                        FaID = item.FaID,
+                        ArticleID = item.ArticleID,
+                        FavoritesTime = item.FavoritesTime.ToShortDateString(),
+                        FaTitle = item.FaTitle
+                    };
+                    vList.Add(vModel);
+                }
+
+                ViewBag.Name = vUser.UserName;
+                ViewBag.IsLogin = true;
+            }
+
+            return View(vList);
+        }
+
+        public JsonResult AddFavorites(string inArticleID, string inTitle)
+        {
+            JsonResult json = new JsonResult();
+
+            try
+            {
+                if (string.IsNullOrEmpty(inArticleID))
+                {
+                    json.Data = new { result = false, msg = "收藏失败" };
+                    return json;
+                }
+
+                if (Session["LoginUser"] is ViewModels.VMUser vUser)
+                {
+                    Model.MFavorites model = new Model.MFavorites
+                    {
+                        ArticleID = Convert.ToInt64(inArticleID),
+                        UID = vUser.UID,
+                        FaTitle = inTitle,
+                        FavoritesTime = DateTime.Now
+                    };
+
+                    bool result = LFavorites.CreateFavorite(model) > 0;
+                    string msg = result ? "" : "收藏失败";
+
+                    json.Data = new { result, msg };
+                }
+                else
+                {
+                    json.Data = new { result = false, msg = "请先登录" };
+                }
+            }
+            catch (Exception ex)
+            {
+                json.Data = new { result = false, msg = "收藏失败" };
+            }
+
+            return json;
+        }
+
+        public JsonResult DelFavorites(string inArticleID)
+        {
+            JsonResult json = new JsonResult();
+
+            if (string.IsNullOrEmpty(inArticleID))
+            {
+                json.Data = new { result = false, msg = "取消收藏失败" };
+                return json;
+            }
+
+            try
+            {
+                if (Session["LoginUser"] is ViewModels.VMUser vUser)
+                {
+                    bool result = LFavorites.DeleteFavorite(Convert.ToInt64(inArticleID), vUser.UID) > 0;
+                    string msg = result ? "" : "取消收藏失败";
+
+                    json.Data = new { result, msg };
+                }
+            }
+            catch (Exception ex)
+            {
+                json.Data = new { result = false, msg = "取消收藏失败" };
+            }
 
             return json;
         }

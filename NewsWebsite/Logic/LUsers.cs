@@ -22,6 +22,16 @@ namespace Logic
         }
 
         /// <summary>
+        /// 验证用户名是否存在
+        /// </summary>
+        /// <param name="inUserName"></param>
+        /// <returns></returns>
+        public static bool ExistUser(string inUserName)
+        {
+            return Data.DUsers.ExistUser(inUserName);
+        }
+
+        /// <summary>
         /// 创建用户
         /// </summary>
         public static int CreateUser(MUsers inModel)

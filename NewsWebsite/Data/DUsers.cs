@@ -47,6 +47,24 @@ namespace Data
         }
 
         /// <summary>
+        /// 验证用户名是否存在
+        /// </summary>
+        /// <param name="inUserName"></param>
+        /// <returns></returns>
+        public static bool ExistUser(string inUserName)
+        {
+            string sql = @" SELECT * FROM nw_Users WHERE UserName = @inUserName ";
+
+            SqlParameter para = new SqlParameter("@inUserName", SqlDbType.NVarChar, 50);
+            para.Value = inUserName;
+
+            DataTable dt = SqlHelper.ExecuteDataTable(CommandType.Text, sql, para);
+            bool result = dt.Rows.Count > 0;
+
+            return result;
+        }
+
+        /// <summary>
         /// 创建用户
         /// </summary>
         public static int CreateUser(MUsers inModel)

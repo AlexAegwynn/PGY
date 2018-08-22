@@ -23,6 +23,28 @@ namespace Logic
         }
 
         /// <summary>
+        /// 验证文章是否已收藏
+        /// </summary>
+        /// <param name="inArticleID"></param>
+        /// <param name="inUID"></param>
+        /// <returns></returns>
+        public static bool ExistFavorites(long inArticleID, int inUID)
+        {
+            return Data.DFavorites.ExistFavorites(inArticleID, inUID);
+        }
+
+        /// <summary>
+        /// 搜索收藏文章
+        /// </summary>
+        /// <param name="search"></param>
+        /// <param name="inUID"></param>
+        /// <returns></returns>
+        public static List<MFavorites> SearchFav(string search, int inUID)
+        {
+            return Data.DFavorites.SearchFav(search, inUID);
+        }
+
+        /// <summary>
         /// 创建收藏记录
         /// </summary>
         /// <param name="inModel"></param>
@@ -37,9 +59,9 @@ namespace Logic
         /// </summary>
         /// <param name="inFaID"></param>
         /// <returns></returns>
-        public static int DeleteFavorite(int inFaID)
+        public static int DeleteFavorite(long inArticleID, int inUID)
         {
-            return Data.DFavorites.DeleteFavorite(inFaID);
+            return Data.DFavorites.DeleteFavorite(inArticleID, inUID);
         }
     }
 }

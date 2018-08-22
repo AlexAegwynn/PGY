@@ -1,49 +1,25 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var vModel = Model as Web.ViewModels.VMArticle;
+    var list = Model as List<Web.ViewModels.VMFavorites>;
 }
 
 <script>
     function Search() {
         var str = $('.searchText').val();
 
-        window.location.href = '/Home/Index?search=' + str;
+        window.location.href = '/Home/FavoritesList?search=' + str;
     }
 
-    function Favorites() {
-        var title = $('.bigtitle').children().html();
-
-        $.ajax({
-            url: '/Home/AddFavorites',
-            type: 'post',
-            data: {
-                inArticleID: $('#aid').val(),
-                inTitle: title
-            },
-            success: function (data) {
-                if (data.result) {
-                    var dom = $('#fav');
-                    dom.parent().attr('href', 'javascript:DelFavorites()');
-                    dom.html('☆已收藏');
-                } else {
-                    alert(data.msg);
-                }
-            }
-        })
-    }
-
-    function DelFavorites() {
+    function DelFav(aid) {
         $.ajax({
             url: '/Home/DelFavorites',
             type: 'post',
             data: {
-                inArticleID: $('#aid').val()
+                inArticleID: aid
             },
             success: function (data) {
                 if (data.result) {
-                    var dom = $('#fav');
-                    dom.parent().attr('href', 'javascript:Favorites()');
-                    dom.html('☆收藏');
+                    window.location.reload();
                 } else {
                     alert(data.msg);
                 }
@@ -51,20 +27,7 @@
         })
     }
 </script>
-
-<script>
-    $(function () {
-        var str = $('#hinfo').val();
-        $('#info').html(str);
-    })
-</script>
-
-<link href="~/Content/css/news.css" rel="stylesheet" />
-<style>
-    .menu {
-        background-color: red
-    }
-</style>
+<link href="~/Content/css/mycollection.css" rel="stylesheet" />
 
 <div class="topBar">
     <div class="weatherInfo" style="height:30px;">
@@ -100,32 +63,28 @@
         <li id="li_19"><a href="/Home/Index?catid=19"><span>搞笑</span></a></li>
     </ul>
 </div>
-<div class="newContent">
-    <div class="newContentArea">
-        <input type="hidden" id="aid" value="@vModel.ArticleID" />
-        <div class="bigtitle"><span>@vModel.Title</span></div>
-        <div id="info">
-            @Html.Hidden("hinfo", vModel.Conten)
-        </div>
-        <div class="aboutLink">
-            @{
-                if (vModel.IsFavorites)
-                {
-                    <a href="javascript:DelFavorites()" class="collectionButton"><span id="fav">☆已收藏</span></a>
-                }
-                else
-                {
-                    <a href="javascript:Favorites()" class="collectionButton"><span id="fav">☆收藏</span></a>
-                }
+<div class="myCollectionContent">
+    <div class="collectionTitle"><span>我的收藏</span></div>
+    <div class="collectionContent">
+        <ul>
+            @for (int i = 0; i < list.Count; i++)
+            {
+                <li>
+                    <div class="rContent">
+                        <div class="newsTitle"><span><a href="news.html" target="_blank">@list[i].FaTitle</a></span></div>
+                        <div class="collectTime"><span>收藏时间: @list[i].FavoritesTime</span></div>
+                        <div class="delNews"><a href="javascript:DelFav('@list[i].ArticleID')">取消收藏</a></div>
+                    </div>
+                </li>
             }
-        </div>
+        </ul>
     </div>
 </div>
 <div class="rightbar">
-    @*<div class="searchBar">
-            <input type="text" class="searchText" value="@ViewBag.Search" placeholder="这里输入你要搜索的内容" />
-            <div class="searchButton"><a type="button" class="searchButton1" onclick="Search()">搜索</a></div>
-        </div>*@
+    <div class="searchBar">
+        <input type="text" class="searchText" value="@ViewBag.Search" placeholder="搜索收藏的文章" />
+        <div class="searchButton"><a type="button" class="searchButton1" href="javascript:Search()">搜索</a></div>
+    </div>
     <div class="loginBar">
         @{
             if (Convert.ToBoolean(ViewBag.IsLogin))

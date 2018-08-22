@@ -11,5 +11,7 @@ namespace Web.ViewModels
         public new string ReleaseTime { get; set; } = string.Empty;
 
         public string ImgSrc { get; set; } = string.Empty;
+
+        public bool IsFavorites { get; set; } = false;
     }
 }
