@@ -56,15 +56,17 @@
     $(function () {
         var str = $('#hinfo').val();
         $('#info').html(str);
+
+        jQuery('#qrcode').qrcode({
+            render: "canvas", 
+            width: 150,
+            height: 150,
+            text: window.location.href
+        });
     })
 </script>
 
 <link href="~/Content/css/news.css" rel="stylesheet" />
-<style>
-    .menu {
-        background-color: red
-    }
-</style>
 
 <div class="topBar">
     <div class="weatherInfo" style="height:30px;">
@@ -147,6 +149,7 @@
             }
         }
     </div>
+    <div id="qrcode"></div>
 </div>
 
 <script type="text/javascript">
