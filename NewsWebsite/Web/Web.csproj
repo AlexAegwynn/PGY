@@ -162,6 +162,7 @@
     <Content Include="Content\css\hover_htc.htc" />
     <Content Include="Content\css\ico.png" />
     <Content Include="Content\css\loading.gif" />
+    <Content Include="Content\css\log.css" />
     <Content Include="Content\css\login.css" />
     <Content Include="Content\css\main.css" />
     <Content Include="Content\css\mycollection.css" />

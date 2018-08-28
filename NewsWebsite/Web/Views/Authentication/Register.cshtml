@@ -2,107 +2,190 @@
     Layout = null;
 }
 
-<!DOCTYPE html>
+<script type="text/javascript">
+    function Register() {
+        var t_UserName = $('#t_UserName').val();
+        var t_UserPass = $('#t_UserPass').val();
+        var t_RePass = $('#t_RePass').val();
+        var t_Email = $('#t_Email').val();
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>注册</title>
-    <link href="~/Content/css/Authentication.css" rel="stylesheet" />
-    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-    <script src="~/Scripts/formValidator_min.js"></script>
-    <script src="~/Scripts/formValidatorRegex.js"></script>
-    <link href="~/Content/css/register.css" rel="stylesheet" />
-    <script type="text/javascript">
-        function Register() {
-            var t_UserName = $('#t_UserName').val();
-            var t_UserPass = $('#t_UserPass').val();
-            var t_RePass = $('#t_RePass').val();
-            var t_Email = $('#t_Email').val();
+        $('#t_UserNameTip').html('');
+        $('#t_UserPassTip').html('');
+        $('#t_RePassTip').html('');
+        $('#t_EmailTip').html('');
 
-            $('#t_UserNameTip').html('');
-            $('#t_UserPassTip').html('');
-            $('#t_RePassTip').html('');
-            $('#t_EmailTip').html('');
+        var state = true;
 
-            var state = true;
+        if (t_UserName == '') {
+            $('#t_UserNameTip').html('不能为空');
+            state = false;
+        }
 
-            if (t_UserName == '') {
-                $('#t_UserNameTip').html('不能为空');
+        if (t_UserPass == '') {
+            $('#t_UserPassTip').html('不能为空');
+            state = false;
+        }
+
+        if (t_RePass == '') {
+            $('#t_RePassTip').html('不能为空');
+            state = false;
+        }
+
+        if (t_UserPass != t_RePass) {
+            $('#t_RePassTip').html('密码不一致');
+            state = false;
+        }
+
+        if (t_Email != '') {
+            var reg = /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/;
+
+            if (!reg.test(t_Email)) {
+                $('#t_EmailTip').html('邮箱格式不正确');
                 state = false;
             }
+        } else {
+            $('#t_EmailTip').html('不能为空');
+            state = false;
+        }
 
-            if (t_UserPass == '') {
-                $('#t_UserPassTip').html('不能为空');
-                state = false;
-            }
+        if (state) {
+            $.ajax({
+                url: '/Authentication/Login',
+                type: 'post',
+                data: $('#form1').serialize(),
+                success: function (data) {
+                    if (!data.result) {
+                        $('#error').html(data.msg);
+                    } else {
+                        window.location.href = '/Home/Index';
+                    }
+                }
+            })
+        }
+    }
+</script>
 
-            if (t_RePass == '') {
-                $('#t_RePassTip').html('不能为空');
-                state = false;
-            }
+<form name="form1" id="form1">
+    <a onClick="closeRight()" style="float: right;cursor: pointer;color: blue;">X</a>
+    @Html.Hidden("UID", 0)
+    <dl>
+        <dt class="f14 b">帐户信息</dt>
+        <dd><span class="title">用户名：</span><input class="reg_input" name="UserName" id="t_UserName" type="text" /> <span id="t_UserNameTip" class="onshow"></span></dd>
+        <dd><span class="title">密　码：</span><input class="reg_input" name="Password" id="t_UserPass" type="password" /> <span id="t_UserPassTip" class="onshow"></span></dd>
+        <dd><span class="title">确认密码：</span><input class="reg_input" name="t_RePass" id="t_RePass" type="password" /> <span id="t_RePassTip" class="onshow"></span></dd>
+        <dd><span class="title">邮箱地址：</span><input class="reg_input" name="Email" id="t_Email" type="text" /> <span id="t_EmailTip" class="onshow"></span></dd>
+    </dl>
+    <div style="height:20px;">
+        <span style="color:red;font-size:12px;" id="error"></span>
+    </div>
+    <div class="f_reg_but">
+        <input id="button" name="button" onclick="Register()" value="免费注册" class="r_button" />
+        <span class="clew_txt">如果您已有帐号，可<a href="javascript:ILogin();">直接登录</a></span>
+    </div>
+</form>
 
-            if (t_UserPass != t_RePass) {
-                $('#t_RePassTip').html('密码不一致');
-                state = false;
-            }
 
-            if (t_Email != '') {
-                var reg = /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/;
+@*<!DOCTYPE html>
 
-                if (!reg.test(t_Email)) {
-                    $('#t_EmailTip').html('邮箱格式不正确');
+    <html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>注册</title>
+        <link href="~/Content/css/Authentication.css" rel="stylesheet" />
+        <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+        <script src="~/Scripts/formValidator_min.js"></script>
+        <script src="~/Scripts/formValidatorRegex.js"></script>
+        <link href="~/Content/css/register.css" rel="stylesheet" />
+        <script type="text/javascript">
+            function Register() {
+                var t_UserName = $('#t_UserName').val();
+                var t_UserPass = $('#t_UserPass').val();
+                var t_RePass = $('#t_RePass').val();
+                var t_Email = $('#t_Email').val();
+
+                $('#t_UserNameTip').html('');
+                $('#t_UserPassTip').html('');
+                $('#t_RePassTip').html('');
+                $('#t_EmailTip').html('');
+
+                var state = true;
+
+                if (t_UserName == '') {
+                    $('#t_UserNameTip').html('不能为空');
                     state = false;
                 }
-            } else {
-                $('#t_EmailTip').html('不能为空');
-                state = false;
-            }
 
-            if (state) {
-                $.ajax({
-                    url: '/Authentication/Login',
-                    type: 'post',
-                    data: $('#form1').serialize(),
-                    success: function (data) {
-                        if (!data.result) {
-                            $('#error').html(data.msg);
-                        } else {
-                            window.location.href = '/Home/Index';
-                        }
+                if (t_UserPass == '') {
+                    $('#t_UserPassTip').html('不能为空');
+                    state = false;
+                }
+
+                if (t_RePass == '') {
+                    $('#t_RePassTip').html('不能为空');
+                    state = false;
+                }
+
+                if (t_UserPass != t_RePass) {
+                    $('#t_RePassTip').html('密码不一致');
+                    state = false;
+                }
+
+                if (t_Email != '') {*@
+@*var reg = /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@@*(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/;*@
+@*
+                    if (!reg.test(t_Email)) {
+                        $('#t_EmailTip').html('邮箱格式不正确');
+                        state = false;
                     }
-                })
-            }
-        }
-    </script>
+                } else {
+                    $('#t_EmailTip').html('不能为空');
+                    state = false;
+                }
 
-    <style>
-        .onshow {
-            color: red;
-        }
-    </style>
-</head>
-<body>
-    <!--注册开始-->
-    <div class="reg">
-        <form name="form1" id="form1">
-            @Html.Hidden("UID", 0)
-            <dl>
-                <dt class="f14 b">帐户信息</dt>
-                <dd><span class="title">用户名：</span><input class="reg_input" name="UserName" id="t_UserName" type="text" /> <span id="t_UserNameTip" class="onshow"></span></dd>
-                <dd><span class="title">密　码：</span><input class="reg_input" name="Password" id="t_UserPass" type="password" /> <span id="t_UserPassTip" class="onshow"></span></dd>
-                <dd><span class="title">确认密码：</span><input class="reg_input" name="t_RePass" id="t_RePass" type="password" /> <span id="t_RePassTip" class="onshow"></span></dd>
-                <dd><span class="title">邮箱地址：</span><input class="reg_input" name="Email" id="t_Email" type="text" /> <span id="t_EmailTip" class="onshow"></span></dd>
-            </dl>
-            <div style="height:20px;">
-                <span style="color:red;font-size:12px;" id="error"></span>
-            </div>
-            <div class="f_reg_but">
-                <input id="button" name="button" onclick="Register()" value="免费注册" class="r_button" />
-                <span class="clew_txt">如果您已有帐号，可<a href="/Authentication/Index">直接登录</a></span>
-            </div>
-        </form>
-    </div>
-    <!--注册结束-->
-</body>
-</html>
+                if (state) {
+                    $.ajax({
+                        url: '/Authentication/Login',
+                        type: 'post',
+                        data: $('#form1').serialize(),
+                        success: function (data) {
+                            if (!data.result) {
+                                $('#error').html(data.msg);
+                            } else {
+                                window.location.href = '/Home/Index';
+                            }
+                        }
+                    })
+                }
+            }
+        </script>
+
+        <style>
+            .onshow {
+                color: red;
+            }
+        </style>
+    </head>
+    <body>
+        <!--注册开始-->
+        <div class="reg">
+            <form name="form1" id="form1">
+                @Html.Hidden("UID", 0)
+                <dl>
+                    <dt class="f14 b">帐户信息</dt>
+                    <dd><span class="title">用户名：</span><input class="reg_input" name="UserName" id="t_UserName" type="text" /> <span id="t_UserNameTip" class="onshow"></span></dd>
+                    <dd><span class="title">密　码：</span><input class="reg_input" name="Password" id="t_UserPass" type="password" /> <span id="t_UserPassTip" class="onshow"></span></dd>
+                    <dd><span class="title">确认密码：</span><input class="reg_input" name="t_RePass" id="t_RePass" type="password" /> <span id="t_RePassTip" class="onshow"></span></dd>
+                    <dd><span class="title">邮箱地址：</span><input class="reg_input" name="Email" id="t_Email" type="text" /> <span id="t_EmailTip" class="onshow"></span></dd>
+                </dl>
+                <div style="height:20px;">
+                    <span style="color:red;font-size:12px;" id="error"></span>
+                </div>
+                <div class="f_reg_but">
+                    <input id="button" name="button" onclick="Register()" value="免费注册" class="r_button" />
+                    <span class="clew_txt">如果您已有帐号，可<a href="/Authentication/Index">直接登录</a></span>
+                </div>
+            </form>
+        </div>
+        <!--注册结束-->
+    </body>
+    </html>*@

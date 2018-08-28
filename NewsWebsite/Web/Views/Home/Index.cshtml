@@ -21,6 +21,13 @@
             }
         })
 
+        jQuery('#qrcode').qrcode({
+            render: "canvas",
+            width: 150,
+            height: 150,
+            text: window.location.href
+        });
+
         var menu1 = $('#ul1').children();
         for (var i = 0; i < menu1.length; i++) {
             if (menu1[i].id == catid) {
@@ -76,6 +83,41 @@
                 }
             }
         });
+</script>
+
+<script>
+    function ILogin() {
+        $.ajax({
+            url: '/Authentication/Index',
+            type: 'post',
+            success: function (data) {
+                $('#GrayBG').show();
+                var log = $('#logreg');
+                log.html(data);
+                log.show();
+            }
+        })
+    }
+
+    function IRegister() {
+        $.ajax({
+            url: '/Authentication/Register',
+            type: 'post',
+            success: function (data) {
+                $('#GrayBG').show();
+                var reg = $('#logreg');
+                reg.html(data);
+                reg.show();
+            }
+        })
+    }
+
+    function closeRight() {
+        $('#GrayBG').hide();
+        var lr = $('#logreg');
+        lr.html('');
+        lr.hide();
+    }
 </script>
 
 <style>
@@ -151,8 +193,8 @@
             {
                 <div class="loginInner">
                     <div class="loginConduce">登录后可以保存您的浏览足迹、收藏。</div>
-                    <div class="loginMode"><a type="button" class="loginButton" href="/Authentication/Index">登录</a></div>
-                    <div class="registerMode"><a type="button" class="registerButton" href="/Authentication/Register">注册</a></div>
+                    <div class="loginMode"><a type="button" class="loginButton" href="javascript:ILogin();">登录</a></div>
+                    <div class="registerMode"><a type="button" class="registerButton" href="javascript:IRegister();">注册</a></div>
                 </div>
             }
             else
@@ -188,7 +230,12 @@
             </ul>
         </div>
     </div>
+
+    <div id="qrcode"></div>
 </div>
+
+<div id="GrayBG" style="background-color: #ccc;opacity: 0.5;width: 100%;height: 100%;z-index:1;display: none;"></div>
+<div class="reg login logreg" id="logreg"></div>
 
 <script type="text/javascript">
     //显示悬浮层
