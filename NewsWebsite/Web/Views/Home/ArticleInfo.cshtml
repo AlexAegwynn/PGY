@@ -55,17 +55,9 @@
 <script>
     $(function () {
         var str = $('#hinfo').val();
-        $('#info').html(str);
-
-        jQuery('#qrcode').qrcode({
-            render: "canvas",
-            width: 150,
-            height: 150,
-            text: window.location.href
-        });
+        $('#info').html(str);    
     })
 </script>
-
 
 <script>
     function ILogin() {
@@ -141,6 +133,7 @@
 <div class="newContent">
     <div class="newContentArea">
         <input type="hidden" id="aid" value="@vModel.ArticleID" />
+        <div class="threeLink"><a href="/Home/Index">首页</a> / <a href="/Home/Index?catid=@vModel.DomainID">@ViewBag.CatName</a> / <span>正文</span></div>
         <div class="bigtitle"><span>@vModel.Title</span></div>
         <div id="info">
             @Html.Hidden("hinfo", vModel.Conten)

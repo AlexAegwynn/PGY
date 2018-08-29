@@ -7,7 +7,6 @@
 	top: 40px;
 	left: 200px;
 	width:700px;
-	background-color: orange;
 	height: auto;
 }
 .newContent .newContentArea{
@@ -15,6 +14,18 @@
 	margin: 25px;
 	width: 650px;
 	height: auto;
+}
+.newContent .newContentArea .threeLink{
+	font-family:'微软雅黑';
+	font-size: 15px;
+	margin-bottom: 15px;
+}
+.newContent .newContentArea .threeLink a{
+	color:black;
+	cursor: pointer;
+}
+.newContent .newContentArea .threeLink span{
+	color:#4d4d4d;
 }
 .newContent .newContentArea .bigtitle{
 	
@@ -73,6 +84,61 @@
 }
 .newContent .moreNews{
 	padding-top: 10px;
+}
+.newContent .tuiwen{
+	width:700px;
+	height: auto;
+}
+.newContent .tuiwen .xgtw{
+	font-size:25px;
+	font-family: "微软雅黑";
+	font-weight: bold;
+	margin-left: 20px;
+}
+.newContent .tuiwen ul{
+	width: 700px;
+	height: auto;
+}
+.newContent .tuiwen ul li{
+	height: 150px;
+	margin-bottom: 10px;
+	border-bottom:1px solid #4d4d4d;
+}
+.newContent .tuiwen ul li .leftpart1{
+	float:left;
+}
+.newContent .tuiwen ul li .leftpart1 img{
+	width:120px;
+	height:120px;
+}
+.newContent .tuiwen ul li .leftpart1 img:hover{
+	transform: scale(1.1);
+	transition: all 0.5s ease 0s;
+	-webkit-transform: scale(1.1);
+	-webkit-transform: all 1s ease 0s;
+}
+.newContent .tuiwen ul li .rightpart1{
+	float:left;
+	margin-left: 40px;
+	margin-top: 20px;
+}
+.newContent .tuiwen ul li .rightpart1 span{
+	color: black;
+	font-size:22px;
+	font-family: "微软雅黑";
+	font-weight: bold;
+}
+.newContent .tuiwen ul li .rightpart1 span:hover{
+	color: blue;
+}
+.newContent .tuiwen ul li .rightpart1 .fromshop{
+	margin-top:10px;
+}
+.newContent .tuiwen ul li .rightpart1 .fromshop a{
+	color: #CCCCCC;
+}
+.newContent .tuiwen ul li .rightpart1 .fromshop a:hover{
+	color:royalblue;
 }
 #share{
 position:fixed;_position:absolute;_top:expression(eval(document.documentElement.scrollTop+document.documentElement.clientHeight)-34+"px");bottom:5%;left:90%;width:30px;zoom:1;}

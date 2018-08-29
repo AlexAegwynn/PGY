@@ -1,4 +1,4 @@
-﻿@charset "utf-8";
+@charset "utf-8";
 /* CSS Document */
 
 .myFootContent{
@@ -12,10 +12,9 @@
 }
 .myFootContent .footTitle{
 	padding-left: 30px;
-	opacity: 0.5;
-	background-color: orange;
 	width: 670px;
 	height: 50px;
+	border-bottom: 1px solid #4d4d4d;
 }
 .myFootContent .footTitle span{
 	float: left;
@@ -25,12 +24,9 @@
 	line-height: 45px;
 }
 .myFootContent .footContent{
-	
-	opacity: 0.8;
 	margin-top: 10px;
 	width: 700px;
 	height: auto;
-	background-color: orange;
 }
 .myFootContent .footContent img{
 	width: 120px;
@@ -56,10 +52,10 @@
 	-webkit-transform: all 1s ease 0s;
 }
 .myFootContent .footContent ul li .rContent{
-	margin-top: 50px;
-	margin-left: 50px;
+	margin-top: -150px;
+	margin-left: 150px;
 	float: left;
-	/*width: 450px;*/
+	width: 450px;
 	height:100px;
 }
 .myFootContent .footContent ul li .rContent .newsTitle{

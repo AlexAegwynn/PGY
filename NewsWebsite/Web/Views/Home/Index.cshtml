@@ -21,13 +21,6 @@
             }
         })
 
-        jQuery('#qrcode').qrcode({
-            render: "canvas",
-            width: 150,
-            height: 150,
-            text: window.location.href
-        });
-
         var menu1 = $('#ul1').children();
         for (var i = 0; i < menu1.length; i++) {
             if (menu1[i].id == catid) {
@@ -208,7 +201,7 @@
             }
         }
     </div>
-    <div class="hoursNews">
+    <div id="hNews" class="hoursNews">
         <div class="hoursNewsTitle"><span>最近要闻</span></div>
         <div class="Newslist">
             <ul>
@@ -229,14 +222,24 @@
                 }
             </ul>
         </div>
+        <div class="more"><div id="qrcode"></div></div>
     </div>
-
-    <div id="qrcode"></div>
 </div>
 
 <div id="GrayBG" style="background-color: #ccc;opacity: 0.5;width: 100%;height: 100%;z-index:1;display: none;"></div>
 <div class="reg login logreg" id="logreg"></div>
 
+<script type="text/javascript">
+    $(window).scroll(function () {
+        var scrollTop = $(window).scrollTop();
+        if (scrollTop > 600) {//这边60可以自己根据自己的距离调整，距离就是滚动条和顶部的距离
+            $('#hNews').show();
+
+        } else {
+            $('#hNews').hide();
+        }
+    });
+</script>
 <script type="text/javascript">
     //显示悬浮层
     function showInform() {

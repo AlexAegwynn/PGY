@@ -1,10 +1,9 @@
-﻿using System;
+﻿using Logic;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
-using Logic;
 
 namespace Web.Controllers
 {
@@ -31,7 +30,7 @@ namespace Web.Controllers
 
             ViewData["ShowList"] = vList;  //首页图片轮播
 
-            var ywList = (from l in articleList where l.Conten.Contains("<img src=") orderby l.ReleaseTime descending select l).Take(6).ToList();
+            var ywList = (from l in articleList where l.Conten.Contains("<img src=") orderby l.ReleaseTime descending select l).Take(4).ToList();
             List<ViewModels.VMArticle> vywList = GetVmList(ywList);
 
             ViewData["NewList"] = vywList;  //最新要闻
@@ -102,6 +101,8 @@ namespace Web.Controllers
 
                 ViewBag.IsLogin = false;
                 ViewBag.Name = string.Empty;
+
+                ViewBag.CatName = GetCatName(vModel.DomainID);
 
                 //获取session,判断是否为空
                 if (Session["LoginUser"] is ViewModels.VMUser vUser)
@@ -346,6 +347,33 @@ namespace Web.Controllers
             }
 
             return src;
+        }
+
+        /// <summary>
+        /// 获取分类名称
+        /// </summary>
+        /// <param name="domainID"></param>
+        /// <returns></returns>
+        private static string GetCatName(int domainID)
+        {
+            string catName = string.Empty;
+
+            switch (domainID)
+            {
+                case 8: catName = " 科技"; break;
+                case 12: catName = "时尚"; break;
+                case 16: catName = "生活"; break;
+                case 21: catName = "女人"; break;
+                case 6: catName = "财经"; break;
+                case 4: catName = "娱乐"; break;
+                case 13: catName = "游戏"; break;
+                case 15: catName = "旅游"; break;
+                case 14: catName = "军事"; break;
+                case 19: catName = "搞笑"; break;
+                default: catName = "综合"; break;
+            }
+
+            return catName;
         }
     }
 }

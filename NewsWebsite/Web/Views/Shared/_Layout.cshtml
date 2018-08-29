@@ -21,6 +21,16 @@
         }
     </style>
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script>
+        $(function () {
+            jQuery('#qrcode').qrcode({
+                render: "canvas",
+                width: 150,
+                height: 150,
+                text: window.location.href
+            });
+        })
+    </script>
     <script src="~/Scripts/QRcode/jquery.qrcode.min.js"></script>
     <script type="text/javascript">
         window.onload = function () {
