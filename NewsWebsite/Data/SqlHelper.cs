@@ -11,8 +11,8 @@ namespace Data
         //private static string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=WebSite; uid=sa;pwd=22446688";
         //private static string connectionString = @"Data Source=STONE20\SQL2005;Initial Catalog=WebSite; uid=sa;pwd=pgy3210";
         //private static string connectionString = @"Data Source=ECS-2D04\SQL2005;Initial Catalog=WebSite;User ID=sa;Password=ASDQWE!@#qwe";        
-        private static string connectionString = @"Data Source=192.168.3.11\SQL2005;Initial Catalog=PGY_CM;User ID=sa;Password=pgy123456";
-        //private static string connectionString = @"Data Source=121.10.200.52,1311\\SQL2005;Initial Catalog=PGY_CM;User ID=sa;Password=pgy123456"; //外网访问内网数据库链接
+        //private static string connectionString = @"Data Source=192.168.3.11\SQL2005;Initial Catalog=PGY_CM;User ID=sa;Password=pgy123456";
+        private static string connectionString = @"Data Source=121.10.200.52,1311\\SQL2005;Initial Catalog=PGY_CM;User ID=sa;Password=pgy123456"; //外网访问内网数据库链接
         #region ExecuteNonQuery
 
         #region 公共方法
