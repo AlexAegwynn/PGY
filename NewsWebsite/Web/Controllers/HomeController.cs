@@ -236,7 +236,7 @@ namespace Web.Controllers
                 }
                 else
                 {
-                    json.Data = new { result = false, msg = "请先登录" };
+                    json.Data = new { result = false, msg = "notlogin" };
                 }
             }
             catch (Exception ex)

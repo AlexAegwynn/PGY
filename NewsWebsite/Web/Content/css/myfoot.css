@@ -1,4 +1,4 @@
-@charset "utf-8";
+﻿@charset "utf-8";
 /* CSS Document */
 
 .myFootContent{
@@ -52,7 +52,7 @@
 	-webkit-transform: all 1s ease 0s;
 }
 .myFootContent .footContent ul li .rContent{
-	margin-top: -150px;
+	margin-top: 50px;
 	margin-left: 150px;
 	float: left;
 	width: 450px;

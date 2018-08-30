@@ -26,7 +26,11 @@
                     dom.parent().attr('href', 'javascript:DelFavorites()');
                     dom.html('☆已收藏');
                 } else {
-                    alert(data.msg);
+                    if (data.msg == 'notlogin') {
+                        ILogin();
+                    } else {
+                        alert(data.msg);
+                    }
                 }
             }
         })
@@ -55,7 +59,7 @@
 <script>
     $(function () {
         var str = $('#hinfo').val();
-        $('#info').html(str);    
+        $('#info').html(str);
     })
 </script>
 
@@ -174,7 +178,9 @@
             }
         }
     </div>
-    <div id="qrcode" style="top:540px;"></div>
+    <div class="more">
+        <div id="qrcode" style="top:540px;"></div>
+    </div>
 </div>
 
 <div id="GrayBG" style="background-color: #ccc;opacity: 0.5;width: 100%;height: 100%;z-index:1;display: none;"></div>

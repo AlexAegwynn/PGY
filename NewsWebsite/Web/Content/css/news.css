@@ -1,4 +1,4 @@
-@charset "utf-8";
+﻿@charset "utf-8";
 /* CSS Document */
 .newContent{
 	margin-bottom: 10px;
@@ -139,6 +139,21 @@
 }
 .newContent .tuiwen ul li .rightpart1 .fromshop a:hover{
 	color:royalblue;
+}
+#qrcode{
+	z-index: 1;
+	width: 150px;
+	height: 150px;
+	margin-left: 150px;
+	
+}
+.more{
+	position: absolute;
+	top: 500px;
+	left: 880px;
+	width:300px;
+	height:150px;
+	margin-top: 20px;
 }
 #share{
 position:fixed;_position:absolute;_top:expression(eval(document.documentElement.scrollTop+document.documentElement.clientHeight)-34+"px");bottom:5%;left:90%;width:30px;zoom:1;}
