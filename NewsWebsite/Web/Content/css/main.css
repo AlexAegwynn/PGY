@@ -513,19 +513,28 @@ body{
 .rightbar .hoursNews .Newslist .NewslistContent a:hover{
 	color:#0000EE;
 }
-#qrcode{
-	z-index: 1;
-	width: 150px;
-	height: 150px;
-	margin-left: 150px;
-	margin-top: -10px;
+#qrcode {
+    z-index: 1;
+    margin-left: 150px;
 }
 .more{
+	/*position: absolute;*/
+	top: 500px;
+	left: 880px;
 	width:300px;
-	height:150px;
+	height:200px;
 	margin-top: 20px;
-	background-color: white;
+	background-color: orange;
 }
+    .more .smsjk {
+        width: 150px;
+        height: 40px;
+        float: right;
+        font-size: 25px;
+        color: red;
+        text-align: left;
+        line-height: 40px;
+    }
 #hNews{
 	position: fixed;
 	top: 0px;
