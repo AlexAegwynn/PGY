@@ -517,7 +517,7 @@ body{
     z-index: 1;
     margin-left: 150px;
 }
-.more{
+.moreContent{
 	/*position: absolute;*/
 	top: 500px;
 	left: 880px;
@@ -526,7 +526,7 @@ body{
 	margin-top: 20px;
 	background-color: orange;
 }
-    .more .smsjk {
+    .moreContent .smsjk {
         width: 150px;
         height: 40px;
         float: right;

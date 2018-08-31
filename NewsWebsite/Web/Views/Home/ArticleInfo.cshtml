@@ -1,6 +1,7 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
     var vModel = Model as Web.ViewModels.VMArticle;
+    var url = ViewBag.CatName == "综合" ? "/Home/Index" : "/Home/Index?catid=" + vModel.DomainID;
 }
 
 <script>
@@ -137,7 +138,7 @@
 <div class="newContent">
     <div class="newContentArea">
         <input type="hidden" id="aid" value="@vModel.ArticleID" />
-        <div class="threeLink"><a href="/Home/Index">首页</a> / <a href="/Home/Index?catid=@vModel.DomainID">@ViewBag.CatName</a> / <span>正文</span></div>
+        <div class="threeLink"><a href="/Home/Index">首页</a> / <a href="@url">@ViewBag.CatName</a> / <span>正文</span></div>
         <div class="bigtitle"><span>@vModel.Title</span></div>
         <div id="info">
             @Html.Hidden("hinfo", vModel.Conten)
@@ -178,7 +179,7 @@
             }
         }
     </div>
-    <div class="more" style="padding-top:20px;">
+    <div class="moreContent" style="padding-top:20px;">
         <div id="qrcode" style="top:540px;"></div>
         <div class="smsjk">扫码手机看</div>
     </div>
