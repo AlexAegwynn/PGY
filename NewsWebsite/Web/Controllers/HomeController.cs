@@ -88,6 +88,7 @@ namespace Web.Controllers
             }
 
             List<Model.MContent> list = articleList;
+
             ViewModels.VMArticle vModel = new ViewModels.VMArticle();
             list = (from l in list where l.ArticleID == inArticleID select l).ToList();
 
@@ -133,6 +134,24 @@ namespace Web.Controllers
                 }
             }
 
+            var raList = articleList.Where(w => w.DomainID == vModel.DomainID).ToList();
+            raList = raList.OrderBy(a => Guid.NewGuid()).Take(3).ToList();
+
+            List<ViewModels.VMArticle> vRaList = new List<ViewModels.VMArticle>();
+            foreach (var item in raList)
+            {
+                ViewModels.VMArticle ar = new ViewModels.VMArticle
+                {
+                    ArticleID = item.ArticleID,
+                    Title = item.Title,
+                    DomainID = item.DomainID,
+                    ReleaseTime = ConvertLongToDateTime(item.ReleaseTime).ToShortDateString(),
+                    ImgSrc = GetSrc(item.Conten)
+                };
+                vRaList.Add(ar);
+            }
+
+            ViewData["RelatedArticle"] = vRaList;
             return View(vModel);
         }
 

@@ -1,4 +1,4 @@
-@charset "utf-8";
+﻿@charset "utf-8";
 /* CSS Document */
 .newContent{
 	margin-bottom: 10px;
@@ -119,6 +119,7 @@
 }
 .newContent .tuiwen ul li .rightpart1{
 	float:left;
+    width:540px;
 	margin-left: 40px;
 	margin-top: 20px;
 }
@@ -144,8 +145,7 @@
 	z-index: 1;
 	width: 150px;
 	height: 150px;
-	margin-left: 150px;
-	
+	margin-left: 150px;	
 }
 .moreContent{
 	position: absolute;
