@@ -152,6 +152,7 @@
     <Compile Include="ViewModels\VMArticle.cs" />
     <Compile Include="ViewModels\VMFavorites.cs" />
     <Compile Include="ViewModels\VMFootmark.cs" />
+    <Compile Include="ViewModels\VMItem.cs" />
     <Compile Include="ViewModels\VMUser.cs" />
   </ItemGroup>
   <ItemGroup>

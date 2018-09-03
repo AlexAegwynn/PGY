@@ -153,13 +153,30 @@ namespace Web.Controllers
 
             ViewData["RelatedArticle"] = vRaList;
 
-            TuiJian(vModel.Title);
+            var catID = TuiJian(vModel.Title);
+            var iList = LItem.GetItemsByCatID(Convert.ToInt64(catID)).Take(3).ToList();
 
+            List<ViewModels.VMItem> vIList = new List<ViewModels.VMItem>();
+            foreach (var item in iList)
+            {
+                ViewModels.VMItem i = new ViewModels.VMItem
+                {
+                    ID = item.ID,
+                    Title = item.Title,
+                    CatID = item.CatID,
+                    ImgSmall = item.ImgSmall,
+                    ClickUrl = item.ClickUrl,
+                    TitleDescribe = item.TitleDescribe
+                };
+                vIList.Add(i);
+            }
+
+            ViewData["Items"] = vIList;
 
             return View(vModel);
         }
 
-        public string TuiJian(string title)
+        private string TuiJian(string title)
         {
             string catID = string.Empty;
 
@@ -173,50 +190,19 @@ namespace Web.Controllers
                 var cats = (from i in list where i.CatName.Contains(item) select i).ToList();
                 if (cats.Count > 0)
                 {
-                    var cat = cats.OrderBy(c => Guid.NewGuid()).Take(1) as Model.MCategory;
-                    catID = cat.CatID.ToString();
-                    break;
+                    var cat = (cats.OrderBy(c => Guid.NewGuid()).Take(1).ToList())[0];
+                    if (cat != null)
+                    {
+                        if (!string.IsNullOrEmpty(cat.CatID.ToString()))
+                        {
+                            catID = cat.CatID.ToString();
+                            break;
+                        }
+                    }
                 }
             }
 
             return catID;
-        }
-
-        /// <summary>
-        /// 删除标点符号
-        /// </summary>
-        /// <param name="str"></param>
-        /// <returns></returns>
-        private static string RemovePunctuation(string str)
-        {
-            str = str.Replace(",", "")
-                              .Replace("，", "")
-                              .Replace(".", "")
-                              .Replace("。", "")
-                              .Replace("!", "")
-                              .Replace("！", "")
-                              .Replace("?", "")
-                              .Replace("？", "")
-                              .Replace(":", "")
-                              .Replace("：", "")
-                              .Replace(";", "")
-                              .Replace("；", "")
-                              .Replace("～", "")
-                              .Replace("-", "")
-                              .Replace("_", "")
-                              .Replace("——", "")
-                              .Replace("—", "")
-                              .Replace("--", "")
-                              .Replace("【", "")
-                              .Replace("】", "")
-                              .Replace("\\", "")
-                              .Replace("(", "")
-                              .Replace(")", "")
-                              .Replace("（", "")
-                              .Replace("）", "")
-                              .Replace("#", "")
-                              .Replace("$", "");
-            return str;
         }
 
         public ActionResult FootmarkList(string search = "")
@@ -457,6 +443,43 @@ namespace Web.Controllers
             }
 
             return catName;
+        }
+
+        /// <summary>
+        /// 删除标点符号
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        private static string RemovePunctuation(string str)
+        {
+            str = str.Replace(",", "")
+                              .Replace("，", "")
+                              .Replace(".", "")
+                              .Replace("。", "")
+                              .Replace("!", "")
+                              .Replace("！", "")
+                              .Replace("?", "")
+                              .Replace("？", "")
+                              .Replace(":", "")
+                              .Replace("：", "")
+                              .Replace(";", "")
+                              .Replace("；", "")
+                              .Replace("～", "")
+                              .Replace("-", "")
+                              .Replace("_", "")
+                              .Replace("——", "")
+                              .Replace("—", "")
+                              .Replace("--", "")
+                              .Replace("【", "")
+                              .Replace("】", "")
+                              .Replace("\\", "")
+                              .Replace("(", "")
+                              .Replace(")", "")
+                              .Replace("（", "")
+                              .Replace("）", "")
+                              .Replace("#", "")
+                              .Replace("$", "");
+            return str;
         }
     }
 }
