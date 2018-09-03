@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MCategory.cs" />
     <Compile Include="MContent.cs" />
     <Compile Include="MFavorites.cs" />
     <Compile Include="MFootmarks.cs" />

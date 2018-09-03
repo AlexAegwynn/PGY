@@ -1,11 +1,11 @@
-﻿using System;
+﻿using Model;
+using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Data;
-using System.Data.SqlClient;
-using Model;
 
 namespace Data
 {
@@ -29,7 +29,7 @@ namespace Data
             paras[0].Value = inUserName;
             paras[1].Value = inPassword;
 
-            DataTable dt = SqlHelper.ExecuteDataTable(CommandType.Text, sql, paras);
+            DataTable dt = SqlHelper.ExecuteDataTable(CommandType.Text, sql, "", paras);
             MUsers model = null;
 
             if (dt.Rows.Count > 0)
@@ -58,7 +58,7 @@ namespace Data
             SqlParameter para = new SqlParameter("@inUserName", SqlDbType.NVarChar, 50);
             para.Value = inUserName;
 
-            DataTable dt = SqlHelper.ExecuteDataTable(CommandType.Text, sql, para);
+            DataTable dt = SqlHelper.ExecuteDataTable(CommandType.Text, sql, "", para);
             bool result = dt.Rows.Count > 0;
 
             return result;

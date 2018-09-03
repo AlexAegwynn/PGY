@@ -13,6 +13,7 @@ namespace Data
         //private static string connectionString = @"Data Source=ECS-2D04\SQL2005;Initial Catalog=WebSite;User ID=sa;Password=ASDQWE!@#qwe";        
         //private static string connectionString = @"Data Source=192.168.3.11\SQL2005;Initial Catalog=PGY_CM;User ID=sa;Password=pgy123456";
         private static string connectionString = @"Data Source=121.10.200.52,1311\\SQL2005;Initial Catalog=PGY_CM;User ID=sa;Password=pgy123456"; //外网访问内网数据库链接
+        private static string connectionString1 = @"Data Source=121.10.200.52,1311\\SQL2005;Initial Catalog=PGY_TK;User ID=sa;Password=pgy123456"; //外网访问内网数据库链接
         #region ExecuteNonQuery
 
         #region 公共方法
@@ -165,16 +166,18 @@ namespace Data
         /// <param name="commandType">SqlCommand命令类型(存储过程，T-SQL语句等。)</param>
         /// <param name="sqlParameters">以数组形式提供SqlCommand命令中用到的参数列表</param>
         /// <returns>结果集</returns>
-        public static DataTable ExecuteDataTable(CommandType commandType, string commandText, params SqlParameter[] sqlParameters)
+        public static DataTable ExecuteDataTable(CommandType commandType, string commandText, string dbName = "", params SqlParameter[] sqlParameters)
         {
             try
             {
-                if (string.IsNullOrEmpty(connectionString))
+                string connStr = !string.IsNullOrEmpty(dbName) ? connectionString1 : connectionString;
+
+                if (string.IsNullOrEmpty(connStr))
                 {
                     throw new ArgumentNullException("connectionString", "错误：未设置数据库连接字符串！");
                 }
 
-                using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+                using (SqlConnection sqlConnection = new SqlConnection(connStr))
                 {
                     sqlConnection.Open();//打开连接
 

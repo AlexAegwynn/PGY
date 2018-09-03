@@ -152,7 +152,71 @@ namespace Web.Controllers
             }
 
             ViewData["RelatedArticle"] = vRaList;
+
+            TuiJian(vModel.Title);
+
+
             return View(vModel);
+        }
+
+        public string TuiJian(string title)
+        {
+            string catID = string.Empty;
+
+            var str = RemovePunctuation(title).Distinct().ToList();
+            List<Model.MCategory> list = LCategory.GetCatsList();
+
+            var qv = from sf in str from ss in str select sf + ss.ToString();
+
+            foreach (var item in qv)
+            {
+                var cats = (from i in list where i.CatName.Contains(item) select i).ToList();
+                if (cats.Count > 0)
+                {
+                    var cat = cats.OrderBy(c => Guid.NewGuid()).Take(1) as Model.MCategory;
+                    catID = cat.CatID.ToString();
+                    break;
+                }
+            }
+
+            return catID;
+        }
+
+        /// <summary>
+        /// 删除标点符号
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        private static string RemovePunctuation(string str)
+        {
+            str = str.Replace(",", "")
+                              .Replace("，", "")
+                              .Replace(".", "")
+                              .Replace("。", "")
+                              .Replace("!", "")
+                              .Replace("！", "")
+                              .Replace("?", "")
+                              .Replace("？", "")
+                              .Replace(":", "")
+                              .Replace("：", "")
+                              .Replace(";", "")
+                              .Replace("；", "")
+                              .Replace("～", "")
+                              .Replace("-", "")
+                              .Replace("_", "")
+                              .Replace("——", "")
+                              .Replace("—", "")
+                              .Replace("--", "")
+                              .Replace("【", "")
+                              .Replace("】", "")
+                              .Replace("\\", "")
+                              .Replace("(", "")
+                              .Replace(")", "")
+                              .Replace("（", "")
+                              .Replace("）", "")
+                              .Replace("#", "")
+                              .Replace("$", "");
+            return str;
         }
 
         public ActionResult FootmarkList(string search = "")

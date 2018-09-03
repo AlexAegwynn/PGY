@@ -1,11 +1,11 @@
-﻿using System;
+﻿using Model;
+using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Model;
-using System.Data;
-using System.Data.SqlClient;
 
 namespace Data
 {
@@ -28,7 +28,7 @@ namespace Data
                 Value = inUID
             };
 
-            DataTable dt = SqlHelper.ExecuteDataTable(CommandType.Text, sql, para);
+            DataTable dt = SqlHelper.ExecuteDataTable(CommandType.Text, sql, "", para);
             List<MFootmarks> list = new List<MFootmarks>();
 
             foreach (DataRow item in dt.Rows)
@@ -65,7 +65,7 @@ namespace Data
             paras[0].Value = inUID;
             paras[1].Value = inArticleID;
 
-            DataTable dt = SqlHelper.ExecuteDataTable(CommandType.Text, sql, paras);
+            DataTable dt = SqlHelper.ExecuteDataTable(CommandType.Text, sql, "", paras);
             var result = "";
 
             if (dt.Rows.Count > 0)
@@ -93,7 +93,7 @@ namespace Data
             paras[0].Value = search;
             paras[1].Value = inUID;
 
-            DataTable dt = SqlHelper.ExecuteDataTable(CommandType.Text, sql, paras);
+            DataTable dt = SqlHelper.ExecuteDataTable(CommandType.Text, sql, "", paras);
             List<MFootmarks> list = new List<MFootmarks>();
 
             foreach (DataRow item in dt.Rows)

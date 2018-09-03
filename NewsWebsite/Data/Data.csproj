@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DCategory.cs" />
     <Compile Include="DContent.cs" />
     <Compile Include="DFavorites.cs" />
     <Compile Include="DFootmarks.cs" />

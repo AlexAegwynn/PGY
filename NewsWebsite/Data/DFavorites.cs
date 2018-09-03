@@ -1,11 +1,11 @@
-﻿using System;
-using System.Data;
+﻿using Model;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Model;
 
 namespace Data
 {
@@ -26,7 +26,7 @@ namespace Data
             SqlParameter para = new SqlParameter("@inUID", SqlDbType.Int, 32);
             para.Value = inUID;
 
-            DataTable dt = SqlHelper.ExecuteDataTable(CommandType.Text, sql, para);
+            DataTable dt = SqlHelper.ExecuteDataTable(CommandType.Text, sql, "", para);
             List<MFavorites> list = new List<MFavorites>();
 
             foreach (DataRow item in dt.Rows)
@@ -63,7 +63,7 @@ namespace Data
             paras[0].Value = inArticleID;
             paras[1].Value = inUID;
 
-            DataTable dt = SqlHelper.ExecuteDataTable(CommandType.Text, sql, paras);
+            DataTable dt = SqlHelper.ExecuteDataTable(CommandType.Text, sql, "", paras);
             bool result = dt.Rows.Count > 0;
 
             return result;
@@ -87,7 +87,7 @@ namespace Data
             paras[0].Value = inUID;
             paras[1].Value = search;
 
-            DataTable dt = SqlHelper.ExecuteDataTable(CommandType.Text, sql, paras);
+            DataTable dt = SqlHelper.ExecuteDataTable(CommandType.Text, sql, "", paras);
             List<MFavorites> list = new List<MFavorites>();
 
             foreach (DataRow item in dt.Rows)
