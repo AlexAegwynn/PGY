@@ -152,9 +152,32 @@ namespace Web.Controllers
             }
 
             ViewData["RelatedArticle"] = vRaList;
+            ViewData["Items"] = TuiJian(vModel.Title);
 
-            var catID = TuiJian(vModel.Title);
-            var iList = LItem.GetItemsByCatID(Convert.ToInt64(catID)).Take(3).ToList();
+            return View(vModel);
+        }
+
+        private List<ViewModels.VMItem> TuiJian(string title)
+        {
+            var str = RemovePunctuation(title).Distinct().ToList();
+            var qv = from sf in str from ss in str select sf + ss.ToString();
+
+            List<Model.MCategory> list = LCategory.GetCatsList();
+            List<Model.MItem> iList = new List<Model.MItem>();
+
+            foreach (var item in qv)
+            {
+                var cats = (from i in list where i.CatName.Contains(item) select i).ToList();
+                foreach (var cat in cats)
+                {
+                    iList = LItem.GetItemsByCatID(Convert.ToInt64(cat.CatID.ToString())).Take(3).ToList();
+                    if (iList.Count >= 3 && title.Contains(item))
+                    {
+                        break;
+                    }
+                }
+                if (iList.Count >= 3 && title.Contains(item)) { break; }
+            }
 
             List<ViewModels.VMItem> vIList = new List<ViewModels.VMItem>();
             foreach (var item in iList)
@@ -171,38 +194,7 @@ namespace Web.Controllers
                 vIList.Add(i);
             }
 
-            ViewData["Items"] = vIList;
-
-            return View(vModel);
-        }
-
-        private string TuiJian(string title)
-        {
-            string catID = string.Empty;
-
-            var str = RemovePunctuation(title).Distinct().ToList();
-            List<Model.MCategory> list = LCategory.GetCatsList();
-
-            var qv = from sf in str from ss in str select sf + ss.ToString();
-
-            foreach (var item in qv)
-            {
-                var cats = (from i in list where i.CatName.Contains(item) select i).ToList();
-                if (cats.Count > 0)
-                {
-                    var cat = (cats.OrderBy(c => Guid.NewGuid()).Take(1).ToList())[0];
-                    if (cat != null)
-                    {
-                        if (!string.IsNullOrEmpty(cat.CatID.ToString()))
-                        {
-                            catID = cat.CatID.ToString();
-                            break;
-                        }
-                    }
-                }
-            }
-
-            return catID;
+            return vIList;
         }
 
         public ActionResult FootmarkList(string search = "")

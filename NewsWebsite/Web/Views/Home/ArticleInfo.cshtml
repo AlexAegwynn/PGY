@@ -2,6 +2,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     var vModel = Model as Web.ViewModels.VMArticle;
     var arList = ViewData["RelatedArticle"] as List<Web.ViewModels.VMArticle>;
+    var iList = ViewData["Items"] as List<Web.ViewModels.VMItem>;
     var url = ViewBag.CatName == "综合" ? "/Home/Index" : "/Home/Index?catid=" + vModel.DomainID;
 }
 
@@ -170,6 +171,26 @@
                     </div>
                     <div class="rightpart1">
                         <a href="/Home/ArticleInfo?inArticleID=@item.ArticleID" target="_blank">
+                            <span>@item.Title</span>
+                        </a>
+                    </div>
+                </li>
+            }
+        </ul>
+    </div>
+    <div class="tuiwen">
+        <span class="xgtw">商品推荐</span>
+        <ul>
+            @foreach (var item in iList)
+            {
+                <li>
+                    <div class="leftpart1">
+                        <a href="@item.ClickUrl" target="_blank">
+                            <img src="@item.ImgSmall">
+                        </a>
+                    </div>
+                    <div class="rightpart1">
+                        <a href="@item.ClickUrl" target="_blank">
                             <span>@item.Title</span>
                         </a>
                     </div>
