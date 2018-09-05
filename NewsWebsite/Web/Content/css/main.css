@@ -19,6 +19,7 @@ a{text-decoration:none;}
 .fl{float:left;}
 .fr{float:right;}
 body{
+	
 	height:2000px;
 }
 .cBox{
@@ -69,6 +70,24 @@ body{
 	width:320px;
 	text-align: center;
 	font-size: 40px;
+}
+#typeInfo .saoma{
+	cursor: pointer;
+	width: 250px;
+	height: auto;
+}
+#typeInfo .saoma #saoma{
+	margin-left: -30px;
+	float: left;
+	width:50px;
+	height: 50px;
+}
+#typeInfo .saoma p{
+	margin-top: 25px;
+	font-weight: bold;
+	float: left;
+	width: 120px;
+	font-size: 20px;
 }
 #typeInfo .typeTop{
 	position: relative;
@@ -159,7 +178,7 @@ body{
 	color:white;
 }
 .newWrapper{
-	z-index: 1;
+	z-index: 0;
 	position: absolute;
 	top: 30px;
 	left: 200px;
@@ -176,7 +195,7 @@ body{
 }
 #scroll{
 	position:relative
-	z-index: 1;
+	z-index: 0;
 	height: 300px;
 	width: 700px;
 }
@@ -397,7 +416,7 @@ body{
 .loginBar #loginInnerTwo{
 	position: absolute;
 	top: 0;
-	/*display: none;*/
+	display: none;
 	height: 250px;
 	width: 250px;
 	background-color: white;
@@ -466,8 +485,62 @@ body{
 	line-height: 50px;
 	color:white;
 }
+.loginBar #loginInnerThree{
+	position: absolute;
+	top: 0;
+	display: none;
+	height: 250px;
+	width: 250px;
+	background-color: white;
+	margin: 25px;
+	font-family: "微软雅黑";
+}
+.loginBar #loginInnerThree .first-inp{
+	margin-top: 25px;
+	font-size: 20px;
+}
+.loginBar #loginInnerThree .first-inp .AOP{
+	border: 1px solid #ccc;
+	width: 140px;
+	height: 20px;
+}
+.loginBar #loginInnerThree .second-inp{
+	margin-top: 25px;
+	font-size: 20px;
+}
+.loginBar #loginInnerThree .second-inp .AOP{
+	border: 1px solid #ccc;
+	width: 140px;
+	height: 20px;
+}
+.loginBar #loginInnerThree .third-inp{
+	margin-top:25px;
+	margin-left: 35px;
+}
+.loginBar #loginInnerThree .third-inp .denglu{
+	background-color: #FF7E00;
+	width: 50px;
+	height: 30px;
+	border-radius: 10px;
+	cursor: pointer;
+}
+.loginBar #loginInnerThree .third-inp a{
+	text-decoration: underline;
+	cursor: pointer;
+	color:#0087C7;
+}
+.loginBar #loginInnerFour{
+	position: absolute;
+	top: 0;
+	display: none;
+	height: 250px;
+	width: 250px;
+	background-color: white;
+	margin: 25px;
+	font-family: "微软雅黑";
+}
 .rightbar .hoursNews{
-	
+	display:none;
 	position: absolute;
 	top:550px;
 	left: 880px;
@@ -502,7 +575,7 @@ body{
 	-webkit-transform: all 1s ease 0s;
 }
 .rightbar .hoursNews .Newslist .NewslistContent{
-	margin-top:  10px;
+	padding-top: 30px;
 	margin-left: 80px;
 	height: 40px;
 	width: 200px;
@@ -513,31 +586,8 @@ body{
 .rightbar .hoursNews .Newslist .NewslistContent a:hover{
 	color:#0000EE;
 }
-#qrcode {
-    z-index: 1;
-    margin-left: 150px;
-}
-.moreContent{
-	/*position: absolute;*/
-	top: 500px;
-	left: 880px;
-	width:300px;
-	height:200px;
-	margin-top: 20px;
-	background-color: orange;
-}
-    .moreContent .smsjk {
-        width: 150px;
-        height: 40px;
-        float: right;
-        font-size: 25px;
-        color: red;
-        text-align: left;
-        line-height: 40px;
-    }
-#hNews{
+#hNews {
 	position: fixed;
-	top: 0px;
+	top: 10px;
 	left: 980px;
-	display: none;
 }

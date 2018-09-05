@@ -114,21 +114,25 @@
             <img src="~/Content/img/toptitle.png" />
         </a>
     </div>
-    <ul id="ul1" class="typeTop">
-        <li id="li_0"><a href="/Home/Index"><span>综合</span></a></li>
-        <li id="li_8"><a href="/Home/Index?catid=8"><span>科技</span></a></li>
-        <li id="li_12"><a href="/Home/Index?catid=12"><span>时尚</span></a></li>
-        <li id="li_16"><a href="/Home/Index?catid=16"><span>生活</span></a></li>
-        <li id="li_21"><a href="/Home/Index?catid=21"><span>女人</span></a></li>
-        <li id="li_6"><a href="/Home/Index?catid=6"><span>财经</span></a></li>
-        <li class="more">
-            <a id="btn" onMouseOver="javascript:showInform();">
-                <span>更多</span>
-            </a>
-        </li>
-    </ul>
+    <div id="saomatop" class="saoma">
+        <img id="saoma" src="~/Content/img/saomapic.png" /><p>扫码手机看</p>
+    </div>
+    <div id="moreContent" class="moreContent"><div id="qrcode"><canvas width="0" height="0"></canvas></div></div>
+    @*<ul id="ul1" class="typeTop">
+            <li id="li_0"><a href="/Home/Index"><span>综合</span></a></li>
+            <li id="li_8"><a href="/Home/Index?catid=8"><span>科技</span></a></li>
+            <li id="li_12"><a href="/Home/Index?catid=12"><span>时尚</span></a></li>
+            <li id="li_16"><a href="/Home/Index?catid=16"><span>生活</span></a></li>
+            <li id="li_21"><a href="/Home/Index?catid=21"><span>女人</span></a></li>
+            <li id="li_6"><a href="/Home/Index?catid=6"><span>财经</span></a></li>
+            <li class="more">
+                <a id="btn" onMouseOver="javascript:showInform();">
+                    <span>更多</span>
+                </a>
+            </li>
+        </ul>*@
 </div>
-<div id="inform" onMouseOver="javascript:showInform();" onMouseOut="hiddenInform(event)" style="display: none;">
+@*<div id="inform" onMouseOver="javascript:showInform();" onMouseOut="hiddenInform(event)" style="display: none;">
     <ul id="ul2">
         <li id="li_4"><a href="/Home/Index?catid=4"><span>娱乐</span></a></li>
         <li id="li_13"><a href="/Home/Index?catid=13"><span>游戏</span></a></li>
@@ -136,7 +140,7 @@
         <li id="li_14"><a href="/Home/Index?catid=14"><span>军事</span></a></li>
         <li id="li_19"><a href="/Home/Index?catid=19"><span>搞笑</span></a></li>
     </ul>
-</div>
+</div>*@
 <div class="newContent">
     <div class="newContentArea">
         <input type="hidden" id="aid" value="@vModel.ArticleID" />
@@ -224,15 +228,27 @@
             }
         }
     </div>
-    <div class="moreContent" style="padding-top:20px;">
+    @*<div class="moreContent" style="padding-top:20px;">
         <div id="qrcode" style="top:540px;"></div>
         <div class="smsjk">扫码手机看</div>
-    </div>
+    </div>*@
 </div>
 
 <div id="GrayBG" style="background-color: #ccc;opacity: 0.5;width: 100%;height: 100%;z-index:1;display: none;"></div>
 <div class="reg login logreg" id="logreg"></div>
 
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#saomatop').mouseenter(function () {
+            $('#moreContent').animate({ opacity: "1" }, 500);
+        })
+    });
+    $(document).ready(function () {
+        $('#saomatop').mouseout(function () {
+            $('#moreContent').animate({ opacity: "0" }, 500);
+        })
+    });
+</script>
 <script type="text/javascript">
     //显示悬浮层
     function showInform() {

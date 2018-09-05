@@ -157,46 +157,6 @@ namespace Web.Controllers
             return View(vModel);
         }
 
-        private List<ViewModels.VMItem> TuiJian(string title)
-        {
-            var str = RemovePunctuation(title).Distinct().ToList();
-            var qv = from sf in str from ss in str select sf + ss.ToString();
-
-            List<Model.MCategory> list = LCategory.GetCatsList();
-            List<Model.MItem> iList = new List<Model.MItem>();
-
-            foreach (var item in qv)
-            {
-                var cats = (from i in list where i.CatName.Contains(item) select i).ToList();
-                foreach (var cat in cats)
-                {
-                    iList = LItem.GetItemsByCatID(Convert.ToInt64(cat.CatID.ToString())).Take(3).ToList();
-                    if (iList.Count >= 3 && title.Contains(item))
-                    {
-                        break;
-                    }
-                }
-                if (iList.Count >= 3 && title.Contains(item)) { break; }
-            }
-
-            List<ViewModels.VMItem> vIList = new List<ViewModels.VMItem>();
-            foreach (var item in iList)
-            {
-                ViewModels.VMItem i = new ViewModels.VMItem
-                {
-                    ID = item.ID,
-                    Title = item.Title,
-                    CatID = item.CatID,
-                    ImgSmall = item.ImgSmall,
-                    ClickUrl = item.ClickUrl,
-                    TitleDescribe = item.TitleDescribe
-                };
-                vIList.Add(i);
-            }
-
-            return vIList;
-        }
-
         public ActionResult FootmarkList(string search = "")
         {
             List<ViewModels.VMFootmark> vList = new List<ViewModels.VMFootmark>();
@@ -334,6 +294,51 @@ namespace Web.Controllers
             }
 
             return json;
+        }
+        
+        /// <summary>
+        /// 推荐商品
+        /// </summary>
+        /// <param name="title"></param>
+        /// <returns></returns>
+        private List<ViewModels.VMItem> TuiJian(string title)
+        {
+            var str = RemovePunctuation(title).Distinct().ToList();
+            var qv = from sf in str from ss in str select sf + ss.ToString();
+
+            List<Model.MCategory> list = LCategory.GetCatsList();
+            List<Model.MItem> iList = new List<Model.MItem>();
+
+            foreach (var item in qv)
+            {
+                var cats = (from i in list where i.CatName.Contains(item) select i).ToList();
+                foreach (var cat in cats)
+                {
+                    iList = LItem.GetItemsByCatID(Convert.ToInt64(cat.CatID.ToString())).Take(3).ToList();
+                    if (iList.Count >= 3 && title.Contains(item))
+                    {
+                        break;
+                    }
+                }
+                if (iList.Count >= 3 && title.Contains(item)) { break; }
+            }
+
+            List<ViewModels.VMItem> vIList = new List<ViewModels.VMItem>();
+            foreach (var item in iList)
+            {
+                ViewModels.VMItem i = new ViewModels.VMItem
+                {
+                    ID = item.ID,
+                    Title = item.Title,
+                    CatID = item.CatID,
+                    ImgSmall = item.ImgSmall,
+                    ClickUrl = item.ClickUrl,
+                    TitleDescribe = item.TitleDescribe
+                };
+                vIList.Add(i);
+            }
+
+            return vIList;
         }
 
         /// <summary>
