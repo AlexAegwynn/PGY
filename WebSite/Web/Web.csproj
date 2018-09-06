@@ -202,6 +202,7 @@
     <Content Include="Content\Images\topbg.jpg" />
     <Content Include="Content\css\WebSite\index.css" />
     <Content Include="Content\css\WebSite\login.css" />
+    <Content Include="Content\Images\toptitle.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
