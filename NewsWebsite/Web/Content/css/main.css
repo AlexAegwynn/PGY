@@ -90,7 +90,7 @@ body{
 	font-size: 20px;
 }
 #typeInfo .typeTop{
-	position: relative;
+	/*position: relative;*/
 	font-family: "微软雅黑";
 	padding-top: 60px;
 	width: 100px;
