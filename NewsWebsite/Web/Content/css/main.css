@@ -291,7 +291,7 @@ body{
 }
 .single-mode-rbox .single-mode-rbox-inner .titlelink{
 	width:450px;
-	font-size: 20px;
+	font-size: 18px;
 }
 .single-mode-rbox .single-mode-rbox-inner .titlelink a{
 	font-family: "微软雅黑";
@@ -356,7 +356,7 @@ body{
 	left: 880px;
 	height: 300px;
 	width: 300px;
-	background-color: #cccccc;
+	background-color: #D8D8D8;
 }
 .loginBar .loginInner{
 	height: 250px;
@@ -416,6 +416,7 @@ body{
 .loginBar #loginInnerTwo{
 	position: absolute;
 	top: 0;
+	/*display: none;*/
 	height: 250px;
 	width: 250px;
 	background-color: white;
@@ -539,14 +540,14 @@ body{
 	font-family: "微软雅黑";
 }
 .rightbar .hoursNews{
-    display:none;
-    position: absolute;
-    top:550px;
-    left: 880px;
-    width: 300px;
-    height: auto;
-    background-color: #c0c0c0;
-    border-top: 2px solid #FF7E00;
+	
+	position: absolute;
+	top:550px;
+	left: 880px;
+	width: 300px;
+	height: auto;
+	background-color: #c0c0c0;
+	border-top: 2px solid #FF7E00;
 }
 .rightbar .hoursNews .hoursNewsTitle{
 	padding: 5px 10px;
@@ -586,7 +587,7 @@ body{
 	color:#0000EE;
 }
 .hoursNews .beian{
-	background-color: orange;
+	background-color: #D8D8D8;
 	width: 300px;
 	height: 50px;
 }
@@ -602,11 +603,11 @@ body{
 	color: #4d4d4d;
 }
 .hoursNews .contact{
-	color: white;
+	color: black;
 	width: 300px;
 	height: auto;
 	margin-top: 20px;
-	background-color: black;
+	background-color: #D8D8D8;
 }
 .hoursNews .contact b{
 	font-size: 20px;
@@ -617,7 +618,7 @@ body{
 	margin-left: 20px;
 }
 .beian{
-	background-color: orange;
+	background-color: #D8D8D8;
 	width: 300px;
 	height: 50px;
 }
@@ -633,11 +634,11 @@ body{
 	color: #4d4d4d;
 }
 .contact{
-	color: white;
+	color: black;
 	width: 300px;
 	height: auto;
 	margin-top: 20px;
-	background-color: black;
+	background-color: #D8D8D8;
 }
 .contact b{
 	font-size: 20px;
@@ -653,7 +654,7 @@ body{
 	left: 980px;
 }
 #hNews .beian{
-	background-color: orange;
+	background-color: #D8D8D8;
 	width: 300px;
 	height: 50px;
 }
@@ -669,11 +670,11 @@ body{
 	color: #4d4d4d;
 }
 #hNews .contact{
-	color: white;
+	color: black;
 	width: 300px;
 	height: auto;
 	margin-top: 20px;
-	background-color: black;
+	background-color: #D8D8D8;
 }
 #hNews .contact b{
 	font-size: 20px;
