@@ -1,5 +1,12 @@
 ﻿@charset "utf-8";
 /* CSS Document */
+#typeInfo{
+	margin-left: 40px;
+}
+#typeInfo .typeTitle img{
+	margin-left: 60px;
+	margin-top: 10px;
+}
 .newContent{
 	margin-bottom: 10px;
 	z-index: 1;
@@ -163,6 +170,17 @@
 	color: red;
 	text-align: center;
 	line-height: 50px;
+}
+.xinxi{
+	position:absolute;
+	left: 880px;
+	top: 500px;
+}
+#xinxi{
+	display: none;
+	position:fixed;
+	top: 10px;
+	left: 980px;
 }
 #share{
 position:fixed;_position:absolute;_top:expression(eval(document.documentElement.scrollTop+document.documentElement.clientHeight)-34+"px");bottom:5%;left:90%;width:30px;zoom:1;}

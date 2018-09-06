@@ -416,7 +416,6 @@ body{
 .loginBar #loginInnerTwo{
 	position: absolute;
 	top: 0;
-	display: none;
 	height: 250px;
 	width: 250px;
 	background-color: white;
@@ -540,14 +539,14 @@ body{
 	font-family: "微软雅黑";
 }
 .rightbar .hoursNews{
-	display:none;
-	position: absolute;
-	top:550px;
-	left: 880px;
-	width: 300px;
-	height: auto;
-	background-color: #c0c0c0;
-	border-top: 2px solid #FF7E00;
+    display:none;
+    position: absolute;
+    top:550px;
+    left: 880px;
+    width: 300px;
+    height: auto;
+    background-color: #c0c0c0;
+    border-top: 2px solid #FF7E00;
 }
 .rightbar .hoursNews .hoursNewsTitle{
 	padding: 5px 10px;
@@ -586,8 +585,101 @@ body{
 .rightbar .hoursNews .Newslist .NewslistContent a:hover{
 	color:#0000EE;
 }
+.hoursNews .beian{
+	background-color: orange;
+	width: 300px;
+	height: 50px;
+}
+.hoursNews .beian p{
+	width: 200px;
+	margin-left: 90px;
+	line-height: 50px;
+}
+.hoursNews .beian p a{
+	color: black;
+}
+.hoursNews .beian p a:hover{
+	color: #4d4d4d;
+}
+.hoursNews .contact{
+	color: white;
+	width: 300px;
+	height: auto;
+	margin-top: 20px;
+	background-color: black;
+}
+.hoursNews .contact b{
+	font-size: 20px;
+	margin-left: 20px;
+}
+.hoursNews .contact p{
+	font-size: 20px;
+	margin-left: 20px;
+}
+.beian{
+	background-color: orange;
+	width: 300px;
+	height: 50px;
+}
+.beian p{
+	width: 200px;
+	margin-left: 90px;
+	line-height: 50px;
+}
+.beian p a{
+	color: black;
+}
+.beian p a:hover{
+	color: #4d4d4d;
+}
+.contact{
+	color: white;
+	width: 300px;
+	height: auto;
+	margin-top: 20px;
+	background-color: black;
+}
+.contact b{
+	font-size: 20px;
+	margin-left: 20px;
+}
+.contact p{
+	font-size: 20px;
+	margin-left: 20px;
+}
 #hNews {
 	position: fixed;
 	top: 10px;
 	left: 980px;
+}
+#hNews .beian{
+	background-color: orange;
+	width: 300px;
+	height: 50px;
+}
+#hNews .beian p{
+	width: 200px;
+	margin-left: 90px;
+	line-height: 50px;
+}
+#hNews .beian p a{
+	color: black;
+}
+#hNews .beian p a:hover{
+	color: #4d4d4d;
+}
+#hNews .contact{
+	color: white;
+	width: 300px;
+	height: auto;
+	margin-top: 20px;
+	background-color: black;
+}
+#hNews .contact b{
+	font-size: 20px;
+	margin-left: 20px;
+}
+#hNews .contact p{
+	font-size: 20px;
+	margin-left: 20px;
 }
