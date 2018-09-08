@@ -132,9 +132,9 @@
     }
 .newContent .tuiwen ul li .rightpart1 span{
 	color: black;
-	font-size:22px;
+	font-size:18px;
 	font-family: "微软雅黑";
-	font-weight: bold;
+	/*font-weight: bold;*/
 }
 .newContent .tuiwen ul li .rightpart1 span:hover{
 	color: blue;

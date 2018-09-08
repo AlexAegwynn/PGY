@@ -9,21 +9,22 @@ namespace Web.Controllers
 {
     public class HomeController : BaseController
     {
-        /// <summary>
-        /// 所有文章列表
-        /// </summary>
-        private static List<Model.MContent> articleList = new List<Model.MContent>();
-        /// <summary>
-        /// 页面文章列表
-        /// </summary>
-        private static List<Model.MContent> aList = new List<Model.MContent>();
+        ///// <summary>
+        ///// 所有文章列表
+        ///// </summary>
+        //private static List<Model.MContent> articleList = new List<Model.MContent>();
+        ///// <summary>
+        ///// 页面文章列表
+        ///// </summary>
+        //private static List<Model.MContent> aList = new List<Model.MContent>();
+        private static int categoryId = 0;
+        private static string searchStr = string.Empty;
 
         public ActionResult Index(string search = "", int catid = 0)
         {
-            articleList = LContent.GetArticles();
-
-            //var a = articleList.Where(m => m.ArticleID == 5822665).ToList();
-            //var text = GetSrc(a[0].Conten);
+            List<Model.MContent> articleList = LContent.GetRandomArticles(10, 0);
+            categoryId = catid;
+            searchStr = search;
 
             var list = (from l in articleList where l.Conten.Contains("<img src=") orderby Guid.NewGuid() select l).Take(6).ToList();
             List<ViewModels.VMArticle> vList = GetVmList(list);
@@ -35,19 +36,7 @@ namespace Web.Controllers
 
             ViewData["NewList"] = vywList;  //最新要闻
 
-            aList = articleList;
-
-            if (!string.IsNullOrEmpty(search))
-            {
-                aList = aList.Where(m => m.Title.Contains(search)).ToList();
-            }
-
-            if (catid != 0)
-            {
-                aList = aList.Where(m => m.DomainID == catid).ToList();
-            }
-
-            decimal total = aList.Count;
+            decimal total = LContent.GetArticleTotal();
             int pcount = Convert.ToInt32(Math.Ceiling(total / 10));  //页数
 
             ViewBag.PageCount = pcount;
@@ -65,15 +54,7 @@ namespace Web.Controllers
 
         public PartialViewResult ArticleList(int page = 0)
         {
-            if (aList == null || aList.Count <= 0)
-            {
-                aList = LContent.GetArticles();
-            }
-
-            List<Model.MContent> list = aList;
-
-            list = list.Skip(10 * page).Take(10).ToList();
-
+            List<Model.MContent> list = LContent.GetArticles(page, categoryId, searchStr);
             List<ViewModels.VMArticle> vList = GetVmList(list);
 
             return PartialView(vList);
@@ -81,24 +62,16 @@ namespace Web.Controllers
 
         public ActionResult ArticleInfo(long inArticleID)
         {
-            //List<Model.MContent> list = Logic.LContent.GetArticles();
-            if (articleList == null || articleList.Count <= 0)
-            {
-                articleList = LContent.GetArticles();
-            }
-
-            List<Model.MContent> list = articleList;
-
+            Model.MContent model = LContent.GetArticle(inArticleID);
             ViewModels.VMArticle vModel = new ViewModels.VMArticle();
-            list = (from l in list where l.ArticleID == inArticleID select l).ToList();
 
-            if (list.Count > 0)
+            if (model != null)
             {
-                vModel.ArticleID = list[0].ArticleID;
-                vModel.Title = list[0].Title;
-                vModel.DomainID = list[0].DomainID;
-                vModel.ReleaseTime = ConvertLongToDateTime(list[0].ReleaseTime).ToShortDateString();
-                vModel.Conten = list[0].Conten;
+                vModel.ArticleID = model.ArticleID;
+                vModel.Title = model.Title;
+                vModel.DomainID = model.DomainID;
+                vModel.ReleaseTime = ConvertLongToDateTime(model.ReleaseTime).ToShortDateString();
+                vModel.Conten = model.Conten;
 
                 ViewBag.IsLogin = false;
                 ViewBag.Name = string.Empty;
@@ -134,9 +107,8 @@ namespace Web.Controllers
                 }
             }
 
-            var raList = articleList.Where(w => w.DomainID == vModel.DomainID).ToList();
-            raList = raList.OrderBy(a => Guid.NewGuid()).Take(3).ToList();
-
+            #region 推荐文章&商品
+            var raList = LContent.GetRandomArticles(3, vModel.DomainID);
             List<ViewModels.VMArticle> vRaList = new List<ViewModels.VMArticle>();
             foreach (var item in raList)
             {
@@ -150,9 +122,9 @@ namespace Web.Controllers
                 };
                 vRaList.Add(ar);
             }
-
             ViewData["RelatedArticle"] = vRaList;
             ViewData["Items"] = TuiJian(vModel.Title);
+            #endregion
 
             return View(vModel);
         }
@@ -295,7 +267,7 @@ namespace Web.Controllers
 
             return json;
         }
-        
+
         /// <summary>
         /// 推荐商品
         /// </summary>

@@ -48,7 +48,7 @@
         function () {
             var scrollTop = $(this).scrollTop();
             var scrollHeight = $(document).height();
-            var windowHeight = $(this).height() + 5;
+            var windowHeight = $(this).height();
             if (scrollTop + windowHeight >= scrollHeight) {
                 var total = $('#PageCount').val();
 

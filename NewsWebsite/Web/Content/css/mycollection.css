@@ -61,9 +61,9 @@
 	height:100px;
 }
 .myCollectionContent .collectionContent ul li .rContent .newsTitle{
-	font-weight: bold;
+	/*font-weight: bold;*/
 	font-family: "微软雅黑";
-	font-size: 20px;
+	font-size: 18px;
 }
 .myCollectionContent .collectionContent ul li .rContent .newsTitle a{
 	color: black;

@@ -59,9 +59,9 @@
 	height:100px;
 }
 .myFootContent .footContent ul li .rContent .newsTitle{
-	font-weight: bold;
+	/*font-weight: bold;*/
 	font-family: "微软雅黑";
-	font-size: 20px;
+	font-size: 18px;
 }
 .myFootContent .footContent ul li .rContent .newsTitle a{
 	color: black;

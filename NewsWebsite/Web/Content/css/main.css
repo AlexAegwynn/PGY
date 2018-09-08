@@ -295,7 +295,7 @@ body{
 }
 .single-mode-rbox .single-mode-rbox-inner .titlelink a{
 	font-family: "微软雅黑";
-	font-weight: bold;
+	/*font-weight: bold;*/
 	color: black;
 }
 .single-mode-rbox .single-mode-rbox-inner .titlelink a:hover{
