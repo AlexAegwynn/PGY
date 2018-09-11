@@ -55,9 +55,9 @@
 }
 .myCollectionContent .collectionContent ul li .rContent{
 	margin-top: 50px;
-	margin-left: 150px;
+	/*margin-left: 150px;*/
 	float: left;
-	width: 450px;
+	width: 98%;
 	height:100px;
 }
 .myCollectionContent .collectionContent ul li .rContent .newsTitle{

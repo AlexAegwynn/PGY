@@ -11,20 +11,22 @@
     }
 
     function DelFav(aid) {
-        $.ajax({
-            url: '/Home/DelFavorites',
-            type: 'post',
-            data: {
-                inArticleID: aid
-            },
-            success: function (data) {
-                if (data.result) {
-                    window.location.reload();
-                } else {
-                    alert(data.msg);
+        if (confirm('确认取消？')) {
+            $.ajax({
+                url: '/Home/DelFavorites',
+                type: 'post',
+                data: {
+                    inArticleID: aid
+                },
+                success: function (data) {
+                    if (data.result) {
+                        window.location.reload();
+                    } else {
+                        alert(data.msg);
+                    }
                 }
-            }
-        })
+            })
+        }
     }
 </script>
 <link href="~/Content/css/mycollection.css" rel="stylesheet" />
