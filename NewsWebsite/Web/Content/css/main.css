@@ -60,6 +60,7 @@ body{
 }
 #typeInfo{
 	position: relative;
+	top: 0px;
 	float: left;
 	padding-left: 40px;
 	height: auto;
@@ -89,8 +90,37 @@ body{
 	width: 120px;
 	font-size: 20px;
 }
+#typeInfo .typeoption{
+	margin-left: -10px;
+	margin-top: 60px;
+	height:auto;
+	width: 100px;
+}
+#typeInfo .typeoption a{
+	font-size: 20px;
+	display: inline-block;
+	border-radius: 10px;
+	background-color: white;
+	margin-top: 15px;
+	text-align: center;
+	width: 100px;
+	height: 30px;
+}
+#typeInfo .typeoption a:hover{
+	background-color: red;
+	color:white;
+}
+#typeInfo .typeoption a{
+	color:black;
+}
+#typeInfo .typeoption .optiontype{
+	background-color: red;
+	color: white;
+	margin-top: 5px;
+	text-align: center;
+}
 #typeInfo .typeTop{
-	/*position: relative;*/
+	position: relative;
 	font-family: "微软雅黑";
 	padding-top: 60px;
 	width: 100px;
@@ -199,11 +229,15 @@ body{
 	height: 300px;
 	width: 700px;
 }
-#scroll li{
-	display:none;
-	
-	
-}
+.banner{height:300px;width: 700px; overflow:hidden;}
+.banner .d1{width:700px;height:300px;display:block;position:absolute;left:0;top:20px;}
+.banner .d1 img{height: 300px;width: 700px;position: relative;}
+.banner .d1 p{display: inline-block;position: absolute;top: 260px;left: 0px;padding-left: 20px;padding-right: 20px; color: white;background-color: rgba(0,0,0,0.5);font-size: 15px;}
+.banner .d2{width:50%;height:30px;clear:both;position:absolute;z-index:100;left:29%;top:300px;}
+.banner .d2 ul{float:left;position:absolute;left:50%;top:0;margin:0 0 0 -96px;display:inline;}
+.banner .d2 li{width:17px;height:15px;overflow:hidden;cursor:pointer;background:url(../img/img1.png) no-repeat center;float:left;margin:0 3px;display:inline;}
+.banner .d2 li.nuw{background:url(../img/img1_1.png) no-repeat center;}
+
 #scroll li a span{
 	color: #CCCCCC;
 	background-color: #000000;
@@ -295,8 +329,10 @@ body{
 }
 .single-mode-rbox .single-mode-rbox-inner .titlelink a{
 	font-family: "微软雅黑";
-	/*font-weight: bold;*/
 	color: black;
+}
+.single-mode-rbox .single-mode-rbox-inner .titlelink a:visited{
+	color:#999;
 }
 .single-mode-rbox .single-mode-rbox-inner .titlelink a:hover{
 	color:#0000EE;
@@ -324,6 +360,7 @@ body{
 	width: 300px;
 }
 .rightbar .searchBar .searchText{
+	margin-top: -50px;
 	font-family: "微软雅黑";
 	width: 200px;
 	float: left;
@@ -335,10 +372,11 @@ body{
 	border: 1px solid #cccccc;
 }
 .rightbar .searchBar .searchButton{
+	margin-top: -50px;
 	float: left;
 	line-height: 30px;
 	border-radius: 10px;
-	margin-left: 5px;
+	margin-left: 215px;
 	border: 1px solid orange;
 	cursor:pointer;
 	height: 30px;
@@ -352,7 +390,7 @@ body{
 }
 .loginBar{
 	position: absolute;
-	top:200px;
+	top:100px;
 	left: 880px;
 	height: 300px;
 	width: 300px;
@@ -436,7 +474,7 @@ body{
 }
 .loginBar #loginInnerTwo .myfoot{
 	text-align: center;
-	margin-top: 10px;
+	margin-top: 5px;
 	margin-left: 25px;
 	width: 200px;
 	height: 50px;
@@ -542,7 +580,7 @@ body{
 .rightbar .hoursNews{
 	
 	position: absolute;
-	top:550px;
+	top:450px;
 	left: 880px;
 	width: 300px;
 	height: auto;

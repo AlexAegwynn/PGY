@@ -1,11 +1,73 @@
 ﻿@charset "utf-8";
 /* CSS Document */
+.rowline{
+	width:100%;
+	height: 70px;
+	position: absolute;
+	top: 30px;
+	box-shadow: 0px 1px 5px #999;
+	/*border-top:1px solid#999;
+	border-bottom: 1px solid#999;*/
+}
 #typeInfo{
 	margin-left: 40px;
 }
 #typeInfo .typeTitle img{
 	margin-left: 60px;
 	margin-top: 10px;
+}
+/*.loginBar{
+	position:absolute;
+	top: 50px;
+}*/
+.wordtweets{
+	border-top: 2px solid red;
+	position: absolute;
+	top:30px;
+	left: 880px;
+	height: 150px;
+	width: 300px;
+	background-color: #D8D8D8;
+}
+.wordtweets .wordtweetstop{
+	margin-top: 10px;
+	margin-left: 10px;
+	margin-right: 10px;
+	border-bottom: 1px solid #4d4d4d;
+}
+.wordtweets .wordtweetstop h2{
+	margin-bottom: 10px;
+}
+.wordtweets .wordtweetsnews{
+	height: 80px;
+	overflow-y: auto;
+	overflow-x: hidden;
+	margin-left: 10px;
+	margin-top: 10px;
+}
+.wordtweets .wordtweetsnews::-webkit-scrollbar{
+	height: 10px;
+	width: 2px;
+}
+.wordtweets .wordtweetsnews::-webkit-scrollbar-thumb:vertical{
+	background-color:gray;
+	-webkit-border-radius:0px;
+}
+.wordtweets .wordtweetsnews::-webkit-scrollbar-thumb:horizontal{
+	background-color:gray;
+	-webkit-border-radius:0px;
+}
+.wordtweets .wordtweetsnews li{
+	margin-left: 5px;
+	margin-top: 5px;
+}
+.wordtweets .wordtweetsnews li a{
+	font-size: 15px;
+	display: inline-block;
+	color: black;
+}
+.wordtweets .wordtweetsnews li a:hover{
+	color: #4d4d4d;
 }
 .newContent{
 	margin-bottom: 10px;
@@ -23,6 +85,7 @@
 	height: auto;
 }
 .newContent .newContentArea .threeLink{
+	margin-top: 0px;
 	font-family:'微软雅黑';
 	font-size: 15px;
 	margin-bottom: 15px;
@@ -35,7 +98,7 @@
 	color:#4d4d4d;
 }
 .newContent .newContentArea .bigtitle{
-	
+	margin-top: 30px;
 }
 .newContent .newContentArea .bigtitle span{
 	font-family: "微软雅黑";
@@ -134,7 +197,10 @@
 	color: black;
 	font-size:18px;
 	font-family: "微软雅黑";
-	/*font-weight: bold;*/
+	
+}
+.newContent .tuiwen ul li .rightpart1 span:visited{
+	color:#999;
 }
 .newContent .tuiwen ul li .rightpart1 span:hover{
 	color: blue;
@@ -174,7 +240,7 @@
 .xinxi{
 	position:absolute;
 	left: 880px;
-	top: 500px;
+	top: 400px;
 }
 #xinxi{
 	display: none;

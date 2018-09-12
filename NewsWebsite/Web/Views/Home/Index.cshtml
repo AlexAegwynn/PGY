@@ -21,18 +21,11 @@
             }
         })
 
-        var menu1 = $('#ul1').children();
+        var menu1 = $('#menu').children();
         for (var i = 0; i < menu1.length; i++) {
-            if (menu1[i].id == catid) {
-                menu1[i].className = 'focusOn';
-                return;
-            }
-        }
-
-        var menu2 = $('#ul2').children();
-        for (var i = 0; i < menu2.length; i++) {
-            if (menu2[i].id == catid) {
-                menu2[i].className = 'menu';
+            var m = menu1[i].children;
+            if (m.item(0).id == catid) {
+                m.item(0).className = 'optiontype';
                 return;
             }
         }
@@ -40,7 +33,6 @@
 
     function Search() {
         var str = $('.searchText').val();
-
         window.location.href = '/Home/Index?search=' + str;
     }
 
@@ -118,6 +110,9 @@
     .menu {
         background-color: red
     }
+    a:visited{
+        color:lightgray;
+    }
 </style>
 <div class="topBar">
     <div class="weatherInfo" style="height:30px;">
@@ -130,46 +125,40 @@
             <img src="~/Content/img/toptitle.png" />
         </a>
     </div>
-    <ul id="ul1" class="typeTop">
-        <li id="li_0"><a href="/Home/Index"><span>综合</span></a></li>
-        <li id="li_8"><a href="/Home/Index?catid=8"><span>科技</span></a></li>
-        <li id="li_12"><a href="/Home/Index?catid=12"><span>时尚</span></a></li>
-        <li id="li_16"><a href="/Home/Index?catid=16"><span>生活</span></a></li>
-        <li id="li_3"><a href="/Home/Index?catid=3"><span>体育</span></a></li>
-        <li id="li_6"><a href="/Home/Index?catid=6"><span>财经</span></a></li>
-        <li class="more">
-            <a id="btn" onMouseOver="javascript:showInform();">
-                <span>更多</span>
-            </a>
-        </li>
-    </ul>
-</div>
-<div id="inform" onMouseOver="javascript:showInform();" onMouseOut="hiddenInform(event)" style="display: none;">
-    <ul id="ul2">
-        <li id="li_4"><a href="/Home/Index?catid=4"><span>娱乐</span></a></li>
-        <li id="li_13"><a href="/Home/Index?catid=13"><span>游戏</span></a></li>
-        <li id="li_15"><a href="/Home/Index?catid=15"><span>旅游</span></a></li>
-        <li id="li_14"><a href="/Home/Index?catid=14"><span>军事</span></a></li>
-        <li id="li_19"><a href="/Home/Index?catid=19"><span>搞笑</span></a></li>
-    </ul>
+    <div id="menu" class="typeoption">
+        <p><a id="li_0" href="/Home/Index" target="_self">综合</a></p>
+        <p><a id="li_8" href="/Home/Index?catid=8" target="_self">科技</a></p>
+        <p><a id="li_12" href="/Home/Index?catid=12" target="_self">时尚</a></p>
+        <p><a id="li_16" href="/Home/Index?catid=16" target="_self">生活</a></p>
+        <p><a id="li_3" href="/Home/Index?catid=3" target="_self">体育</a></p>
+        <p><a id="li_6" href="/Home/Index?catid=6" target="_self">财经</a></p>
+        <p><a id="li_4" href="/Home/Index?catid=4" target="_self">娱乐</a></p>
+        <p><a id="li_13" href="/Home/Index?catid=13" target="_self">游戏</a></p>
+        <p><a id="li_15" href="/Home/Index?catid=15" target="_self">旅游</a></p>
+        <p><a id="li_14" href="/Home/Index?catid=14" target="_self">军事</a></p>
+        <p><a id="li_19" href="/Home/Index?catid=19" target="_self">搞笑</a></p>
+    </div>
 </div>
 <div class="newWrapper">
     <div class="newPhoto">
-        <a class="control prev"></a><a class="control next abs"></a>
-        <div id="scroll">
-            <ul>
-                @foreach (var item in sList)
-                {
-                    <li style="display:block;">
-                        <a target="_blank" href="/Home/ArticleInfo?inArticleID=@item.ArticleID">
-                            <img alt="@item.Title" src="@item.ImgSrc" />
-                        </a>
-                    </li>
-                }
-            </ul>
+        <div class="banner" id="banner">
+            @foreach (var item in sList)
+            {
+                <a href="/Home/ArticleInfo?inArticleID=@item.ArticleID" class="d1">
+                    <img src="@item.ImgSrc" alt="" /><p>@item.Title</p>
+                </a>
+            }
+            <div class="d2" id="banner_id">
+                <ul>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+            </div>
         </div>
-        <!--<div class="control subl"><img src="img/left.png"></div>
-        <div class="control subr"><img src="img/right.png"></div>-->
     </div>
     <input id="PageCount" hidden="hidden" value="@ViewBag.PageCount" />
 
@@ -250,33 +239,58 @@
     });
 </script>
 <script type="text/javascript">
-    //显示悬浮层
-    function showInform() {
-        document.getElementById("inform").style.display = 'block';
-    }
-    //隐藏悬浮层
-    function hiddenInform(event) {
-        var informDiv = document.getElementById('inform');
-        var x = event.clientX;
-        var y = event.clientY;
-        var divx1 = informDiv.offsetLeft;
-        var divy1 = informDiv.offsetTop;
-        var divx2 = informDiv.offsetLeft + informDiv.offsetWidth;
-        var divy2 = informDiv.offsetTop + informDiv.offsetHeight;
-        if (x < divx1 || x > divx2 || y < divy1 || y > divy2) {
-            document.getElementById('inform').style.display = 'none';
+    function banner() {
+        var bn_id = 0;
+        var bn_id2 = 1;
+        var speed33 = 3000;
+        var qhjg = 1;
+        var MyMar33;
+        $("#banner .d1").hide();
+        $("#banner .d1").eq(0).fadeIn("slow");
+        if ($("#banner .d1").length > 1) {
+            $("#banner_id li").eq(0).addClass("nuw");
+            function Marquee33() {
+                bn_id2 = bn_id + 1;
+                if (bn_id2 > $("#banner .d1").length - 1) {
+                    bn_id2 = 0;
+                }
+                $("#banner .d1").eq(bn_id).css("z-index", "2");
+                $("#banner .d1").eq(bn_id2).css("z-index", "1");
+                $("#banner .d1").eq(bn_id2).show();
+                $("#banner .d1").eq(bn_id).fadeOut("slow");
+                $("#banner_id li").removeClass("nuw");
+                $("#banner_id li").eq(bn_id2).addClass("nuw");
+                bn_id = bn_id2;
+            };
+
+            MyMar33 = setInterval(Marquee33, speed33);
+
+            $("#banner_id li").click(function () {
+                var bn_id3 = $("#banner_id li").index(this);
+                if (bn_id3 != bn_id && qhjg == 1) {
+                    qhjg = 0;
+                    $("#banner .d1").eq(bn_id).css("z-index", "2");
+                    $("#banner .d1").eq(bn_id3).css("z-index", "1");
+                    $("#banner .d1").eq(bn_id3).show();
+                    $("#banner .d1").eq(bn_id).fadeOut("slow", function () { qhjg = 1; });
+                    $("#banner_id li").removeClass("nuw");
+                    $("#banner_id li").eq(bn_id3).addClass("nuw");
+                    bn_id = bn_id3;
+                }
+            })
+            $("#banner_id").hover(
+                function () {
+                    clearInterval(MyMar33);
+                }
+                ,
+                function () {
+                    MyMar33 = setInterval(Marquee33, speed33);
+                }
+            )
+        }
+        else {
+            $("#banner_id").hide();
         }
     }
-</script>
-<script src="~/Scripts/YuxiSlider.jQuery.min.js"></script>
-<script>
-    $("#scroll").YuxiSlider({
-        width: 700, //容器宽度
-        height: 250, //容器高度
-        control: $('.control'), //绑定控制按钮
-        during: 4000, //间隔4秒自动滑动
-        speed: 1000, //移动速度1秒
-        mousewheel: false, //是否开启鼠标滚轮控制
-        direkey: true //是否开启左右箭头方向控制
-    });
+    banner()
 </script>
