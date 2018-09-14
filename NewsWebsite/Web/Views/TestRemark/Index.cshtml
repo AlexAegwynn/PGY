@@ -1,0 +1,196 @@
+﻿@{
+    Layout = null;
+    var list = Model as List<Web.ViewModels.VMRemark>;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery.comment.js"></script>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <title></title>
+    <style>
+        .container {
+            width: 1000px;
+        }
+
+        .commentbox {
+            width: 900px;
+            margin: 20px auto;
+        }
+
+        .mytextarea {
+            width: 100%;
+            overflow: auto;
+            word-break: break-all;
+            height: 100px;
+            color: #000;
+            font-size: 1em;
+            resize: none;
+        }
+
+        .comment-list {
+            width: 850px;
+            margin: 20px auto;
+            clear: both;
+            padding-top: 20px;
+        }
+
+            .comment-list .comment-info {
+                position: relative;
+                margin-bottom: 20px;
+                margin-bottom: 20px;
+                border-bottom: 1px solid #ccc;
+            }
+
+                .comment-list .comment-info header {
+                    width: 10%;
+                    position: absolute;
+                }
+
+                    .comment-list .comment-info header img {
+                        display: none;
+                        width: 100%;
+                        border-radius: 50%;
+                        padding: 5px;
+                    }
+
+                .comment-list .comment-info .comment-right {
+                    margin-top: 5px;
+                    /* padding:5px 0px 5px 11%; */
+                }
+
+                    .comment-list .comment-info .comment-right h3 {
+                        margin: 5px 0px;
+                    }
+
+                    .comment-list .comment-info .comment-right .comment-content-header {
+                        height: 25px;
+                    }
+
+                        .comment-list .comment-info .comment-right .comment-content-header span, .comment-list .comment-info .comment-right .comment-content-footer span {
+                            padding-right: 2em;
+                            color: #aaa;
+                        }
+
+                            .comment-list .comment-info .comment-right .comment-content-header span i {
+                                display: none;
+                            }
+
+                            .comment-list .comment-info .comment-right .comment-content-header span, .comment-list .comment-info .comment-right .comment-content-footer span.reply-btn, .send, .reply-list-btn {
+                                cursor: pointer;
+                            }
+
+                    .comment-list .comment-info .comment-right .reply-list {
+                        border-left: 3px solid #ccc;
+                        padding-left: 7px;
+                    }
+
+                        .comment-list .comment-info .comment-right .reply-list .reply {
+                            border-bottom: 1px dashed #ccc;
+                        }
+
+                            .comment-list .comment-info .comment-right .reply-list .reply div span {
+                                padding-left: 10px;
+                            }
+
+                            .comment-list .comment-info .comment-right .reply-list .reply p span {
+                                padding-right: 2em;
+                                color: #aaa;
+                            }
+    </style>
+    <script>
+        function SaveReply() {
+            alert();
+        }
+    </script>
+</head>
+<body>
+    <div>
+        <div class="container">
+            <div class="commentbox">
+                <textarea cols="80" rows="50" placeholder="在此处留言评论" class="mytextarea" id="content"></textarea>
+                <div class="btn btn-info pull-right" id="comment" onclick="SaveComment()">评论</div>
+            </div>
+            <div class="comment-list">
+                @foreach (var item in list)
+                {
+                    <div class="comment-info">
+                        <div class="comment-right">
+                            <h3>@item.UName</h3>
+                            <div class="comment-content-header">
+                                <span><i class="glyphicon glyphicon-time"></i>@item.RTime</span>
+                            </div>
+                            <p class="content">@item.Remark</p>
+                            <div class="comment-content-footer">
+                                <div class="row">
+                                    @if (item.RepliesTotal != 0)
+                                    {
+                                        <div class="col-md-2" style="float:left;">
+                                            <span>@item.RepliesTotal 条回复</span>
+                                        </div>
+                                    }
+                                    <div class="col-md-2" style="float:right;">
+                                        <span class="reply-btn">回复</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="reply_@list.IndexOf(item)" class="reply-list">
+                                @*<div class="reply">
+                                        <div>
+                                            <a href="javascript:void(0)" class="replyname">帅大叔</a>:<a href="javascript:void(0)">@@匿名</a><span>来啊，我们一起吃鸡</span>
+                                        </div><p>
+                                            <span>2017-10-17 11:42:53</span>
+                                            <span class="reply-list-btn">回复</span>
+                                        </p>
+                                    </div>*@
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script type="text/javascript">
+    ////初始化数据
+    //var arr = [
+
+    //];
+    //$(function () {
+    //    $(".comment-list").addCommentList({ data: arr, add: "" });
+    //    $("#comment").click(function () {
+    //        var obj = new Object();
+
+    //        obj.replyName = "匿名";
+    //        obj.content = $("#content").val();
+
+    //        obj.replyBody = "";
+    //        $(".comment-list").addCommentList({ data: [], add: obj });
+    //    });
+    //})
+
+    function SaveComment() {
+        var comm = $("#content").val();
+        if (comm == '') {
+            alert('评论不能为空！'); return;
+        }
+
+        $.ajax({
+            url: '/TestRemark/InsertRemark',
+            type: 'post',
+            data: {
+                ArticleID: '6672546',
+                Remark: comm
+            },
+            success: function (data) {
+                alert(data);
+            }
+        })
+    }
+</script>

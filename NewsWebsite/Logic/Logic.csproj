@@ -45,6 +45,7 @@
     <Compile Include="LFavorites.cs" />
     <Compile Include="LFootmarks.cs" />
     <Compile Include="LItem.cs" />
+    <Compile Include="LRemarks.cs" />
     <Compile Include="LUsers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

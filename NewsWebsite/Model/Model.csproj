@@ -45,6 +45,8 @@
     <Compile Include="MFavorites.cs" />
     <Compile Include="MFootmarks.cs" />
     <Compile Include="MItem.cs" />
+    <Compile Include="MRemarks.cs" />
+    <Compile Include="MReplies.cs" />
     <Compile Include="MUsers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

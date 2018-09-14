@@ -145,6 +145,7 @@
     <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\TestRemarkController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -153,6 +154,7 @@
     <Compile Include="ViewModels\VMFavorites.cs" />
     <Compile Include="ViewModels\VMFootmark.cs" />
     <Compile Include="ViewModels\VMItem.cs" />
+    <Compile Include="ViewModels\VMRemark.cs" />
     <Compile Include="ViewModels\VMUser.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -212,6 +214,7 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.comment.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -239,6 +242,7 @@
     <Content Include="Views\Authentication\Register.cshtml" />
     <Content Include="Views\Home\FootmarkList.cshtml" />
     <Content Include="Views\Home\FavoritesList.cshtml" />
+    <Content Include="Views\TestRemark\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
