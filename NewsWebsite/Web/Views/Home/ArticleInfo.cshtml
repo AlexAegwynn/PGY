@@ -63,13 +63,13 @@
         var str = $('#hinfo').val();
         $('#info').html(str);
 
-        //$.ajax({
-        //    url: '/Remark/Index',
-        //    type: 'get',
-        //    success: function (data) {
-        //        $('#remark').html(data);
-        //    }
-        //})
+        $.ajax({
+            url: '/Remark/Index',
+            type: 'get',
+            success: function (data) {
+                $('#remark').html(data);
+            }
+        })
     })
 </script>
 
@@ -244,7 +244,7 @@
 <div id="GrayBG" style="background-color: #ccc;opacity: 0.5;width: 100%;height: 100%;z-index:1;display: none;"></div>
 <div class="reg login logreg" id="logreg"></div>
 
-<div id="remark"></div>
+<div id="remark" style="background-color:white;position:absolute;z-index:999;"></div>
 
 <script type="text/javascript">
     $(document).ready(function () {
