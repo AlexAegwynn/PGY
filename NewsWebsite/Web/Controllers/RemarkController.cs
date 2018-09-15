@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace Web.Controllers
 {
-    public class TestRemarkController : Controller
+    public class RemarkController : Controller
     {
         // GET: TestRemark
         public ActionResult Index()
@@ -49,5 +49,7 @@ namespace Web.Controllers
 
             return json;
         }
+
+
     }
 }

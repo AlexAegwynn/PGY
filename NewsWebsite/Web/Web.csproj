@@ -145,7 +145,7 @@
     <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\TestRemarkController.cs" />
+    <Compile Include="Controllers\RemarkController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -155,6 +155,7 @@
     <Compile Include="ViewModels\VMFootmark.cs" />
     <Compile Include="ViewModels\VMItem.cs" />
     <Compile Include="ViewModels\VMRemark.cs" />
+    <Compile Include="ViewModels\VMReplies.cs" />
     <Compile Include="ViewModels\VMUser.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -242,7 +243,7 @@
     <Content Include="Views\Authentication\Register.cshtml" />
     <Content Include="Views\Home\FootmarkList.cshtml" />
     <Content Include="Views\Home\FavoritesList.cshtml" />
-    <Content Include="Views\TestRemark\Index.cshtml" />
+    <Content Include="Views\Remark\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
