@@ -173,6 +173,7 @@
     <Content Include="Content\css\myfoot.css" />
     <Content Include="Content\css\news.css" />
     <Content Include="Content\css\register.css" />
+    <Content Include="Content\css\Remarks.css" />
     <Content Include="Content\img\0bd79e9e781823000001.jpg" />
     <Content Include="Content\img\buttons.png" />
     <Content Include="Content\img\eee.jpg" />
@@ -244,6 +245,7 @@
     <Content Include="Views\Home\FootmarkList.cshtml" />
     <Content Include="Views\Home\FavoritesList.cshtml" />
     <Content Include="Views\Remark\Index.cshtml" />
+    <Content Include="Views\Remark\GetReplies.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

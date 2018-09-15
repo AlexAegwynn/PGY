@@ -40,6 +40,16 @@ namespace Logic
         }
 
         /// <summary>
+        /// 添加回复
+        /// </summary>
+        /// <param name="inModel"></param>
+        /// <returns></returns>
+        public static int InsertReply(Model.MReplies inModel)
+        {
+            return Data.DRemarks.InsertReply(inModel);
+        }
+
+        /// <summary>
         /// 获取回复数
         /// </summary>
         /// <param name="inRID"></param>

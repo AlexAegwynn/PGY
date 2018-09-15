@@ -100,18 +100,52 @@ namespace Data
                 Model.MReplies model = new Model.MReplies
                 {
                     ReID = Convert.ToInt32(item["ReID"]),
-                    RID = Convert.ToInt32(item["ReID"]),
-                    BeUID = Convert.ToInt32(item["ReID"]),
-                    BeUName = item["ReID"].ToString(),
-                    UID = Convert.ToInt32(item["ReID"]),
-                    UName = item["ReID"].ToString(),
-                    Remark = item["ReID"].ToString(),
-                    RTime = Convert.ToInt32(item["ReID"])
+                    RID = Convert.ToInt32(item["RID"]),
+                    BeUID = Convert.ToInt32(item["BeUID"]),
+                    BeUName = item["BeUName"].ToString(),
+                    UID = Convert.ToInt32(item["UID"]),
+                    UName = item["UName"].ToString(),
+                    Remark = item["Remark"].ToString(),
+                    RTime = Convert.ToDateTime(item["RTime"])
                 };
                 list.Add(model);
             }
 
             return list;
+        }
+
+        /// <summary>
+        /// 添加回复
+        /// </summary>
+        /// <param name="inModel"></param>
+        /// <returns></returns>
+        public static int InsertReply(Model.MReplies inModel)
+        {
+            StringBuilder sql = new StringBuilder();
+            sql.Append(" INSERT INTO nw_Replies ( ");
+            sql.Append(" RID, BeUID, BeUName, UID, UName, Remark, RTime ) VALUES ( ");
+            sql.Append(" @inRID, @inBeUID, @inBeUName, @inUID, @inUName, @inRemark, @inRTime ) ");
+
+            SqlParameter[] paras = new SqlParameter[]
+            {
+                new SqlParameter("@inRID", SqlDbType.Int),
+                new SqlParameter("@inBeUID", SqlDbType.Int),
+                new SqlParameter("@inBeUName", SqlDbType.NVarChar, 50),
+                new SqlParameter("@inUID", SqlDbType.Int),
+                new SqlParameter("@inUName", SqlDbType.NVarChar, 50),
+                new SqlParameter("@inRemark", SqlDbType.NVarChar, 500),
+                new SqlParameter("@inRTime", SqlDbType.DateTime)
+            };
+            paras[0].Value = inModel.RID;
+            paras[1].Value = inModel.BeUID;
+            paras[2].Value = inModel.BeUName;
+            paras[3].Value = inModel.UID;
+            paras[4].Value = inModel.UName;
+            paras[5].Value = inModel.Remark;
+            paras[6].Value = inModel.RTime;
+
+            int result = SqlHelper.ExecuteNonQuery(CommandType.Text, sql.ToString(), paras);
+            return result;
         }
 
         /// <summary>

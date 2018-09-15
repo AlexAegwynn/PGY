@@ -3,103 +3,9 @@
     var list = Model as List<Web.ViewModels.VMRemark>;
 }
 
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <link href="~/Content/bootstrap.css" rel="stylesheet" />
-<style>
-    .container {
-        width: 1000px;
-    }
-
-    .commentbox {
-        width: 900px;
-        margin: 20px auto;
-    }
-
-    .mytextarea {
-        width: 100%;
-        overflow: auto;
-        word-break: break-all;
-        height: 100px;
-        color: #000;
-        font-size: 1em;
-        resize: none;
-    }
-
-    .comment-list {
-        width: 850px;
-        margin: 20px auto;
-        clear: both;
-        padding-top: 20px;
-    }
-
-        .comment-list .comment-info {
-            position: relative;
-            margin-bottom: 20px;
-            margin-bottom: 20px;
-            border-bottom: 1px solid #ccc;
-        }
-
-            .comment-list .comment-info header {
-                width: 10%;
-                position: absolute;
-            }
-
-                .comment-list .comment-info header img {
-                    display: none;
-                    width: 100%;
-                    border-radius: 50%;
-                    padding: 5px;
-                }
-
-            .comment-list .comment-info .comment-right {
-                margin-top: 5px;
-                /* padding:5px 0px 5px 11%; */
-            }
-
-                .comment-list .comment-info .comment-right h3 {
-                    margin: 5px 0px;
-                }
-
-                .comment-list .comment-info .comment-right .comment-content-header {
-                    height: 25px;
-                }
-
-                    .comment-list .comment-info .comment-right .comment-content-header span, .comment-list .comment-info .comment-right .comment-content-footer span {
-                        padding-right: 2em;
-                        color: #aaa;
-                    }
-
-                        .comment-list .comment-info .comment-right .comment-content-header span i {
-                            display: none;
-                        }
-
-                        .comment-list .comment-info .comment-right .comment-content-header span, .comment-list .comment-info .comment-right .comment-content-footer span.reply-btn, .send, .reply-list-btn {
-                            cursor: pointer;
-                        }
-
-                .comment-list .comment-info .comment-right .reply-list {
-                    border-left: 3px solid #ccc;
-                    padding-left: 7px;
-                }
-
-                    .comment-list .comment-info .comment-right .reply-list .reply {
-                        border-bottom: 1px dashed #ccc;
-                    }
-
-                        .comment-list .comment-info .comment-right .reply-list .reply div span {
-                            padding-left: 10px;
-                        }
-
-                        .comment-list .comment-info .comment-right .reply-list .reply p span {
-                            padding-right: 2em;
-                            color: #aaa;
-                        }
-</style>
-<script>
-    function SaveReply() {
-        alert();
-    }
-</script>
-
+<link href="~/Content/css/Remarks.css" rel="stylesheet" />
 <div>
     <div class="container">
         <div class="commentbox">
@@ -109,6 +15,7 @@
         <div class="comment-list">
             @foreach (var item in list)
             {
+                var index = list.IndexOf(item);
                 <div class='comment-info'>
                     <div class='comment-right'>
                         <h3>@item.UName</h3>
@@ -118,28 +25,21 @@
                         <p class='content'>@item.Remark</p>
                         <div class='comment-content-footer'>
                             <div class='row'>
-                                @{
-                                    if (item.RepliesTotal != 0)
-                                    {
-                                        <div class='col-md-10' style="float:left;">
-                                            <span>@item.RepliesTotal 条回复</span>
-                                        </div>
-                                    }
+                                <input type="hidden" id="rid" value="@item.RID" />
+                                <input type="hidden" id="uid" value="@item.UID" />
+                                <input type="hidden" id="uname" value="@item.UName" />
+                                @if (item.RepliesTotal != 0)
+                                {
+                                    <div class='col-md-10' style="float:left;">
+                                        <span onclick="ShowReplies('@item.RID')" style="cursor:pointer;">@item.RepliesTotal 条回复</span>
+                                    </div>
                                 }
                                 <div class='col-md-2' style="float:right;">
                                     <span class='reply-btn'>回复</span>
                                 </div>
                             </div>
                         </div>
-                        <div class='reply-list'>
-                            @*<div class='reply'>
-                                    <div>
-                                        <a href='javascript:void(0)' class='replyname'>回复人名称</a>:<a href='javascript:void(0)'>@@被回复人名称</a>
-                                        <span>回复内容</span>
-                                    </div>
-                                    <p><span>回复时间</span><span class='reply-list-btn'>回复</span></p>
-                                </div>*@
-                        </div>
+                        <div class='reply-list' id="reply_@item.RID"></div>
                     </div>
                 </div>
             }
@@ -147,7 +47,6 @@
     </div>
 </div>
 
-<script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script src="~/Scripts/bootstrap.min.js"></script>
 <script type="text/javascript">
     $(".reply-btn").click(function () {
@@ -160,24 +59,90 @@
     });
 
     function replyClick(el) {
-        el.parent().parent().append("<div class='replybox'><textarea cols='80' rows='50' placeholder='来说几句吧......' class='mytextarea' ></textarea><span class='send' onclick='SaveReply()'>发送</span></div>")
+        $.ajax({
+            url: '/Remark/GetLoginUser',
+            type: 'post',
+            success: function (data) {
+                if (data) {
+                    el.parent().parent().append(
+                        "<div class='replybox'>" +
+                        "<textarea cols='80' rows='50' placeholder='来说几句吧......' class='mytextarea' ></textarea>" +
+                        "<span class='send'>发送</span>" +
+                        "</div>"
+                    ).find(".send").click(function () {
+                        var content = $(this).prev().val();
+                        if (content != "") {
+                            var parentEl = $(this).parent().parent();
+                            $.ajax({
+                                url: '/Remark/InsertReply',
+                                type: 'post',
+                                data: {
+                                    RID: parentEl.find("#rid").val(),
+                                    BeUID: parentEl.find("#uid").val(),
+                                    BeUName: parentEl.find("#uname").val(),
+                                    Remark: content
+                                },
+                                success: function (data) {
+                                    window.location.reload();
+                                }
+                            })
+                        } else {
+                            alert("回复不能为空！");
+                        }
+                    });
+                } else {
+                    alert('请先登录');
+                    return;
+                }
+            }
+        })
     }
 
     function SaveComment() {
-        var comm = $("#content").val();
-        if (comm == '') {
-            alert('评论不能为空！'); return;
+        $.ajax({
+            url: '/Remark/GetLoginUser',
+            type: 'post',
+            success: function (data) {
+                if (data) {
+                    var comm = $("#content").val();
+                    if (comm == '') {
+                        alert('评论不能为空！'); return;
+                    }
+                    $.ajax({
+                        url: '/Remark/InsertRemark',
+                        type: 'post',
+                        data: {
+                            ArticleID: '6672546',
+                            Remark: comm
+                        },
+                        success: function (data) {
+                            window.location.reload();
+                        }
+                    })
+                } else {
+                    alert('请先登录');
+                    return;
+                }
+            }
+        })
+    }
+
+    function ShowReplies(rid) {
+        if ($('#reply_' + rid).html() != '') {
+            $('#reply_' + rid).html('');
+            return;
         }
 
+        $('.reply-list').html('');
+
         $.ajax({
-            url: '/TestRemark/InsertRemark',
-            type: 'post',
+            url: '/Remark/GetReplies',
+            type: 'get',
             data: {
-                ArticleID: '6672546',
-                Remark: comm
+                inRID: rid
             },
             success: function (data) {
-                window.location.reload();
+                $('#reply_' + rid).html(data);
             }
         })
     }

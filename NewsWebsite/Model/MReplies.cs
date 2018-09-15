@@ -39,13 +39,13 @@ namespace Model
         public string UName { get; set; } = string.Empty;
 
         /// <summary>
-        /// 评论内容
+        /// 回复内容
         /// </summary>
         public string Remark { get; set; } = string.Empty;
 
         /// <summary>
-        /// 评论时间
+        /// 回复时间
         /// </summary>
-        public int RTime { get; set; } = 0;
+        public DateTime RTime { get; set; } = Convert.ToDateTime("1900-1-1");
     }
 }

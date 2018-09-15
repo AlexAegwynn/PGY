@@ -36,6 +36,6 @@ namespace Model
         /// <summary>
         /// 评论时间
         /// </summary>
-        public DateTime RTime { get; set; } = DateTime.Now;
+        public DateTime RTime { get; set; } = Convert.ToDateTime("1900-1-1");
     }
 }
