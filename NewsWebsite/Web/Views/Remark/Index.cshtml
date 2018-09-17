@@ -46,7 +46,6 @@
         </div>
     </div>
 </div>
-
 <script src="~/Scripts/bootstrap.min.js"></script>
 <script type="text/javascript">
     $(".reply-btn").click(function () {
@@ -104,6 +103,7 @@
             type: 'post',
             success: function (data) {
                 if (data) {
+                    var aid = $('#aid').val();
                     var comm = $("#content").val();
                     if (comm == '') {
                         alert('评论不能为空！'); return;
@@ -112,7 +112,7 @@
                         url: '/Remark/InsertRemark',
                         type: 'post',
                         data: {
-                            ArticleID: '6672546',
+                            ArticleID: aid,
                             Remark: comm
                         },
                         success: function (data) {

@@ -1,10 +1,10 @@
 ﻿
 .container {
-    width: 1000px;
+    width: 700px;
 }
 
 .commentbox {
-    width: 900px;
+    width: 700px;
     margin: 20px auto;
 }
 
@@ -19,7 +19,7 @@
 }
 
 .comment-list {
-    width: 850px;
+    width: 700px;
     margin: 20px auto;
     clear: both;
     padding-top: 20px;
@@ -87,3 +87,20 @@
                         padding-right: 2em;
                         color: #aaa;
                     }
+
+
+
+.commentbox .pull-right {
+    margin-top: 5px;
+}
+
+
+
+.comment-list .comment-info .comment-right .replybox {
+    width: 700px;
+}
+
+    .comment-list .comment-info .comment-right .replybox textarea {
+        width: 680px;
+        margin-left: 10px;
+    }

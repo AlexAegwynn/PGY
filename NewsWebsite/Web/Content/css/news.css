@@ -165,10 +165,10 @@
 	font-weight: bold;
 	margin-left: 20px;
 }
-.newContent .tuiwen ul{
-	width: 700px;
-	height: auto;
-}
+    .newContent .tuiwen ul {
+        width: 700px;
+        height: auto;
+    }
 .newContent .tuiwen ul li{
 	height: 150px;
 	margin-bottom: 10px;
@@ -187,7 +187,7 @@
 	-webkit-transform: scale(1.1);
 	-webkit-transform: all 1s ease 0s;
 }
-    .newContent .tuiwen ul li .rightpart1{
+    .newContent .tuiwen ul li .rightpart1 {
         float: left;
         width: 540px;
         margin-left: 40px;
@@ -258,4 +258,9 @@ position:fixed;_position:absolute;_top:expression(eval(document.documentElement.
 }
 #totop a#totop:hover {
 	background-position:-30px -120px;
+}
+#remark{
+	width:700px;
+	height: auto;
+	margin-left: 20px;
 }

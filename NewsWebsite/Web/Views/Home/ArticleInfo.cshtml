@@ -59,6 +59,8 @@
 </script>
 
 <script>
+    var articleid = '@vModel.ArticleID';
+
     $(function () {
         var str = $('#hinfo').val();
         $('#info').html(str);
@@ -66,6 +68,9 @@
         $.ajax({
             url: '/Remark/Index',
             type: 'get',
+            data: {
+                inArticleID: articleid
+            },
             success: function (data) {
                 $('#remark').html(data);
             }
@@ -191,6 +196,7 @@
             </ul>
         </div>
     }
+    <div id="remark" style=""></div>
 </div>
 <div class="rightbar">
     <div class="searchBar">
@@ -243,9 +249,6 @@
 </div>
 <div id="GrayBG" style="background-color: #ccc;opacity: 0.5;width: 100%;height: 100%;z-index:1;display: none;"></div>
 <div class="reg login logreg" id="logreg"></div>
-
-<div id="remark" style="background-color:white;position:absolute;z-index:999;"></div>
-
 <script type="text/javascript">
     $(document).ready(function () {
         $('#saomatop').mouseenter(function () {

@@ -11,9 +11,9 @@ namespace Web.Controllers
     public class RemarkController : Controller
     {
         // GET: TestRemark
-        public ActionResult Index()
+        public ActionResult Index(int inArticleID)
         {
-            List<Model.MRemarks> list = Logic.LRemarks.GetRemarks(6672546);
+            List<Model.MRemarks> list = Logic.LRemarks.GetRemarks(inArticleID);
             List<VMRemark> vList = new List<VMRemark>();
             foreach (var item in list)
             {
