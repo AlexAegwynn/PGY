@@ -14,6 +14,11 @@ namespace Model
         public long ID { get; set; } = 0;
 
         /// <summary>
+        /// 商品编号
+        /// </summary>
+        public long NumIID { get; set; } = 0;
+
+        /// <summary>
         /// 商品标题
         /// </summary>
         public string Title { get; set; } = string.Empty;
@@ -22,6 +27,11 @@ namespace Model
         /// 分类ID
         /// </summary>
         public long CatID { get; set; } = 0;
+
+        /// <summary>
+        /// 商品价格
+        /// </summary>
+        public decimal PriceNow { get; set; } = 0;
 
         /// <summary>
         /// 商品图片

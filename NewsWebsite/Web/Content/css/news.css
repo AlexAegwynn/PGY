@@ -261,6 +261,24 @@ position:fixed;_position:absolute;_top:expression(eval(document.documentElement.
 }
 #remark{
 	width:700px;
+	max-width: 700px;
 	height: auto;
 	margin-left: 20px;
+}
+.like .rightpart1{
+	width: 300px;
+}
+.like .rightpart2 span{
+	float: left;
+	color:red;
+	font-weight: bolder;
+	font-size:20px;
+	margin-top: 25px;
+	margin-left: 30px;
+}
+.like .rightpart2 h2{
+	color:red;
+	float:left;
+	margin-top: 20px;
+	font-weight: bolder;
 }

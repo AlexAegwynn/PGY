@@ -30,8 +30,10 @@ namespace Data
                 Model.MItem model = new Model.MItem
                 {
                     ID = Convert.ToInt64(item["ID"]),
+                    NumIID = Convert.ToInt64(item["NumIID"]),
                     Title = item["Title"].ToString(),
                     CatID = Convert.ToInt64(item["CatID"]),
+                    PriceNow = Convert.ToDecimal(item["PriceNow"]),
                     ImgSmall = item["ImgSmall"].ToString(),
                     ClickUrl = item["ClickUrl"].ToString(),
                     TitleDescribe = item["TitleDescribe"].ToString()

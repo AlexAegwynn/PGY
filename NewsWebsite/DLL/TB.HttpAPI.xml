@@ -1,0 +1,2785 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TB.HttpAPI</name>
+    </assembly>
+    <members>
+        <member name="T:TB.HttpAPI.Simba.TBCreative">
+            <summary>
+            直通车创意
+            </summary>
+        </member>
+        <member name="T:TB.HttpAPI.TBPublic.TbBaseNew">
+            <summary>
+            淘宝 API 通用基础函数
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.TBPublic.TbBaseNew.url">
+            <summary>
+            淘宝API获取数据网址
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.TBPublic.TbBaseNew.vmUrlNew">
+            <summary>
+            淘宝【API】--定义网页 中转 接口网址
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.TBPublic.TbBaseNew.appkey">
+            <summary>
+            直通车 appkey
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.TBPublic.TbBaseNew.appsecret">
+            <summary>
+            直通车 appsecret 【定时更新】
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.TBPublic.TbBaseNew.appkeyTKDown">
+            <summary>
+            淘宝客 appkey
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.TBPublic.TbBaseNew.appsecretTKDown">
+            <summary>
+            淘宝客 appsecret 【定时更新】
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.TBPublic.TbBaseNew.appkeyTKUp">
+            <summary>
+            淘宝客 appkey
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.TBPublic.TbBaseNew.appsecretTKUp">
+            <summary>
+            淘宝客 appsecret 【定时更新】
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.TBPublic.TbBaseNew.clientXml">
+            <summary>
+            Xml 格式【直接调用】
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.TBPublic.TbBaseNew.clientStoneXml">
+            <summary>
+            Xml 格式
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.TBPublic.TbBaseNew.clientJson">
+            <summary>
+            Json 格式【直接调用】
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.TBPublic.TbBaseNew.clientStoneJson">
+            <summary>
+            Json 格式
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.TBPublic.TbBaseNew.clientXmlTKDown">
+            <summary>
+            Xml 格式【淘宝客】【Appkey：23494883】【直接调用】
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.TBPublic.TbBaseNew.clientStoneXmlTKDown">
+            <summary>
+            Xml 格式【淘宝客】【Appkey：23494883】
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.TBPublic.TbBaseNew.clientJsonTKDown">
+            <summary>
+            Json 格式【淘宝客】【Appkey：23494883】【直接调用】
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.TBPublic.TbBaseNew.clientStoneJsonTKDown">
+            <summary>
+            Json 格式【淘宝客】【Appkey：23494883】
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.TBPublic.TbBaseNew.clientXmlTKUp">
+            <summary>
+            Xml 格式【淘宝客】【Appkey：23621938】【直接调用】
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.TBPublic.TbBaseNew.clientStoneXmlTKUp">
+            <summary>
+            Xml 格式【淘宝客】【Appkey：23621938】
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.TBPublic.TbBaseNew.clientJsonTKUp">
+            <summary>
+            Json 格式【淘宝客】【Appkey：23621938】【直接调用】
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.TBPublic.TbBaseNew.clientStoneJsonTKUp">
+            <summary>
+            Json 格式【淘宝客】【Appkey：23621938】
+            </summary>
+        </member>
+        <member name="M:TB.HttpAPI.TBPublic.TbBaseNew.GetAPIStringByPar(System.String,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            【API】通过 淘宝云服务器中转 操作函数【New】
+            </summary>
+            <param name="parStr"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.TBPublic.TbBaseNew.DoPost(System.String,System.Collections.Generic.IDictionary{System.String,System.String},System.String@,System.String@)">
+            <summary>
+            执行【HTTP】【POST】请求。
+            </summary>
+            <param name="url">请求地址</param>
+            <param name="parameters">请求参数</param>
+            <param name="returnUrl">回传的网址</param>
+            <returns>HTTP响应</returns>
+        </member>
+        <member name="M:TB.HttpAPI.TBPublic.TbBaseNew.GetResponseAsString(System.Net.HttpWebResponse,System.Text.Encoding)">
+            <summary>
+            把响应流转换为文本。
+            </summary>
+            <param name="rsp">响应流对象</param>
+            <param name="encoding">编码方式</param>
+            <returns>响应文本</returns>
+        </member>
+        <member name="M:TB.HttpAPI.TBPublic.TbBaseNew.BuildQuery(System.Collections.Generic.IDictionary{System.String,System.String})">
+            <summary>
+            组装普通文本请求参数。
+            </summary>
+            <param name="parameters">Key-Value形式请求参数字典</param>
+            <returns>URL编码后的请求数据</returns>
+        </member>
+        <member name="M:TB.HttpAPI.TBPublic.TbBaseNew.GetJsonArray(System.String)">
+            <summary>
+            【Json】数据格式转化，将从API接口获取的字符串数据转化为 Json 【数组】类型数据【无 list】
+            <para>格式1：[{"ren1":1,"ren2":2,...},{"ren1":1,"ren2":2,...}]</para>
+            </summary>
+            <param name="getStr">输入字符串</param>
+            <returns>Json 数据</returns>
+        </member>
+        <member name="M:TB.HttpAPI.TBPublic.TbBaseNew.GetJsonArrayNoList(System.String)">
+            <summary>
+            【Json】数据格式转化，将从API接口获取的字符串数据转化为 Json 【数组】类型数据【已有 list】
+            <para>格式1：{"list":[{"ren1":1,"ren2":2,...},{"ren1":1,"ren2":2,...}]}</para>
+            <para>格式2：{"list":[{"ren1":1,"ren2":2,...},{"ren1":1,"ren2":2,...},...],"list2":[{"ren1":1,"ren2":2,...},{},...]}</para>
+            </summary>
+            <param name="getStr">输入字符串</param>
+            <returns>Json 数据</returns>
+        </member>
+        <member name="M:TB.HttpAPI.TBPublic.TbBaseNew.GetJsonObject(System.String)">
+            <summary>
+            【Json】数据格式转化，将从API接口获取的字符串数据转化为 Json 类型数据
+            <para>格式：{"ren1":1,"ren2":2,...}</para>
+            </summary>
+            <param name="getStr">输入字符串</param>
+            <returns>Json 数据</returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBCreative.Getcreatives(System.String,System.String,System.Int64,System.String,Top.Api.TopResponse@)">
+            <summary>
+            批量获得创意
+            </summary>
+            <param name="nick">昵称【可选】</param>
+            <param name="creativeids">创意Id数组，最多200个【特殊可选】</param>
+            <param name="adgroupid">推广组Id【特殊可选】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBCreative.Getudpatecreatives(System.String,System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            批量得到创意修改记录
+            </summary>
+            <param name="nick">昵称【可选】</param>
+            <param name="creativeids">创意Id数组，最多200个【特殊可选】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBCreative.Updatecreative(System.String,System.Int64,System.Int64,System.String,System.String,System.Int64,System.String,Top.Api.TopResponse@)">
+            <summary>
+            修改创意与？？？
+            </summary>
+            <param name="nick">昵称【可选】</param>
+            <param name="adgroupid">推广组编号【必须】</param>
+            <param name="creativeid">创意编号【必须】</param>
+            <param name="title">创意标题，最多20个汉字【必须】</param>
+            <param name="imgurl">创意图片地址，必须是推广组对应商品的图片之一【必须】</param>
+            <param name="pictureid">如果用户开通了创意本地上传图片功能的，可以使用该用户图片空间的图片来修改创意
+            <para>pictureId为图片空间中图片的pictureId，img_url为图片空间中图片链接地址，如果是使用的主图或副图修改创意，则pictureId必须为空【可选】</para></param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBCreative.Delectcreative(System.String,System.Int64,System.String,Top.Api.TopResponse@)">
+            <summary>
+            删除创意
+            </summary>
+            <param name="nick">昵称【可选】</param>
+            <param name="creativeid">创意编号【必须】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBCreative.Addcreative(System.String,System.Int64,System.String,System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            增加创意
+            </summary>
+            <param name="nick">昵称【可选】</param>
+            <param name="adgroupid">推广组编号【必须】</param>
+            <param name="title">创意标题【必须】</param>
+            <param name="imgurl">创意图片地址，必须是推广组对应商品的图片之一【必须】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBCreative.Getdelectcreativeids(System.String,System.String,System.Int32,System.Int32,System.String,Top.Api.TopResponse@)">
+            <summary>
+            获取删除的创意ID
+            </summary>
+            <param name="nick">昵称【可选】</param>
+            <param name="starttime">得到这个时间点之后的数据，不能大于一个月【必须】</param>
+            <param name="page_size">返回的每页数据量大小,默认200最大1000【必须】</param>
+            <param name="page_no">返回的第几页数据，默认为1【必须】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBCreative.Getupdatecreativeids(System.String,System.String,System.Int32,System.Int32,System.String,Top.Api.TopResponse@)">
+            <summary>
+            获取修改的创意ID
+            </summary>
+            <param name="nick">昵称【可选】</param>
+            <param name="starttime">得到这个时间点之后的数据，不能大于一个月【必须】</param>
+            <param name="page_size">返回的每页数据量大小,默认200最大1000【必须】</param>
+            <param name="page_no">返回的第几页数据，默认为1【必须】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBCreative.Getcreativeschanged(System.String,System.String,System.Int32,System.Int32,System.String,Top.Api.TopResponse@)">
+            <summary>
+            分页获取修改过的广告创意ID和修改时间
+            </summary>
+            <param name="nick">昵称【可选】</param>
+            <param name="starttime">得到这个时间点之后的数据，不能大于一个月【必须】</param>
+            <param name="page_size">返回的每页数据量大小,默认200最大1000【必须】</param>
+            <param name="page_no">返回的第几页数据，默认为1【必须】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBCreative.Getcreative(System.String,System.Int64,System.Int64,System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            获取创意实时报表数据
+            </summary>
+            <param name="nick">昵称【可选】</param>
+            <param name="campaignid">推广计划编号【必须】</param>
+            <param name="adgroupid">推广组编号【必须】</param>
+            <param name="date">日期，格式yyyy-mm-dd</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="T:TB.HttpAPI.Simba.TBOther">
+            <summary>
+            直通车其他API接口
+            </summary>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBOther.Gettoolsitems(System.String,System.String,System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            取得一个关键词的推广组排名列表
+            </summary>
+            <param name="nick">昵称【可选】</param>
+            <param name="keyword">关键词【必须】</param>
+            <param name="ip">输入的必须是一个符合ipv4或者ipv6格式的IP地址【必须】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBOther.Getlogin(System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            获取登陆权限签名
+            </summary>
+            <param name="nick">昵称【可选】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBOther.Getalldemographics(System.String,Top.Api.TopResponse@)">
+            <summary>
+            获取定向投放人群维度列表
+            </summary>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBOther.Getdemographics(System.String,System.Int64,System.String,Top.Api.TopResponse@)">
+            <summary>
+            获取给定campaign设置的投放人群维度列表
+            </summary>
+            <param name="nick">昵称【可选】</param>
+            <param name="campaignid">推广计划编号【必须】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBOther.Updatedemographics(System.String,System.Int64,System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            设置投放人群维度加价
+            </summary>
+            <param name="nick">昵称【可选】</param>
+            <param name="campaignid">推广计划编号【必须】</param>
+            <param name="demographic_id_price_json">投放人群维度Id，加价json数组字符串。数组长度不能超过15
+            <para>json数组中的key必须和相应实体DemographicSetting中的属性字段保持一致，否则对应的实体对象属性获取不到相应的值</para>
+            <para> incrementalPrice是整数，以“分”为单位，不能小于1，不能大于日限额,不能大于9999分; 可以为0表示不加价</para>
+            <para>投放人群维度ID必须有效</para></param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBOther.Getallplaces(System.String,Top.Api.TopResponse@)">
+            <summary>
+             获取单独出价投放位置列表
+            </summary>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBOther.Getcatsforecastnew(System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            获取词的相关类目预测数据
+            </summary>
+            <param name="bidword_list">需要查询的词列表【必须】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBOther.Getrelatedwords(System.String,System.Int32,System.String,Top.Api.TopResponse@)">
+            <summary>
+            获取词的相关词
+            </summary>
+            <param name="bidword_list">需要查询的词列表【必须】</param>
+            <param name="number">表示返回数据的条数,最大100【必须】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBOther.Getcatstopwordnew(System.String,System.String,System.String,System.String,System.Int32,System.String,Top.Api.TopResponse@)">
+            <summary>
+            获取类目下最热门的词
+            </summary>
+            <param name="catid">类目id【必须】</param>
+            <param name="starttime">查询开始时间，格式必须为：yyyy-MM-dd【必须】</param>
+            <param name="endtime">查询截止时间，格式只能是：yyyy-MM-dd【必须】</param>
+            <param name="dimension">表示查询的维度，比如选择click，则查询该类目下点击量最大的词
+            <para>可供选择的值有：impression, click, cost, ctr, cpc, coverage, transactiontotal, transactionshippingtotal, favtotal, roi【必须】</para></param>
+            <param name="page_size">返回前多少条数据，最大20【必须】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBOther.Getcatsworddata(System.String,System.String,System.String,System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            获取类目下关键词的数据
+            </summary>
+            <param name="catid">类目</param>
+            <param name="bidword_list">需要查询的关键词列表，最大长度100【必须】</param>
+            <param name="starttime">开始时间，格式只能为：yyyy-MM-dd【必须】</param>
+            <param name="endtime">结束时间，格式只能为：yyyy-MM-dd【必须】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBOther.Getwordsdata(System.String,System.String,System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            获取关键词的大盘数据
+            </summary>
+            <param name="bidword_list">需要查询的关键词列表，最大长度100【必须】</param>
+            <param name="starttime">开始时间，格式只能为：yyyy-MM-dd【必须】</param>
+            <param name="endtime">结束时间，格式只能为：yyyy-MM-dd【必须】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBOther.Getwordssubdata(System.String,System.String,System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            获取关键词按流量细分的数据
+            </summary>
+            <param name="bidword_list">需要查询的关键词列表，最大长度100【必须】</param>
+            <param name="starttime">开始时间，格式只能为：yyyy-MM-dd【必须】</param>
+            <param name="endtime">结束时间，格式只能为：yyyy-MM-dd【必须】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBOther.Getwordsareadata(System.String,System.String,System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            获取关键词按地域进行细分的数据
+            </summary>
+            <param name="bidword">关键词【必须】</param>
+            <param name="starttime">开始时间，格式只能为：yyyy-MM-dd【必须】</param>
+            <param name="endtime">结束时间，格式只能为：yyyy-MM-dd【必须】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBOther.Getwordspricedata(System.String,System.String,System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            关键词按竞价区间的分布数据
+            </summary>
+            <param name="bidword">关键词【必须】</param>
+            <param name="starttime">开始时间，格式只能为：yyyy-MM-dd【必须】</param>
+            <param name="endtime">结束时间，格式只能为：yyyy-MM-dd【必须】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBOther.Getcatsinfo(System.Int32,System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            类目信息获取
+            </summary>
+            <param name="type">表示请求的类型：0表示请求所有顶级类目的信息，这时可以忽略第二个参数
+            <para>1表示获取给定的类目id的详细信息，2表示获取给定类目id的所有子类目的详细信息【必须】</para></param>
+            <param name="category_id_list">需要查询的类目id字符串列表【可选】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBOther.Getcatsdata(System.String,System.String,System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            获取类目的大盘数据
+            </summary>
+            <param name="category_id_list">需要查询的类目id字符串列表【必须】</param>
+            <param name="starttime">开始时间，格式只能为：yyyy-MM-dd【必须】</param>
+            <param name="endtime">结束时间，格式只能为：yyyy-MM-dd【必须】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBOther.Gettargetingtageffect(System.String,System.Int64,System.Int64,System.String,System.String,System.Int32,System.Int32,System.String,Top.Api.TopResponse@)">
+            <summary>
+            获取定向效果报表数据
+            </summary>
+            <param name="nick">昵称【可选】</param>
+            <param name="campaignid">推广计编号【可选】</param>
+            <param name="adgroupid">推广组编号【可选】</param>
+            <param name="starttime">起始时间【必须】</param>
+            <param name="endtime">终止时间【必须】</param>
+            <param name="page_size">页面大小【可选】</param>
+            <param name="page_number">页码【可选】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBOther.Gettargetingtagbase(System.String,System.Int64,System.Int64,System.String,System.String,System.Int32,System.Int32,System.String,Top.Api.TopResponse@)">
+            <summary>
+            定向基础报表
+            </summary>
+            <param name="nick">昵称【可选】</param>
+            <param name="campaignid">推广计编号【可选】</param>
+            <param name="adgroupid">推广组编号【可选】</param>
+            <param name="starttime">起始时间【必须】</param>
+            <param name="endtime">终止时间【必须】</param>
+            <param name="page_size">页面大小【可选】</param>
+            <param name="page_number">页码【可选】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBOther.Getqscore(System.String,System.Int64,System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            新质量分服务
+            </summary>
+            <param name="nick">昵称【可选】</param>
+            <param name="adgroupid">推广组编号【必须】</param>
+            <param name="bidword_ids">词id数组字符串【必须】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBOther.Delectmobilediscount(System.String,System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            批量删除adgroup的移动溢价
+            </summary>
+            <param name="nick">昵称【可选】</param>
+            <param name="adgroupidS">adgroup主键数组（批量最多支持200个）【必须】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBOther.Updatemobilediscount(System.String,System.Int64,System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+             对推广组进行单独移动溢价
+            </summary>
+            <param name="nick">昵称【可选】</param>
+            <param name="mobile_discount">折扣（折扣值在1-400之间）【必须】</param>
+            <param name="adgroupidS">推广组编号数组(推广组id集合元素个数在1-200个之间，推广组id需要在同一个推广计划中)【必须】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBOther.Getdemographicbase(System.String,System.Int64,System.String,System.String,System.String,System.Int32,System.Int32,System.String,Top.Api.TopResponse@)">
+            <summary>
+            推广计划下的人群基础数据查询
+            </summary>
+            <param name="nick">昵称【可选】</param>
+            <param name="campaignid">推广计划编号【可选】</param>
+            <param name="subway_token">权限校验参数【可选】</param>
+            <param name="starttime">开始时间,格式为：yyyy-mm-dd【必须】</param>
+            <param name="endtime">结束时间,格式为：yyyy-mm-dd【必须】</param>
+            <param name="page_no">页码【可选】</param>
+            <param name="page_size">每页大小【可选】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBOther.Getserchcrowd(System.String,System.Int64,System.String,Top.Api.TopResponse@)">
+            <summary>
+            根据推广单元id获取搜索溢价人群???【找不到请求的类】
+            </summary>
+            <param name="nick">昵称【必须】</param>
+            <param name="adgroupid">推广组编号【必须】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBOther.Delectserchcrowd(System.String,System.String,System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            单品搜索人群批量取消溢价???【找不到请求的类】
+            </summary>
+            <param name="nick">昵称【必须】</param>
+            <param name="sub_nick">子账号昵称【可选】</param>
+            <param name="adgroup_crowd_ids">需要删除的人群id【必须】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBOther.Getsearchtagtemplate(System.String,System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            获取搜索人群TOP用户可添加人群信息???【找不到请求的类】
+            </summary>
+            <param name="nick">昵称【可选】</param>
+            <param name="sub_nick">子账号昵称【可选】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBOther.Updateserchcrowd(System.String,System.String,System.Int64,System.Int32,System.String,Top.Api.TopResponse@)">
+            <summary>
+            单品搜索人群修改状态???【找不到请求的类】
+            </summary>
+            <param name="nick">昵称【必须】</param>
+            <param name="adgroup_crowd_ids">需要修改出价的人群包id,批量传入时用,分割【必须】</param>
+            <param name="adgroupid">推广组编号【必须】</param>
+            <param name="state">人群状态,0:暂停;1:启用【可选】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBOther.Addsearchcrowd(System.String,System.Int64,System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            推广单元增加搜索人群???【找不到请求的类】
+            </summary>
+            <param name="nick">昵称【可选】</param>
+            <param name="adgroupid">推广组编号</param>
+            <param name="adgroup_targeting_tags">新增人群信息,批量接口,入参为list,溢价范围为[105,400]【必须】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBOther.Updateserchcrowd(System.String,System.String,System.String,System.Int64,System.Int64,System.String,Top.Api.TopResponse@)">
+            <summary>
+            单品推广搜索人群修改溢价???【找不到请求的类】
+            </summary>
+            <param name="nick">昵称【必须】</param>
+            <param name="sub_nick">子账号昵称【可选】</param>
+            <param name="adgroup_targeting_tags">需要修改出价的人群包id,批量传入的时候用,分割【必须】</param>
+            <param name="adgroupid">推广组编号【必须】</param>
+            <param name="discount">人群溢价比例，溢价范围[5,300]</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBOther.Gettargetingtag(System.String,System.Int64,System.Int64,System.String,System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            搜索人群实时报表???【找不到请求的类】
+            </summary>
+            <param name="nick">昵称【必须】</param>
+            <param name="campaignid">推广计划编号【必须】</param>
+            <param name="adgroupid">推广组编号【必须】</param>
+            <param name="date">日期，格式yyyy-mm-dd【必须】</param>
+            <param name="traffic_type">流量类型 1: PC站内, 2: PC站外 , 4: 无线站内, 5: 无线站外,支持多种一起查询,如1,2,4,5【必须】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBOther.Gettargetingtag(System.String,System.Int64,System.Int64,System.String,System.String,System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            搜索人群离线报表???【找不到请求的类】
+            </summary>
+            <param name="nick">昵称【可选】</param>
+            <param name="campaignid">推广计划编号【可选】</param>
+            <param name="adgroupid">推广组编号【可选】</param>
+            <param name="starttime">开始时间【可选】</param>
+            <param name="endtime">结束时间【可选】</param>
+            <param name="traffic_type">流量类型 1: PC站内, 2: PC站外 , 4: 无线站内, 5: 无线站外,支持多种一起查询,如1,2,4,5【可选】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBOther.GetItemS(System.String,System.String,System.Int32,System.Int32,System.String,Top.Api.TopResponse@)">
+            <summary>
+            得到当前会话用户库存中的商品列表
+            </summary>
+            <param name="fields">需返回的字段列表</param>
+            <param name="order_by">排序方式.格式为column:asc/desc,column可选值:list_time(上架时间),delist_time(下架时间),num(商品数量),modified(最近修改时间)
+            <para>默认上架时间降序(即最新上架排在前面)。如按照上架时间降序排序方式为list_time:desc</para></param>
+            <param name="page_no">页码</param>
+            <param name="page_size">每页条数。取值范围:大于零的整数;最大值：200；默认值：40。</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBOther.GetItemList(System.String,System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            批量获取商品详细信息
+            </summary>
+            <param name="fields">需返回的字段列表</param>
+            <param name="numids">商品ID列表，多个ID用半角逗号隔开，一次最多不超过20个
+            <para>注：获取不存在的商品ID或获取别人的商品都不会报错，但没有商品数据返回。</para></param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBOther.GetItem(System.String,System.Int64,System.String,Top.Api.TopResponse@)">
+            <summary>
+            获取单个商品详细信息
+            </summary>
+            <param name="fields">需返回的字段列表</param>
+            <param name="numiid">商品编号</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBOther.GetItemSonsale(System.String,System.String,System.Int32,System.Int32,System.String,Top.Api.TopResponse@)">
+            <summary>
+            获取当前会话用户出售中的商品列表
+            </summary>
+            <param name="fields">需返回的字段列表</param>
+            <param name="order_by">排序方式.格式为column:asc/desc,column可选值:list_time(上架时间),delist_time(下架时间),num(商品数量),modified(最近修改时间)
+            <para>默认上架时间降序(即最新上架排在前面)。如按照上架时间降序排序方式为list_time:desc</para></param>
+            <param name="page_no">页码</param>
+            <param name="page_size">每页条数。取值范围:大于零的整数;最大值：200；默认值：40。</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="T:TB.HttpAPI.Model.MTbkDataReport">
+            <summary>
+            【日志上行】【taobao.tbk.data.report】详细参数
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.Model.MTbkDataReport.DataID">
+            <summary>
+            此条上报日志的id， string类型，组成为7位用户ID_13位时间戳
+            <para>每个工具团队下日志id需要保证唯一性、不能重复（后续淘客工具将其追加在单品券/单品链接中）</para>
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.Model.MTbkDataReport.PID">
+            <summary>
+            淘客的pid，满足mm_memberid_siteid_adzoneid格式
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.Model.MTbkDataReport.Account">
+            <summary>
+            淘客在淘客工具的账号
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.Model.MTbkDataReport.MediumType">
+            <summary>
+            渠道类型：微信群/QQ群/微博/微信公众号／其他
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.Model.MTbkDataReport.MediumName">
+            <summary>
+            渠道名称：微信群名称/QQ群名称/微博名称/微信公众号名称
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.Model.MTbkDataReport.MediumID">
+            <summary>
+            渠道ID：微信群ID填-1/QQ群ID/微博ID/公众号帐号
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.Model.MTbkDataReport.MemberNum">
+            <summary>
+            微信群人数／QQ群人数／微博粉丝数／公众号粉丝数
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.Model.MTbkDataReport.ItemID">
+            <summary>
+            推广的商品id
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.Model.MTbkDataReport.OriginUrl">
+            <summary>
+            未转链前的原始商品url【宝贝链接网址】
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.Model.MTbkDataReport.CouponUrl">
+            <summary>
+            优惠券url
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.Model.MTbkDataReport.TbkUrl">
+            <summary>
+            商品推广链接/二合一推广链接
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.Model.MTbkDataReport.ItemTitle">
+            <summary>
+            商品名称
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.Model.MTbkDataReport.ItemDescription">
+            <summary>
+            商品文案（除图片和链接外的所有文字信息）
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.Model.MTbkDataReport.TbCommand">
+            <summary>
+            淘口令
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.Model.MTbkDataReport.ExtraInfo">
+            <summary>
+            备注说明
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.Model.MTbkDataReport.Appkey">
+            <summary>
+            工具在联盟的备案的上行appkey，即调用淘宝客保护api时使用的appkey
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.Model.MTbkDataReport.Src">
+            <summary>
+            官方备案的 团队识别id_工具识别id
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.Model.MTbkDataReport.SrcName">
+            <summary>
+            官方备案的团队名称
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.Model.MTbkDataReport.TimeNow">
+            <summary>
+            官方备案的团队名称
+            </summary>
+        </member>
+        <member name="T:TB.HttpAPI.TBTbk">
+            <summary>
+            淘宝客
+            </summary>
+        </member>
+        <member name="M:TB.HttpAPI.TBTbk.GetItemInfoByID(System.Int32,System.String,Top.Api.TopResponse@)">
+            <summary>
+            淘宝客商品详情（简版）
+            </summary>
+            <param name="platform">【可选】1：PC，2：无线，默认：1</param>
+            <param name="numIIDs">商品ID串，用,分割，从taobao.tbk.item.get接口获取num_iid字段，最大40个。</param>
+            <param name="topRsp">API返回参数说明</param>
+        </member>
+        <member name="M:TB.HttpAPI.TBTbk.GetItemCouponByID(System.Int32,System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            根据nid批量查询优惠券
+            </summary>
+            <param name="platform">【可选】1：PC，2：无线，默认：1</param>
+            <param name="num_iids">【必须】商品ID串，用逗号分割，从taobao.tbk.item.coupon.get接口获取num_iid字段，最大40个。
+            <para>（如果传入了没有优惠券的宝贝num_iid，则优惠券相关的字段返回为空，请做好容错）</para></param>
+            <param name="pid">【必须】三方pid，满足mm_xxx_xxx_xxx格式</param>
+            <param name="topRsp">API返回参数说明</param>
+        </member>
+        <member name="M:TB.HttpAPI.TBTbk.GetSpread(System.Int64,System.DateTime,System.DateTime,System.Int64,System.Int64,Top.Api.TopResponse@)">
+            <summary>
+            淘抢购
+            <para>获取淘抢购的数据，淘客商品转淘客链接，非淘客商品输出普通链接</para>
+            </summary>
+            <param name="adzoneID">【必须】推广位id</param>
+            <param name="timeStart">【必须】最早开团时间</param>
+            <param name="timeEnd">【必须】最晚开团时间</param>
+            <param name="pageNo">【可选】第几页，默认1，1~100</param>
+            <param name="pageSize">【可选】页大小，默认96，1~96</param>
+            <param name="topRsp">API返回参数说明</param>
+        </member>
+        <member name="M:TB.HttpAPI.TBTbk.GetSpreadList(System.Collections.Generic.List{System.String},Top.Api.TopResponse@)">
+            <summary>
+            物料传播方式获取【批量】【暂停使用】
+            <para>输入一个原始的链接，转换得到指定的传播方式，如二维码，淘口令，短连接； 现阶段只支持短连接。</para>
+            </summary>
+            <param name="urlStr">原</param>
+            <param name="topRsp">API返回参数说明</param>
+        </member>
+        <member name="M:TB.HttpAPI.TBTbk.GetSpread(System.String,Top.Api.TopResponse@)">
+            <summary>
+            物料传播方式获取【单个】
+            <para>输入一个原始的链接，转换得到指定的传播方式，如二维码，淘口令，短连接； 现阶段只支持短连接。</para>
+            </summary>
+            <param name="urlStr">原始网址</param>
+            <param name="topRsp">API返回参数说明</param>
+        </member>
+        <member name="M:TB.HttpAPI.TBTbk.GetItemList(TB.HttpAPI.Model.MTbkItemListPar,Top.Api.TopResponse@)">
+            <summary>
+            淘宝客商品查询
+            </summary>
+            <param name="modelPar">参数</param>
+            <param name="topRsp">API返回参数说明</param>
+        </member>
+        <member name="M:TB.HttpAPI.TBTbk.GetItemListCoupon(System.Int64,System.String,System.String,System.Int32,System.Int32,System.String,Top.Api.TopResponse@)">
+            <summary>
+            单品加券检索api【检索有优惠券的单品】【Appkey：23494883 专用】
+            </summary>
+            <param name="platform">【可选】【1：PC，2：无线，默认：1】</param>
+            <param name="cat">【可选】【后台类目ID，用,分割，最大10个，该ID可以通过taobao.itemcats.get接口获取到】</param>
+            <param name="q">【可选】【查询词】</param>
+            <param name="pageSize">【可选】【页大小，默认20，1~100】</param>
+            <param name="pageNo">【可选】【第几页，默认：1（当后台类目和查询词均不指定的时候，最多出10000个结果，即page_no*page_size不能超过10000；当指定类目或关键词的时候，则最多出100个结果）】</param>
+            <param name="pid">【必须】【三方pid，满足mm_xxx_xxx_xxx格式】</param>
+            <param name="topRsp">API返回参数说明</param>
+        </member>
+        <member name="M:TB.HttpAPI.TBTbk.DataReprotUpload(TB.HttpAPI.Model.MTbkDataReport,Top.Api.TopResponse@)">
+            <summary>
+            日志上行详细参数
+            </summary>
+            <param name="model">日志上行详细参数</param>
+            <param name="topRsp">API返回参数说明</param>
+        </member>
+        <member name="M:TB.HttpAPI.TBTbk.GetTpwd(System.String,System.String,System.String,System.String,System.Int64)">
+            <summary>
+            生成淘口令
+            <para>提供isv生成淘口令接口，isv提交口令内容、logo、url等参数，</para>
+            <para>生成淘口令关键key如：￥SADadW￥，后续进行文案包装组装用于传播</para>
+            </summary>
+            <param name="ext">【可选】【{"xx":"xx"} 扩展字段JSON格式】</param>
+            <param name="logo">【可选】【http://m.taobao.com/xxx.jpg口令弹框logoURL】</param>
+            <param name="text">【必须】【超值活动，惊喜活动多多口令弹框内容】</param>
+            <param name="url">【必须】【http://m.taobao.com口令跳转url】</param>
+            <param name="userID">【可选】【24234234234 默认值：0 生成口令的淘宝用户ID】</param>
+        </member>
+        <member name="M:TB.HttpAPI.TBTbk.GetUatmFavorites(System.Int32,System.Int32,System.Int32,Top.Api.TopResponse@)">
+            <summary>
+            获取淘宝联盟选品库列表 (枚举出淘宝客在淘宝联盟超级搜索，特色频道中，创建的选品库列表)
+            </summary>
+            <param name="pageNo">【可选】第几页，从1开始计数</param>
+            <param name="pageSize">【可选】默认20，页大小，即每一页的活动个数</param>
+            <param name="type">【可选】默认值-1；选品库类型，1：普通选品组，2：高佣选品组，-1，同时输出所有类型的选品组</param>
+            <param name="topRsp">API返回参数说明</param>
+        </member>
+        <member name="M:TB.HttpAPI.TBTbk.GetUatmFavoritesItem(System.Int32,System.Int32,System.Int32,System.String,System.Int64,System.Int64,Top.Api.TopResponse@)">
+            <summary>
+            获取淘宝联盟选品库的宝贝信息 (指定选品库id，获取该选品库的宝贝信息)
+            </summary>
+            <param name="platform">【可选】链接形式：1：PC，2：无线，默认：１</param>
+            <param name="pageNo">【可选】第几页，默认：1，从1开始计数</param>
+            <param name="pageSize">【可选】页大小，默认20，1~100</param>
+            <param name="unid">【可选】自定义输入串，英文和数字组成，长度不能大于12个字符，区分不同的推广渠道</param>
+            <param name="adzoneID">【必须】推广位id</param>
+            <param name="favoritesID">【必须】选品库的id</param>
+            <param name="topRsp">API返回参数说明</param>
+        </member>
+        <member name="T:TB.HttpAPI.Model.MTbkItemListPar">
+            <summary>
+            【淘宝客商品查询】【taobao.tbk.item.get】详细参数
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.Model.MTbkItemListPar.Fields">
+            <summary>
+            【必须】需返回的字段列表
+            <para>【num_iid,title,pict_url,small_images,reserve_price,zk_final_price,</para>
+            <para>user_type,provcity,item_url,seller_id,volume,nick】</para>
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.Model.MTbkItemListPar.Q">
+            <summary>
+            【特殊可选】查询词
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.Model.MTbkItemListPar.Cat">
+            <summary>
+            【特殊可选】后台类目ID，用,分割，最大10个，该ID可以通过taobao.itemcats.get接口获取到
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.Model.MTbkItemListPar.Platform">
+            <summary>
+            【可选】1：PC，2：无线，默认：1
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.Model.MTbkItemListPar.Itemloc">
+            <summary>
+            【可选】所在地
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.Model.MTbkItemListPar.Sort">
+            <summary>
+            【可选】排序，如：tk_rate_des
+            <para>_des（降序），_asc（升序）</para>
+            <para>销量（total_sales），淘客佣金比率（tk_rate）,累计推广量（tk_total_sales），总支出佣金（tk_total_commi）</para>
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.Model.MTbkItemListPar.IsTmall">
+            <summary>
+            【可选】是否商城商品
+            <para>设置为true表示该商品是属于淘宝商城商品，设置为false或不设置表示不判断这个属性</para>
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.Model.MTbkItemListPar.IsOverseas">
+            <summary>
+            【可选】是否海外商品
+            <para>设置为true表示该商品是属于海外商品，设置为false或不设置表示不判断这个属性</para>
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.Model.MTbkItemListPar.StartPrice">
+            <summary>
+            【可选】折扣价范围下限，单位：元
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.Model.MTbkItemListPar.EndPrice">
+            <summary>
+            【可选】折扣价范围上限，单位：元
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.Model.MTbkItemListPar.StartTkRate">
+            <summary>
+            【可选】淘客佣金比率上限，如：1234表示12.34%
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.Model.MTbkItemListPar.EndTkRate">
+            <summary>
+            【可选】淘客佣金比率下限，如：1234表示12.34%
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.Model.MTbkItemListPar.PageSize">
+            <summary>
+            【可选】页大小，默认20，1~100
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.Model.MTbkItemListPar.PageNo">
+            <summary>
+            【可选】第几页，默认：1
+            </summary>
+        </member>
+        <member name="T:TB.HttpAPI.Simba.TBCust">
+            <summary>
+            直通车--账号
+            </summary>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBCust.GetAccountBalance(System.String,System.String,System.String@,System.String@,Top.Api.TopResponse@)">
+            <summary>
+            获取实时余额，”元”为单位
+            </summary>
+            <param name="nick">账户昵称【可选】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="errorCode">错误代码</param>
+            <param name="errorMsg">错误信息</param>
+            <param name="topRsp">TopResponse</param>
+            <returns>实时余额，“元”为单位</returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBCust.GetRPTCustBase(System.String,System.DateTime,System.DateTime,System.String,System.Int64,System.Int64,System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            客户账户报表基础数据对象
+            </summary>
+            <param name="nick">账户昵称【可选】</param>
+            <param name="startDate">开始日期，格式：2012-02-1 【必须】</param>
+            <param name="endDate">结束日期，格式：2012-02-2</param>
+            <param name="source">数据来源（站内：1，站外：2 ，汇总：SUMMARY）SUMMARY必须单选，其他值可多选例如1,2【必须】</param>
+            <param name="pageNo">页码【可选】</param>
+            <param name="pageSize">每页大小【可选】</param>
+            <param name="subwayToken">权限校验参数【必须】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBCust.GetRequestBase(System.String,System.DateTime,System.DateTime,System.String,System.Int64,System.Int64,System.String)">
+            <summary>
+            设置 API 参数
+            </summary>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBCust.GetRPTCustBaseByUrl(System.String,System.DateTime,System.DateTime,System.String,System.Int64,System.Int64,System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            客户账户报表基础数据对象查询
+            </summary>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBCust.GetRPTCustEffect(System.String,System.DateTime,System.DateTime,System.String,System.Int64,System.Int64,System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            用户账户报表效果数据查询【只有汇总数据，无分类数据】
+            </summary>
+            <param name="nick">账户昵称【可选】</param>
+            <param name="startTime">开始日期，格式：2012-02-1【必须】 </param>
+            <param name="endTime">结束日期，格式：2012-02-2【必须】</param>
+            <param name="source">数据来源（站内：1，站外：2 ，汇总：SUMMARY）SUMMARY必须单选，其他值可多选例如1,2【必须】</param>
+            <param name="pageNo">页码【可选】</param>
+            <param name="pageSize">每页大小【可选】</param>
+            <param name="subwayToken">权限校验参数【必须】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBCust.GetRequestEffect(System.String,System.DateTime,System.DateTime,System.String,System.Int64,System.Int64,System.String)">
+            <summary>
+            设置 API 参数
+            </summary>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBCust.GetRPTCustEffectByUrl(System.String,System.DateTime,System.DateTime,System.String,System.Int64,System.Int64,System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            用户账户报表效果数据查询【只有汇总数据，无分类数据】
+            </summary>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBCust.GetZYCCustReal(System.String,System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            获取账户实时报表数据
+            </summary>
+            <param name="nick">昵称【可选】</param>
+            <param name="date">日期【必须【格式：yyyy-mm-dd】】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBCust.GetZTCCustBalance(System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            获取实时余额，”元”为单位
+            </summary>
+            <param name="nick">昵称【可选】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBCust.Getcustomers(System.String,Top.Api.TopResponse@)">
+            <summary>
+            取得当前登录用户的授权账户列表
+            </summary>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBCust.Getcustbase(System.String,System.String,System.String,System.String,System.String,System.Int32,System.Int32,System.String,Top.Api.TopResponse@)">
+            <summary>
+            客户账户报表基础数据对象
+            </summary>
+            <param name="nick">昵称【可选】</param>
+            <param name="starttime">开始时间，格式yyyy-mm-dd【必须】</param>
+            <param name="endtime">结束时间，格式yyyy-mm-dd；开始时间结束时间间隔不能超过30天【必须】</param>
+            <param name="source">数据来源（PC站内：1，PC站外：2，无线站内：4，无线站外 : 5，汇总：SUMMARY）SUMMARY必须单选，其他值可多选例如1,2【必须】</param>
+            <param name="subway_token">权限校验参数【必须】</param>
+            <param name="page_no">页码【可选】</param>
+            <param name="page_size">每页大小【可选】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBCust.Getcusteffect(System.String,System.String,System.String,System.String,System.String,System.Int32,System.Int32,System.String,Top.Api.TopResponse@)">
+            <summary>
+            用户账户报表效果数据查询（只有汇总数据，无分类数据）
+            </summary>
+            <param name="nick">昵称【可选】</param>
+            <param name="starttime">开始时间，格式yyyy-mm-dd【必须】</param>
+            <param name="endtime">结束时间，格式yyyy-mm-dd；开始时间结束时间间隔不能超过30天【必须】</param>
+            <param name="source">数据来源（PC站内：1，PC站外：2，无线站内：4，无线站外 : 5，汇总：SUMMARY）SUMMARY必须单选，其他值可多选例如1,2【必须】</param>
+            <param name="subway_token">权限校验参数【必须】</param>
+            <param name="page_no">页码【可选】</param>
+            <param name="page_size">每页大小【可选】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="T:TB.HttpAPI.TBPublic.TbBase">
+            <summary>
+            淘宝 API 通用基础函数
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.TBPublic.TbBase.url">
+            <summary>
+            淘宝API获取数据网址
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.TBPublic.TbBase.appkey">
+            <summary>
+            直通车 appkey
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.TBPublic.TbBase.appsecret">
+            <summary>
+            直通车 appsecret 【定时更新】
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.TBPublic.TbBase.appkeyTK">
+            <summary>
+            淘宝客 appkey
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.TBPublic.TbBase.appsecretTK">
+            <summary>
+            淘宝客 appsecret 【定时更新】
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.TBPublic.TbBase.vmUrlNew">
+            <summary>
+            淘宝【API】--定义网页 中转 接口网址--
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.TBPublic.TbBase.clientXml">
+            <summary>
+            Xml 格式
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.TBPublic.TbBase.clientStoneXml">
+            <summary>
+            Xml 格式
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.TBPublic.TbBase.clientJson">
+            <summary>
+            Json 格式
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.TBPublic.TbBase.clientStoneJson">
+            <summary>
+            Json 格式
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.TBPublic.TbBase.clientXmlTK">
+            <summary>
+            Xml 格式【淘宝客】
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.TBPublic.TbBase.clientStoneXmlTK">
+            <summary>
+            Xml 格式【淘宝客】
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.TBPublic.TbBase.clientJsonTK">
+            <summary>
+            Json 格式【淘宝客】
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.TBPublic.TbBase.clientStoneJsonTK">
+            <summary>
+            Json 格式【淘宝客】
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.TBPublic.TbBase.isSoftRight">
+            <summary>
+            软件使用权限
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.TBPublic.TbBase.urlDoCountAll">
+            <summary>
+            网页操作出错时的重复操作最大次数
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.TBPublic.TbBase.errorMsgs">
+            <summary>
+            重复开始的错误类型
+            </summary>
+        </member>
+        <member name="M:TB.HttpAPI.TBPublic.TbBase.GetAPIStringByParBase(System.String)">
+            <summary>
+            【API】通过 淘宝云服务器中转 操作函数
+            </summary>
+            <param name="parStr">参数</param>
+        </member>
+        <member name="M:TB.HttpAPI.TBPublic.TbBase.GetAPIStringByParBase(System.String,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            【API】通过 淘宝云服务器中转 操作函数【New】
+            </summary>
+            <param name="parStr"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.TBPublic.TbBase.GetJsonArrayBase(System.String)">
+            <summary>
+            【Json】数据格式转化，将从API接口获取的字符串数据转化为 Json 【数组】类型数据【无 list】
+            <para>格式1：[{"ren1":1,"ren2":2,...},{"ren1":1,"ren2":2,...}]</para>
+            </summary>
+            <param name="getStr">输入字符串</param>
+            <returns>Json 数据</returns>
+        </member>
+        <member name="M:TB.HttpAPI.TBPublic.TbBase.GetJsonArrayNoListBase(System.String)">
+            <summary>
+            【Json】数据格式转化，将从API接口获取的字符串数据转化为 Json 【数组】类型数据【已有 list】
+            <para>格式1：{"list":[{"ren1":1,"ren2":2,...},{"ren1":1,"ren2":2,...}]}</para>
+            <para>格式2：{"list":[{"ren1":1,"ren2":2,...},{"ren1":1,"ren2":2,...},...],"list2":[{"ren1":1,"ren2":2,...},{},...]}</para>
+            </summary>
+            <param name="getStr">输入字符串</param>
+            <returns>Json 数据</returns>
+        </member>
+        <member name="M:TB.HttpAPI.TBPublic.TbBase.GetJsonObjectBase(System.String)">
+            <summary>
+            【Json】数据格式转化，将从API接口获取的字符串数据转化为 Json 类型数据
+            <para>格式：{"ren1":1,"ren2":2,...}</para>
+            </summary>
+            <param name="getStr">输入字符串</param>
+            <returns>Json 数据</returns>
+        </member>
+        <member name="M:TB.HttpAPI.TBPublic.TbBase.GetHtmlString_Default_Post_Base(System.String,System.String,System.Collections.Generic.IDictionary{System.String,System.String},System.String@,System.String@)">
+            <summary>
+            执行【HTTP】【Default】【POST】请求【通用】
+            </summary>
+            <param name="url">要打开的网址</param>
+            <param name="cookiesStr">账号Cookies字符串</param>
+            <param name="parameters">网页参数值列表</param>
+            <param name="htmlStr">回传的网页内容</param>
+            <param name="returnUrl">回传的网址</param>
+            <returns>获取操作是否成功</returns>
+        </member>
+        <member name="M:TB.HttpAPI.TBPublic.TbBase.GetHtmlString_Default_Post_Base(System.String,System.String,System.Collections.Generic.IDictionary{System.String,System.String},System.String,System.String@,System.String@)">
+            <summary>
+            执行【HTTP】【Default】【POST】请求【通用】
+            </summary>
+            <param name="url">要打开的网址</param>
+            <param name="cookiesStr">账号Cookies字符串</param>
+            <param name="parameters">网页参数值列表</param>
+            <param name="htmlStr">回传的网页内容</param>
+            <param name="returnUrl">回传的网址</param>
+            <returns>获取操作是否成功</returns>
+        </member>
+        <member name="M:TB.HttpAPI.TBPublic.TbBase.GetHtmlString_UTF8_Post_Base(System.String,System.String,System.Collections.Generic.IDictionary{System.String,System.String},System.String@,System.String@)">
+            <summary>
+            执行【HTTP】【UTF8】【POST】请求【通用】
+            </summary>
+            <param name="url">要打开的网址</param>
+            <param name="cookiesStr">账号Cookies字符串</param>
+            <param name="parameters">网页参数值列表</param>
+            <param name="htmlStr">回传的网页内容</param>
+            <param name="returnUrl">回传的网址</param>
+            <returns>获取操作是否成功</returns>
+        </member>
+        <member name="M:TB.HttpAPI.TBPublic.TbBase.GetHtmlString_UTF8_Post_Base(System.String,System.String,System.Collections.Generic.IDictionary{System.String,System.String},System.String,System.String@,System.String@)">
+            <summary>
+            执行【HTTP】【UTF8】【POST】请求【通用】
+            </summary>
+            <param name="url">要打开的网址</param>
+            <param name="cookiesStr">账号Cookies字符串</param>
+            <param name="parameters">网页参数值列表</param>
+            <param name="htmlStr">回传的网页内容</param>
+            <param name="returnUrl">回传的网址</param>
+            <returns>获取操作是否成功</returns>
+        </member>
+        <member name="M:TB.HttpAPI.TBPublic.TbBase.DoPost(System.String,System.String,System.Int32,System.Collections.Generic.IDictionary{System.String,System.String},System.String,System.String@,System.String@)">
+            <summary>
+            执行【HTTP】【POST】请求。
+            </summary>
+            <param name="url">请求地址</param>
+            <param name="cookiesStr">账号Cookies字符串</param>
+            <param name="encodingType">编码类型：【GB2312】=【0】、【UTF-8】=【1】</param>
+            <param name="parameters">请求参数</param>
+            <param name="returnUrl">回传的网址</param>
+            <returns>HTTP响应</returns>
+        </member>
+        <member name="M:TB.HttpAPI.TBPublic.TbBase.GetResponseAsString(System.Net.HttpWebResponse,System.Text.Encoding)">
+            <summary>
+            把响应流转换为文本。
+            </summary>
+            <param name="rsp">响应流对象</param>
+            <param name="encoding">编码方式</param>
+            <returns>响应文本</returns>
+        </member>
+        <member name="M:TB.HttpAPI.TBPublic.TbBase.GetWebRequest(System.String,System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="url"></param>
+            <param name="method"></param>
+            <param name="cookiesStr"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.TBPublic.TbBase.BuildQuery(System.Collections.Generic.IDictionary{System.String,System.String})">
+            <summary>
+            组装普通文本请求参数。
+            </summary>
+            <param name="parameters">Key-Value形式请求参数字典</param>
+            <returns>URL编码后的请求数据</returns>
+        </member>
+        <member name="M:TB.HttpAPI.TBPublic.TbBase.GetHtmlString_Default_Get_Base(System.String,System.String,System.String@,System.String@)">
+            <summary>
+            执行【HTTP】【Default】【GET】请求【通用】
+            </summary>
+            <param name="url">要打开的网址</param>
+            <param name="cookiesStr">账号Cookies字符串</param>
+            <param name="htmlStr">回传的网页内容</param>
+            <param name="returnUrl">回传的网址</param>
+            <returns>获取操作是否成功</returns>
+        </member>
+        <member name="M:TB.HttpAPI.TBPublic.TbBase.GetHtmlString_UTF8_Get_Base(System.String,System.String,System.String@,System.String@)">
+            <summary>
+            执行【HTTP】【UTF8】【GET】请求【通用】
+            </summary> 
+            <param name="url">要打开的网址</param>
+            <param name="cookiesStr">账号Cookies字符串</param>
+            <param name="htmlStr">回传的网页内容</param>
+            <param name="returnUrl">回传的网址</param>
+            <returns>获取操作是否成功</returns>
+        </member>
+        <member name="M:TB.HttpAPI.TBPublic.TbBase.DoGet(System.String,System.String,System.Int32,System.String@,System.String@)">
+            <summary>
+            打开网址，获取网页内容【通用】
+            </summary>
+            <param name="url">要打开的网址</param>
+            <param name="cookiesStr">账号Cookies字符串</param>
+            <param name="encodingType">编码类型：【Default】=【0】、【UTF-8】=【1】</param>
+            <param name="methodType">网页请求类型：【POST】=【0】、【GET】=【1】</param>
+            <param name="htmlStr">回传的网页内容</param>
+            <param name="returnUrl">回传的网址</param>
+            <returns>获取操作是否成功</returns>
+        </member>
+        <member name="M:TB.HttpAPI.TBPublic.TbBase.GetLzDataString(System.String,System.Boolean,System.String)">
+            <summary>
+            量子数据获取
+            </summary>
+            <param name="url"></param>
+            <param name="isAddList"></param>
+            <param name="replaceStr"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.TBPublic.TbBase.GetLzDataStringGet(System.String,System.Boolean,System.String)">
+            <summary>
+            量子数据获取
+            </summary>
+        </member>
+        <member name="M:TB.HttpAPI.TBPublic.TbBase.IsGetUrlInfoError(System.String)">
+            <summary>
+            判断网页操作错误类型【判断是否重新操作】
+            </summary>
+        </member>
+        <member name="M:TB.HttpAPI.TBPublic.TbBase.InternetGetCookieEx(System.String,System.String,System.Text.StringBuilder,System.UInt32@,System.Int32,System.IntPtr)">
+            <summary>
+            获取Cookies
+            </summary>
+            <param name="pchURL"></param>
+            <param name="pchCookieName"></param>
+            <param name="pchCookieData"></param>
+            <param name="pcchCookieData"></param>
+            <param name="dwFlags"></param>
+            <param name="lpReserved"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.TBPublic.TbBase.InternetSetCookieEx(System.String,System.String,System.String,System.Int32,System.IntPtr)">
+            <summary>
+            设置Cookies
+            </summary>
+            <param name="lpszURL"></param>
+            <param name="lpszCookieName"></param>
+            <param name="lpszCookieData"></param>
+            <param name="dwFlags"></param>
+            <param name="dwReserved"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.TBPublic.TbBase.InternetGetCookieEx(System.String,System.String,System.Text.StringBuilder,System.Int32@,System.Int32,System.Object)">
+            <summary>
+            获取Cookies
+            </summary>
+            <param name="pchURL"></param>
+            <param name="pchCookieName"></param>
+            <param name="pchCookieData"></param>
+            <param name="pcchCookieData"></param>
+            <param name="dwFlags"></param>
+            <param name="lpReserved"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.TBPublic.TbBase.GetCookiesStone(System.String,System.String@)">
+            <summary>
+            获取 Cookies
+            </summary>
+        </member>
+        <member name="M:TB.HttpAPI.TBPublic.TbBase.GetCookiesBase(System.String,System.String@)">
+            <summary>
+            获取 Cookies
+            </summary>
+        </member>
+        <member name="T:TB.HttpAPI.Model.MTbkItemCoupon">
+            <summary>
+            【有优惠券的商品信息】
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.Model.MTbkItemCoupon.CouponStartTime">
+            <summary>
+            优惠券开始时间
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.Model.MTbkItemCoupon.CouponEndTime">
+            <summary>
+            优惠券结束时间
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.Model.MTbkItemCoupon.CouponClickUrl">
+            <summary>
+            商品优惠券推广链接【二合一】
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.Model.MTbkItemCoupon.ShopTitle">
+            <summary>
+            店铺名称
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.Model.MTbkItemCoupon.CouponTotalCount">
+            <summary>
+            优惠券总量
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.Model.MTbkItemCoupon.UserType">
+            <summary>
+            类型，0表示集市，1表示商城
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.Model.MTbkItemCoupon.ZkFinalPrice">
+            <summary>
+            折扣价
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.Model.MTbkItemCoupon.CouponRemainCount">
+            <summary>
+            优惠券剩余量
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.Model.MTbkItemCoupon.CommissionRate">
+            <summary>
+            佣金比率(%)
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.Model.MTbkItemCoupon.Title">
+            <summary>
+            商品标题
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.Model.MTbkItemCoupon.CategoryID">
+            <summary>
+            后台一级类目编号
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.Model.MTbkItemCoupon.NumIID">
+            <summary>
+            商品ID
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.Model.MTbkItemCoupon.Nick">
+            <summary>
+            卖家昵称
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.Model.MTbkItemCoupon.SellerID">
+            <summary>
+            卖家id
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.Model.MTbkItemCoupon.Volume">
+            <summary>
+            30天销量
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.Model.MTbkItemCoupon.PictUrl">
+            <summary>
+            商品主图
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.Model.MTbkItemCoupon.CouponInfo">
+            <summary>
+            优惠券面额
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.Model.MTbkItemCoupon.ItemUrl">
+            <summary>
+            商品详情页链接地址
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.Model.MTbkItemCoupon.SmallImages">
+            <summary>
+            商品小图列表
+            </summary>
+        </member>
+        <member name="T:TB.HttpAPI.Simba.TBCampaign">
+            <summary>
+            直通车--推广计划
+            </summary>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBCampaign.GetZTCCampaign(System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            取得一个客户的推广计划
+            </summary>
+            <param name="nick">昵称【可选】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBCampaign.GetZTCCampaignByUrl(System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            取得一个客户的推广计划
+            </summary>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBCampaign.GetZTCCampaignBudget(System.String,System.Int64,System.String,System.String@,System.String@,Top.Api.TopResponse@)">
+            <summary>
+            取得一个推广计划的日限额
+            </summary>
+            <param name="nick">昵称【可选】</param>
+            <param name="campaignID">推广计划ID【必须】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="errorCode">错误码</param>
+            <param name="errorMsg">返回的错误信息，正确则为空</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBCampaign.GetZTCCampaignBudgetUrl(System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            取得一个推广计划的日限额：？？？
+            </summary>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBCampaign.GetZTCCampaignPlatform(System.String,System.Int64,System.String,Top.Api.TopResponse@)">
+            <summary>
+            取得一个推广计划的投放平台设置
+            </summary>
+            <param name="nick">昵称【可选】</param>
+            <param name="campaignID">推广计划ID【必须】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBCampaign.GetZTCCampaignPlatformByUrl(System.String,System.Int64,System.String,Top.Api.TopResponse@)">
+            <summary>
+            取得一个推广计划的投放平台设置
+            </summary>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBCampaign.UpdateZTCCampaignPlatform(Top.Api.Domain.CampaignPlatform,System.Int32,System.String,Top.Api.TopResponse@)">
+            <summary>
+             更新一个推广计划的平台设置
+            </summary>
+            <param name="model">推广计划的投放平台设置实体类</param>
+            <param name="newOutsideDiscount">溢价的百分比，必须是大于等于 1小于等于200的整数</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBCampaign.GetRequest(System.String,System.Int64,System.String,System.String,System.Int32)">
+            <summary>
+            设置 API 参数
+            </summary>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBCampaign.UpdateZTCCampaignPlatformByUrl(System.String,System.Int64,System.String,System.String,System.Int32,System.String,Top.Api.TopResponse@)">
+            <summary>
+            更新一个推广计划的平台设置
+            </summary>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBCampaign.UpdateZTCCampaignSchedule(System.String,System.Int64,System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            更新一个推广计划的分时折扣设置
+            </summary>
+            <param name="nick">账户昵称【可选】</param>
+            <param name="campaignID">推广计划编号【必须】</param>
+            <param name="schedule">值为：“all”；或者用“;”分割的每天的设置字符串，该字符串为用“,”分割的时段折扣字符串
+            <para>格式为：起始时间-结束时间:折扣，其中时间是24小时格式记录，折扣是1-150整数，表示折扣百分比</para>
+            <para>例（00:00-08:00:100,08:00-24:00:85;0;0;0;0;0;0）【必须】</para></param>
+            <param name="sessionKey">SessionKey</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBCampaign.GetRequest(System.String,System.Int64,System.String)">
+            <summary>
+            设置 API 参数
+            </summary>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBCampaign.UpdateZTCCampaignScheduleByUrl(System.String,System.Int64,System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            更新一个推广计划的分时折扣设置
+            </summary>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBCampaign.GetCampaignAreaOptions(System.String,Top.Api.TopResponse@)">
+            <summary>
+            取得推广计划的可设置投放地域列表
+            </summary>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBCampaign.GetCampaignAreaOptionsByUrl(System.String,Top.Api.TopResponse@)">
+            <summary>
+            取得推广计划的可设置投放地域列表
+            </summary>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBCampaign.UpdateZTCCampaignArea(System.String,System.Int64,System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            更新一个推广计划的投放地域
+            </summary>
+            <param name="nick">账户昵称【可选】</param>
+            <param name="campaignID">推广计划编号【必须】</param>
+            <param name="area">值为：“all”；或者用“,”分割的数字，数字必须是直通车全国省市列表的AreaID
+            <para>如果已经包含省、自治区id，请不要再包括省内市的id，例如：19,138,393【必须】</para></param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBCampaign.GetSimbaCampaignAreaUpdateRequest(System.String,System.Int64,System.String)">
+            <summary>
+            设置 API 参数
+            </summary>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBCampaign.UpdateZTCCampaignAreaByUrl(System.String,System.Int64,System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            更新一个推广计划的投放地域
+            </summary>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBCampaign.GetRPTCampaignBase(System.String,System.Int64,System.DateTime,System.DateTime,System.String,System.String,System.Int64,System.Int64,System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            推广计划报表基础数据对象查询
+            （分为4种类型，具体见search_type字段）
+            </summary>
+            <param name="nick">账户昵称【可选】</param>
+            <param name="campaignID">推广计划编号【必须】</param>
+            <param name="startTime">开始日期，格式：2012-02-1 【必须】</param>
+            <param name="endTime">结束日期，格式：2012-02-2【必须】</param>
+            <param name="searchType">报表类型（搜索：SEARCH,类目出价：CAT, 定向投放：NOSEARCH 全部：ALL）
+            <para>可以一次取多个例如：SEARCH,CAT【必须】</para></param>
+            <param name="source">数据来源（站内：1，站外：2 ，汇总：SUMMARY）SUMMARY必须单选，其他值可多选例如1,2【必须】</param>
+            <param name="pageNo">页码【可选】</param>
+            <param name="pageSize">每页大小【可选】</param>
+            <param name="subwayToken">权限校验参数【必须】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBCampaign.GetRequestBase(System.String,System.Int64,System.DateTime,System.DateTime,System.String,System.String,System.Int64,System.Int64,System.String)">
+            <summary>
+            设置 API 参数
+            </summary>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBCampaign.GetRPTCampaignBaseByUrl(System.String,System.Int64,System.DateTime,System.DateTime,System.String,System.String,System.Int64,System.Int64,System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            推广计划报表基础数据对象查询
+            </summary>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBCampaign.GetRPTCampaignEffect(System.String,System.Int64,System.DateTime,System.DateTime,System.String,System.String,System.Int64,System.Int64,System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            推广计划效果报表数据对象查询
+            </summary>
+            <param name="nick">账户昵称【可选】</param>
+            <param name="campaignID">推广计划编号【必须】</param>
+            <param name="startTime">开始日期，格式：2012-02-1 【必须】</param>
+            <param name="endTime">结束日期，格式：2012-02-2【必须】</param>
+            <param name="searchType">报表类型（搜索：SEARCH,类目出价：CAT, 定向投放：NOSEARCH 全部：ALL）可以一次取多个例如：SEARCH,CAT【必须】</param>
+            <param name="source">数据来源（站内：1，站外：2）可多选以逗号分隔，默认值为：1,2【必须】</param>
+            <param name="pageNo">页码【可选】</param>
+            <param name="pageSize">每页大小【可选】</param>
+            <param name="subwayToken">权限校验参数【必须】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBCampaign.GetRequestEffect(System.String,System.Int64,System.DateTime,System.DateTime,System.String,System.String,System.Int64,System.Int64,System.String)">
+            <summary>
+            设置 API 参数
+            </summary>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBCampaign.GetRPTCampaignEffectByUrl(System.String,System.Int64,System.DateTime,System.DateTime,System.String,System.String,System.Int64,System.Int64,System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            推广计划效果报表数据对象查询
+            </summary>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBCampaign.GetZTCCampaignBudget(System.String,System.Int64,System.String,Top.Api.TopResponse@)">
+            <summary>
+            取得一个推广计划的日限额
+            </summary>
+            <param name="nick"></param>
+            <param name="campaignID"></param>
+            <param name="sessionKey"></param>
+            <param name="errorCode"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBCampaign.UpdateZTCCampaignPlatform(System.String,System.Int64,System.String,System.String,System.Int32,System.String,Top.Api.TopResponse@)">
+            <summary>
+            更新一个推广计划的平台设置
+            </summary>
+            <param name="model"></param>
+            <param name="newOutsideDiscount"></param>
+            <param name="sessionKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBCampaign.AddZTCCompaign(System.String,System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            创建一个推广计划
+            </summary>
+            <param name="title">推广计划标题【必须】</param>
+            <param name="nick">昵称【可选】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBCampaign.GetZTCCampaignReal(System.String,System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            获取推广计划实时报表数据
+            </summary>
+            <param name="nick">昵称【可选】</param>
+            <param name="date">日期【必须【格式：yyyy-mm-dd】】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBCampaign.UpdateZTCCampaignplatform(System.String,System.Int64,System.String,System.String,System.Int32,System.Int64,System.String,Top.Api.TopResponse@)">
+            <summary>
+            更新一个推广计划的平台设置
+            </summary>
+            <param name="nick">昵称【可选】</param>
+            <param name="campaignid">推广计划编号【必须】</param>
+            <param name="search_channels">搜索投放频道代码字符串，用','隔开【频道代码必须是直通车搜索类频道列表中的值，必须包含淘宝内网。】【必须】</param>
+            <param name="nonsearch_channels">非搜索投放频道代码字符串，用','隔开【频道代码必须是直通车非搜索类频道列表中的值】【可选】</param>
+            <param name="outside_discount">溢价的百分比，必须是大于等于 1小于等于200的整数【必须】</param>
+            <param name="mobile_discount">站内无线频道折扣。百分比，数值必须是大于等于 1小于等于200的整数【必须】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBCampaign.GetZTCCampaignplatform(System.String,System.Int64,System.String,Top.Api.TopResponse@)">
+            <summary>
+            取得一个推广计划的投放平台设置
+            </summary>
+            <param name="nick">昵称【可选】</param>
+            <param name="campaignid">推广计划编号【必须】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBCampaign.UpdateZTCCampaignScheduleNew(System.String,System.Int64,System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            更新一个推广计划的分时折扣设置
+            </summary>
+            <param name="nick">昵称【可选】</param>
+            <param name="campaignid">推广计划编号【必须】</param>
+            <param name="schedule">值为：“all”；或者用“;”分割的每天的设置字符串，该字符串为用“,”分割的时段折扣字符串，
+            <para>格式为：起始时间-结束时间:折扣，其中时间是24小时格式记录，折扣是1-150整数，表示折扣百分比；【必须】</para></param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBCampaign.GetCampaignSchedule(System.String,System.Int64,System.String,Top.Api.TopResponse@)">
+            <summary>
+            取得一个推广计划的分时折扣设置
+            </summary>
+            <param name="nick">昵称【可选】</param>
+            <param name="campaignid">推广计划编号【必须】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBCampaign.UpdateCampaignBudget(System.String,System.Int64,System.Int32,System.Boolean,System.String,Top.Api.TopResponse@)">
+            <summary>
+            更新一个推广计划的日限额
+            </summary>
+            <param name="nick">昵称【可选】</param>
+            <param name="campaign">推广计划Id【必须】</param>
+            <param name="budget">如果为空则取消限额；否则必须为整数，单位是元，不得小于30；【可选】</param>
+            <param name="use_smooth">是否平滑消耗：false-否，true-是【必须】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBCampaign.GetCampaignBudget(System.String,System.Int64,System.String,Top.Api.TopResponse@)">
+            <summary>
+            取得一个推广计划的日限额
+            </summary>
+            <param name="nick">昵称【可选】</param>
+            <param name="campaignid">推广计划编号【必须】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBCampaign.GetCampaignareaoptions(System.String,Top.Api.TopResponse@)">
+            <summary>
+            取得推广计划的可设置投放地域列表
+            </summary>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBCampaign.GetCampaignchanneloptions(System.String,Top.Api.TopResponse@)">
+            <summary>
+            取得推广计划的可设置投放频道列表
+            </summary>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBCampaign.GetCampaignarea(System.String,System.Int64,System.String,Top.Api.TopResponse@)">
+            <summary>
+            取得一个推广计划的投放地域设置
+            </summary>
+            <param name="nick">昵称【可选】</param>
+            <param name="campaignid">推广计划编号【必须】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBCampaign.UpdateCampaignarea(System.String,System.String,System.Int64,System.String,Top.Api.TopResponse@)">
+            <summary>
+            更新一个推广计划的投放地域
+            </summary>
+            <param name="nick">昵称【可选】</param>
+            <param name="area">【必须】</param>
+            <param name="campaignid">推广计划编号【必须】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBCampaign.UpdateCampaign(System.String,System.String,System.Int64,System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            更新一个推广计划
+            </summary>
+            <param name="nick">昵称【可选】</param>
+            <param name="title">推广计划名称【必须】</param>
+            <param name="campaignid">推广计划编号【必须】</param>
+            <param name="online_status">用户设置的上下限状态；offline-下线；online-上线【必须】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBCampaign.GetCamaignS(System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            取得一组推广计划
+            </summary>
+            <param name="nick">昵称【可选】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBCampaign.GetCampaigneffect(System.String,System.Int64,System.String,System.String,System.String,System.String,System.String,System.Int32,System.Int32,System.String,Top.Api.TopResponse@)">
+            <summary>
+            推广计划效果报表数据对象
+            </summary>
+            <param name="nick">昵称【可选】</param>
+            <param name="campaignid">推广计划编号【必须】</param>
+            <param name="subway_token">权限校验参数【例：1102001000-101102001000-1318045030614-ed7cf93b【必须】】</param>
+            <param name="start_time">开始时间，格式yyyy-mm-dd【必须】</param>
+            <param name="end_time">结束时间，格式yyyy-mm-dd【必须】</param>
+            <param name="search_type">报表类型（搜索：SEARCH,类目出价：CAT, 定向投放：NOSEARCH 全部：SUMMARY）可以一次取多个例如：SEARCH,CAT【必须】</param>
+            <param name="source">数据来源（站内：1，站外：2）可多选以逗号分隔，默认值为：1,2【必须】</param>
+            <param name="page_no">页码【可选】</param>
+            <param name="page_size">每页大小【可选】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBCampaign.GetCampaignbase(System.String,System.Int64,System.String,System.String,System.String,System.String,System.String,System.Int32,System.Int32,System.String,Top.Api.TopResponse@)">
+            <summary>
+            推广计划报表基础数据对象
+            </summary>
+            <param name="nick">昵称【可选】</param>
+            <param name="campaignid">推广计划编号【必须】</param>
+            <param name="subway_token">权限校验参数【例：1102001000-101102001000-1318045030614-ed7cf93b【必须】】</param>
+            <param name="start_time">开始时间，格式yyyy-mm-dd【必须】</param>
+            <param name="end_time">结束时间，格式yyyy-mm-dd【必须】</param>
+            <param name="search_type">报表类型（搜索：SEARCH,类目出价：CAT, 定向投放：NOSEARCH 全部：SUMMARY）可以一次取多个例如：SEARCH,CAT【必须】</param>
+            <param name="source">数据来源（站内：1，站外：2）可多选以逗号分隔，默认值为：1,2【必须】</param>
+            <param name="page_no">页码【可选】</param>
+            <param name="page_size">每页大小【可选】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBCampaign.Getcampadgroupeffect(System.String,System.Int64,System.String,System.String,System.String,System.String,System.Int32,System.Int32,System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            推广计划下的推广组报表效果数据查询(只有汇总数据，无分类类型)
+            </summary>
+            <param name="nick">昵称【可选】</param>
+            <param name="campaignid">推广计划编号【必须】</param>
+            <param name="starttime">开始时间，格式yyyy-mm-dd【必须】</param>
+            <param name="endtime">结束时间，格式yyyy-mm-dd；开始时间结束时间间隔不能超过30天【必须】</param>
+            <param name="source">数据来源（PC站内：1，PC站外：2，无线站内：4，无线站外 : 5，汇总：SUMMARY）SUMMARY必须单选，其他值可多选例如1,2【必须】</param>
+            <param name="subway_token">权限校验参数【必须】</param>
+            <param name="page_no">页码【可选】</param>
+            <param name="page_size">每页大小【可选】</param>
+            <param name="search_type">报表类型（搜索：SEARCH,类目出价：CAT, 定向投放：NOSEARCH）可多选例如：SEARCH,CAT【必须】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBCampaign.Getcampadgroupbase(System.String,System.Int64,System.String,System.String,System.String,System.String,System.Int32,System.Int32,System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            推广计划下的推广组报表基础数据查询
+            </summary>
+            <param name="nick">昵称【可选】</param>
+            <param name="campaignid">推广计划编号【必须】</param>
+            <param name="starttime">开始时间，格式yyyy-mm-dd【必须】</param>
+            <param name="endtime">结束时间，格式yyyy-mm-dd；开始时间结束时间间隔不能超过30天【必须】</param>
+            <param name="source">数据来源（PC站内：1，PC站外：2，无线站内：4，无线站外 : 5，汇总：SUMMARY）SUMMARY必须单选，其他值可多选例如1,2【必须】</param>
+            <param name="subway_token">权限校验参数【必须】</param>
+            <param name="page_no">页码【可选】</param>
+            <param name="page_size">每页大小【可选】</param>
+            <param name="search_type">报表类型（搜索：SEARCH,类目出价：CAT, 定向投放：NOSEARCH）可多选例如：SEARCH,CAT【必须】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBCampaign.Getcampkeywordeffect(System.Int64,System.String,System.String,System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            推广计划下的词报表效果数据查询
+            </summary>
+            <param name="campaignid">推广计划编号【必须】</param>
+            <param name="time_slot">时间参数（昨天：DAY、 前一周：7DAY 、前15天：15DAY 、前30天：30DAY 、前90天：90DAY）单选【必须】</param>
+            <param name="search_type">报表类型。可选值：SEARCH（搜索）、CAT（类目出价）、 NOSEARCH（定向投放），可多选，如：SEARCH,CAT【必须】</param>
+            <param name="source">数据来源。可选值：1（站内）、2（站外）、SUMMARY（汇总），其中SUMMARY必须单选，其它值可多选，如：1,2【必须】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBCampaign.Getcampkeywordbase(System.Int64,System.String,System.String,System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+             推广计划下的词报表效果数据查询???(应该是基础数据)
+            </summary>
+            <param name="campaignid">推广计划编号【必须】</param>
+            <param name="time_slot">时间参数（昨天：DAY、 前一周：7DAY 、前15天：15DAY 、前30天：30DAY 、前90天：90DAY）单选【必须】</param>
+            <param name="search_type">报表类型。可选值：SEARCH（搜索）、CAT（类目出价）、 NOSEARCH（定向投放），可多选，如：SEARCH,CAT【必须】</param>
+            <param name="source">数据来源。可选值：1（站内）、2（站外）、SUMMARY（汇总），其中SUMMARY必须单选，其它值可多选，如：1,2【必须】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="T:TB.HttpAPI.Simba.TBKeyword">
+            <summary>
+            直通车--关键词
+            </summary>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBKeyword.SetKeywordPrice(System.String,System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            设置一批关键词的出价：taobao.simba.keywords.pricevon.set
+            设置一批关键词的出价和匹配模式
+            （目前设置关键词出价和匹配模式不仅限制在一个宝贝下，入参keword_price中的keywordid可以是不同宝贝下的，adgroup_id暂时无用可不传）
+            </summary>
+            <param name="nick">账户昵称【可选】</param>
+            <param name="adgroupID">推广组Id（暂时无用，为了兼容新老接口暂时保留）</param>
+            <param name="keywordPrices">关键词ID，出价和匹配方式json字符串，keywordId:词ID，整数。
+            <para>maxPrice：价格，是整数，以“分”为单位，不能小于5，不能大于日限额,也不能大于99.99元,当使用默认出价时必须将这个值设置为0。; </para>
+            <para>isDefaultPrice：是否使用默认出价，只能是0，1(0代表不使用，1代表使用)。</para>
+            <para>matchscope只能是1,2,4（1代表精确匹配，4代表广泛匹配），maxMobilePrice：代表无线出价（如果是0，则代表无线出价=PC*无线溢价）</para>
+            <para>mobileIsDefaultPrice代表无线出价是否采用pc*无线溢价，还是独立价格（1：是；0：否）【必须】</para></param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBKeyword.GetRequest(System.String,System.String)">
+            <summary>
+            设置 API 参数
+            </summary>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBKeyword.SetKeywordPriceByUrl(System.String,System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            设置一批关键词的出价
+            </summary>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBKeyword.GetZTCKeywordsByAdgroupID(System.String,System.Int64,System.String,Top.Api.TopResponse@)">
+            <summary>
+            取得一个推广组的所有关键词
+            </summary>
+            <param name="nick">账户昵称【可选】</param>
+            <param name="adgroupID">推广组编号【特殊可选】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBKeyword.GetRequest(System.String,System.Int64)">
+            <summary>
+            设置 API 参数
+            </summary>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBKeyword.GetZTCKeywordsByAdgroupIDByUrl(System.String,System.Int64,System.String,Top.Api.TopResponse@)">
+            <summary>
+            取得一个推广组的所有关键词
+            </summary>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBKeyword.AddKeywordByAdgroupID(System.String,System.Int64,System.Collections.Generic.List{Top.Api.Domain.Keyword},System.String,Top.Api.TopResponse@)">
+            <summary>
+            创建一批关键词
+            </summary>
+            <param name="nick">账户昵称【可选】</param>
+            <param name="adgroupID">推广组编号【必须】</param>
+            <param name="keywordList">新增关键词列表</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBKeyword.AddKeywordByAdgroupID(System.String,System.Int64,System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            创建一批关键词
+            </summary>
+            <param name="nick">账户昵称【可选】</param>
+            <param name="adgroupID">推广组编号【必须】</param>
+            <param name="keywordPrices">关键词，出价和匹配方式json字符串，word:词，不能有一些特殊字符。
+            <para>maxPrice：价格，是整数，以“分”为单位，不能小于5，不能大于日限额,当使用默认出价时必须将这个值设置为0。</para>
+            <para>isDefaultPrice：是否使用默认出价，只能是0，1(0代表不使用，1代表使用)</para>
+            <para>matchscope只能是1,2,4（1代表精确匹配，2代表子串匹配，4代表广泛匹配）。【必须】</para></param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBKeyword.GetRequest(System.String,System.Int64,System.String)">
+            <summary>
+            设置 API 参数
+            </summary>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBKeyword.GetKeywordPricesStr(System.Collections.Generic.List{Top.Api.Domain.Keyword})">
+            <summary>
+            设置新增词格式
+            </summary>
+            <param name="keywordList">新增关键词列表
+            <para>关键词，出价和匹配方式 json 字符串，</para>
+            <para>word：词，不能有一些特殊字符。</para>
+            <para>maxPrice：价格，是整数，以“分”为单位，不能小于5，不能大于日限额,当使用默认出价时必须将这个值设置为0。</para>
+            <para>isDefaultPrice：是否使用默认出价，只能是0，1(0代表不使用，1代表使用)。</para>
+            <para>matchscope：只能是1,2,4（1代表精确匹配，2代表子串匹配，4代表广泛匹配）。</para>
+            <para>格式：[ { "word": "西瓜汁", "maxPrice": 123 ,"isDefaultPrice": 0,"matchScope": 1}, { "word": "苹果汁","maxPrice": 0, "isDefaultPrice": 1 ,"matchScope": 2} ]</para>
+            </param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBKeyword.AddKeywordByAdgroupIDByUrl(System.String,System.Int64,System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            创建一批关键词
+            </summary>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBKeyword.GetRPTKeywordBase(System.String,System.Int64,System.Int64,System.DateTime,System.DateTime,System.String,System.String,System.Int64,System.Int64,System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            推广组下的词基础报表数据查询【明细数据不分类型查询】
+            </summary>
+            <param name="nick">账户昵称【可选】</param>
+            <param name="adgroupID">推广组编号【必须】</param>
+            <param name="campaignID">推广计划编号【必须】</param>
+            <param name="startTime">开始日期，格式：2012-02-1【必须】 </param>
+            <param name="endTime">结束日期，格式：2012-02-2，开始时间结束时间间隔不能超过30天【必须】</param>
+            <param name="searchType">报表类型（搜索：SEARCH,类目出价：CAT, 定向投放：NOSEARCH）可多选例如：SEARCH,CAT【必须】</param>
+            <param name="source">数据来源（PC站内：1，PC站外：2，无线站内：4，无线站外 : 5，汇总：SUMMARY）
+            <para>SUMMARY必须单选，其他值可多选例如1,2【必须】</para></param>
+            <param name="pageNo">页码【可选】</param>
+            <param name="pageSize">每页大小【可选】</param>
+            <param name="subwayToken">权限校验参数【可选】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBKeyword.GetRequestBase(System.String,System.Int64,System.Int64,System.DateTime,System.DateTime,System.String,System.String,System.Int64,System.Int64,System.String)">
+            <summary>
+            设置 API 参数
+            </summary>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBKeyword.GetRPTKeywordBaseByUrl(System.String,System.Int64,System.Int64,System.DateTime,System.DateTime,System.String,System.String,System.Int64,System.Int64,System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            推广组下的词基础报表数据查询【明细数据不分类型查询】
+            </summary>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBKeyword.GetRPTCampKeywordBase(System.Int64,System.String,System.String,System.String,System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            从 API 接口获取 推广计划下的词报表效果数据查询【异步API】
+            </summary>
+            <param name="campaignID">推广计划编号【必须】</param>
+            <param name="timeSlot">时间参数（昨天：DAY、 前一周：7DAY 、前15天：15DAY 、前30天：30DAY 、前90天：90DAY）单选【必须】</param>
+            <param name="searchType">报表类型。可选值：SEARCH（搜索）、CAT（类目出价）、NOSEARCH（定向投放），可多选，如：SEARCH,CAT【必须】</param>
+            <param name="source ">数据来源。可选值：1（站内）、2（站外）、SUMMARY（汇总），其中SUMMARY必须单选，其它值可多选，如：1,2【必须】</param>
+            <param name="nick">查询的昵称</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBKeyword.GetRequestBase(System.Int64,System.String,System.String,System.String,System.String)">
+            <summary>
+            设置 API 参数
+            </summary>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBKeyword.GetRPTCampKeywordBaseByUrl(System.Int64,System.String,System.String,System.String,System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            从 API 接口获取 直通车推广计划下的词报表基础数据查询【异步API】
+            </summary>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBKeyword.GetRPTKeywordEffect(System.String,System.Int64,System.Int64,System.DateTime,System.DateTime,System.String,System.String,System.Int64,System.Int64,System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            推广组下的词效果报表数据查询【明细数据不分类型查询】
+            </summary>
+            <param name="nick">账户昵称【可选】</param>
+            <param name="adgroupID">推广组编号【必须】</param>
+            <param name="campaignID">推广计划编号【必须】</param>
+            <param name="startTime">开始日期，格式：2012-02-1【必须】 </param>
+            <param name="endTime">结束日期，格式：2012-02-2，开始时间结束时间间隔不能超过30天【必须】</param>
+            <param name="searchType">报表类型（搜索：SEARCH,类目出价：CAT, 定向投放：NOSEARCH）可多选例如：SEARCH,CAT【必须】</param>
+            <param name="source">数据来源（PC站内：1，PC站外：2，无线站内：4，无线站外 : 5，汇总：SUMMARY）
+            <para>SUMMARY必须单选，其他值可多选例如1,2【必须】</para></param>
+            <param name="pageNo">页码【可选】</param>
+            <param name="pageSize">每页大小【可选】</param>
+            <param name="subwayToken">权限校验参数【必须】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBKeyword.GetRequestEffect(System.String,System.Int64,System.Int64,System.DateTime,System.DateTime,System.String,System.String,System.Int64,System.Int64,System.String)">
+            <summary>
+            设置 API 参数
+            </summary>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBKeyword.GetRPTKeywordEffectByUrl(System.String,System.Int64,System.Int64,System.DateTime,System.DateTime,System.String,System.String,System.Int64,System.Int64,System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            推广组下的词效果报表数据查询【明细数据不分类型查询】
+            </summary>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBKeyword.GetRPTCampKeywordEffect(System.Int64,System.String,System.String,System.String,System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            从 API 接口获取 直通车推广计划下的词报表效果数据查询【异步API】
+            </summary>
+            <param name="campaignID">推广计划编号【必须】</param>
+            <param name="timeSlot">时间参数（昨天：DAY、 前一周：7DAY 、前15天：15DAY 、前30天：30DAY 、前90天：90DAY）单选【必须】</param>
+            <param name="searchType">报表类型。可选值：SEARCH（搜索）、CAT（类目出价）、NOSEARCH（定向投放），可多选，如：SEARCH,CAT【必须】</param>
+            <param name="source ">数据来源。可选值：1（站内）、2（站外）、SUMMARY（汇总），其中SUMMARY必须单选，其它值可多选，如：1,2【必须】</param>
+            <param name="nick">查询的昵称</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBKeyword.GetRequestEffect(System.Int64,System.String,System.String,System.String,System.String)">
+            <summary>
+            设置 API 参数
+            </summary>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBKeyword.GetRPTCampKeywordEffectByUrl(System.Int64,System.String,System.String,System.String,System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            从 API 接口获取 直通车推广计划下的词报表效果数据查询【异步API】
+            </summary>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBKeyword.GetInsightWordssubdataByKeyword(System.String,System.String,System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            获取关键词按流量细分的数据
+            </summary>
+            <param name="keywordStrs">关键词字符串，以逗隔开【必须】</param>
+            <param name="dateStart">开始时间【必须】</param>
+            <param name="dateEnd">结束时间【必须】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBKeyword.GetRequestWordssubdata(System.String,System.String,System.String)">
+            <summary>
+            设置 API 参数
+            </summary>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBKeyword.GetInsightWordssubdataByKeywordByUrl(System.String,System.String,System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            获取关键词按流量细分的数据
+            </summary>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBKeyword.GetAdgroupRankByKeyword(System.String,System.String,System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            取得一个关键词的推广组排名列表
+            </summary>
+            <param name="nick">账户昵称【可选】</param>
+            <param name="keyword">关键词【必须】</param>
+            <param name="ip">IP地址【必须】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBKeyword.GetRequest(System.String,System.String,System.String)">
+            <summary>
+            设置 API 参数
+            </summary>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBKeyword.GetAdgroupRankByKeywordByUrl(System.String,System.String,System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            取得一个关键词的推广组排名列表
+            </summary>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBKeyword.GetWordspricedataByKeyword(System.String,System.String,System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            关键词按竞价区间的分布数据
+            </summary>
+            <param name="keyword">关键词【必须】</param>
+            <param name="dateStart">开始时间【必须】</param>
+            <param name="dateEnd">结束时间【必须】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBKeyword.GetRequestTwo(System.String,System.String,System.String)">
+            <summary>
+            设置 API 参数
+            </summary>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBKeyword.GetWordspricedataByKeywordByUrl(System.String,System.String,System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            关键词按竞价区间的分布数据
+            </summary>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBKeyword.GetWordsData(System.String,System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            获取关键词的详细数据
+            </summary>
+            <param name="bidWordList">关键词列表，最多可传100个。【必须】</param>
+            <param name="startDate">开始时间【必须】</param>
+            <param name="endDate">结束时间【必须】</param>
+            <param name="topRsp">TopResponse</param>
+            <returns>关键词大盘数据列表</returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBKeyword.GetWordsAreaData(System.String,System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            获取关键词按地域细分的详细数据，目前地域只能细化到省级别，返回的结果中包括市，是为了方便以后扩展，目前结果中市的值等于省
+            </summary>
+            <param name="bidWord">关键词【必须】</param>
+            <param name="startData">开始时间，格式：yyyy-MM-dd【必须】</param>
+            <param name="endData">结束时间，格式：yyyy-MM-dd【必须】</param>
+            <param name="topRsp">TopResponse</param>
+            <returns>地域细分数据</returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBKeyword.GetWordsAreaDataGetRequst(System.String,System.String,System.String)">
+            <summary>
+            设置API参数：获取关键词按地域进行细分的数据
+            </summary>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBKeyword.AddKeywordS(System.String,System.Int64,System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            创建一批关键词
+            </summary>
+            <param name="nick">昵称【可选】</param>
+            <param name="adgroupid">推广组编号【必须】</param>
+            <param name="keyword_prices">关键词，出价和匹配方式json字符串，word:词，不能有一些特殊字符。
+            <para>maxPrice：价格，是整数，以“分”为单位，不能小于5，不能大于日限额,当使用默认出价时必须将这个值设置为0。</para>
+            <para> isDefaultPrice：是否使用默认出价，只能是0，1(0代表不使用，1代表使用)。</para>
+            <para>matchscope只能是1,2,4（1代表精确匹配，2代表子串匹配，4代表广泛匹配）。</para></param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBKeyword.GetZTCKeywordList(System.String,System.Int64,System.Int32,System.String,System.Int32,System.Int32,System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            取得一个推广组的推荐关键词列表
+            </summary>
+            <param name="nick">昵称【可选】</param>
+            <param name="adgroupid">推广组编号【必须】</param>
+            <param name="search">搜索量【可选】</param>
+            <param name="pertinence">相关度【可选】</param>
+            <param name="page_size">返回的每页数据量大小,最大200【必须】</param>
+            <param name="page_no">返回的第几页数据，默认为1【必须】</param>
+            <param name="order_by">排序方式: 搜索量 search_volume 市场平均价格 average_price 相关度 relevance 不排序 non 默认为 non【可选】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBKeyword.GetZTCKeywordReal(System.String,System.Int64,System.Int64,System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            获取推广词实时报表数据
+            </summary>
+            <param name="nick">昵称【可选】</param>
+            <param name="campaignid">推广计划编号【必须】</param>
+            <param name="adgroupid">推广组编号【必须】</param>
+            <param name="date">日期【必须【格式：yyyy-mm-dd】】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBKeyword.GetZTCKeywordRanking(System.String,System.Int64,System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            获取关键词的新版实时排名
+            </summary>
+            <param name="nick">昵称【必须】</param>
+            <param name="adgroupid">推广组编号【必须】</param>
+            <param name="keywordarr">关键词编号列表【必须】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBKeyword.DelectZTCKeywordS(System.String,System.Int64,System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            删除一批关键词
+            </summary>
+            <param name="nick">昵称【可选】</param>
+            <param name="campaignid">推广计划编号【必须】</param>
+            <param name="keywordIDS">关键词编号字符串，编号用','隔开,最多100个【必须【例：200000,200001,200002】】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBKeyword.UpdateZTCKeywordS(System.String,System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            设置一批关键词的出价
+            </summary>
+            <param name="nick">昵称【可选】</param>
+            <param name="KeywordIDstr">关键词ID，出价和匹配方式json字符串，keywordId:词ID，整数。
+            <para>maxPrice：价格，是整数，以“分”为单位，不能小于5，不能大于日限额,也不能大于99.99元,当使用默认出价时必须将这个值设置为0</para> 
+            <para>isDefaultPrice：是否使用默认出价，只能是0，1(0代表不使用，1代表使用)。</para>
+            <para>matchscope只能是1,2,4（1代表精确匹配，4代表广泛匹配）</para>
+            <para>maxMobilePrice：代表无线出价（如果是0，则代表无线出价=PC*无线溢价）</para>
+            <para>mobileIsDefaultPrice代表无线出价是否采用pc*无线溢价，还是独立价格（1：是；0：否）</para></param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBKeyword.GetKeywordQscore(System.String,System.Int64,System.String,Top.Api.TopResponse@)">
+            <summary>
+            取得一个推广组的所有关键词的质量得分或者根据关键词Id列表取得一组关键词的质量得分
+            </summary>
+            <param name="nick">昵称【必须】</param>
+            <param name="adgroupid">推广组编号【必须】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBKeyword.GetUpdateKeywordS(System.String,System.DateTime,System.Int32,System.Int32,System.String,Top.Api.TopResponse@)">
+            <summary>
+            分页获取修改过的关键词ID、宝贝id、修改时间
+            </summary>
+            <param name="nick">昵称【必须】</param>
+            <param name="starttime">得到此时间点之后的数据，不能大于一个月【必须】</param>
+            <param name="page_size">返回的每页数据量大小,最大200【可选】</param>
+            <param name="page_no">返回的第几页数据，默认为1【可选】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBKeyword.GetAdgroupKeywordS(System.String,System.Int64,System.String,Top.Api.TopResponse@)">
+            <summary>
+            取得一个推广组的所有关键词
+            </summary>
+            <param name="nick">昵称【可选】</param>
+            <param name="adgroupid">推广组编号【特殊可选】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBKeyword.GetKeywordIDS(System.String,System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            根据一个关键词Id列表取得一组关键词
+            </summary>
+            <param name="nick">昵称【可选】</param>
+            <param name="keyIDS">关键词Id字符串，最多200个，用','隔开</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBKeyword.GetAdgroupQscore(System.String,System.Int64,System.String,Top.Api.TopResponse@)">
+            <summary>
+            取得一个推广组的所有关键词和类目出价的质量得分
+            </summary>
+            <param name="nick">昵称【可选】</param>
+            <param name="adgroupid">推广组编号【必须】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBKeyword.Getdelectkeyid(System.String,System.String,System.Int32,System.Int32,System.String,Top.Api.TopResponse@)">
+            <summary>
+            获取删除的词ID
+            </summary>
+            <param name="nick">昵称【可选】</param>
+            <param name="starttime">得到此时间点之后的数据，不能大于一个月【必须】</param>
+            <param name="page_size">返回的每页数据量大小,默认200最大1000【可选】</param>
+            <param name="page_no">返回的第几页数据，默认为1【可选】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBKeyword.GetUpdatekeyid(System.String,System.String,System.Int32,System.Int32,System.String,Top.Api.TopResponse@)">
+            <summary>
+             获取修改的词ID
+            </summary>
+            <param name="nick">昵称【可选】</param>
+            <param name="starttime">得到此时间点之后的数据，不能大于一个月【必须】</param>
+            <param name="page_size">返回的每页数据量大小,默认200最大1000【可选】</param>
+            <param name="page_no">返回的第几页数据，默认为1【可选】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="T:TB.HttpAPI.Simba.TBAdgroup">
+            <summary>
+            直通车--推广组
+            </summary>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBAdgroup.GetZTCAdgroupsByCampaignID(System.String,System.Int64,System.Int64,System.Int64,System.String,Top.Api.TopResponse@)">
+            <summary>
+            批量得到推广计划下的推广组
+            </summary>
+            <param name="nick">账户昵称【可选】</param>
+            <param name="campaignID">推广计划编号【特殊可选】</param>
+            <param name="pageNo">页码，从1开始【必须】</param>
+            <param name="pageSize">页尺寸，最大200，如果入参adgroup_ids有传入值，则page_size和page_no值不起作用。
+            <para>如果adgrpup_ids为空而campaign_id有值，此时page_size和page_no值才是返回的页数据大小和页码【必须】</para></param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBAdgroup.GetRequest(System.String,System.Int64,System.Int64,System.Int64)">
+            <summary>
+            设置 API 参数
+            </summary>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBAdgroup.GetZTCAdgroupsByCampaignIDByUrl(System.String,System.Int64,System.Int64,System.Int64,System.String,Top.Api.TopResponse@)">
+            <summary>
+            批量得到推广计划下的推广组
+            </summary>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBAdgroup.GetRPTCampAdgroupBase(System.String,System.Int64,System.DateTime,System.DateTime,System.String,System.String,System.Int64,System.Int64,System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            推广计划下的推广组报表基础数据查询【只有汇总数据，无分类类型】
+            </summary>
+            <param name="nick">昵称【可选】</param>
+            <param name="campaignID">查询推广计划id【必须】</param>
+            <param name="startDate">开始日期,格式yyyy-mm-dd【必须】</param>
+            <param name="endDate">结束日期,格式yyyy-mm-dd【必须】</param>
+            <param name="searchType">报表类型（搜索：SEARCH,类目出价：CAT, 定向投放：NOSEARCH汇总：SUMMARY）
+            <para>SUMMARY必须单选，其他值可多选例如：SEARCH,CAT【必须】</para></param>
+            <param name="source">数据来源（PC站内：1，PC站外：2，无线站内：4，无线站外 : 5, 汇总：SUMMARY）
+            <para>SUMMARY必须单选，其他值可多选例如1,2【必须】</para></param>
+            <param name="pageNo">页码【可选】</param>
+            <param name="pageSize">每页大小【可选】</param>
+            <param name="subwayToken">权限验证信息【必须】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBAdgroup.GetRequestBase(System.String,System.Int64,System.DateTime,System.DateTime,System.String,System.String,System.Int64,System.Int64,System.String)">
+            <summary>
+            设置 API 参数
+            </summary>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBAdgroup.GetRPTCampAdgroupBaseByUrl(System.String,System.Int64,System.DateTime,System.DateTime,System.String,System.String,System.Int64,System.Int64,System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            推广计划下的推广组报表基础数据查询【只有汇总数据，无分类类型】
+            </summary>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBAdgroup.GetRPTCampAdgroupEffect(System.String,System.Int64,System.DateTime,System.DateTime,System.String,System.String,System.Int64,System.Int64,System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            推广计划下的推广组报表效果数据查询【只有汇总数据，无分类类型】
+            </summary>
+            <param name="nick">账户昵称【可选】</param>
+            <param name="campaignID">推广计划编号【必须】</param>
+            <param name="startTime">开始日期，格式：2012-02-1【必须】 </param>
+            <param name="endTime">结束日期，格式：2012-02-2【必须】</param>
+            <param name="searchType">报表类型（搜索：SEARCH,类目出价：CAT, 定向投放：NOSEARCH汇总：SUMMARY）
+            <para>SUMMARY必须单选，其他值可多选例如：SEARCH,CAT【必须】</para></param>
+            <param name="source">数据来源（PC站内：1，PC站外：2，无线站内：4，无线站外 : 5，汇总：SUMMARY）
+            <para>SUMMARY必须单选，其他值可多选例如1,2【必须】</para></param>
+            <param name="pageNo">页码【可选】</param>
+            <param name="pageSize">每页大小【可选】</param>
+            <param name="subwayToken">权限校验参数【必须】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBAdgroup.GetRequestEffect(System.String,System.Int64,System.DateTime,System.DateTime,System.String,System.String,System.Int64,System.Int64,System.String)">
+            <summary>
+            设置 API 参数
+            </summary>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBAdgroup.GetRPTCampAdgroupEffectByUrl(System.String,System.Int64,System.DateTime,System.DateTime,System.String,System.String,System.Int64,System.Int64,System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            推广计划下的推广组报表效果数据查询【只有汇总数据，无分类类型】
+            </summary>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBAdgroup.AddZTCAdgroups(System.String,System.Int64,System.Int64,System.Int32,System.String,System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            创建一个推广组
+            </summary>
+            <param name="nick">昵称【可选】</param>
+            <param name="campaignID">推广计划编号【必须】</param>
+            <param name="Item_id">商品编号【必须】</param>
+            <param name="default_price">推广组默认出价，单位为分，不能小于5 不能大于日最高限额【必须】</param>
+            <param name="title">创意标题，最多20个汉字【必须】</param>
+            <param name="img_url">创意图片地址，必须是商品的图片之一【必须】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBAdgroup.GetZTCAdgroupReal(System.String,System.Int64,System.String,System.Int32,System.Int32,System.String,Top.Api.TopResponse@)">
+            <summary>
+             获取推广组实时报表数据
+            </summary>
+            <param name="nick">昵称【可选】</param>
+            <param name="campaignid">推广计划编号【必须】</param>
+            <param name="date">日期【必须【格式：yyyy-mm-dd】】</param>
+            <param name="page_size">每页大小【可选】</param>
+            <param name="page_number">页码【可选】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBAdgroup.GetAdgroupitembool(System.String,System.Int64,System.Int64,System.String,Top.Api.TopResponse@)">
+            <summary>
+            商品是否推广
+            </summary>
+            <param name="nick">昵称【可选】</param>
+            <param name="campaignid">推广计划编号【必须】</param>
+            <param name="itemid">商品编号【必须】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBAdgroup.Updateadgroup(System.String,System.Int64,System.Int32,System.Int32,System.Boolean,System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            更新一个推广组的信息
+            </summary>
+            <param name="nick">昵称【可选】</param>
+            <param name="adgroupid">推广组编号【必须】</param>
+            <param name="default_price">默认出价，单位是分，不能小于5【特殊可选】</param>
+            <param name="nonsearch_max_price">非搜索出价，单位是分，不能小于5
+            <para>如果use_nonseatch_default_price为使用默认出价，则此nonsearch_max_price字段传入的数据不起作用，商品将使用默认非搜索出价【特殊可选】</para></param>
+            <param name="use_nonsearch_default_price">非搜索是否使用默认出价，false-不用；true-使用；默认为true;【特殊可选】</param>
+            <param name="online_status">用户设置的上下线状态 offline-下线(暂停竞价)； online-上线；默认为online【可选】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBAdgroup.Delectadgroup(System.String,System.Int64,System.String,Top.Api.TopResponse@)">
+            <summary>
+            删除一个推广组
+            </summary>
+            <param name="nick">昵称【可选】</param>
+            <param name="adgroupid">推广组编号【必须】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBAdgroup.GetDelectadgroupid(System.String,System.String,System.Int32,System.Int32,System.String,Top.Api.TopResponse@)">
+            <summary>
+            获取删除的推广组ID
+            </summary>
+            <param name="nick">昵称【可选】</param>
+            <param name="starttime">得到此时间点之后的数据，不能大于一个月【必须】</param>
+            <param name="page_size">返回的每页数据量大小,默认200最大1000【可选】</param>
+            <param name="page_no">返回的第几页数据，默认为1【可选】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBAdgroup.GetUpdateadgroupid(System.String,System.String,System.Int32,System.Int32,System.String,Top.Api.TopResponse@)">
+            <summary>
+            获取修改的推广组ID
+            </summary>
+            <param name="nick">昵称【可选】</param>
+            <param name="starttime">得到此时间点之后的数据，不能大于一个月【必须】</param>
+            <param name="page_size">返回的每页数据量大小,默认200最大1000【可选】</param>
+            <param name="page_no">返回的第几页数据，默认为1【可选】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBAdgroup.Getadgroupkeywordeffect(System.String,System.Int64,System.Int64,System.String,System.String,System.String,System.String,System.Int32,System.Int32,System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            推广组下的词效果报表数据查询(明细数据不分类型查询)
+            </summary>
+            <param name="nick">昵称【可选】</param>
+            <param name="campaignid">推广计划编号【必须】</param>
+            <param name="adgroupid">推广组编号【必须】</param>
+            <param name="starttime">开始时间，格式yyyy-mm-dd【必须】</param>
+            <param name="endtime">结束时间，格式yyyy-mm-dd；开始时间结束时间间隔不能超过30天【必须】</param>
+            <param name="source">数据来源（PC站内：1，PC站外：2，无线站内：4，无线站外 : 5，汇总：SUMMARY）SUMMARY必须单选，其他值可多选例如1,2【必须】</param>
+            <param name="subway_token">权限校验参数【必须】</param>
+            <param name="page_no">页码【可选】</param>
+            <param name="page_size">每页大小【可选】</param>
+            <param name="search_type">报表类型（搜索：SEARCH,类目出价：CAT, 定向投放：NOSEARCH）可多选例如：SEARCH,CAT【必须】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBAdgroup.Getadgroupkeywordbase(System.String,System.Int64,System.Int64,System.String,System.String,System.String,System.String,System.Int32,System.Int32,System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            推广组下的词基础报表数据查询(明细数据不分类型查询)
+            </summary>
+            <param name="nick">昵称【可选】</param>
+            <param name="campaignid">推广计划编号【必须】</param>
+            <param name="adgroupid">推广组编号【必须】</param>
+            <param name="starttime">开始时间，格式yyyy-mm-dd【必须】</param>
+            <param name="endtime">结束时间，格式yyyy-mm-dd；开始时间结束时间间隔不能超过30天【必须】</param>
+            <param name="source">数据来源（PC站内：1，PC站外：2，无线站内：4，无线站外 : 5，汇总：SUMMARY）SUMMARY必须单选，其他值可多选例如1,2【必须】</param>
+            <param name="subway_token">权限校验参数【必须】</param>
+            <param name="page_no">页码【可选】</param>
+            <param name="page_size">每页大小【可选】</param>
+            <param name="search_type">报表类型（搜索：SEARCH,类目出价：CAT, 定向投放：NOSEARCH）可多选例如：SEARCH,CAT【必须】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBAdgroup.Getadgroupeffect(System.String,System.Int64,System.Int64,System.String,System.String,System.String,System.String,System.Int32,System.Int32,System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            推广组效果报表数据对象
+            </summary>
+            <param name="nick">昵称【可选】</param>
+            <param name="campaignid">推广计划编号【必须】</param>
+            <param name="adgroupid">推广组编号【必须】</param>
+            <param name="starttime">开始时间，格式yyyy-mm-dd【必须】</param>
+            <param name="endtime">结束时间，格式yyyy-mm-dd；开始时间结束时间间隔不能超过30天【必须】</param>
+            <param name="source">数据来源（PC站内：1，PC站外：2，无线站内：4，无线站外 : 5，汇总：SUMMARY）SUMMARY必须单选，其他值可多选例如1,2【必须】</param>
+            <param name="subway_token">权限校验参数【必须】</param>
+            <param name="page_no">页码【可选】</param>
+            <param name="page_size">每页大小【可选】</param>
+            <param name="search_type">报表类型（搜索：SEARCH,类目出价：CAT, 定向投放：NOSEARCH）可多选例如：SEARCH,CAT【必须】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBAdgroup.Getadgroupbase(System.String,System.Int64,System.Int64,System.String,System.String,System.String,System.String,System.Int32,System.Int32,System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            推广组基础报表数据对象
+            </summary>
+            <param name="nick">昵称【可选】</param>
+            <param name="campaignid">推广计划编号【必须】</param>
+            <param name="adgroupid">推广组编号【必须】</param>
+            <param name="starttime">开始时间，格式yyyy-mm-dd【必须】</param>
+            <param name="endtime">结束时间，格式yyyy-mm-dd；开始时间结束时间间隔不能超过30天【必须】</param>
+            <param name="source">数据来源（PC站内：1，PC站外：2，无线站内：4，无线站外 : 5，汇总：SUMMARY）SUMMARY必须单选，其他值可多选例如1,2【必须】</param>
+            <param name="subway_token">权限校验参数【必须】</param>
+            <param name="page_no">页码【可选】</param>
+            <param name="page_size">每页大小【可选】</param>
+            <param name="search_type">报表类型（搜索：SEARCH,类目出价：CAT, 定向投放：NOSEARCH）可多选例如：SEARCH,CAT【必须】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBAdgroup.Getadgroupschanged(System.String,System.String,System.Int32,System.Int32,System.String,Top.Api.TopResponse@)">
+            <summary>
+            分页获取修改的推广组ID和修改时间
+            </summary>
+            <param name="nick">昵称【可选】</param>
+            <param name="starttime">得到此时间点之后的数据，不能大于一个月【必须】</param>
+            <param name="page_no">页码【可选】</param>
+            <param name="page_size">每页大小【可选】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBAdgroup.Getadgroupnonsearchprices(System.String,System.Int64,System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            修改通投出价
+            </summary>
+            <param name="nick">昵称【可选】</param>
+            <param name="campaignid">推广计划编号【必须】</param>
+            <param name="adgroupid_price_json">推广组id，通投位置价格，是否使用默认出价json 数组字符串，数组个数最多200个
+            <para>json数组中的key必须和对应实体ADGroup中的属性字段保持一致，否则对应的实体对象属性获取不到相应的值</para>
+            <para> adgroupId,isNonsearchDefaultPrice不能为空。nonsearchMaxPrice是整数，以“分”为单位，不能小于5，不能大于日限额,不能大于9999分</para>
+            <para> 启用非搜索默认出价时nonsearchMaxPrice为0</para></param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBAdgroup.Getadgroupnonsearchstates(System.String,System.Int64,System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            更改通投状态（暂停或启动）
+            </summary>
+            <param name="nick">昵称【可选】</param>
+            <param name="campaignid">推广计划编号【必须】</param>
+            <param name="adgroupid_nonsearchstate_json">推广组ID通投状态json数组字符串，数组个数最多200个
+            <para>json数组中的key必须和对应实体ADGroup 中的属性字段保持一致，否则对应的实体对象属性获取不到相应的值推广组ID,通投状态不传默认为1</para></param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBAdgroup.Getadgroupcreativeeffect(System.String,System.Int64,System.Int64,System.String,System.String,System.String,System.String,System.Int32,System.Int32,System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            推广组下的创意报表效果数据查询(汇总数据，不分类型)
+            </summary>
+            <param name="nick">昵称【可选】</param>
+            <param name="campaignid">推广计划编号【必须】</param>
+            <param name="adgroupid">推广组编号【必须】</param>
+            <param name="starttime">开始时间，格式yyyy-mm-dd【必须】</param>
+            <param name="endtime">结束时间，格式yyyy-mm-dd；开始时间结束时间间隔不能超过30天【必须】</param>
+            <param name="source">数据来源（PC站内：1，PC站外：2，无线站内：4，无线站外 : 5，汇总：SUMMARY）SUMMARY必须单选，其他值可多选例如1,2【必须】</param>
+            <param name="subway_token">权限校验参数【必须】</param>
+            <param name="page_no">页码【可选】</param>
+            <param name="page_size">每页大小【可选】</param>
+            <param name="search_type">报表类型（搜索：SEARCH,类目出价：CAT, 定向投放：NOSEARCH）可多选例如：SEARCH,CAT【必须】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBAdgroup.Getadgroupcreativebase(System.String,System.Int64,System.Int64,System.String,System.String,System.String,System.String,System.Int32,System.Int32,System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            推广组下创意报表基础数据查询(汇总数据，不分类型)
+            </summary>
+            <param name="nick">昵称【可选】</param>
+            <param name="campaignid">推广计划编号【必须】</param>
+            <param name="adgroupid">推广组编号【必须】</param>
+            <param name="starttime">开始时间，格式yyyy-mm-dd【必须】</param>
+            <param name="endtime">结束时间，格式yyyy-mm-dd；开始时间结束时间间隔不能超过30天【必须】</param>
+            <param name="source">数据来源（PC站内：1，PC站外：2，无线站内：4，无线站外 : 5，汇总：SUMMARY）SUMMARY必须单选，其他值可多选例如1,2【必须】</param>
+            <param name="subway_token">权限校验参数【必须】</param>
+            <param name="page_no">页码【可选】</param>
+            <param name="page_size">每页大小【可选】</param>
+            <param name="search_type">报表类型（搜索：SEARCH,类目出价：CAT, 定向投放：NOSEARCH）可多选例如：SEARCH,CAT【必须】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBAdgroup.Delectadgroupplaces(System.String,System.Int64,System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            批量删除推广组定向推广投放位置
+            </summary>
+            <param name="nick">昵称【必须】</param>
+            <param name="campaignid">推广计划编号【必须】</param>
+            <param name="adgroup_places_json">推广组id，投放位置id json数组字符串，数组个数最多200个。
+            <para>其中json数组中的key必须和对应实体AdGroupPlace中的属性字段保持一致，否则对应的实体对象属性获取不到相应的值</para></param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBAdgroup.Getadgroupplaces(System.String,System.Int64,System.String,System.String,Top.Api.TopResponse@)">
+            <summary>
+            根据指定推广计划下推广组列表获取相应推广组投放位置包括通投位置和单独出价位置
+            </summary>
+            <param name="nick">昵称【可选】</param>
+            <param name="campaignid">推广计划【必须】</param>
+            <param name="adgroupids">推广组编号【必须】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBAdgroup.Getadgroupsbycampaignid(System.String,System.Int64,System.Int32,System.Int32,System.String,Top.Api.TopResponse@)">
+            <summary>
+            批量得到推广计划下的推广组
+            </summary>
+            <param name="nick">昵称【可选】</param>
+            <param name="campaignid">推广计划编号【特殊可选】</param>
+            <param name="page_size">页尺寸，最大200【必须】</param>
+            <param name="page_no">页码，从1开始【必须】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBAdgroup.Getadgroupsbyadgroupids(System.String,System.String,System.Int32,System.Int32,System.String,Top.Api.TopResponse@)">
+            <summary>
+            批量得到推广组
+            </summary>
+            <param name="nick">昵称【可选】</param>
+            <param name="adgroupids">推广组id列表【特殊可选】</param>
+            <param name="page_size">页尺寸，最大200【必须】</param>
+            <param name="page_no">页码，从1开始【必须】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBAdgroup.Getonlineitemsvon(System.String,System.String,System.Boolean,System.Int32,System.Int32,System.String,Top.Api.TopResponse@)">
+            <summary>
+            获取用户上架在线销售的全部宝贝
+            </summary>
+            <param name="nick">昵称【可选】</param>
+            <param name="order_field">排序字段，starts：按开始时间排序bidCount:按销量排序【可选】</param>
+            <param name="order_by">排序，true:降序， false:升序【可选】</param>
+            <param name="page_size">页尺寸，最大200【可选】</param>
+            <param name="page_no">页码，从1开始【可选】</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="M:TB.HttpAPI.Simba.TBAdgroup.Getmobilediscount(System.String,System.String,System.Int32,System.String,Top.Api.TopResponse@)">
+            <summary>
+            对推广组进行单独移动溢价
+            </summary>
+            <param name="nick">昵称</param>
+            <param name="adgroupids">推广组id数组(推广组id集合元素个数在1-200个之间，推广组id需要在同一个推广计划中)</param>
+            <param name="mobile_discount">折扣（折扣值在1-400之间）</param>
+            <param name="sessionKey">SessionKey</param>
+            <param name="topRsp">TopResponse</param>
+            <returns></returns>
+        </member>
+        <member name="T:TB.HttpAPI.Model.MTbkSpread">
+            <summary>
+            物料传播方式获取【taobao.tbk.spread.get】批量返回结果
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.Model.MTbkSpread.Content">
+            <summary>
+            content：传播形式, 目前只支持短链接
+            <para>如：http://s.click.taobao.com/H4zazPx </para>
+            </summary>
+        </member>
+        <member name="F:TB.HttpAPI.Model.MTbkSpread.ErrMsg">
+            <summary>
+            调用错误信息；由于是批量接口，请重点关注每条请求返回的结果，如果非OK，则说明该结果对应的content不正常，请酌情处理;
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TB.HttpAPI;
+using Top.Api;
 
 namespace Web.Controllers
 {
@@ -295,6 +297,13 @@ namespace Web.Controllers
                 if (iList.Count >= 3 && title.Contains(item)) { break; }
             }
 
+            string numIIDs = string.Empty;
+            foreach (var item in iList)
+            {
+                numIIDs += item.NumIID + ",";
+            }
+
+            List<Top.Api.Domain.NTbkItem> zklist = GetZKPice(numIIDs);
             List<ViewModels.VMItem> vIList = new List<ViewModels.VMItem>();
             foreach (var item in iList)
             {
@@ -303,14 +312,38 @@ namespace Web.Controllers
                     ID = item.ID,
                     Title = item.Title,
                     CatID = item.CatID,
+                    PriceNow = item.PriceNow,
                     ImgSmall = item.ImgSmall,
                     ClickUrl = item.ClickUrl,
                     TitleDescribe = item.TitleDescribe
                 };
+                foreach (var zk in zklist)
+                {
+                    if (item.NumIID == zk.NumIid)
+                    {
+                        i.Price = Convert.ToDecimal(zk.ZkFinalPrice).ToString("0.00");
+                        break;
+                    }
+                }
+
                 vIList.Add(i);
             }
 
             return vIList;
+        }
+
+        /// <summary>
+        /// 获取折扣后的价格
+        /// </summary>
+        /// <param name="numIIDs"></param>
+        /// <returns></returns>
+        public static List<Top.Api.Domain.NTbkItem> GetZKPice(string numIIDs)
+        {
+            TBTbk tkbll = new TBTbk();
+            TopResponse topRsp = null;
+            var strModel = tkbll.GetItemInfoByID(2, numIIDs.TrimEnd(','), ref topRsp);
+
+            return strModel;
         }
 
         /// <summary>

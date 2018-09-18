@@ -7,6 +7,6 @@ namespace Web.ViewModels
 {
     public class VMItem : Model.MItem
     {
-
+        public string Price { get; set; }
     }
 }

@@ -172,23 +172,26 @@
     </div>
     @if (iList.Count > 0)
     {
-        <div class="tuiwen" style="margin-left:25px;">
+        <div class="tuiwen like" style="margin-left:25px;">
             <span class="xgtw">猜你想买</span>
             <ul>
                 @foreach (var item in iList)
                 {
-                    <li>
-                        <div class="leftpart1">
-                            <a href="@item.ClickUrl" target="_blank">
-                                <img src="@item.ImgSmall">
-                            </a>
-                        </div>
-                        <div class="rightpart1">
-                            <a href="@item.ClickUrl" target="_blank">
-                                <span>@item.Title</span>
-                            </a>
-                        </div>
-                    </li>
+                <li>
+                    <div class="leftpart1">
+                        <a href="@item.ClickUrl" target="_blank">
+                            <img src="@item.ImgSmall">
+                        </a>
+                    </div>
+                    <div class="rightpart1" style="width: 300px;">
+                        <a href="@item.ClickUrl" target="_blank">
+                            <span>@item.Title</span>
+                        </a>
+                    </div>
+                    <div class="rightpart2">
+                        <div class="price"><span>￥</span><h2>@item.Price</h2></div>
+                    </div>
+                </li>
                 }
             </ul>
         </div>
