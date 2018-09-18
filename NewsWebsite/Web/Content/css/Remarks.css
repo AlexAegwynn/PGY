@@ -88,13 +88,36 @@
                         color: #aaa;
                     }
 
+                    .comment-list .comment-info .comment-right .comment-content-footer span.reply-btn, .comment-list .comment-info .comment-right .reply-list .reply .reply-list-btn {
+                        display: inline-block;
+                        background-color: #5BC0DE;
+                        border-radius: 5px;
+                        color: white;
+                        padding-top: 5px;
+                        padding-bottom: 5px;
+                        padding-left: 10px;
+                        padding-right: 10px;
+                        margin-bottom: 10px;
+                        border: 1px solid #eee;
+                    }
 
+                    .comment-list .comment-info .comment-right .comment-content-footer .row .send, .comment-list .comment-info .comment-right .reply-list .reply .replybox .send {
+                        display: inline-block;
+                        border-radius: 5px;
+                        padding-top: 5px;
+                        padding-bottom: 5px;
+                        padding-left: 10px;
+                        padding-right: 10px;
+                        margin-bottom: 10px;
+                        border: 1px solid #eee;
+                        margin-left: 15px;
+                        background-color: #5BC0DE;
+                        color: white;
+                    }
 
 .commentbox .pull-right {
     margin-top: 5px;
 }
-
-
 
 .comment-list .comment-info .comment-right .replybox {
     width: 700px;
