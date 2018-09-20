@@ -1,4 +1,4 @@
-﻿@charset "utf-8";
+@charset "utf-8";
 /* CSS Document */
 .rowline{
 	width:100%;
@@ -159,16 +159,42 @@
 	width:700px;
 	height: auto;
 }
-.newContent .tuiwen .xgtw{
+.newContent .othernews{
+	width:700px;
+	height: auto;
+}
+.newContent .othernews ul li{
+	width: 700px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	margin-left: 20px;
+	border-bottom:1px solid #000;
+}
+.newContent .othernews ul li a{
+	text-decoration: none;
+	font-family:'微软雅黑';
+	color:black;
+	font-size: 18px;
+	display: inline-block;
+	margin-bottom: 10px;
+}
+.newContent .othernews ul li a:visited{
+	color:#999;
+}
+.newContent .othernews ul li a:hover{
+	color:blue;
+}
+.xgtw{
 	font-size:25px;
 	font-family: "微软雅黑";
 	font-weight: bold;
 	margin-left: 20px;
 }
-    .newContent .tuiwen ul {
-        width: 700px;
-        height: auto;
-    }
+.newContent .tuiwen ul{
+	margin-left: 20px;
+	width: 680px;
+	height: auto;
+}
 .newContent .tuiwen ul li{
 	height: 150px;
 	margin-bottom: 10px;
@@ -187,12 +213,11 @@
 	-webkit-transform: scale(1.1);
 	-webkit-transform: all 1s ease 0s;
 }
-    .newContent .tuiwen ul li .rightpart1 {
-        float: left;
-        width: 540px;
-        margin-left: 40px;
-        margin-top: 20px;
-    }
+.newContent .tuiwen ul li .rightpart1{
+	float:left;
+	margin-left: 40px;
+	margin-top: 20px;
+}
 .newContent .tuiwen ul li .rightpart1 span{
 	color: black;
 	font-size:18px;
@@ -265,6 +290,9 @@ position:fixed;_position:absolute;_top:expression(eval(document.documentElement.
 	height: auto;
 	margin-left: 20px;
 }
+.like{
+	position:relative;
+}
 .like .rightpart1{
 	width: 300px;
 }
@@ -282,3 +310,13 @@ position:fixed;_position:absolute;_top:expression(eval(document.documentElement.
 	margin-top: 20px;
 	font-weight: bolder;
 }
+.shopping{height:300px;width: 700px; overflow:hidden;}
+.shopping .d1{margin-top: 20px;margin-left: 20px;width:700px;height:300px;display:block;position:absolute;left:0;top:20px;}
+.shopping .d1 img{height: 300px;width: 700px;position: relative;}
+.shopping .d1 div{color: red; padding-left: 20px;padding-right: 20px;position: absolute;top: 220px;left: 0px;background-color: rgba(0,0,0,0.5)}
+.shopping .d1 div span{float:left;margin-top: 10px;font-size: 15px;}
+.shopping .d1 div b{float:left;font-size: 25px;}
+.shopping .d1 p{display: inline-block;position: absolute;top: 260px;left: 0px;padding-left: 20px;padding-right: 20px; color: white;background-color: rgba(0,0,0,0.5);font-size: 15px;}
+.shopping .d2{display: inline-block;width:350px;height:30px;clear:both;position:absolute;z-index:100;left:40%;top:330px;}
+.shopping .d2 li{width:17px;height:15px;overflow:hidden;cursor:pointer;background:url(../img/img1.png) no-repeat center;float:left;margin:0 3px;display:inline;}
+.shopping .d2 li.nuw{background:url(../img/img1_1.png) no-repeat center;}
