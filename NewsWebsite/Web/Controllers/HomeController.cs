@@ -341,7 +341,7 @@ namespace Web.Controllers
         {
             TBTbk tkbll = new TBTbk();
             TopResponse topRsp = null;
-            var strModel = tkbll.GetItemInfoByID(2, numIIDs.TrimEnd(','), ref topRsp);
+            var strModel = tkbll.GetItemInfoByID(1, numIIDs.TrimEnd(','), ref topRsp);
 
             return strModel;
         }

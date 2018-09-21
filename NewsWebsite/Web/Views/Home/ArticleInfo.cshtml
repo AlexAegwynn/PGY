@@ -165,24 +165,18 @@
     </div>
     @if (iList.Count > 0)
     {
-        <div class="tuiwen like" style="margin-left:25px;">
+        <div class="tuiwen like">
             <span class="xgtw">猜你想买</span>
             <div class="shopping" id="banner">
                 @foreach (var item in iList)
                 {
-                    <a href="@item.ClickUrl" class="d1">
-                        <img src="@item.ImgSmall" alt="" />
-                        <div>
-                            <span>￥</span>
-                            <b>@item.Price</b>
-                        </div>
-                        <p>@item.Title</p>
-                    </a>
+                    <div class="d1">
+                        <a href="@item.ClickUrl" target="_blank"><img src="@item.ImgSmall"></a>
+                        <a href="@item.ClickUrl" target="_blank"><span class="shoplink">@item.Title</span></a>
+                        <div class="price"><span>￥</span><b>@item.Price</b></div>
+                    </div>
                 }
                 <div class="d2" id="banner_id">
-                    <li></li>
-                    <li></li>
-                    <li></li>
                     <li></li>
                     <li></li>
                     <li></li>

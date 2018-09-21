@@ -1,4 +1,4 @@
-@charset "utf-8";
+﻿@charset "utf-8";
 /* CSS Document */
 .rowline{
 	width:100%;
@@ -179,7 +179,7 @@
 	margin-bottom: 10px;
 }
 .newContent .othernews ul li a:visited{
-	color:#999;
+	color:#999999;
 }
 .newContent .othernews ul li a:hover{
 	color:blue;
@@ -310,13 +310,15 @@ position:fixed;_position:absolute;_top:expression(eval(document.documentElement.
 	margin-top: 20px;
 	font-weight: bolder;
 }
-.shopping{height:300px;width: 700px; overflow:hidden;}
-.shopping .d1{margin-top: 20px;margin-left: 20px;width:700px;height:300px;display:block;position:absolute;left:0;top:20px;}
-.shopping .d1 img{height: 300px;width: 700px;position: relative;}
-.shopping .d1 div{color: red; padding-left: 20px;padding-right: 20px;position: absolute;top: 220px;left: 0px;background-color: rgba(0,0,0,0.5)}
-.shopping .d1 div span{float:left;margin-top: 10px;font-size: 15px;}
-.shopping .d1 div b{float:left;font-size: 25px;}
-.shopping .d1 p{display: inline-block;position: absolute;top: 260px;left: 0px;padding-left: 20px;padding-right: 20px; color: white;background-color: rgba(0,0,0,0.5);font-size: 15px;}
-.shopping .d2{display: inline-block;width:350px;height:30px;clear:both;position:absolute;z-index:100;left:40%;top:330px;}
-.shopping .d2 li{width:17px;height:15px;overflow:hidden;cursor:pointer;background:url(../img/img1.png) no-repeat center;float:left;margin:0 3px;display:inline;}
+.shopping{margin-top: 20px;margin-bottom: 50px;margin-left: 20px;border: 1px solid #eee;height:150px;width: 700px; overflow:hidden;}
+.shopping .d1{margin-top: 60px;margin-left: 40px;width:700px;height:150px;display:block;position:absolute;left:0;top:0px;}
+.shopping .d1 img{float: left;height: 120px;width: 120px;position: relative;}
+.shopping .d1 img:hover{transform:scale(1.1);transition: all 0.5s ease 0s}
+.shopping .d1 .shoplink{float: left;margin-top: 20px;margin-left: 30px;font-size: 20px;width: 400px;color: black;}
+.shopping .d1 .shoplink:hover{color:blue;}
+.shopping .d1 .price{float:right;margin-right: 40px; margin-top: 10px;color: red;}
+.shopping .d1 .price span{font-size: 20px;display: inline-block;}
+.shopping .d1 .price b{font-size:30px;}
+.shopping .d2{display: inline-block;width:350px;height:30px;clear:both;position:absolute;z-index:100;left:45%;top:180px;}
+.shopping .d2 li{width:17px;height:15px;overflow:hidden;cursor:pointer;background:url(../img/img1_2.png) no-repeat center;float:left;margin:0 3px;display:inline;}
 .shopping .d2 li.nuw{background:url(../img/img1_1.png) no-repeat center;}
