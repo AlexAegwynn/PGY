@@ -4,6 +4,7 @@
     var arList = ViewData["RelatedArticle"] as List<Web.ViewModels.VMArticle>;
     var iList = ViewData["Items"] as List<Web.ViewModels.VMItem>;
     var url = ViewBag.CatName == "综合" ? "/Home/Index" : "/Home/Index?catid=" + vModel.DomainID;
+    ViewBag.Title = vModel.Title;
 }
 
 <script>

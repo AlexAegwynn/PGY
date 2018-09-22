@@ -316,9 +316,22 @@ position:fixed;_position:absolute;_top:expression(eval(document.documentElement.
 .shopping .d1 img:hover{transform:scale(1.1);transition: all 0.5s ease 0s}
 .shopping .d1 .shoplink{float: left;margin-top: 20px;margin-left: 30px;font-size: 20px;width: 400px;color: black;}
 .shopping .d1 .shoplink:hover{color:blue;}
-.shopping .d1 .price{float:right;margin-right: 40px; margin-top: 10px;color: red;}
-.shopping .d1 .price span{font-size: 20px;display: inline-block;}
-.shopping .d1 .price b{font-size:30px;}
+    .shopping .d1 .price {
+        width: 150px;
+        float: right;
+        text-align:center;
+        margin-top: 30px;
+        color: red;
+    }
+
+        .shopping .d1 .price span {
+            font-size: 15px;
+            display: inline-block;
+        }
+
+        .shopping .d1 .price b {
+            font-size: 20px;
+        }
 .shopping .d2{display: inline-block;width:350px;height:30px;clear:both;position:absolute;z-index:100;left:45%;top:180px;}
 .shopping .d2 li{width:17px;height:15px;overflow:hidden;cursor:pointer;background:url(../img/img1_2.png) no-repeat center;float:left;margin:0 3px;display:inline;}
 .shopping .d2 li.nuw{background:url(../img/img1_1.png) no-repeat center;}
