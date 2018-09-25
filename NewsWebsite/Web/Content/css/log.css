@@ -21,7 +21,7 @@ body{behavior:url(" css/hover_htc.htc");font-family:"Microsoft YaHei",宋体; co
 .r_button{background-position:-138px -60px; margin-right:4px}
 .l_button:hover{background-position:0 0;}
 .r_button:hover{background-position:-138px 0;}
-.f_reg_but{margin:10px 0 0 115px}
+.f_reg_but{margin:10px 0 0 90px}
 
 .reg{width:460px; font-size:14px;line-height:25px; overflow:hidden;}
 .reg dl{padding-left:10px; font-size:14px;}

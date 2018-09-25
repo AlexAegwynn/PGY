@@ -48,6 +48,7 @@
     <Compile Include="MRemarks.cs" />
     <Compile Include="MReplies.cs" />
     <Compile Include="MUsers.cs" />
+    <Compile Include="MVisitorCount.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

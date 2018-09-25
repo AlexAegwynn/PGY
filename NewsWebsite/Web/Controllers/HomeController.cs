@@ -11,16 +11,13 @@ namespace Web.Controllers
 {
     public class HomeController : BaseController
     {
-        ///// <summary>
-        ///// 所有文章列表
-        ///// </summary>
-        //private static List<Model.MContent> articleList = new List<Model.MContent>();
-        ///// <summary>
-        ///// 页面文章列表
-        ///// </summary>
-        //private static List<Model.MContent> aList = new List<Model.MContent>();
         private static int categoryId = 0;
         private static string searchStr = string.Empty;
+
+        /// <summary>
+        /// 访问IP列表
+        /// </summary>
+        public static List<string> vcList = new List<string>();
 
         public ActionResult Index(string search = "", int catid = 0)
         {
@@ -51,6 +48,8 @@ namespace Web.Controllers
             ViewBag.IsLogin = vUser == null;
             ViewBag.Name = vUser == null ? "" : vUser.UserName;
 
+            ViewBag.VCount = LVisitorCount.GetVisitorCount().Count;
+
             return View();
         }
 
@@ -79,6 +78,8 @@ namespace Web.Controllers
                 ViewBag.Name = string.Empty;
 
                 ViewBag.CatName = GetCatName(vModel.DomainID);
+
+                ViewBag.VCount = LVisitorCount.GetVisitorCount().Count;
 
                 //获取session,判断是否为空
                 if (Session["LoginUser"] is ViewModels.VMUser vUser)
@@ -158,6 +159,8 @@ namespace Web.Controllers
                 ViewBag.IsLogin = true;
             }
 
+            ViewBag.VCount = LVisitorCount.GetVisitorCount().Count;
+
             return View(vList);
         }
 
@@ -198,6 +201,8 @@ namespace Web.Controllers
                 ViewBag.Name = vUser.UserName;
                 ViewBag.IsLogin = true;
             }
+
+            ViewBag.VCount = LVisitorCount.GetVisitorCount().Count;
 
             return View(vList);
         }
@@ -268,6 +273,18 @@ namespace Web.Controllers
             }
 
             return json;
+        }
+
+        /// <summary>
+        /// 添加访问IP
+        /// </summary>
+        /// <returns></returns>
+        public JsonResult VCAdd(string IP = "")
+        {
+            if (vcList.Any(x => x == IP)) { return null; }
+            vcList.Add(IP);
+
+            return null;
         }
 
         /// <summary>

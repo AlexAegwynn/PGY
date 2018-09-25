@@ -47,6 +47,7 @@
     <Compile Include="LItem.cs" />
     <Compile Include="LRemarks.cs" />
     <Compile Include="LUsers.cs" />
+    <Compile Include="LVisitorCount.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
