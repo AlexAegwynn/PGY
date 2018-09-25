@@ -278,21 +278,17 @@
             $("#banner_id").hover(
                 function () {
                     clearInterval(MyMar33);
-                }
-                ,
-                function () {
+                }, function () {
                     MyMar33 = setInterval(Marquee33, speed33);
                 }
             )
-        }
-        else {
+        } else {
             $("#banner_id").hide();
         }
         $("#banner .d1").hover(
             function () {
                 clearInterval(MyMar33);
-            },
-            function () {
+            }, function () {
                 MyMar33 = setInterval(Marquee33, speed33);
             }
         )
