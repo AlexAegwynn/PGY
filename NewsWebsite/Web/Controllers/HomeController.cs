@@ -158,7 +158,6 @@ namespace Web.Controllers
                 ViewBag.Name = vUser.UserName;
                 ViewBag.IsLogin = true;
             }
-
             ViewBag.VCount = LVisitorCount.GetVisitorCount().Count;
 
             return View(vList);

@@ -10,8 +10,13 @@ namespace Web.Controllers
     {
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-
+            State = filterContext.RequestContext.HttpContext.Request.Browser.IsMobileDevice;
             base.OnActionExecuting(filterContext);
         }
+
+        /// <summary>
+        /// 是否移动设备
+        /// </summary>
+        protected static bool State { get; private set; } = false;
     }
 }
