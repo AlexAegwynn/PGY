@@ -1,0 +1,86 @@
+﻿@charset "utf-8";
+/* CSS Document */
+
+body {
+    background-color: rgba(255,0,0,0.5);
+}
+
+.back_button {
+    display: inline-block;
+    float: left;
+    margin-left: 1%;
+    margin-top: -2%;
+}
+
+#loginbar {
+    position: absolute;
+    margin-top: 5%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 100%;
+    overflow-y: scroll;
+}
+
+    #loginbar .firstline {
+        margin-left: 20%;
+        margin-top: 2%;
+        width: 100%;
+        height: 100px;
+    }
+
+        #loginbar .firstline span {
+            font-size: 40px;
+        }
+
+        #loginbar .firstline input {
+            border-color: rgba(255,165,0,0.8);
+            height: 80px;
+            border-radius: 15px;
+            font-size: 40px;
+            text-indent: 0.5em;
+        }
+
+    #loginbar .secondline {
+        margin-left: 20%;
+        margin-top: 2%;
+        width: 100%;
+        height: 100px;
+    }
+
+        #loginbar .secondline span {
+            font-size: 40px;
+        }
+
+        #loginbar .secondline input {
+            border-color: rgba(255,165,0,0.8);
+            height: 80px;
+            border-radius: 15px;
+            font-size: 40px;
+            text-indent: 0.5em;
+        }
+
+    #loginbar .thirdline {
+        margin-left: 20%;
+        margin-top: 2%;
+        width: 100%;
+        height: 100px;
+    }
+
+        #loginbar .thirdline input {
+            text-align: center;
+            width: 20%;
+            height: 80px;
+            font-size: 40px;
+            background-color: rgba(255,169,0,0.8);
+            border: 0px;
+            border-radius: 15px;
+        }
+
+        #loginbar .thirdline span, #loginbar .thirdline a {
+            font-size: 35px;
+        }
+
+        #loginbar .thirdline a {
+            color: red;
+        }

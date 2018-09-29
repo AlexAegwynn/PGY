@@ -1,0 +1,80 @@
+﻿@charset "utf-8";
+/* CSS Document */
+
+body {
+    background-color: rgba(255,0,0,0.5);
+}
+
+.back_button {
+    display: inline-block;
+    float: left;
+    margin-left: 1%;
+    margin-top: -2%;
+}
+
+#registerbar {
+    position: absolute;
+    margin-top: 17%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 100%;
+    overflow-y: scroll;
+}
+
+    #registerbar .firstline, #registerbar .secondline, #registerbar .thirdline, #registerbar .forthline {
+        /*margin-left: 15%;*/
+        margin-top: 2%;
+        width: 100%;
+        height: 100px;
+    }
+
+        #registerbar .firstline .title, #registerbar .secondline .title, #registerbar .thirdline .title, #registerbar .forthline .title {
+            width: 35%;
+            float: left;
+        }
+
+        #registerbar .firstline span, #registerbar .secondline span, #registerbar .thirdline span, #registerbar .forthline span {
+            float: right;
+            /*margin-right:20%;*/
+            margin-top: 3%;
+            font-size: 40px;
+        }
+
+        #registerbar .firstline .inputbar, #registerbar .secondline .inputbar, #registerbar .thirdline .inputbar, #registerbar .forthline .inputbar {
+            float: left;
+        }
+
+        #registerbar .firstline input, #registerbar .secondline input, #registerbar .thirdline input, #registerbar .forthline input {
+            float: left;
+            border-color: rgba(255,165,0,0.8);
+            height: 80px;
+            border-radius: 15px;
+            font-size: 40px;
+            text-indent: 0.5em;
+        }
+
+    #registerbar .fifthline {
+        margin-left: 15%;
+        margin-top: 2%;
+        width: 100%;
+        height: 100px;
+    }
+
+        #registerbar .fifthline input {
+            text-align: center;
+            width: 20%;
+            height: 80px;
+            font-size: 40px;
+            background-color: rgba(255,169,0,0.8);
+            border: 0px;
+            border-radius: 15px;
+        }
+
+        #registerbar .fifthline span, #registerbar .fifthline a {
+            font-size: 35px;
+        }
+
+        #registerbar .fifthline a {
+            color: red;
+        }

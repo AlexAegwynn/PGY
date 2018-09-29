@@ -209,6 +209,19 @@
     <Content Include="Content\img\toptitle.png" />
     <Content Include="Content\img\totop.png" />
     <Content Include="Content\img\小米8——120x120.jpg" />
+    <Content Include="Content\mobile\css\bootstrap.css" />
+    <Content Include="Content\mobile\css\collect_phone.css" />
+    <Content Include="Content\mobile\css\foot_phone.css" />
+    <Content Include="Content\mobile\css\login_phone.css" />
+    <Content Include="Content\mobile\css\main_phone.css" />
+    <Content Include="Content\mobile\css\mycollection.css" />
+    <Content Include="Content\mobile\css\news_phone.css" />
+    <Content Include="Content\mobile\css\register_phone.css" />
+    <Content Include="Content\mobile\css\search_phone.css" />
+    <Content Include="Content\mobile\img\back.png" />
+    <Content Include="Content\mobile\img\clickdown.png" />
+    <Content Include="Content\mobile\img\close.png" />
+    <Content Include="Content\mobile\img\search.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -254,6 +267,8 @@
     <Content Include="Views\Home\FavoritesList.cshtml" />
     <Content Include="Views\Remark\Index.cshtml" />
     <Content Include="Views\Remark\GetReplies.cshtml" />
+    <Content Include="Views\Authentication\MobileLogin.cshtml" />
+    <Content Include="Views\Authentication\MobileRegister.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -280,6 +295,9 @@
       <Project>{7d48169e-24db-4f18-bb00-7f41be2c1a27}</Project>
       <Name>Model</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

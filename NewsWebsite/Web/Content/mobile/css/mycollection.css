@@ -1,0 +1,98 @@
+@charset "utf-8";
+/* CSS Document */
+
+.myCollectionContent{
+	position: absolute;
+	top: 40px;
+	left: 200px;
+	z-index: 1;
+	width:700px;
+	height: auto;
+	
+}
+.myCollectionContent .collectionTitle{
+	padding-left: 30px;
+	width: 670px;
+	height: 50px;
+	border-bottom: 1px solid #4d4d4d;
+}
+.myCollectionContent .collectionTitle span{
+	float: left;
+	font-family: "微软雅黑";
+	font-weight: bold;
+	font-size: 30px;
+	line-height: 45px;
+}
+.myCollectionContent .collectionContent{
+	
+	margin-top: 10px;
+	width: 700px;
+	height: auto;
+	
+}
+.myCollectionContent .collectionContent img{
+	width: 120px;
+	height: 120px;
+}
+.myCollectionContent .collectionContent ul li{
+	display: block;
+	padding-left: 30px;
+	width: 670px;
+	height: 200px;
+	border-bottom: 1px solid #4d4d4d;
+}
+.myCollectionContent .collectionContent ul li .lContent{
+	position: relative;
+	width: 150px;
+	height: 170px;
+	padding-top: 30px;
+}
+.myCollectionContent .collectionContent ul li .lContent a img:hover{
+	transform: scale(1.1);
+	transition: all 0.5s ease 0s;
+	-webkit-transform: scale(1.1);
+	-webkit-transform: all 1s ease 0s;
+}
+.myCollectionContent .collectionContent ul li .rContent{
+	margin-top: -150px;
+	margin-left: 150px;
+	float: left;
+	width: 450px;
+	height:100px;
+}
+.myCollectionContent .collectionContent ul li .rContent .newsTitle{
+	font-weight: bold;
+	font-family: "微软雅黑";
+	font-size: 18px;
+}
+.myCollectionContent .collectionContent ul li .rContent .newsTitle a{
+	color: black;
+}
+.myCollectionContent .collectionContent ul li .rContent .newsTitle a:hover{
+	color:blue;
+}
+.myCollectionContent .collectionContent ul li .rContent .contentFrom{
+	padding-top: 10px;
+}
+.myCollectionContent .collectionContent ul li .rContent .contentFrom a{
+	color: #4d4d4d;
+}
+.myCollectionContent .collectionContent ul li .rContent .contentFrom a:hover{
+	text-decoration: underline;
+}
+.myCollectionContent .collectionContent ul li .rContent .collectTime{
+	padding-top: 10px;
+}
+.myCollectionContent .collectionContent ul li .rContent .delNews{
+	padding-top: 10px;
+	float: right;
+}
+.myCollectionContent .collectionContent ul li .rContent .delNews a{
+	color: black;
+}
+.myCollectionContent .collectionContent ul li .rContent .delNews a:hover{
+	text-decoration: underline;
+}
+.loginBar #loginInnerTwo .myCollection{
+	background-color: #4d4d4d;
+}

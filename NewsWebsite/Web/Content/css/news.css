@@ -335,3 +335,7 @@ position:fixed;_position:absolute;_top:expression(eval(document.documentElement.
 .shopping .d2{display: inline-block;width:350px;height:30px;clear:both;position:absolute;z-index:100;left:45%;top:180px;}
 .shopping .d2 li{width:17px;height:15px;overflow:hidden;cursor:pointer;background:url(../img/img1_2.png) no-repeat center;float:left;margin:0 3px;display:inline;}
 .shopping .d2 li.nuw{background:url(../img/img1_1.png) no-repeat center;}
+
+#info img {
+    max-width: 100%;
+}

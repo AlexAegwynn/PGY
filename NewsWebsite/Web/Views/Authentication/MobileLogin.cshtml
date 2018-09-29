@@ -1,0 +1,82 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+    <title>登录</title>
+    <link href="~/Content/mobile/css/main_phone.css" rel="stylesheet" />
+    <link href="~/Content/mobile/css/login_phone.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript">
+        function Login() {
+            var t_UserName = $('#t_UserName').val();
+            var t_UserPass = $('#t_UserPass').val();
+
+            $('#t_UserNameTip').html('');
+            $('#t_UserPassTip').html('');
+
+            var state = true;
+
+            if (t_UserName == '') {
+                $('#t_UserNameTip').html('不能为空');
+                state = false;
+            }
+
+            if (t_UserPass == '') {
+                $('#t_UserPassTip').html('不能为空');
+                state = false;
+            }
+
+            if (state) {
+                $.ajax({
+                    url: '/Authentication/Login',
+                    type: 'post',
+                    data: $('#form1').serialize(),
+                    success: function (data) {
+                        if (!data.result) {
+                            $('#error').html(data.msg);
+                        } else {
+                            window.location.href = '/Home/Index'
+                        }
+                    }
+                })
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="top">
+        <div class="top_left">
+            <div class="back_button">
+                <a href="javascript :;" onClick="javascript :history.back(-1);">
+                    <img src="~/Content/mobile/img/back.png" />
+                </a>
+            </div>
+        </div>
+        <div class="top_center">
+            <a href="#"><h1>寻味网</h1></a>
+        </div>
+        <div class="top_right">
+            <!--<a href="search_phone.html"><img src="img/search.png" /></a>-->
+        </div>
+    </div>
+
+    <div id="loginbar">
+        <form name="form1" id="form1">
+            @Html.Hidden("UID", 1)
+            <div class="firstline"><span>账号：</span><input type="text" name="UserName" id="t_UserName" /></div>
+            <div class="secondline"><span>密码：</span><input type="password" name="Password" id="t_UserPass" /></div>
+            <div class="thirdline">
+                <input type="button" id="button" name="submit" onclick="Login()" value="登录" />
+                <span>&nbsp;&nbsp;&nbsp;还没账号？</span>
+                <a href="/Authentication/Register">立即注册</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

@@ -6,15 +6,23 @@ using System.Web.Mvc;
 
 namespace Web.Controllers
 {
-    public class AuthenticationController : Controller
+    public class AuthenticationController : BaseController
     {
         public ActionResult Index()
         {
+            if (State)
+            {
+                return View("MobileLogin");
+            }
             return View();
         }
 
         public ActionResult Register()
         {
+            if (State)
+            {
+                return View("MobileRegister");
+            }
             return View();
         }
 

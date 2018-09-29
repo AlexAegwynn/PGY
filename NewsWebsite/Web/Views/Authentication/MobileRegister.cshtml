@@ -1,0 +1,116 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+    <title>注册</title>
+    <link href="~/Content/mobile/css/main_phone.css" rel="stylesheet" />
+    <link href="~/Content/mobile/css/register_phone.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript">
+        function Register() {
+            var t_UserName = $('#t_UserName').val();
+            var t_UserPass = $('#t_UserPass').val();
+            var t_RePass = $('#t_RePass').val();
+            var t_Email = $('#t_Email').val();
+
+            $('#t_UserNameTip').html('');
+            $('#t_UserPassTip').html('');
+            $('#t_RePassTip').html('');
+            $('#t_EmailTip').html('');
+
+            var state = true;
+
+            if (t_UserName == '') {
+                $('#t_UserNameTip').html('不能为空');
+                state = false;
+            } else {
+                var reg = /^[a-zA-Z0-9_-]{3,16}$/;
+                if (!reg.test(t_UserName)) {
+                    $('#t_UserNameTip').html('用户名格式错误');
+                    state = false;
+                }
+            }
+
+            if (t_UserPass == '') {
+                $('#t_UserPassTip').html('不能为空');
+                state = false;
+            } else {
+                if (t_UserPass.length > 8) {
+                    $('#t_UserPassTip').html('密码格式错误');
+                    state = false;
+                }
+            }
+
+            if (t_RePass == '') {
+                $('#t_RePassTip').html('不能为空');
+                state = false;
+            }
+
+            if (t_UserPass != t_RePass) {
+                $('#t_RePassTip').html('密码不一致');
+                state = false;
+            }
+
+            if (t_Email != '') {
+                var reg = /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/;
+
+                if (!reg.test(t_Email)) {
+                    $('#t_EmailTip').html('邮箱格式不正确');
+                    state = false;
+                }
+            } else {
+                $('#t_EmailTip').html('不能为空');
+                state = false;
+            }
+
+            if (state) {
+                $.ajax({
+                    url: '/Authentication/Login',
+                    type: 'post',
+                    data: $('#form1').serialize(),
+                    success: function (data) {
+                        if (!data.result) {
+                            $('#error').html(data.msg);
+                        } else {
+                            window.location.href = '/Home/Index';
+                        }
+                    }
+                })
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="top">
+        <div class="top_left">
+            <div class="back_button">
+                <a href="javascript :;" onClick="javascript :history.back(-1);">
+                    <img src="~/Content/mobile/img/back.png" />
+                </a>
+            </div>
+        </div>
+        <div class="top_center">
+            <a href="#"><h1>寻味网</h1></a>
+        </div>
+        <div class="top_right">
+            <!--<a href="search_phone.html"><img src="img/search.png" /></a>-->
+        </div>
+    </div>
+
+    <div id="registerbar">
+        <form name="form1" id="form1">
+            <div class="firstline"><div class="title"><span>账号：</span></div><div class="inputbar"><input type="text" name="UserName" id="t_UserName" /></div></div>
+            <div class="secondline"><div class="title"><span>密码：</span></div><div class="inputbar"><input type="password" name="Password" id="t_UserPass" /></div></div>
+            <div class="thirdline"><div class="title"><span>确认密码：</span></div><div class="inputbar"><input type="password" name="t_RePass" id="t_RePass" /></div></div>
+            <div class="forthline"><div class="title"><span>邮箱地址：</span></div><div class="inputbar"><input type="email" name="Email" id="t_Email" /></div></div>
+            <div class="fifthline"><input type="button" name="button" onclick="Register()" value="免费注册" /><span>&nbsp;&nbsp;&nbsp;已有账号？点击</span><a href="/Authentication/Index">直接登录</a></div>
+        </form>
+    </div>
+</body>
+</html>

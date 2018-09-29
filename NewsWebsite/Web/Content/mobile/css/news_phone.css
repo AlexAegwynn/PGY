@@ -1,0 +1,296 @@
+﻿@charset "utf-8";
+/* CSS Document */
+
+a{
+    color:black;
+}
+
+a:active, a:link, a:visited {
+    text-decoration: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: bold;
+}
+
+.top .top_center {
+    margin-top:0%;
+}
+
+.type .ontype {
+    width: 100%;
+    height: auto;
+}
+
+.type .ontype span {
+    font-size:40px;
+    float:left;
+    margin-left:1%;
+    margin-top:2%;
+}
+
+.type .ontype .gotop {
+    float:right;
+    margin-top:2%; 
+    margin-right:2%;
+}
+
+.type .ontype p {
+    color: #999;
+}
+
+.news_content {
+    position: absolute;
+    top: 10%;
+    width: 100%;
+    height: auto;
+}
+
+.news_content * {
+    margin: 2%;
+}
+
+.news_content h1 {
+    font-size: 60px;
+}
+
+.news_content h2 {
+    font-size:40px;
+}
+
+.news_content p {
+    font-size:30px;
+}
+
+.news_content .image {
+    text-align: center;
+    width:96%;
+    height:auto;
+}
+
+.news_content img {
+    max-width: 96%;
+    height:100%;
+}
+
+.news_content .collect #notcollect {
+    display:none;
+}
+
+.news_content .collect a {
+    color:red;
+}
+
+#remark {
+    width: 96%;
+    height: auto;
+    display: block;
+}
+
+.otherlink, .otherlink .newslink {
+    width: 96%;
+    height: auto;
+}
+
+.otherlink .newslink, .shoplink{
+    border-bottom: 1px solid #ccc;
+}
+
+.shoplink {
+    width:96%;
+    height:200px;
+}
+
+.shoplink .shop_leftbar {
+    float: left;
+    width: 20%;
+    height: 100px;
+}
+
+.shoplink .shop_leftbar img {
+    width:100%;
+    height:150px;
+}
+
+.shoplink .shop_centerbar {
+    float:left;
+    width:50%;
+    height:150px;
+}
+
+.shoplink .shop_rightbar {
+    float: left;
+    margin-top:3%;
+    width:15%;
+    height: 150px;
+    color:red;
+}
+
+.container {
+    width: 90%;
+    height:auto;
+}
+
+.commentbox {
+    width: 94%;
+    margin:1% 1% 1% 1%;
+}
+
+.commentbox .pull-right {
+    width:15%;
+    height:10%;
+    font-size:30px;
+    margin-top: 10px;
+}
+
+.mytextarea {
+    width: 100%;
+    overflow: auto;
+    word-break: break-all;
+    height: 100px;
+    color: #000;
+    font-size: 2em;
+    resize: none;
+}
+
+.comment-list {
+    width: 700px;
+    margin: 20px auto;
+    clear: both;
+    padding-top: 20px;
+}
+
+.comment-content-header {
+    font-size: 30px;
+    margin-left:0%;
+}
+.comment-list .comment-info {
+    position: relative;
+    margin-bottom: 20px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ccc;
+}
+
+.comment-list .comment-info header {
+    width: 10%;
+    position: absolute;
+}
+
+.comment-list .comment-info header img {
+    width: 100%;
+    border-radius: 50%;
+    padding: 5px;
+}
+
+.comment-list .comment-info .comment-right {
+    padding: 5px 0px 5px 0px;
+}
+
+.comment-list .comment-info .comment-right h3 {
+    font-size:40px;
+    margin: 5px 0px;
+}
+
+.comment-list .comment-info .comment-right .comment-content-header {
+    height: 25px;
+}
+
+.comment-list .comment-info .comment-right .replybox {
+    width: 80%;
+}
+
+.comment-list .comment-info .comment-right .replybox textarea {
+    width: 100%;
+    margin-left: 15px;
+}
+
+.comment-right .reply-list .reply .replybox {
+    width: 80%;
+}
+
+.comment-right .reply-list .reply .replybox textarea {
+    width: 100%;
+    margin-left:15px;
+}
+
+.comment-right .comment-list .comment-info .comment-right h3 {
+    font-size: 45px;
+}
+
+.comment-right .reply-list .reply a {
+    font-size: 30px;
+}
+
+.comment-right .reply-list .reply span {
+    font-size: 30px;
+}
+
+.comment-list .comment-info .comment-right .comment-content-footer span.reply-btn {
+    margin-left: -10%;
+}
+
+.comment-list .comment-info .comment-right .comment-content-footer .row .replybox .send {
+    width:18%;
+    font-size:30px;
+}
+
+.comment-list .comment-info .comment-right .comment-content-header span, .comment-list .comment-info .comment-right .comment-content-footer span {
+    padding-right: 2em;
+    color: #aaa;
+}
+
+.comment-list .comment-info .comment-right .comment-content-header span, .comment-list .comment-info .comment-right .comment-content-footer span.reply-btn, .send, .reply-list-btn {
+    cursor: pointer;
+}
+
+.comment-list .comment-info .comment-right .comment-content-footer span.reply-btn, .comment-list .comment-info .comment-right .reply-list .reply .reply-list-btn {
+    display: inline-block;
+    background-color: #5BC0DE;
+    border-radius: 5px;
+    width:16%;
+    height:10%;
+    font-size:30px;
+    color: white;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 12px;
+    padding-right: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #eee;
+}
+
+.comment-list .comment-info .comment-right .comment-content-footer .row .send, .comment-list .comment-info .comment-right .reply-list .reply .replybox .send {
+    display: inline-block;
+    border-radius: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #eee;
+    margin-left: 15px;
+    background-color: #5BC0DE;
+    color: white;
+}
+
+.comment-list .comment-info .comment-right .reply-list {
+    border-left: 3px solid #ccc;
+    padding-left: 7px;
+}
+
+.comment-list .comment-info .comment-right .reply-list .reply {
+    border-bottom: 1px dashed #ccc;
+}
+
+.comment-list .comment-info .comment-right .reply-list .reply div span {
+    padding-left: 10px;
+}
+
+.comment-list .comment-info .comment-right .reply-list .reply p span {
+    padding-right: 2em;
+    color: #aaa;
+}
+
+.info img {
+    max-width: 100%;
+}

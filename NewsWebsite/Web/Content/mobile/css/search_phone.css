@@ -1,0 +1,132 @@
+﻿@charset "utf-8";
+/* CSS Document */
+* {
+    font-family: '微软雅黑';
+}
+body, ul, ol, li, p, h1, h2, h3, h4, h5, h6, form, fieldset, table, td, img, div, dl, dt, dd, input {
+    margin: 0;
+    padding: 0;
+}
+
+a{
+    color:black;
+}
+
+::-webkit-scrollbar {
+    width: 0px;
+}
+
+.topbar {
+    z-index:1;
+    width:100%;
+    height:150px;
+    background-color:#eee;
+    position:fixed;
+    top:0;
+}
+
+.topbar form {
+    display:block;
+    margin-top:0px;
+}
+
+.topbar .index_button {
+    float: left;
+    margin-left:5%;
+    margin-top:3.5%;
+    width:50px;
+    height:50px;
+}
+
+.topbar form .index_button img {
+    width:100%;
+    height:100%;
+}
+
+.topbar form .searchbar {
+    float: left;
+    margin-top:2%;
+    margin-left:9%;
+    width: 80%;
+    height: 100px;
+}
+
+.topbar form .searchbar .text_search {
+    float:left;
+    border:1px solid #999;
+    width:70%;
+    height:100px;
+    background-color:#fff;
+}
+
+.topbar form .searchbar .text_search input {
+    border: none;
+    margin-left: 0.5%;
+    width: 90%;
+    height: 100px;
+    text-indent: 0.2em;
+    font-size: 35px;
+}
+
+.topbar form .searchbar .text_search img {
+    width:50px;
+    height:50px;
+    position:absolute;
+    margin-top:2.6%;
+    margin-left:0.5%;
+    display:none;
+}
+
+.topbar form .searchbar .button_search {
+    float:left;
+    border:1px solid #999;
+    background-color:#ccc;
+    width:20%;
+    height:100px;
+}
+
+.topbar form .searchbar .button_search span {
+    display:inline-block;
+    font-size:35px;
+    width:100%;
+    height:100px;
+    text-align:center;
+    line-height:100px;
+    color:black;
+}
+
+.search_list {
+    display:none;
+    z-index:0;
+    margin-top:15%;
+    overflow-y:scroll;
+    width:100%;
+    height:auto;
+}
+
+.search_list .news {
+    width: 100%;
+    height: 220px;
+    border-bottom: 1px solid #ccc;
+}
+
+.search_list .news img {
+    float: left;
+    margin-left: 2%;
+    margin-top: 1%;
+    width: 20%;
+    height: 90%;
+}
+
+.search_list .news p {
+    font-size: 40px;
+    margin-left: 2%;
+    margin-top: 1%;
+    float: left;
+    width: 70%;
+    height: 20%;
+}
+
+.search_list .news p:visited {
+    color: #ccc;
+}
