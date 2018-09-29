@@ -43,7 +43,6 @@
             var windowHeight = $(this).height();
             if (scrollTop + windowHeight >= scrollHeight) {
                 var total = $('#PageCount').val();
-
                 if (pcount <= total) {
                     var str = $('.searchText').val();
                     $.ajax({

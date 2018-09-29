@@ -1,0 +1,12 @@
+﻿@{
+    Layout = null;
+    var vList = Model as List<Web.ViewModels.VMArticle>;
+}
+
+@foreach (var item in vList)
+{
+    <div class="news">
+        <a href="/Home/ArticleInfo?inArticleID=@item.ArticleID"><img src="@item.ImgSrc" alt="" /></a>
+        <a href="/Home/ArticleInfo?inArticleID=@item.ArticleID"><p>@item.Title</p></a>
+    </div>
+}

@@ -50,6 +50,11 @@ namespace Web.Controllers
 
             ViewBag.VCount = LVisitorCount.GetVisitorCount().Count;
 
+            if (State)
+            {
+                return View("MobileIndex");
+            }
+
             return View();
         }
 
@@ -58,6 +63,10 @@ namespace Web.Controllers
             List<Model.MContent> list = LContent.GetArticles(page, categoryId, searchStr);
             List<ViewModels.VMArticle> vList = GetVmList(list);
 
+            if (State)
+            {
+                return PartialView("MobileArticleList", vList);
+            }
             return PartialView(vList);
         }
 

@@ -269,6 +269,9 @@
     <Content Include="Views\Remark\GetReplies.cshtml" />
     <Content Include="Views\Authentication\MobileLogin.cshtml" />
     <Content Include="Views\Authentication\MobileRegister.cshtml" />
+    <Content Include="Views\Home\MobileIndex.cshtml" />
+    <Content Include="Views\Shared\_MobileLayout.cshtml" />
+    <Content Include="Views\Home\MobileArticleList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
