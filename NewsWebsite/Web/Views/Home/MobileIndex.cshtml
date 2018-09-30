@@ -30,7 +30,7 @@
 
     $(window).scroll(
         function () {
-            var scrollTop = $(this).scrollTop();     
+            var scrollTop = $(this).scrollTop();
             var scrollHeight = $(document).height();
             var windowHeight = $(this).height();
             if (scrollTop + 2 + windowHeight >= scrollHeight) {
@@ -51,7 +51,7 @@
                 } else {
                     if (state == true) {
                         //alert('到底了');
-                        var str = '<div class="cBox single-mode" style="height:10px;;background-color:#d8f7ff;text-align:center"><span>到底了</span></div>';
+                        var str = '<div style="height:10px;background-color:#d8f7ff;text-align:center"><span>到底了</span></div>';
                         $(str).appendTo($("#articles"));
                         state = false;
                         return;
@@ -61,15 +61,38 @@
         });
 </script>
 
+<div id="typepick" class="typepick">
+    <a id="mycollection" href="/Home/FavoritesList"><div>我的收藏</div></a>
+    <a id="myfoot" href="/Home/FootmarkList"><div>我的足迹</div></a>
+    <a href="/Authentication/Logout"><div>退出账号</div></a>
+</div>
 <div class="top">
     <div class="top_left">
-        <a href="/Authentication/Index">登录</a> | <a href="/Authentication/Register">注册</a>
+        @{
+            if (Convert.ToBoolean(ViewBag.IsLogin))
+            {
+                var a = "|";
+                <a href="/Authentication/Index">登录</a> @a <a href="/Authentication/Register"> 注册 </a>
+            }
+            else
+            {
+                <div class="personal">
+                    <a onclick="javascript: ;" id="clickdown">
+                        <img src="~/Content/mobile/img/clickdown.png" />
+                    </a>
+                    <a onclick="javascript: ;" id="clickdown2">
+                        <img src="~/Content/mobile/img/clickdown.png" />
+                    </a>
+                    <span>@ViewBag.Name</span>
+                </div>
+            }
+        }
     </div>
     <div class="top_center">
         <a href="/Home/Index"><h1>寻味网</h1></a>
     </div>
     <div class="top_right">
-        <a href="search_phone.html">
+        <a href="/Home/Search">
             <img src="~/Content/mobile/img/search.png" />
         </a>
     </div>
@@ -90,3 +113,28 @@
 
 <input id="PageCount" hidden="hidden" value="@ViewBag.PageCount" />
 <div id="articles" class="new_list"></div>
+
+<script type="text/javascript">
+    $('#clickdown').click(function () {
+        $('.top').animate({ left: '25%' }, 300);
+        $('.type').animate({ left: '25%' }, 300);
+        $('#typepick').animate({ left: '0%' }, 300);
+        $('.type').animate({ width: '75%' }, 1);
+        $('.top').animate({ width: '75%' }, 1);
+        $('#clickdown').animate({ opacity: '0' }, 300);
+        $('#clickdown').hide();
+        $('#clickdown2').show();
+        $('#clickdown2').animate({ opacity: '1' }, 300);
+        $('#clickdown2').click(function () {
+            $('.type').animate({ width: '100%' }, 1);
+            $('.top').animate({ width: '100%' }, 1);
+            $('.top').animate({ left: '0%' }, 300);
+            $('.type').animate({ left: '0%' }, 300);
+            $('#typepick').animate({ left: '-25%' }, 300);
+            $('#clickdown2').animate({ opacity: '0' }, 300);
+            $('#clickdown2').hide();
+            $('#clickdown').show();
+            $('#clickdown').animate({ opacity: '1' }, 300);
+        });
+    });
+</script>

@@ -209,7 +209,6 @@
     <Content Include="Content\img\toptitle.png" />
     <Content Include="Content\img\totop.png" />
     <Content Include="Content\img\小米8——120x120.jpg" />
-    <Content Include="Content\mobile\css\bootstrap.css" />
     <Content Include="Content\mobile\css\collect_phone.css" />
     <Content Include="Content\mobile\css\foot_phone.css" />
     <Content Include="Content\mobile\css\login_phone.css" />
@@ -272,6 +271,8 @@
     <Content Include="Views\Home\MobileIndex.cshtml" />
     <Content Include="Views\Shared\_MobileLayout.cshtml" />
     <Content Include="Views\Home\MobileArticleList.cshtml" />
+    <Content Include="Views\Home\MobileSearch.cshtml" />
+    <Content Include="Views\Home\MobileArticleInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

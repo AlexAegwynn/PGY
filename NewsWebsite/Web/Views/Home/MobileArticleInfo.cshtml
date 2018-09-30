@@ -1,0 +1,180 @@
+﻿@{
+    Layout = null;
+    var vModel = Model as Web.ViewModels.VMArticle;
+    var arList = ViewData["RelatedArticle"] as List<Web.ViewModels.VMArticle>;
+    var iList = ViewData["Items"] as List<Web.ViewModels.VMItem>;
+    var url = ViewBag.CatName == "综合" ? "/Home/Index" : "/Home/Index?catid=" + vModel.DomainID;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/mobile/css/main_phone.css" rel="stylesheet" />
+    <link href="~/Content/mobile/css/news_phone.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <title>@vModel.Title</title>
+
+    <script>
+        $(function () {
+            var str = $('#hinfo').val();
+            $('#info').html(str);
+
+
+        })
+    </script>
+</head>
+<body>
+    <div id="typepick" class="typepick">
+        <a id="mycollection" href="/Home/FavoritesList"><div>我的收藏</div></a>
+        <a id="myfoot" href="/Home/FootmarkList"><div>我的足迹</div></a>
+        <a href="/Authentication/Logout"><div>退出账号</div></a>
+    </div>
+    <div class="top">
+        <div class="top_left">
+            @{
+                if (Convert.ToBoolean(ViewBag.IsLogin))
+                {
+                    <div class="personal">
+                        <a onclick="javascript: ;" id="clickdown">
+                            <img src="~/Content/mobile/img/clickdown.png" />
+                        </a>
+                        <a onclick="javascript: ;" id="clickdown2">
+                            <img src="~/Content/mobile/img/clickdown.png" />
+                        </a>
+                        <span>@ViewBag.Name</span>
+                    </div>
+                }
+                else
+                {
+                    var a = "|";
+                    <a href="/Authentication/Index">登录</a> @a <a href="/Authentication/Register"> 注册 </a>
+                }
+            }
+        </div>
+        <div class="top_center">
+            <a href="/Home/Index"><h1>寻味网</h1></a>
+        </div>
+        <div class="top_right">
+            <a href="/Home/Search">
+                <img src="~/Content/mobile/img/search.png" />
+            </a>
+        </div>
+    </div>
+    <div class="type">
+        <div class="ontype">
+            <span><a href="/Home/Index">首页</a>|<a href="@url">@ViewBag.CatName</a>|<a><p>正文</p></a></span>
+            <div id="gotop" class="gotop"><a><p>点击回到顶部</p></a></div>
+        </div>
+    </div>
+    <div class="news_content">
+        <h1>@vModel.Title</h1>
+        <div id="info">
+            @Html.Hidden("hinfo", vModel.Conten)
+        </div>
+        <div class="collect">
+            @{
+                if (vModel.IsFavorites)
+                {
+                    <p id="notcollect"><a href="javascript:notcollect();">已收藏</a></p>
+                }
+                else
+                {
+                    <p id="collectted"><a href="javascript:collectted();">★收藏</a></p>
+                }
+            }
+        </div>
+        <div id="remark">
+            <div class="container">
+                <div class="commentbox">
+                    <textarea cols="80" rows="50" placeholder="来说几句吧......" class="mytextarea" id="content"></textarea>
+                    <div class="btn btn-info pull-right" id="comment" onClick="javascript:SaveComment();">评论</div>
+                </div>
+                <div class="comment-list">
+
+                </div>
+            </div>
+        </div>
+        <div class="otherlink">
+            <h2>相关推文</h2>
+            @foreach (var item in arList)
+            {
+                <div class="newslink">
+                    <a href="/Home/ArticleInfo?inArticleID=@item.ArticleID"><p>@item.Title</p></a>
+                </div>
+            }
+        </div>
+        @if (iList.Count > 0)
+        {
+            <h2>猜你喜欢</h2>
+            foreach (var item in iList)
+            {
+                <div class="shoplink">
+                    <a class="shop_leftbar" href="@item.ClickUrl"><img src="@item.ImgSmall" alt="" /></a>
+                    <a class="shop_centerbar" href="@item.ClickUrl"><p>@item.Title</p></a>
+                    <p class="shop_rightbar"><span>￥</span>@item.Price</p>
+                </div>
+            }
+        }
+    </div>
+</body>
+</html>
+<script src="~/Scripts/jquery.comment.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $("#gotop").hide();
+
+        $(function () {
+            $(window).scroll(function () {
+                if ($(window).scrollTop() > 100) {
+                    $("#gotop").show();
+                }
+                else {
+                    $("#gotop").hide();
+                }
+            });
+
+            $('#gotop').click(function () {
+                $('html , body').animate({ scrollTop: 0 }, '500');
+            });
+        });
+    });
+</script>
+<script type="text/javascript">
+    $('#clickdown').click(function () {
+        $('.top').animate({ left: '25%' }, 300);
+        $('.type').animate({ left: '25%' }, 300);
+        $('#typepick').animate({ left: '0%' }, 300);
+        $('.type').animate({ width: '75%' }, 1);
+        $('.top').animate({ width: '75%' }, 1);
+        $('#clickdown').animate({ opacity: '0' }, 300);
+        $('#clickdown').hide();
+        $('#clickdown2').show();
+        $('#clickdown2').animate({ opacity: '1' }, 300);
+        $('#clickdown2').click(function () {
+            $('.type').animate({ width: '100%' }, 1);
+            $('.top').animate({ width: '100%' }, 1);
+            $('.top').animate({ left: '0%' }, 300);
+            $('.type').animate({ left: '0%' }, 300);
+            $('#typepick').animate({ left: '-25%' }, 300);
+            $('#clickdown2').animate({ opacity: '0' }, 300);
+            $('#clickdown2').hide();
+            $('#clickdown').show();
+            $('#clickdown').animate({ opacity: '1' }, 300);
+        });
+    });
+</script>
+<script type="text/javascript">
+    function collectted() {
+        document.getElementById('collectted').style.display = 'none';
+        document.getElementById('notcollect').style.display = 'block';
+    }
+    function notcollect() {
+        document.getElementById('notcollect').style.display = 'none';
+        document.getElementById('collectted').style.display = 'block';
+    }
+</script>

@@ -58,6 +58,11 @@ namespace Web.Controllers
             return View();
         }
 
+        public ActionResult Search()
+        {
+            return View("MobileSearch");
+        }
+
         public PartialViewResult ArticleList(int page = 0)
         {
             List<Model.MContent> list = LContent.GetArticles(page, categoryId, searchStr);
@@ -137,6 +142,11 @@ namespace Web.Controllers
             ViewData["RelatedArticle"] = vRaList;
             ViewData["Items"] = TuiJian(vModel.Title);
             #endregion
+
+            if (State)
+            {
+                return View("MobileArticleInfo", vModel);
+            }
 
             return View(vModel);
         }

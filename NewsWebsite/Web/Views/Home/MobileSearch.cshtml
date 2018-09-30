@@ -1,0 +1,49 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+    <link href="~/Content/mobile/css/search_phone.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script>
+        $('#close').click(function () {
+            $('#Stext').val("");
+        });
+
+        function Search() {
+            var str = $('#Stext').val();
+            if (str != '') {
+                window.location.href = '/Home/Index?search=' + str;
+            }
+        }
+    </script>
+    <title>搜索</title>
+</head>
+<body>
+    <div class="topbar">
+        <div class="index_button">
+            <a href="javascript :;" onClick="javascript :history.back(-1);">
+                <img src="~/Content/mobile/img/back.png" />
+            </a>
+        </div>
+        <form>
+            <div class="searchbar">
+                <div id="text_search" class="text_search">
+                    <input id="Stext" type="text" name="searchtext" value="" placeholder="在此处输入你要搜索的信息" />
+                    <a href="#">
+                        <img id="close" src="~/Content/mobile/img/close.png" />
+                    </a>
+                </div>
+                <div class="button_search">
+                    <a href="javascript:;" onclick="Search()"><span>搜索</span></a>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
