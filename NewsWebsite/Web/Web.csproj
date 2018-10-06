@@ -273,6 +273,8 @@
     <Content Include="Views\Home\MobileArticleList.cshtml" />
     <Content Include="Views\Home\MobileSearch.cshtml" />
     <Content Include="Views\Home\MobileArticleInfo.cshtml" />
+    <Content Include="Views\Home\MobileFavoritesList.cshtml" />
+    <Content Include="Views\Home\MobileFootmarkList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

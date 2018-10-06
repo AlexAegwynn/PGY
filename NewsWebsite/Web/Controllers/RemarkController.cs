@@ -8,7 +8,7 @@ using Web.ViewModels;
 
 namespace Web.Controllers
 {
-    public class RemarkController : Controller
+    public class RemarkController : BaseController
     {
         // GET: TestRemark
         public ActionResult Index(int inArticleID)
@@ -29,6 +29,7 @@ namespace Web.Controllers
                 };
                 vList.Add(vModel);
             }
+            ViewBag.State = State;
             return View(vList);
         }
 

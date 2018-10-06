@@ -3,9 +3,11 @@
     var list = Model as List<Web.ViewModels.VMRemark>;
 }
 
-<script src="~/Scripts/jquery-1.10.2.min.js"></script>
-<link href="~/Content/bootstrap.css" rel="stylesheet" />
-<link href="~/Content/css/Remarks.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+@if (!ViewBag.State)
+{
+    <link href="~/Content/css/Remarks.css" rel="stylesheet" />
+}
 <div>
     <div class="container">
         <div class="commentbox">
@@ -46,7 +48,6 @@
         </div>
     </div>
 </div>
-<script src="~/Scripts/bootstrap.min.js"></script>
 <script type="text/javascript">
     $(".reply-btn").click(function () {
         if ($(this).parent().parent().find(".replybox").length > 0) {
@@ -120,7 +121,12 @@
                         }
                     })
                 } else {
-                    ILogin();
+                    var state = '@ViewBag.State';
+                    if (state) {
+                        window.location.href = '/Authentication/Index';
+                    } else {
+                        ILogin();
+                    }
                     return;
                 }
             }

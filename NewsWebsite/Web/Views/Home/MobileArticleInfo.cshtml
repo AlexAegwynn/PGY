@@ -19,11 +19,22 @@
     <title>@vModel.Title</title>
 
     <script>
+        var articleid = '@vModel.ArticleID';
+
         $(function () {
             var str = $('#hinfo').val();
             $('#info').html(str);
 
-
+            $.ajax({
+                url: '/Remark/Index',
+                type: 'get',
+                data: {
+                    inArticleID: articleid
+                },
+                success: function (data) {
+                    $('#remark').html(data);
+                }
+            })
         })
     </script>
 </head>
@@ -66,12 +77,13 @@
     </div>
     <div class="type">
         <div class="ontype">
+            <input type="hidden" id="aid" value="@vModel.ArticleID" />
             <span><a href="/Home/Index">首页</a>|<a href="@url">@ViewBag.CatName</a>|<a><p>正文</p></a></span>
             <div id="gotop" class="gotop"><a><p>点击回到顶部</p></a></div>
         </div>
     </div>
     <div class="news_content">
-        <h1>@vModel.Title</h1>
+        <h1 id="title">@vModel.Title</h1>
         <div id="info">
             @Html.Hidden("hinfo", vModel.Conten)
         </div>
@@ -79,25 +91,15 @@
             @{
                 if (vModel.IsFavorites)
                 {
-                    <p id="notcollect"><a href="javascript:notcollect();">已收藏</a></p>
+                    <p id="notcollect"><a id="fav" href="javascript:DelFavorites();">★已收藏</a></p>
                 }
                 else
                 {
-                    <p id="collectted"><a href="javascript:collectted();">★收藏</a></p>
+                    <p id="collectted"><a id="fav" href="javascript:Favorites();">★收藏</a></p>
                 }
             }
         </div>
-        <div id="remark">
-            <div class="container">
-                <div class="commentbox">
-                    <textarea cols="80" rows="50" placeholder="来说几句吧......" class="mytextarea" id="content"></textarea>
-                    <div class="btn btn-info pull-right" id="comment" onClick="javascript:SaveComment();">评论</div>
-                </div>
-                <div class="comment-list">
-
-                </div>
-            </div>
-        </div>
+        <div id="remark" style=""></div>
         <div class="otherlink">
             <h2>相关推文</h2>
             @foreach (var item in arList)
@@ -169,12 +171,48 @@
     });
 </script>
 <script type="text/javascript">
-    function collectted() {
-        document.getElementById('collectted').style.display = 'none';
-        document.getElementById('notcollect').style.display = 'block';
+    function Favorites() {
+        var title = $('#title').html();
+
+        $.ajax({
+            url: '/Home/AddFavorites',
+            type: 'post',
+            data: {
+                inArticleID: $('#aid').val(),
+                inTitle: title
+            },
+            success: function (data) {
+                if (data.result) {
+                    var dom = $('#fav');
+                    dom.attr('href', 'javascript:DelFavorites()');
+                    dom.html('★已收藏');
+                } else {
+                    if (data.msg == 'notlogin') {
+                        ILogin();
+                    } else {
+                        alert(data.msg);
+                    }
+                }
+            }
+        })
     }
-    function notcollect() {
-        document.getElementById('notcollect').style.display = 'none';
-        document.getElementById('collectted').style.display = 'block';
+
+    function DelFavorites() {
+        $.ajax({
+            url: '/Home/DelFavorites',
+            type: 'post',
+            data: {
+                inArticleID: $('#aid').val()
+            },
+            success: function (data) {
+                if (data.result) {
+                    var dom = $('#fav');
+                    dom.attr('href', 'javascript:Favorites()');
+                    dom.html('★收藏');
+                } else {
+                    alert(data.msg);
+                }
+            }
+        })
     }
 </script>

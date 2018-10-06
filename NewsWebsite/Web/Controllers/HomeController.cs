@@ -179,6 +179,11 @@ namespace Web.Controllers
             }
             ViewBag.VCount = LVisitorCount.GetVisitorCount().Count;
 
+            if (State)
+            {
+                return View("MobileFootmarkList", vList);
+            }
+
             return View(vList);
         }
 
@@ -221,6 +226,11 @@ namespace Web.Controllers
             }
 
             ViewBag.VCount = LVisitorCount.GetVisitorCount().Count;
+
+            if (State)
+            {
+                return View("MobileFavoritesList", vList);
+            }
 
             return View(vList);
         }

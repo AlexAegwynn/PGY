@@ -1,0 +1,123 @@
+﻿@{
+    Layout = "~/Views/Shared/_MobileLayout.cshtml";
+    var list = Model as List<Web.ViewModels.VMFootmark>;
+}
+
+<link href="~/Content/mobile/css/news_phone.css" rel="stylesheet" />
+<link href="~/Content/mobile/css/foot_phone.css" rel="stylesheet" />
+
+<div id="typepick" class="typepick">
+    <a id="mycollection" href="/Home/FavoritesList"><div>我的收藏</div></a>
+    <a id="myfoot" href="/Home/FootmarkList"><div>我的足迹</div></a>
+    <a href="/Authentication/Logout"><div>退出账号</div></a>
+</div>
+<div class="top">
+    <div class="top_left">
+        @{
+            if (Convert.ToBoolean(ViewBag.IsLogin))
+            {
+                <div class="personal">
+                    <a onclick="javascript: ;" id="clickdown">
+                        <img src="~/Content/mobile/img/clickdown.png" />
+                    </a>
+                    <a onclick="javascript: ;" id="clickdown2">
+                        <img src="~/Content/mobile/img/clickdown.png" />
+                    </a>
+                    <span>@ViewBag.Name</span>
+                </div>
+            }
+            else
+            {
+                var a = "|";
+                <a href="/Authentication/Index">登录</a> @a <a href="/Authentication/Register"> 注册 </a>
+            }
+        }
+    </div>
+    <div class="top_center">
+        <a href="/Home/Index"><h1>寻味网</h1></a>
+    </div>
+    <div class="top_right">
+        <a href="/Home/Search">
+            <img src="~/Content/mobile/img/search.png" />
+        </a>
+    </div>
+</div>
+<div class="type">
+    <div class="ontype">
+        <span id="myfoot_title">我的足迹</span>
+        <div id="gotop" class="gotop"><a><p>点击回到顶部</p></a></div>
+    </div>
+</div>
+<div class="foot_new_list">
+    @{
+        for (int i = 0; i < list.Count; i++)
+        {
+            <div class="news">
+                <a href="/Home/ArticleInfo?inArticleID=@list[i].ArticleID"><p>@list[i].FmTitle</p></a>
+                <a id="delete_foot" href="javascript:DeleteMark('@list[i].FmID')"><p>删除</p></a>
+            </div>
+        }
+    }
+</div>
+
+<script type="text/javascript">
+        $('#clickdown').click(function () {
+            $('.top').animate({ left: '25%' }, 300);
+            $('.type').animate({ left: '25%' }, 300);
+            $('#typepick').animate({ left: '0%' }, 300);
+            $('.type').animate({ width: '75%' }, 1);
+            $('.top').animate({ width: '75%' }, 1);
+            $('#clickdown').animate({ opacity: '0' }, 300);
+            $('#clickdown').hide();
+            $('#clickdown2').show();
+            $('#clickdown2').animate({ opacity: '1' }, 300);
+            $('#clickdown2').click(function () {
+                $('.type').animate({ width: '100%' }, 1);
+                $('.top').animate({ width: '100%' }, 1);
+                $('.top').animate({ left: '0%' }, 300);
+                $('.type').animate({ left: '0%' }, 300);
+                $('#typepick').animate({ left: '-25%' }, 300);
+                $('#clickdown2').animate({ opacity: '0' }, 300);
+                $('#clickdown2').hide();
+                $('#clickdown').show();
+                $('#clickdown').animate({ opacity: '1' }, 300);
+            });
+        });
+
+        $(function () {
+            $("#gotop").hide();
+
+            $(function () {
+                $(window).scroll(function () {
+                    if ($(window).scrollTop() > 100) {
+                        $("#gotop").show();
+                    }
+                    else {
+                        $("#gotop").hide();
+                    }
+                });
+
+                $('#gotop').click(function () {
+                    $('html , body').animate({ scrollTop: 0 }, '500');
+                });
+            });
+    });
+
+
+    function DeleteMark(id) {
+        if (confirm('确认删除？')) {
+            $.ajax({
+                url: '/Home/DeleteFootmark',
+                type: 'post',
+                data: { fmid: id },
+                success: function (data) {
+                    if (data.result) {
+                        window.location.reload();
+                    } else {
+                        alert('删除失败');
+                    }
+                }
+            })
+        }
+    }
+</script>
