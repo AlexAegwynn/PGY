@@ -1,13 +1,32 @@
 ﻿@{
-    Layout = null;
-    var list = Model as List<Web.ViewModels.VMRemark>;
+                /**/
+
+                Layout = null;
+                var list = Model as List<Web.ViewModels.VMRemark>;
 }
 
-<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
 @if (!ViewBag.State)
 {
     <link href="~/Content/css/Remarks.css" rel="stylesheet" />
 }
+else
+{
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        .comment-list .comment-info .comment-right .content {
+            margin-top: 30px;
+            font-size: 30px;
+        }
+
+        .col-md-10 span {
+            cursor: pointer;
+            display: inline-block;
+            width: 200px;
+            font-size: 30px;
+        }
+    </style>
+}
+
 <div>
     <div class="container">
         <div class="commentbox">
@@ -91,7 +110,12 @@
                         }
                     });
                 } else {
-                    ILogin();
+                    var state = '@ViewBag.State';
+                    if (state) {
+                        window.location.href = '/Authentication/Index';
+                    } else {
+                        ILogin();
+                    }
                     return;
                 }
             }

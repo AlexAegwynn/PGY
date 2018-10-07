@@ -188,7 +188,7 @@
                     dom.html('★已收藏');
                 } else {
                     if (data.msg == 'notlogin') {
-                        ILogin();
+                        window.location.href = '/Authentication/Index';
                     } else {
                         alert(data.msg);
                     }
