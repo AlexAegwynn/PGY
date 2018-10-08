@@ -53,7 +53,7 @@ body{
 	padding-right: 20px;
 }
 .personal a{
-	color:white;
+    color:white;
 }
 .personal a:hover{
 	text-decoration: underline;
@@ -652,8 +652,9 @@ body{
 	margin-left: 20px;
 }
 .hoursNews .contact p{
-	font-size: 20px;
+	font-size: 15px;
 	margin-left: 20px;
+    margin-right:20px;
 }
 .beian{
 	background-color: #D8D8D8;
@@ -683,8 +684,9 @@ body{
 	margin-left: 20px;
 }
 .contact p{
-	font-size: 20px;
+	font-size: 15px;
 	margin-left: 20px;
+    margin-right:20px;
 }
 #hNews {
 	position: fixed;
@@ -719,6 +721,7 @@ body{
 	margin-left: 20px;
 }
 #hNews .contact p{
-	font-size: 20px;
+	font-size: 15px;
 	margin-left: 20px;
+    margin-right:20px;
 }

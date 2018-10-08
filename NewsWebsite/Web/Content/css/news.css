@@ -318,6 +318,7 @@ position:fixed;_position:absolute;_top:expression(eval(document.documentElement.
 .shopping .d1 .shoplink:hover{color:blue;}
     .shopping .d1 .price {
         width: 150px;
+        padding-top:5px;
         float: right;
         text-align:center;
         margin-top: 15px;

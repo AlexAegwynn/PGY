@@ -78,6 +78,7 @@
 <style>
     .btnClose {
         transform: rotate(45deg);
+        padding: 0px 0px 0px 5px;
         float: right;
         cursor: pointer;
         color: blue;
@@ -89,9 +90,9 @@
     }
 </style>
 <form name="form1" id="form1">
-    <div style="height:30px;background-color:#a1a1a1;padding-right:5px;">
+    <div style="height:30px;background-color:#a1a1a1;padding-right:8px;">
         <div class="btnClose">
-            <a onClick="closeRight()" style="font-size: 30px;">+</a>
+            <span onClick="closeRight()" style="font-size: 30px;">+</span>
         </div>
     </div>
     @Html.Hidden("UID", 0)

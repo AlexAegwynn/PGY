@@ -41,7 +41,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .news_content {
     position: absolute;
-    top: 10%;
+    top: 200px;
     width: 100%;
     height: auto;
 }
@@ -71,6 +71,10 @@ h1, h2, h3, h4, h5, h6 {
 .news_content img {
     max-width: 96%;
     height:100%;
+}
+
+.news_content .collect #notcollect {
+    display:none;
 }
 
 .news_content .collect a {
