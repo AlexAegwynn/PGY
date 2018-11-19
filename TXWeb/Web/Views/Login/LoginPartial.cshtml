@@ -35,17 +35,6 @@
             oPassword.value = getCookie('inPassword');
             oRemember.checked = true;
         }
-        //oRemember.onchange = function () {
-        //    if (!this.checked) {
-        //        delCookie('inEmail');
-        //        delCookie('inPassword');
-        //    }
-        //};
-    };
-    function setCookie(name, value, day) {
-        var date = new Date();
-        date.setDate(date.getDate() + day);
-        document.cookie = name + '=' + value + ';expires=' + date;
     };
     function getCookie(name) {
         var reg = RegExp(name + '=([^;]+)');

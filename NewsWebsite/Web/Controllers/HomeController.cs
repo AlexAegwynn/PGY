@@ -13,6 +13,12 @@ namespace Web.Controllers
     {
         private static int categoryId = 0;
         private static string searchStr = string.Empty;
+        private static int pageIndex = 0;
+
+        /// <summary>
+        /// 文章列表
+        /// </summary>
+        private static List<Model.MContent> aList = new List<Model.MContent>();
 
         /// <summary>
         /// 访问IP列表
@@ -24,6 +30,8 @@ namespace Web.Controllers
             List<Model.MContent> articleList = LContent.GetRandomArticles(10, 0);
             categoryId = catid;
             searchStr = search;
+            pageIndex = 0;
+            aList.Clear();
 
             var list = (from l in articleList where l.Conten.Contains("<img src=") orderby Guid.NewGuid() select l).Take(6).ToList();
             List<ViewModels.VMArticle> vList = GetVmList(list);
@@ -65,13 +73,38 @@ namespace Web.Controllers
 
         public PartialViewResult ArticleList(int page = 0)
         {
-            List<Model.MContent> list = LContent.GetArticles(page, categoryId, searchStr);
-            List<ViewModels.VMArticle> vList = GetVmList(list);
+            List<Model.MContent> viewList = new List<Model.MContent>();
+            if (categoryId != 0 || searchStr != "")
+            {
+                viewList = LContent.GetArticles(page, categoryId, searchStr);
+                aList.Clear();
+            }
+            else
+            {
+                if (aList.Count == 0)
+                {
+                    int[] cats = { 8, 12, 16, 3, 6, 4, 13, 15, 14, 19 };
+                    foreach (var item in cats)
+                    {
+                        List<Model.MContent> list1 = LContent.GetArticles(pageIndex, item, "");
+                        aList.AddRange(list1);
+                    }
+
+                    aList = aList.OrderBy(o => Guid.NewGuid()).ToList();
+                    pageIndex++;
+                }
+
+                viewList = aList.Take(10).ToList();
+                aList.RemoveRange(0, 10);
+            }
+
+            List<ViewModels.VMArticle> vList = GetVmList(viewList);
 
             if (State)
             {
                 return PartialView("MobileArticleList", vList);
             }
+
             return PartialView(vList);
         }
 

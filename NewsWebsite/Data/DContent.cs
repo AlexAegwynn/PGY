@@ -20,7 +20,7 @@ namespace Data
             int pagesize = 10;
             StringBuilder sql = new StringBuilder();
             sql.Append(" SELECT TOP(" + pagesize + ") * FROM ( ");
-            sql.Append(" SELECT ROW_NUMBER() OVER( ORDER BY ArticleID DESC )  ");
+            sql.Append(" SELECT ROW_NUMBER() OVER( ORDER BY ReleaseTime DESC ) ");
             sql.Append(" AS ROWNUMBER,* FROM wz_Content WITH(NOLOCK) WHERE Origin = '今日头条' ");
             if (domainId != 0)
             {
